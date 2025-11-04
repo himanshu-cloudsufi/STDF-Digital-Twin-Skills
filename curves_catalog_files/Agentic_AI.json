@@ -1,0 +1,396 @@
+{
+  "Agentic AI": {
+    "Deployment_Cost": {
+      "metadata": {
+        "type": "cost",
+        "units": "$",
+        "source": "Internet",
+        "category": "cost per unit capability",
+        "entity_type": "disruptor",
+        "description": "Total cost to deploy and maintain Agentic AI solutions."
+      },
+      "regions": {
+        "China": {
+          "X": [
+            2021,
+            2022,
+            2023,
+            2024,
+            2025
+          ],
+          "Y": [
+            15869474.0,
+            140000000.0,
+            720000000.0,
+            1108300000.0,
+            1483770000.0
+          ]
+        },
+        "Europe": {
+          "X": [
+            2021,
+            2022,
+            2023,
+            2024,
+            2025
+          ],
+          "Y": [
+            8681052.0,
+            356000000.0,
+            764000000.0,
+            1211600000.0,
+            1592744000.0
+          ]
+        },
+        "Global": {
+          "X": [
+            2021,
+            2022,
+            2023,
+            2024,
+            2025
+          ],
+          "Y": [
+            2205263158.0,
+            4800000000.0,
+            7800000000.0,
+            12470000000.0,
+            18270000000.0
+          ]
+        },
+        "Rest_of_World": {
+          "X": [
+            2021,
+            2022,
+            2023,
+            2024,
+            2025
+          ],
+          "Y": [
+            1081105263.0,
+            1424000000.0,
+            2027600000.0,
+            4484400000.0,
+            6356436000.0
+          ]
+        },
+        "USA": {
+          "X": [
+            2021,
+            2022,
+            2023,
+            2024,
+            2025
+          ],
+          "Y": [
+            79627368.0,
+            1080000000.0,
+            1555000000.0,
+            2231500000.0,
+            3458850000.0
+          ]
+        }
+      }
+    },
+    "Hardware_Cost": {
+      "metadata": {
+        "type": "cost",
+        "units": "$",
+        "source": "Internet",
+        "category": "cost per unit capability",
+        "entity_type": "disruptor",
+        "description": "Capital and operational costs for hardware used in Agentic AI systems."
+      },
+      "regions": {
+        "China": {
+          "X": [
+            2021,
+            2022,
+            2023,
+            2024,
+            2025
+          ],
+          "Y": [
+            15789474.0,
+            30000000.0,
+            57000000.0,
+            108300000.0,
+            205770000.0
+          ]
+        },
+        "Europe": {
+          "X": [
+            2021,
+            2022,
+            2023,
+            2024,
+            2025
+          ],
+          "Y": [
+            8421052.0,
+            16000000.0,
+            30400000.0,
+            57760000.0,
+            109744000.0
+          ]
+        },
+        "Global": {
+          "X": [
+            2021,
+            2022,
+            2023,
+            2024,
+            2025
+          ],
+          "Y": [
+            105263158.0,
+            200000000.0,
+            380000000.0,
+            722000000.0,
+            1371800000.0
+          ]
+        },
+        "Rest_of_World": {
+          "X": [
+            2021,
+            2022,
+            2023,
+            2024,
+            2025
+          ],
+          "Y": [
+            2105263.0,
+            4000000.0,
+            7600000.0,
+            14440000.0,
+            27436000.0
+          ]
+        },
+        "USA": {
+          "X": [
+            2021,
+            2022,
+            2023,
+            2024,
+            2025
+          ],
+          "Y": [
+            78947368.0,
+            150000000.0,
+            285000000.0,
+            541500000.0,
+            1028850000.0
+          ]
+        }
+      }
+    },
+    "How_Long_a_Task_AI_Can_Handle_Reliably_(50%_Success)_For_HCAST_+_Re-Bench_Tasks": {
+      "metadata": {
+        "type": "Capability",
+        "units": "seconds",
+        "source": "RethinkX",
+        "category": "Capability",
+        "entity_type": "disruptor"
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024,
+            2025
+          ],
+          "Y": [
+            3.0,
+            8.0,
+            15.0,
+            60.0,
+            240.0,
+            600.0,
+            1800.0
+          ]
+        }
+      }
+    },
+    "How_Long_a_Task_AI_Can_Handle_Reliably_(50%_Success)__For_SWE-Bench_Verified_Tasks": {
+      "metadata": {
+        "type": "Capability",
+        "units": "seconds",
+        "source": "RethinkX",
+        "category": "Capability",
+        "entity_type": "disruptor"
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            2023,
+            2024,
+            2025
+          ],
+          "Y": [
+            4.0,
+            60.0,
+            2700.0
+          ]
+        }
+      }
+    },
+    "How_Long_a_Task_AI_Can_Handle_Reliably_(50%_Success)": {
+      "metadata": {
+        "type": "Capability",
+        "units": "seconds",
+        "source": "RethinkX",
+        "category": "Capability",
+        "entity_type": "disruptor",
+        "description": "Average duration an AI can reliably perform a task globally with 50% success rate."
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024,
+            2025
+          ],
+          "Y": [
+            2.0,
+            9.0,
+            23.0,
+            36.0,
+            540.0,
+            2340.0,
+            8220.0
+          ]
+        }
+      }
+    },
+    "How_Long_a_Task_AI_Can_Handle_Reliably_(80%_Success)": {
+      "metadata": {
+        "type": "Capability",
+        "units": "seconds",
+        "source": "RethinkX",
+        "category": "Capability",
+        "entity_type": "disruptor",
+        "description": "Average duration an AI can reliably perform a task globally with 80% success rate."
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            2020,
+            2021,
+            2022,
+            2023,
+            2024,
+            2025
+          ],
+          "Y": [
+            2.0,
+            4.0,
+            10.0,
+            60.0,
+            360.0,
+            1560.0
+          ]
+        }
+      }
+    },
+    "Software_Cost": {
+      "metadata": {
+        "type": "cost",
+        "units": "$",
+        "source": "Internet",
+        "category": "cost per unit capability",
+        "entity_type": "disruptor",
+        "description": "Annual cost of software required to develop and operate Agentic AI systems."
+      },
+      "regions": {
+        "China": {
+          "X": [
+            2021,
+            2022,
+            2023,
+            2024,
+            2025
+          ],
+          "Y": [
+            80000000.0,
+            110000000.0,
+            150000000.0,
+            193000000.0,
+            278000000.0
+          ]
+        },
+        "Europe": {
+          "X": [
+            2021,
+            2022,
+            2023,
+            2024,
+            2025
+          ],
+          "Y": [
+            260000000.0,
+            340000000.0,
+            460000000.0,
+            634000000.0,
+            913000000.0
+          ]
+        },
+        "Global": {
+          "X": [
+            2021,
+            2022,
+            2023,
+            2024,
+            2025
+          ],
+          "Y": [
+            2100000000.0,
+            2800000000.0,
+            3900000000.0,
+            5250000000.0,
+            7550000000.0
+          ]
+        },
+        "Rest_of_World": {
+          "X": [
+            2021,
+            2022,
+            2023,
+            2024,
+            2025
+          ],
+          "Y": [
+            1080000000.0,
+            1420000000.0,
+            2020000000.0,
+            2740000000.0,
+            3930000000.0
+          ]
+        },
+        "USA": {
+          "X": [
+            2021,
+            2022,
+            2023,
+            2024,
+            2025
+          ],
+          "Y": [
+            680000000.0,
+            930000000.0,
+            1270000000.0,
+            1690000000.0,
+            2430000000.0
+          ]
+        }
+      }
+    }
+  }
+}

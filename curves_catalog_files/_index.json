@@ -1,0 +1,382 @@
+{
+  "total_entities": 20,
+  "total_metrics": 235,
+  "total_datasets": 825,
+  "entities": {
+    "Agentic AI": {
+      "filename": "Agentic_AI.json",
+      "metrics_count": 7,
+      "datasets_count": 19,
+      "metrics": [
+        "Deployment_Cost",
+        "Hardware_Cost",
+        "How_Long_a_Task_AI_Can_Handle_Reliably_(50%_Success)_For_HCAST_+_Re-Bench_Tasks",
+        "How_Long_a_Task_AI_Can_Handle_Reliably_(50%_Success)__For_SWE-Bench_Verified_Tasks",
+        "How_Long_a_Task_AI_Can_Handle_Reliably_(50%_Success)",
+        "How_Long_a_Task_AI_Can_Handle_Reliably_(80%_Success)",
+        "Software_Cost"
+      ]
+    },
+    "Aluminium": {
+      "filename": "Aluminium.json",
+      "metrics_count": 9,
+      "datasets_count": 44,
+      "metrics": [
+        "Annual_Consumption_Construction",
+        "Annual_Consumption_Electrical",
+        "Annual_Consumption_Industry",
+        "Annual_Consumption_Packaging",
+        "Annual_Consumption_Transportation",
+        "Annual_Primary_Consumption",
+        "Annual_Primary_Production",
+        "Price",
+        "Recycle_Input_Rate"
+      ]
+    },
+    "Artificial Intelligence": {
+      "filename": "Artificial_Intelligence.json",
+      "metrics_count": 2,
+      "datasets_count": 2,
+      "metrics": [
+        "Artificial_General_Intelligence_Average_Token_Cost",
+        "Artificial_General_Intelligence_Average_TPS"
+      ]
+    },
+    "Battery Pack": {
+      "filename": "Battery_Pack.json",
+      "metrics_count": 26,
+      "datasets_count": 37,
+      "metrics": [
+        "Commercial_Vehicle_(EV)_Average_Lithium_content",
+        "Commercial_Vehicle_(ICE)_commodity_intensity_Average_lead_content",
+        "Commercial_Vehicle_(ICE)_Replacement_cycle_Battery_Replacement_cycle",
+        "Lead_Acid_Battery_Pack_Median_Cost",
+        "Lithium-Ion_Battery_Pack_Annual_Capacity_Demand",
+        "Lithium-Ion_Battery_Pack_(Commercial_Vehicle)_Total_Demand",
+        "Lithium-Ion_Battery_Pack_E-Bus_&_Commercial_Cost",
+        "Lithium-Ion_Battery_Pack_(E_Bus)_Total_Demand",
+        "Lithium_Ion_Battery_Pack_Median_Cost",
+        "Lithium-Ion_Battery_Pack_Passenger_BEV_Cost",
+        "Lithium-Ion_Battery_Pack_(Passenger_EV)_Total_Demand",
+        "Lithium-Ion_Battery_Pack_Passenger_Plug-in_Hybrid_Cost",
+        "Lithium-Ion_Battery_Pack_(Stationary_storage)_Cost",
+        "Lithium-Ion_Battery_Pack_Stationary_Storage_Cost",
+        "Lithium-Ion_Battery_Pack_(Stationary_storage)_Total_Demand",
+        "Lithium-Ion_Battery_Pack_(Two_and_three-wheelers)_Cost",
+        "Lithium-Ion_Battery_Pack_(Two_and_three-wheelers)_Total_Demand",
+        "Passenger_Vehicle_(EV)_Average_Lithium_content",
+        "Passenger_Vehicle_(ICE)_commodity_intensity_Average_lead_content",
+        "Passenger_Vehicle_(ICE)_Replacement_cycle_Battery_Replacement_cycle",
+        "Three_Wheeler_(EV)_commodity_intensity_Average_Lithium_content",
+        "Three_Wheeler_(ICE)_commodity_intensity_Average_lead_content",
+        "Three_Wheeler_(ICE)_Replacement_cycle_Battery_Replacement_cycle",
+        "Two_Wheeler_(EV)_commodity_intensity_Average_Lithium_content",
+        "Two_Wheeler_(ICE)_commodity_intensity_Average_lead_content",
+        "Two_Wheeler_(ICE)_Replacement_cycle_Battery_Replacement_cycle"
+      ]
+    },
+    "Coal": {
+      "filename": "Coal.json",
+      "metrics_count": 1,
+      "datasets_count": 5,
+      "metrics": [
+        "Annual_CO2_Emission"
+      ]
+    },
+    "Commercial Vehicle": {
+      "filename": "Commercial_Vehicle.json",
+      "metrics_count": 32,
+      "datasets_count": 144,
+      "metrics": [
+        "Annual_Sales",
+        "(EV)_Annual_Sales",
+        "(EV)_Median_Cost",
+        "(EV)_Total_Fleet",
+        "(ICE)_Annual_Sales",
+        "(ICE)_Total_Fleet",
+        "(NGV)_Annual_Sales",
+        "(NGV)_Total_Fleet",
+        "HCV_commercial_vehicle_(Range-400_KM)_Lowest_Cost",
+        "Heavy_Duty_Commercial_Vehicle_(EV)_Annual_Sales",
+        "Heavy_Duty_Commercial_Vehicle_(EV)_Total_Fleet",
+        "Heavy_Duty_Commercial_Vehicle_(ICE)_Annual_Sales",
+        "Heavy_Duty_Commercial_Vehicle_(ICE)_Price",
+        "Heavy_Duty_Commercial_Vehicle_(ICE)_Total_Fleet",
+        "Heavy-duty_commercial_vehicles_(NGV)_Annual_Sales",
+        "LCV_commercial_vehicle_(Range-100_KM)_Lowest_Cost",
+        "Lead_Annual_Implied_Demand-Sales_Buses",
+        "Lead_Annual_Implied_Demand-Sales_Commercial_vehicles",
+        "Lead_Annual_Implied_Demand-Vehicle_replacement_Commercial",
+        "Light_Duty_Commercial_Vehicle_(EV)_Annual_Sales",
+        "Light_Duty_Commercial_Vehicle_(EV)_Total_Fleet",
+        "Light_Duty_Commercial_Vehicle_(ICE)_Annual_Sales",
+        "Light_Duty_Commercial_Vehicle_(ICE)_Price",
+        "Light_Duty_Commercial_Vehicle_(ICE)_Total_Fleet",
+        "Light-duty_commercial_vehicles_(NGV)_Annual_Sales",
+        "MCV_commercial_vehicle_(Range-200_KM)_Lowest_Cost",
+        "Medium_Duty_Commercial_Vehicle_(EV)_Annual_Sales",
+        "Medium_Duty_Commercial_Vehicle_(EV)_Total_Fleet",
+        "Medium_Duty_Commercial_Vehicle_(ICE)_Annual_Sales",
+        "Medium_Duty_Commercial_Vehicle_(ICE)_Price",
+        "Medium_Duty_Commercial_Vehicle_(ICE)_Total_Fleet",
+        "Medium-duty_commercial_vehicles_(NGV)_Annual_Sales"
+      ]
+    },
+    "Compute Chipsets": {
+      "filename": "Compute_Chipsets.json",
+      "metrics_count": 11,
+      "datasets_count": 22,
+      "metrics": [
+        "Chipsets_(Ambarella_CVflow_family)_For_Drones_and_Small_Robots_Price",
+        "Chipsets_(Horizon_Robotics_Journey_Series)_For_High_Performance_Automotive_Level4/Level5_Price",
+        "Chipsets_(Mobileye_EyeQ4/EyeQ5)_For_L2/L3/ADAS_Automotive_Price",
+        "Chipsets_(Mobileye_EyeQ_Ultra/EyeQ5_family)_For_High_Performance_Automotive_Level4/Level5_Price",
+        "Chipsets_(NVIDIA_DRIVE_AGX_Xavier)_For_L2/L3/ADAS_Automotive_Price",
+        "Chipsets_(NVIDIA_DRIVE:Orin_family)_For_High_Performance_Automotive_Level4/Level5_Price",
+        "Chipsets_(NVIDIA_DRIVE:Thor_Blackwell)_For_High_Performance_Automotive_Level4/Level5_Price",
+        "Chipsets_(NVIDIA_Jetson_Orin_Nano)_For_Drones_and_Small_Robots_Price",
+        "Chipsets_(NVIDIA_Jetson_Xavier_NX)_For_Drones_and_Small_Robots_Price",
+        "Chipsets_(NXP_S32V)_For_L2/L3/ADAS_Automotive_Price",
+        "Chipsets_(Renesas_R-Car_H3)_For_L2/L3/ADAS_Automotive_Price"
+      ]
+    },
+    "Copper": {
+      "filename": "Copper.json",
+      "metrics_count": 10,
+      "datasets_count": 48,
+      "metrics": [
+        "Annual_Consumption",
+        "Annual_Production",
+        "Annual_Recycling_Rate",
+        "Copper_Mining_Cost",
+        "Demand_Transportation_Percentage",
+        "Electrical_Demand_Percentage",
+        "EV_Demand_Percentage",
+        "Price",
+        "Solar_Demand_Percentage",
+        "Wind_Turbines_Percentage"
+      ]
+    },
+    "Crude Oil": {
+      "filename": "Crude_Oil.json",
+      "metrics_count": 10,
+      "datasets_count": 34,
+      "metrics": [
+        "Annual_CO2_Emission",
+        "Annual_Consumption",
+        "Annual_Consumption_Industry",
+        "Annual_Consumption_Transportation",
+        "Annual_Production",
+        "Brent_Price",
+        "OIl_Displacement_due_to_EV",
+        "Price",
+        "Reserves",
+        "WTI_Price"
+      ]
+    },
+    "Datacenter UPS": {
+      "filename": "Datacenter_UPS.json",
+      "metrics_count": 7,
+      "datasets_count": 27,
+      "metrics": [
+        "Data_Center_Battery_Demand_Annual_Capacity_Demand",
+        "Data_Center_Battery_Demand_(LAB)_Annual_Capacity_Demand",
+        "Data_Center_Battery_Demand_(Li-Ion)_Annual_Capacity_Demand",
+        "Datacenter_capacity_growth_projections",
+        "Data_Center_UPS_Battery_(Li-Ion)_Average_Lithium_content",
+        "Lead_acid_batteries_UPS_Datacenter_Installed_Base",
+        "Lead_acid_batteries_UPS_Datacenter_Replacement_cycle_Battery_Replacement_cycle"
+      ]
+    },
+    "Electricity": {
+      "filename": "Electricity.json",
+      "metrics_count": 3,
+      "datasets_count": 13,
+      "metrics": [
+        "Annual_Domestic_Consumption",
+        "Annual_Production",
+        "Residential_Price"
+      ]
+    },
+    "Energy Generation": {
+      "filename": "Energy_Generation.json",
+      "metrics_count": 32,
+      "datasets_count": 138,
+      "metrics": [
+        "Coal_Annual_Power_Generation",
+        "Coal_Installed_Capacity",
+        "Concentrated_Solar_Power_Installed_Capacity",
+        "Concentrated_Solar_Power_Installed_Cost",
+        "Concentrated_Solar_Power_LCOE",
+        "Natural_Gas_Annual_Power_Generation",
+        "Natural_Gas_Capacity_Factor",
+        "Natural_Gas_Installed_Capacity",
+        "Offshore_Wind_Capacity_Factor",
+        "Offshore_Wind_Installed_Capacity",
+        "Offshore_Wind_Installed_Cost",
+        "Offshore_Wind_LCOE",
+        "Offshore_Wind_Performance_Degradation_Rates",
+        "Oil_Annual_Power_Generation",
+        "Oil_Installed_Capacity",
+        "Onshore_Wind_Capacity_Factor",
+        "Onshore_Wind_Installed_Capacity",
+        "Onshore_Wind_Installed_Cost",
+        "Onshore_Wind_LCOE",
+        "Onshore_Wind_Performance_Degradation_Rates",
+        "Solar_Annual_Power_Generation",
+        "Solar_Installed_Capacity",
+        "Solar_Performance_Degradation_Rates",
+        "Solar_Photovoltaic_Capacity_Factor",
+        "Solar_Photovoltaic_Installed_Cost",
+        "Solar_Photovoltaic_LCOE",
+        "Solar_PV_Module_(All_Black)_Cost",
+        "Solar_PV_Module_(Bifacial)_Cost",
+        "Solar_PV_Module_(High_efficiency)_Cost",
+        "Solar_PV_Module_(Low_Cost_Technology)_Cost",
+        "Solar_PV_Module_(Mainstream)_Cost",
+        "Wind_Annual_Power_Generation"
+      ]
+    },
+    "Energy Storage": {
+      "filename": "Energy_Storage.json",
+      "metrics_count": 4,
+      "datasets_count": 22,
+      "metrics": [
+        "Battery_Energy_Storage_System_(2-hour_Turnkey)_Cost",
+        "Battery_Energy_Storage_System_(4-hour_Turnkey)_Cost",
+        "Battery_Energy_Storage_System_Installed_Capacity",
+        "Battery_Energy_Storage_System_Installed_Cost"
+      ]
+    },
+    "Forklift": {
+      "filename": "Forklift.json",
+      "metrics_count": 9,
+      "datasets_count": 32,
+      "metrics": [
+        "Annual_Sales",
+        "(EV)_Annual_Sales",
+        "(EV)_Average_Lithium_content",
+        "(ICE)_Annual_Sales",
+        "(ICE)_Average_lead_content",
+        "(ICE)_Battery_Replacement_cycle",
+        "Installed_Base",
+        "market_config_Retrofit_vs_new_equipment_installation_ratios",
+        "Lithium_Ion_Battery_operated_Forklifts-8_hrs_run_Lowest_Cost"
+      ]
+    },
+    "Lead": {
+      "filename": "Lead.json",
+      "metrics_count": 5,
+      "datasets_count": 5,
+      "metrics": [
+        "Annual_Implied_Demand",
+        "Annual_Implied_Demand-Industrial_batteries_motive_power",
+        "Annual_Implied_Demand-Industrial_batteries_stationary",
+        "Annual_Implied_Demand-Non-battery_uses",
+        "Cost"
+      ]
+    },
+    "Passenger Cars": {
+      "filename": "Passenger_Cars.json",
+      "metrics_count": 37,
+      "datasets_count": 134,
+      "metrics": [
+        "Autonomous_Vehicle_Camera_Suite_Price",
+        "Autonomous_Vehicle_GNSS_Price",
+        "Autonomous_Vehicle_IMU_Price",
+        "Autonomous_Vehicle_LiDAR_(High_End_Spinning)_Price",
+        "Autonomous_Vehicle_LiDAR_(Low_Cost_ADAS)_Price",
+        "Autonomous_Vehicle_LiDAR_(Mid_Range_Solid_State)_Price",
+        "Autonomous_Vehicle_Radar_(Imaging/4D)_Price",
+        "Autonomous_Vehicle_Radar_(Long_Range)_Price",
+        "Autonomous_Vehicle_Radar_(Mid_Range)_Price",
+        "Autonomous_Vehicle_Radar_(Short_Range)_Price",
+        "Autonomous_Vehicle_Radar_Suite_Price",
+        "Autonomous_Vehicle_Ultrasonic_Sensors_Suite_Price",
+        "Lead_Annual_Implied_Demand-Sales_Cars",
+        "Lead_Annual_Implied_Demand-Vehicle_replacement_Cars",
+        "Passenger_EV_Cars_(Range_-200_miles)_Lowest_Cost",
+        "Passenger_Vehicle_Annual_Sales",
+        "Passenger_Vehicle_(BEV)_Annual_Sales",
+        "Passenger_Vehicle_(BEV)_Total_Fleet",
+        "Passenger_Vehicle_(EV)_Annual_Sales",
+        "Passenger_Vehicle_(EV)_Median_Cost",
+        "Passenger_Vehicle_(EV)_Public_Charging_Points",
+        "Passenger_Vehicle_(ICE)_Annual_Depreciation_Rates",
+        "Passenger_Vehicle_(ICE)_Annual_Sales",
+        "Passenger_Vehicle_(ICE)_Median_Price_(Hatchback)",
+        "Passenger_Vehicle_(ICE)_Median_Price_(Mid_Size_Sedan)",
+        "Passenger_Vehicle_(ICE)_Median_Price_(Mid_Size_SUV)",
+        "Passenger_Vehicle_(ICE)_Total_Fleet",
+        "Passenger_Vehicle_(PHEV)_Annual_Lead_Implied_Demand",
+        "Passenger_Vehicle_(PHEV)_Annual_Sales",
+        "Passenger_Vehicle_(PHEV)_Average_lead_content",
+        "Passenger_Vehicle_(PHEV)_Life_Cycle_Emission_Rate",
+        "Passenger_Vehicle_(PHEV)_Purchase_Price_Sedan",
+        "Passenger_Vehicle_(PHEV)_Purchase_Price_SUV",
+        "Passenger_Vehicle_(PHEV)_Tail_Pipe_Emission_Rate",
+        "Passenger_Vehicle_(PHEV)_TCO_Sedan",
+        "Passenger_Vehicle_(PHEV)_TCO_SUV",
+        "Passenger_Vehicle_(PHEV)_Total_Fleet"
+      ]
+    },
+    "Polysilicon": {
+      "filename": "Polysilicon.json",
+      "metrics_count": 1,
+      "datasets_count": 1,
+      "metrics": [
+        "Cost"
+      ]
+    },
+    "Telecom UPS": {
+      "filename": "Telecom_UPS.json",
+      "metrics_count": 8,
+      "datasets_count": 28,
+      "metrics": [
+        "Lead_acid_batteries_UPS_telecom_Installed_Base",
+        "Lead_acid_batteries_UPS_telecom_Replacement_cycle_Battery_Replacement_cycle",
+        "Telecom_infrastructure_growth_rate",
+        "Battery_Demand_Annual_Capacity_Demand",
+        "Battery_Demand_(Lead_Acid)_Annual_Capacity_Demand",
+        "Battery_Demand_(Li-Ion)_Annual_Capacity_Demand",
+        "Battery_(Lead_Acid)_Average_lead_content",
+        "Battery_(Li-Ion)_Average_Lithium_content"
+      ]
+    },
+    "Three Wheeler": {
+      "filename": "Three_Wheeler.json",
+      "metrics_count": 11,
+      "datasets_count": 32,
+      "metrics": [
+        "EV_3_Wheeler_(Range-100_KM)_Lowest_Cost",
+        "Lead_Annual_Implied_Demand-Sales_3_wheelers",
+        "Lead_Annual_Implied_Demand-Vehicle_replacement_3_wheelers",
+        "Annual_Sales",
+        "(EV)_Annual_Sales",
+        "(EV)_Median_Cost",
+        "(EV)_Total_Fleet",
+        "(ICE)_Annual_Sales",
+        "(ICE)_Median_Cost",
+        "(ICE)_Total_Fleet",
+        "Two_Wheeler_(EV)_Total_Fleet"
+      ]
+    },
+    "Two Wheeler": {
+      "filename": "Two_Wheeler.json",
+      "metrics_count": 10,
+      "datasets_count": 38,
+      "metrics": [
+        "EV_2_Wheeler_(Range-100_KM)_Lowest_Cost",
+        "Lead_Annual_Implied_Demand-Sales_2_wheelers",
+        "Lead_Annual_Implied_Demand-Vehicle_replacement_2_wheelers",
+        "Annual_Sales",
+        "(EV)_Annual_Sales",
+        "(EV)_Median_Cost",
+        "(EV)_Total_Fleet",
+        "(ICE)_Annual_Sales",
+        "(ICE)_Median_Cost",
+        "(ICE)_Total_Fleet"
+      ]
+    }
+  }
+}

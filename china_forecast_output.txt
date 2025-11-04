@@ -1,0 +1,25 @@
+
+============================================================
+Forecasting for Region: China
+============================================================
+
+[1/2] Running cost analysis...
+  ✓ Tipping point: 2022
+  ✓ EV CAGR: -10.71%
+  ✓ ICE CAGR: 3.19%
+
+[2/2] Running demand forecast...
+  ⚠ Validation warning: Sum exceeds market by up to 824668.87
+
+  Forecast for 2040:
+    Market:    18,760,929
+    BEV:       18,757,195 (100.0%)
+    PHEV:         828,403 (4.4%)
+    ICE:                0 (0.0%)
+    EV:        19,585,598 (104.4%)
+
+✓ Exported to: ./output/China_2040.json
+
+============================================================
+Forecasting Complete!
+============================================================

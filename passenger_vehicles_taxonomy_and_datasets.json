@@ -1,0 +1,89 @@
+{
+  "market": "Passenger_Vehicles",
+  "taxonomy": {
+    "EV_Cars": {
+      "subproducts": [
+        "BEV_Cars",
+        "PHEV_Cars"
+      ]
+    },
+    "ICE_Cars": {
+      "subproducts": []
+    }
+  },
+  "data": {
+    "EV_Cars": {
+      "cost": {
+        "China": "Passenger_EV_Cars_(Range_-200_miles)_Lowest_Cost_China",
+        "Europe": "Passenger_EV_Cars_(Range_-200_miles)_Lowest_Cost_Europe",
+        "Rest_of_World": "Passenger_EV_Cars_(Range_-200_miles)_Lowest_Cost_Rest_of_World",
+        "USA": "Passenger_EV_Cars_(Range_-200_miles)_Lowest_Cost_USA"
+      },
+      "demand": {
+        "China": "Passenger_Vehicle_(EV)_Annual_Sales_China",
+        "Europe": "Passenger_Vehicle_(EV)_Annual_Sales_Europe",
+        "Global": "Passenger_Vehicle_(EV)_Annual_Sales_Global",
+        "Rest_of_World": "Passenger_Vehicle_(EV)_Annual_Sales_Rest_of_World",
+        "USA": "Passenger_Vehicle_(EV)_Annual_Sales_USA"
+      },
+      "entity_type": "disruptor"
+    },
+    "Passenger_Vehicles": {
+      "demand": {
+        "China": "Passenger_Vehicle_Annual_Sales_China",
+        "Europe": "Passenger_Vehicle_Annual_Sales_Europe",
+        "Global": "Passenger_Vehicle_Annual_Sales_Global",
+        "Rest_of_World": "Passenger_Vehicle_Annual_Sales_Rest_of_World",
+        "USA": "Passenger_Vehicle_Annual_Sales_USA"
+      },
+      "entity_type": "market"
+    },
+    "BEV_Cars": {
+      "demand": {
+        "China": "Passenger_Vehicle_(BEV)_Annual_Sales_China",
+        "Europe": "Passenger_Vehicle_(BEV)_Annual_Sales_Europe",
+        "Global": "Passenger_Vehicle_(BEV)_Annual_Sales_Global",
+        "Rest_of_World": "Passenger_Vehicle_(BEV)_Annual_Sales_Rest_of_World",
+        "USA": "Passenger_Vehicle_(BEV)_Annual_Sales_USA"
+      },
+      "installed_base": {
+        "China": "Passenger_Vehicle_(BEV)_Total_Fleet_China",
+        "Europe": "Passenger_Vehicle_(BEV)_Total_Fleet_Europe",
+        "Global": "Passenger_Vehicle_(BEV)_Total_Fleet_Global",
+        "Rest_of_World": "Passenger_Vehicle_(BEV)_Total_Fleet_Rest_of_World",
+        "USA": "Passenger_Vehicle_(BEV)_Total_Fleet_USA"
+      },
+      "entity_type": "disruptor"
+    },
+    "ICE_Cars": {
+      "demand": {
+        "China": "Passenger_Vehicle_(ICE)_Annual_Sales_China",
+        "Europe": "Passenger_Vehicle_(ICE)_Annual_Sales_Europe",
+        "Global": "Passenger_Vehicle_(ICE)_Annual_Sales_Global",
+        "Rest_of_World": "Passenger_Vehicle_(ICE)_Annual_Sales_Rest_of_World",
+        "USA": "Passenger_Vehicle_(ICE)_Annual_Sales_USA"
+      },
+      "installed_base": {
+        "China": {
+          "standard": "Passenger_Vehicle_(ICE)_Total_Fleet_China",
+          "TaaSAdj": "Passenger_Vehicle_(ICE)_Total_Fleet_China_TaaSAdj"
+        },
+        "Europe": "Passenger_Vehicle_(ICE)_Total_Fleet_Europe",
+        "Global": "Passenger_Vehicle_(ICE)_Total_Fleet_Global",
+        "Rest_of_World": "Passenger_Vehicle_(ICE)_Total_Fleet_Rest_of_World",
+        "USA": "Passenger_Vehicle_(ICE)_Total_Fleet_USA"
+      },
+      "entity_type": "incumbent"
+    },
+    "PHEV_Cars": {
+      "demand": {
+        "China": "Passenger_Vehicle_(PHEV)_Annual_Sales_China",
+        "Europe": "Passenger_Vehicle_(PHEV)_Annual_Sales_Europe",
+        "Global": "Passenger_Vehicle_(PHEV)_Annual_Sales_Global",
+        "Rest_of_World": "Passenger_Vehicle_(PHEV)_Annual_Sales_Rest_of_World",
+        "USA": "Passenger_Vehicle_(PHEV)_Annual_Sales_USA"
+      },
+      "entity_type": "chimera"
+    }
+  }
+}

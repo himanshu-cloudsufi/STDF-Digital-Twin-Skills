@@ -1,0 +1,608 @@
+{
+  "Compute Chipsets": {
+    "Chipsets_(Ambarella_CVflow_family)_For_Drones_and_Small_Robots_Price": {
+      "metadata": {
+        "type": "cost",
+        "units": "USD",
+        "source": "Internet",
+        "category": "cost per unit capability",
+        "entity_type": "disruptor",
+        "description": "Price of Ambarella CVflow chipset family for drones and small robots."
+      },
+      "regions": {
+        "China": {
+          "X": [
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024,
+            2025
+          ],
+          "Y": [
+            280.0,
+            260.0,
+            240.0,
+            220.0,
+            200.0,
+            180.0,
+            150.0,
+            120.0
+          ]
+        },
+        "USA": {
+          "X": [
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024,
+            2025
+          ],
+          "Y": [
+            350.0,
+            320.0,
+            300.0,
+            280.0,
+            250.0,
+            220.0,
+            190.0,
+            160.0
+          ]
+        }
+      }
+    },
+    "Chipsets_(Horizon_Robotics_Journey_Series)_For_High_Performance_Automotive_Level4/Level5_Price": {
+      "metadata": {
+        "type": "cost",
+        "units": "USD",
+        "source": "Internet",
+        "category": "cost per unit capability",
+        "entity_type": "disruptor",
+        "description": "Price of Horizon Robotics Journey Series chipset for Level 4/5 autonomous vehicles."
+      },
+      "regions": {
+        "China": {
+          "X": [
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024,
+            2025
+          ],
+          "Y": [
+            2000.0,
+            2200.0,
+            2400.0,
+            2200.0,
+            2000.0,
+            1800.0,
+            1400.0,
+            1100.0
+          ]
+        },
+        "USA": {
+          "X": [
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024,
+            2025
+          ],
+          "Y": [
+            2800.0,
+            3000.0,
+            3200.0,
+            3000.0,
+            2800.0,
+            2500.0,
+            2000.0,
+            1600.0
+          ]
+        }
+      }
+    },
+    "Chipsets_(Mobileye_EyeQ4/EyeQ5)_For_L2/L3/ADAS_Automotive_Price": {
+      "metadata": {
+        "type": "cost",
+        "units": "USD",
+        "source": "Internet",
+        "category": "cost per unit capability",
+        "entity_type": "disruptor",
+        "description": "Price of Mobileye EyeQ4/EyeQ5 chipset for L2/L3 ADAS."
+      },
+      "regions": {
+        "China": {
+          "X": [
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024,
+            2025
+          ],
+          "Y": [
+            1100.0,
+            1050.0,
+            1000.0,
+            950.0,
+            850.0,
+            720.0,
+            650.0,
+            520.0
+          ]
+        },
+        "USA": {
+          "X": [
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024,
+            2025
+          ],
+          "Y": [
+            1400.0,
+            1350.0,
+            1300.0,
+            1250.0,
+            1100.0,
+            950.0,
+            800.0,
+            650.0
+          ]
+        }
+      }
+    },
+    "Chipsets_(Mobileye_EyeQ_Ultra/EyeQ5_family)_For_High_Performance_Automotive_Level4/Level5_Price": {
+      "metadata": {
+        "type": "cost",
+        "units": "USD",
+        "source": "Internet",
+        "category": "cost per unit capability",
+        "entity_type": "disruptor",
+        "description": "Price of Mobileye EyeQ Ultra/EyeQ5 family chipset for Level 4/5 autonomous vehicles."
+      },
+      "regions": {
+        "China": {
+          "X": [
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024,
+            2025
+          ],
+          "Y": [
+            2000.0,
+            1900.0,
+            1800.0,
+            1700.0,
+            1500.0,
+            1200.0,
+            1000.0,
+            800.0
+          ]
+        },
+        "USA": {
+          "X": [
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024,
+            2025
+          ],
+          "Y": [
+            2500.0,
+            2400.0,
+            2300.0,
+            2200.0,
+            1900.0,
+            1600.0,
+            1200.0,
+            900.0
+          ]
+        }
+      }
+    },
+    "Chipsets_(NVIDIA_DRIVE_AGX_Xavier)_For_L2/L3/ADAS_Automotive_Price": {
+      "metadata": {
+        "type": "cost",
+        "units": "USD",
+        "source": "Internet",
+        "category": "cost per unit capability",
+        "entity_type": "disruptor",
+        "description": "Price of NVIDIA DRIVE AGX Xavier chipset for L2/L3 ADAS."
+      },
+      "regions": {
+        "China": {
+          "X": [
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024,
+            2025
+          ],
+          "Y": [
+            2400.0,
+            2300.0,
+            2100.0,
+            1950.0,
+            1700.0,
+            1600.0,
+            1200.0,
+            900.0
+          ]
+        },
+        "USA": {
+          "X": [
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024,
+            2025
+          ],
+          "Y": [
+            3200.0,
+            3000.0,
+            2700.0,
+            2500.0,
+            2300.0,
+            2100.0,
+            1600.0,
+            1200.0
+          ]
+        }
+      }
+    },
+    "Chipsets_(NVIDIA_DRIVE:Orin_family)_For_High_Performance_Automotive_Level4/Level5_Price": {
+      "metadata": {
+        "type": "cost",
+        "units": "USD",
+        "source": "Internet",
+        "category": "cost per unit capability",
+        "entity_type": "disruptor",
+        "description": "Price of NVIDIA DRIVE Orin family chipset for Level 4/5 autonomous vehicles."
+      },
+      "regions": {
+        "China": {
+          "X": [
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024,
+            2025
+          ],
+          "Y": [
+            7500.0,
+            8500.0,
+            9800.0,
+            9200.0,
+            8000.0,
+            7200.0,
+            6000.0,
+            4800.0
+          ]
+        },
+        "USA": {
+          "X": [
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024,
+            2025
+          ],
+          "Y": [
+            9500.0,
+            10500.0,
+            11500.0,
+            11000.0,
+            10000.0,
+            9000.0,
+            7800.0,
+            6000.0
+          ]
+        }
+      }
+    },
+    "Chipsets_(NVIDIA_DRIVE:Thor_Blackwell)_For_High_Performance_Automotive_Level4/Level5_Price": {
+      "metadata": {
+        "type": "cost",
+        "units": "USD",
+        "source": "Internet",
+        "category": "cost per unit capability",
+        "entity_type": "disruptor",
+        "description": "Price of NVIDIA DRIVE Thor (Blackwell) chipset for Level 4/5 autonomous vehicles."
+      },
+      "regions": {
+        "China": {
+          "X": [
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024,
+            2025
+          ],
+          "Y": [
+            20000.0,
+            22000.0,
+            24000.0,
+            22000.0,
+            20000.0,
+            18000.0,
+            15000.0,
+            12000.0
+          ]
+        },
+        "USA": {
+          "X": [
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024,
+            2025
+          ],
+          "Y": [
+            25000.0,
+            27000.0,
+            30000.0,
+            28000.0,
+            26000.0,
+            24000.0,
+            20000.0,
+            15000.0
+          ]
+        }
+      }
+    },
+    "Chipsets_(NVIDIA_Jetson_Orin_Nano)_For_Drones_and_Small_Robots_Price": {
+      "metadata": {
+        "type": "cost",
+        "units": "USD",
+        "source": "Internet",
+        "category": "cost per unit capability",
+        "entity_type": "disruptor",
+        "description": "Price of NVIDIA Jetson Orin Nano chipset for drones and small robots."
+      },
+      "regions": {
+        "China": {
+          "X": [
+            2021,
+            2022,
+            2023,
+            2024,
+            2025
+          ],
+          "Y": [
+            380.0,
+            350.0,
+            320.0,
+            260.0,
+            200.0
+          ]
+        },
+        "USA": {
+          "X": [
+            2021,
+            2022,
+            2023,
+            2024,
+            2025
+          ],
+          "Y": [
+            450.0,
+            420.0,
+            380.0,
+            320.0,
+            260.0
+          ]
+        }
+      }
+    },
+    "Chipsets_(NVIDIA_Jetson_Xavier_NX)_For_Drones_and_Small_Robots_Price": {
+      "metadata": {
+        "type": "cost",
+        "units": "USD",
+        "source": "Internet",
+        "category": "cost per unit capability",
+        "entity_type": "disruptor",
+        "description": "Price of NVIDIA Jetson Xavier NX chipset for drones and small robots."
+      },
+      "regions": {
+        "China": {
+          "X": [
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024,
+            2025
+          ],
+          "Y": [
+            900.0,
+            880.0,
+            600.0,
+            560.0,
+            520.0,
+            480.0,
+            380.0,
+            280.0
+          ]
+        },
+        "USA": {
+          "X": [
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024,
+            2025
+          ],
+          "Y": [
+            1100.0,
+            1050.0,
+            700.0,
+            650.0,
+            600.0,
+            550.0,
+            460.0,
+            360.0
+          ]
+        }
+      }
+    },
+    "Chipsets_(NXP_S32V)_For_L2/L3/ADAS_Automotive_Price": {
+      "metadata": {
+        "type": "cost",
+        "units": "USD",
+        "source": "Internet",
+        "category": "cost per unit capability",
+        "entity_type": "disruptor",
+        "description": "Price of NXP S32V chipset for L2/L3 ADAS."
+      },
+      "regions": {
+        "China": {
+          "X": [
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024,
+            2025
+          ],
+          "Y": [
+            480.0,
+            450.0,
+            430.0,
+            420.0,
+            400.0,
+            390.0,
+            380.0,
+            360.0
+          ]
+        },
+        "USA": {
+          "X": [
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024,
+            2025
+          ],
+          "Y": [
+            650.0,
+            620.0,
+            600.0,
+            580.0,
+            560.0,
+            540.0,
+            520.0,
+            500.0
+          ]
+        }
+      }
+    },
+    "Chipsets_(Renesas_R-Car_H3)_For_L2/L3/ADAS_Automotive_Price": {
+      "metadata": {
+        "type": "cost",
+        "units": "USD",
+        "source": "Internet",
+        "category": "cost per unit capability",
+        "entity_type": "disruptor",
+        "description": "Price of Renesas R-Car H3 chipset for L2/L3 ADAS."
+      },
+      "regions": {
+        "China": {
+          "X": [
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024,
+            2025
+          ],
+          "Y": [
+            700.0,
+            680.0,
+            650.0,
+            630.0,
+            610.0,
+            590.0,
+            560.0,
+            540.0
+          ]
+        },
+        "USA": {
+          "X": [
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024,
+            2025
+          ],
+          "Y": [
+            900.0,
+            880.0,
+            860.0,
+            840.0,
+            820.0,
+            800.0,
+            780.0,
+            760.0
+          ]
+        }
+      }
+    }
+  }
+}
