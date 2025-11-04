@@ -19,8 +19,9 @@ class DataLoader:
             data_dir: Path to data directory. If None, uses skill's data dir.
         """
         if data_dir is None:
-            # Default to skill's data directory
-            skill_dir = os.path.dirname(os.path.abspath(__file__))
+            # Default to skill's data directory (parent of scripts dir)
+            scripts_dir = os.path.dirname(os.path.abspath(__file__))
+            skill_dir = os.path.dirname(scripts_dir)
             data_dir = os.path.join(skill_dir, "data")
 
         self.data_dir = data_dir

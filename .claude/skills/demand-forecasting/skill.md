@@ -1,246 +1,289 @@
-# Cost-Driven Demand Forecasting Skill
+---
+name: demand-forecasting
+description: Performs cost-driven demand forecasting for passenger vehicles (EV, PHEV, ICE) across global regions. Calculates cost parity tipping points and models market adoption using logistic growth curves. Use when forecasting vehicle demand by region through 2040, analyzing technology transitions, or evaluating EV adoption scenarios.
+---
 
-## Description
-This skill performs cost-driven demand forecasting for passenger vehicles (EV, PHEV, ICE) across different regions using a logistic adoption model anchored to cost parity tipping points.
+# Cost-Driven Demand Forecasting
 
-## Purpose
-Use this skill when you need to:
-- Forecast demand for EVs, PHEVs, and ICE vehicles by region
-- Calculate cost parity tipping points between disruptor (EV) and incumbent (ICE) technologies
-- Generate regional or global demand forecasts through 2040
-- Analyze technology transition scenarios based on cost curves
+## When to Use This Skill
 
-## Instructions
+Use this skill to forecast passenger vehicle demand (EV, PHEV, ICE) when:
+- Analyzing regional or global EV adoption scenarios
+- Calculating when EVs achieve cost parity with ICE vehicles
+- Generating demand forecasts through 2040 (or custom horizon)
+- Evaluating technology transition dynamics
+- Supporting policy or investment decisions
 
-When this skill is invoked, you will:
+## Workflow
 
-1. **Load datasets from the skill's data directory** (`.claude/skills/demand-forecasting/data/`)
-   - `Passenger_Cars.json` - Contains all cost and demand curves
-   - `passenger_vehicles_taxonomy_and_datasets.json` - Defines the taxonomy and dataset mappings
-   - `instructions_editable.md` - Full methodology documentation
+Follow this workflow systematically for each forecast request.
 
-2. **Ask the user for parameters:**
-   - **Region** (required): China, USA, Europe, Rest_of_World, or Global
-   - **End Year** (optional, default: 2040): The forecast horizon
-   - **Logistic Ceiling** (optional, default: 1.0): Maximum EV adoption share (0.0-1.0)
-   - **Output Format** (optional, default: csv): csv, json, or plot
+### Prerequisites Checklist
 
-3. **Execute the forecasting pipeline:**
+Before starting, verify:
+- [ ] User has specified region or needs help selecting one
+- [ ] Forecast horizon is clear (default: 2040)
+- [ ] Any custom parameters are understood (ceiling, output format)
 
-   ### Step 1: Load and Prepare Cost Data
-   - Extract EV and ICE cost curves for the specified region from `Passenger_Cars.json`
-   - Apply 3-year rolling median smoothing to remove noise
-   - Convert to real USD if needed
+### Step 1: Parameter Collection
 
-   ### Step 2: Forecast Cost Curves
-   - Transform cost series to log scale: `log(cost)`
-   - Calculate long-term CAGR on log-transformed series
-   - Forecast log series to end_year using CAGR
-   - Convert back to normal scale via exponentiation
-   - Combine historical and forecasted series
+Ask the user for these parameters:
 
-   ### Step 3: Determine Tipping Point
-   - Find first year where EV cost < ICE cost
-   - If EV always cheaper → tipping = first historical year
-   - If ICE always cheaper → tipping = None (use baseline adoption)
+**Required:**
+- **Region**: China, USA, Europe, Rest_of_World, or Global
 
-   ### Step 4: Forecast Market Demand
-   - Load historical market sales from `Passenger_Cars.json`
-   - Use linear extrapolation (Theil-Sen robust regression) to end_year
-   - Enforce: market_forecast ≥ 0
-   - Optional: cap CAGR at ±5% per year
+**Optional (use defaults if not specified):**
+- **End Year**: Forecast horizon (default: 2040)
+- **Logistic Ceiling**: Maximum EV adoption share 0.0-1.0 (default: 1.0)
+- **Output Format**: csv, json, or both (default: csv)
 
-   ### Step 5: Forecast BEV Demand
-   - Calculate historical BEV share: BEV_sales / Market_sales
-   - If tipping in future: linearly extend recent share to tipping
-   - Fit logistic curve post-tipping: `share(t) = L / (1 + exp(-k*(t-t₀)))`
-     - Use scipy.optimize.differential_evolution
-     - Bounds: k ∈ [0.05, 1.5], t₀ ∈ [min_year-5, max_year+10]
-   - Convert to absolute: BEV_forecast = share × market_forecast
-   - Clamp to [0, market_forecast]
+See [reference/parameters-reference.md](reference/parameters-reference.md) for detailed parameter descriptions.
 
-   ### Step 6: Forecast PHEV Demand
-   - Load historical PHEV data if available
-   - Generate "hump" trajectory:
-     - Rising phase before tipping
-     - Decay after tipping with half-life ≈ 3 years
-   - Keep continuous and smooth
+### Step 2: Load and Validate Data
 
-   ### Step 7: Forecast ICE Demand
-   - Residual calculation: ICE = max(Market - BEV - PHEV, 0)
+Load datasets from skill's data directory:
 
-   ### Step 8: Compute EV Demand
-   - Aggregate: EV = BEV + PHEV
-   - Clamp to [0, market_forecast]
+```bash
+python3 scripts/forecast.py --region {REGION} --end-year {END_YEAR} --ceiling {CEILING} --output {FORMAT}
+```
 
-   ### Step 9: Validate and Export
-   - Ensure: BEV + PHEV + ICE ≤ Market (with small epsilon)
-   - Ensure: all values ≥ 0
-   - Validate smooth transitions near tipping year
-   - Export results in requested format
+**Data sources** (automatically loaded by script):
+- `data/Passenger_Cars.json` - Cost and demand curves
+- `data/passenger_vehicles_taxonomy_and_datasets.json` - Dataset mappings
 
-4. **For Global Region:**
-   - Run analysis for all individual regions (China, USA, Europe, Rest_of_World)
-   - Report individual tipping points and cost curves
-   - Aggregate demand forecasts: Global = sum of regions
-   - Return both regional and global datasets
+**Validation checkpoint:**
+- [ ] Data loaded successfully for specified region
+- [ ] Cost curves have sufficient historical points (>3)
+- [ ] Demand curves have sufficient historical points (>3)
 
-5. **Return the following outputs:**
-   - Cost data (historical + forecasted) for EV and ICE
-   - Demand data (historical + forecasted) for Market, BEV, PHEV, ICE, EV
-   - Tipping point year
-   - Summary statistics and validation checks
-   - Visualizations (if requested)
+If data issues occur, see [reference/troubleshooting-reference.md](reference/troubleshooting-reference.md).
+
+### Step 3: Run Cost Analysis
+
+The script performs cost curve forecasting and tipping point detection:
+
+**What happens:**
+1. Loads EV and ICE cost curves for region
+2. Applies 3-year rolling median smoothing
+3. Forecasts costs to end_year using log-CAGR method
+4. Detects tipping point (first year EV cost < ICE cost)
+
+**Validation checkpoint:**
+- [ ] Cost curves loaded and smoothed
+- [ ] Tipping point identified (or None if ICE always cheaper)
+- [ ] CAGRs are reasonable (EV declining faster than ICE)
+
+**Expected console output:**
+```
+[1/2] Running cost analysis...
+  ✓ Tipping point: 2024
+  ✓ EV CAGR: -8.50%
+  ✓ ICE CAGR: -1.20%
+```
+
+See [reference/methodology-reference.md#step-1-tipping-point-detection](reference/methodology-reference.md) for algorithm details.
+
+### Step 4: Run Demand Forecast
+
+The script generates market, BEV, PHEV, and ICE forecasts:
+
+**What happens:**
+1. Forecasts total market demand using linear extrapolation
+2. Fits logistic curve to BEV adoption post-tipping
+3. Models PHEV "hump" trajectory (rise then decay)
+4. Calculates ICE as residual (Market − BEV − PHEV)
+5. Validates consistency (BEV + PHEV + ICE ≤ Market)
+
+**Validation checkpoint:**
+- [ ] Market forecast is positive and reasonable
+- [ ] BEV forecast follows logistic S-curve
+- [ ] PHEV trajectory is smooth
+- [ ] ICE residual is non-negative
+- [ ] Sum consistency validated (within tolerance)
+
+**Expected console output:**
+```
+[2/2] Running demand forecast...
+  ✓ Validation passed
+
+  Forecast for 2040:
+    Market:  28,000,000
+    BEV:     24,500,000 (87.5%)
+    PHEV:       500,000 (1.8%)
+    ICE:      3,000,000 (10.7%)
+    EV:      25,000,000 (89.3%)
+```
+
+See [reference/methodology-reference.md#step-3-bev-demand-forecasting](reference/methodology-reference.md) for algorithm details.
+
+### Step 5: Export Results
+
+The script exports forecast in requested format:
+
+**CSV output** (regional):
+- Columns: Year, Market, BEV, PHEV, ICE, EV, EV_Cost, ICE_Cost
+- Saved to: `output/{Region}_{EndYear}.csv`
+
+**JSON output** (regional):
+- Includes: Cost analysis, demand forecast, tipping point, CAGRs, validation status
+- Saved to: `output/{Region}_{EndYear}.json`
+
+**Global output**:
+- Runs all 4 regions automatically
+- Aggregates to global totals
+- Exports 5 CSVs (if csv) or 1 JSON (if json)
+
+**Validation checkpoint:**
+- [ ] Output files created successfully
+- [ ] File paths displayed in console
+- [ ] No error messages during export
+
+See [reference/output-formats-reference.md](reference/output-formats-reference.md) for complete format specifications.
+
+### Step 6: Interpret and Report Results
+
+Present key findings to the user:
+
+**For single region:**
+- Tipping point year (when EVs achieve cost parity)
+- Final year forecast breakdown (Market, BEV, PHEV, ICE percentages)
+- Growth dynamics (CAGRs, logistic parameters)
+- Validation status
+- Output file paths
+
+**For Global:**
+- Individual regional tipping points
+- Regional final year breakdowns
+- Global aggregated totals
+- Comparison across regions
+- Output file paths
+
+**Example summary:**
+```
+Forecast Complete: China 2040
+
+Tipping Point: 2024 (EV cost parity achieved)
+Cost Dynamics:
+  - EV costs declining at 8.5% per year
+  - ICE costs declining at 1.2% per year
+
+2040 Forecast:
+  - Total Market: 28.0M vehicles
+  - BEV: 24.5M (87.5%)
+  - PHEV: 0.5M (1.8%)
+  - ICE: 3.0M (10.7%)
+
+Validation: ✓ Passed (all checks)
+
+Outputs:
+  - CSV: output/China_2040.csv
+  - JSON: output/China_2040.json
+```
+
+## Error Handling
+
+If issues occur at any step:
+
+1. **Check error message** in console output
+2. **Consult troubleshooting guide**: [reference/troubleshooting-reference.md](reference/troubleshooting-reference.md)
+3. **Common issues**:
+   - Missing regional data → Check data availability
+   - Convergence failure → Automatic fallback to seeded parameters
+   - Validation warnings → Usually acceptable if error < 1%
+   - Import errors → Ensure running from skill root directory
+
+## Special Case: Global Forecast
+
+When region = "Global", the workflow automatically:
+1. Runs forecast for China, USA, Europe, Rest_of_World sequentially
+2. Reports individual regional results
+3. Aggregates demand to global totals
+4. Exports both regional and global files
+
+**Note**: Global forecasts take ~4x longer than single region.
+
+## Notes and Best Practices
+
+**Regional independence:**
+- Each region is analyzed separately with its own cost curves and tipping point
+- Global is aggregated afterward (not forecasted independently)
+
+**Data consistency:**
+- All costs are in real USD (inflation-adjusted)
+- Demand is annual sales (not cumulative)
+- Years are calendar years (not model years)
+
+**Parameter guidance:**
+- Use default ceiling (1.0) unless infrastructure constraints exist
+- Use ceiling 0.85-0.9 for regions with known adoption limits
+- Default end_year (2040) is standard policy horizon
+- Extend to 2050+ for longer-term scenarios
+
+**Validation:**
+- Minor sum errors (< 1%) are acceptable due to rounding
+- Negative ICE late in forecast is expected (clamped to zero)
+- Logistic convergence failures trigger automatic fallbacks
+
+## Reference Files
+
+**Detailed algorithm documentation:**
+- [reference/methodology-reference.md](reference/methodology-reference.md) - Complete forecasting methodology
+
+**Parameter descriptions:**
+- [reference/parameters-reference.md](reference/parameters-reference.md) - All parameters with ranges and guidance
+
+**Data documentation:**
+- [reference/data-schema-reference.md](reference/data-schema-reference.md) - JSON structure and dataset naming
+
+**Output specifications:**
+- [reference/output-formats-reference.md](reference/output-formats-reference.md) - CSV and JSON format details
+
+**Problem solving:**
+- [reference/troubleshooting-reference.md](reference/troubleshooting-reference.md) - Common errors and solutions
+
+## Quick Start Examples
+
+**Example 1: Simple regional forecast**
+```bash
+python3 scripts/forecast.py --region China --output csv
+```
+
+**Example 2: Custom ceiling scenario**
+```bash
+python3 scripts/forecast.py --region Europe --end-year 2050 --ceiling 0.9 --output both
+```
+
+**Example 3: Global analysis**
+```bash
+python3 scripts/forecast.py --region Global --output json
+```
 
 ## Implementation Details
 
-### Data Loading
-All data files are located in: `.claude/skills/demand-forecasting/data/`
+**Script location**: `scripts/forecast.py`
 
-Use the taxonomy file to map product types to dataset names:
-```python
-import json
-import os
+**Data location**: `data/` directory (relative to skill root)
 
-skill_dir = os.path.dirname(__file__)
-data_dir = os.path.join(skill_dir, "data")
+**Output location**: `./output` (default) or custom via `--output-dir`
 
-# Load taxonomy
-with open(os.path.join(data_dir, "passenger_vehicles_taxonomy_and_datasets.json")) as f:
-    taxonomy = json.load(f)
+**Python modules** (in `scripts/`):
+- `forecast.py` - Main orchestration (use this)
+- `data_loader.py` - Data loading utilities
+- `cost_analysis.py` - Cost curve analysis and tipping point detection
+- `demand_forecast.py` - Demand forecasting logic
+- `utils.py` - Helper functions
 
-# Load curves
-with open(os.path.join(data_dir, "Passenger_Cars.json")) as f:
-    curves_data = json.load(f)["Passenger Cars"]
-```
-
-### Key Algorithms
-
-**Cost Forecast (Log-CAGR Method):**
-```python
-import numpy as np
-
-# Transform to log scale
-log_costs = np.log(historical_costs)
-
-# Calculate CAGR
-years = np.array(historical_years)
-slope, _ = np.polyfit(years, log_costs, 1)  # Linear fit on log scale
-cagr = slope
-
-# Forecast
-future_years = np.arange(historical_years[-1] + 1, end_year + 1)
-log_forecast = log_costs[-1] + cagr * (future_years - historical_years[-1])
-forecast = np.exp(log_forecast)
-```
-
-**Tipping Point Detection:**
-```python
-def find_tipping_point(ev_costs, ice_costs, years):
-    """Find first year where EV cost < ICE cost"""
-    for i, year in enumerate(years):
-        if ev_costs[i] < ice_costs[i]:
-            return year
-    return None
-```
-
-**Logistic Share Forecast:**
-```python
-from scipy.optimize import differential_evolution
-
-def logistic(t, L, k, t0):
-    return L / (1 + np.exp(-k * (t - t0)))
-
-def fit_logistic(years, shares, L=1.0):
-    def objective(params):
-        k, t0 = params
-        predicted = logistic(years, L, k, t0)
-        return np.sum((shares - predicted) ** 2)
-
-    bounds = [(0.05, 1.5), (min(years) - 5, max(years) + 10)]
-    result = differential_evolution(objective, bounds)
-    return result.x  # Returns [k, t0]
-```
-
-### Error Handling
-- If convergence fails, fall back to linear trend (bounded by market)
-- If history sparse (<3 points), seed with k=0.4, t₀=tipping_year
-- Handle missing data gracefully with warnings
-- Validate all outputs for physical consistency
-
-## Usage Examples
-
-### Example 1: Regional Forecast
-```
-User: "Run demand forecasting for China through 2040"
-
-Expected behavior:
-- Ask for any optional parameters (or use defaults)
-- Load China cost and demand data
-- Calculate tipping point
-- Generate forecasts for Market, BEV, PHEV, ICE, EV
-- Return results as CSV
-```
-
-### Example 2: Global Forecast
-```
-User: "Forecast global passenger vehicle demand with 90% EV ceiling"
-
-Expected behavior:
-- Set logistic ceiling L = 0.9
-- Run analysis for all 4 regions
-- Aggregate to global level
-- Return regional and global datasets
-```
-
-### Example 3: Custom Analysis
-```
-User: "Show me the tipping point for Europe and plot the transition"
-
-Expected behavior:
-- Load Europe data
-- Calculate and report tipping point year
-- Generate visualization showing:
-  - Cost parity crossover
-  - Market share evolution
-  - Demand trajectories
-```
-
-## Constraints and Best Practices
-
-1. **Data Consistency:**
-   - Ensure all costs in real USD
-   - Use 3-year rolling median for smoothing
-   - Validate region names match taxonomy
-
-2. **Numerical Stability:**
-   - Clamp all shares to [0, 1]
-   - Clamp all demands to [0, market]
-   - Ensure BEV + PHEV + ICE ≤ Market + ε
-
-3. **Physical Realism:**
-   - Cap market CAGR at ±5%
-   - Use L < 1.0 if infrastructure/policy limits exist
-   - PHEV decay half-life ≈ 3 years
-
-4. **Performance:**
-   - Cache intermediate results
-   - Use vectorized numpy operations
-   - Minimize file I/O
+**Configuration**: `config.json` contains default parameters (advanced users only)
 
 ## Dependencies
 
-Required Python packages:
-- numpy
-- scipy
-- pandas
-- matplotlib (for plotting)
-- json (built-in)
+Required Python packages (in `requirements.txt`):
+- numpy >= 1.20.0
+- scipy >= 1.7.0
+- pandas >= 1.3.0
+- matplotlib >= 3.4.0 (for visualization)
 
-## Notes
-
-- All data is self-contained within the skill directory
-- Taxonomy defines the mapping between product types and dataset names
-- Cost curves must be forecasted before tipping point analysis
-- Regional analysis is independent; global is an aggregation
-- Follow the methodology exactly as described in `instructions_editable.md`
+Install via:
+```bash
+pip install -r requirements.txt
+```

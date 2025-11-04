@@ -5,9 +5,14 @@ Orchestrates the complete forecasting pipeline
 
 import json
 import os
+import sys
 import pandas as pd
 import numpy as np
 from typing import Dict, Optional, List
+
+# Add parent directory to path for imports
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
 from data_loader import DataLoader
 from cost_analysis import run_cost_analysis
 from demand_forecast import run_demand_forecast
