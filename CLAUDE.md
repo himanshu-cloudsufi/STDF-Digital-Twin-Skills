@@ -4,7 +4,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a **cost-driven demand forecasting system** for analyzing technology transitions in passenger vehicles (EV, PHEV, ICE) across global regions. The system predicts when disruptor technologies (EVs) will achieve cost parity with incumbents (ICE vehicles) and models subsequent market adoption using logistic growth curves.
+This is a **cost-driven demand forecasting system** for analyzing technology disruption across transportation, energy generation, and commodities. The system predicts when disruptor technologies achieve cost parity with incumbents and models subsequent market adoption using logistic growth curves.
+
+### Scope
+- **Transportation**: Passenger vehicles (EV, PHEV, ICE), commercial vehicles, two-wheelers, three-wheelers
+- **Energy Generation**: Solar, wind, batteries, coal, natural gas, oil power
+- **Commodities**: Copper, lithium, lead, cobalt, aluminum, nickel, oil, coal, natural gas
+- **Analysis**: Cross-market disruption impacts and displacement timelines
 
 ## Interaction Protocol
 
@@ -81,18 +87,30 @@ When analyzing queries and presenting results:
 ## Key Concepts
 
 - **Tipping Point**: The cost parity year when disruptor cost < incumbent cost
-- **Disruptor**: Electric Vehicles (BEV)
-- **Chimera**: Plug-in Hybrid Vehicles (PHEV)
-- **Incumbent**: Internal Combustion Engine vehicles (ICE)
-- **Regions**: China, USA, Europe, Rest_of_World, Global (aggregated)
+- **Disruptor**: New technology with exponentially declining costs (e.g., BEV, Solar, Battery Storage) - modeled with logistic S-curve
+- **Chimera**: Bridge technology that rises temporarily then decays (e.g., PHEV, NGV) - modeled with hump trajectory
+- **Incumbent**: Legacy technology displaced by disruptor (e.g., ICE, Coal, Natural Gas) - calculated as residual
+- **Regions**: China, USA, Europe, Rest_of_World, Global (aggregated across all regions)
 
 ## Data Architecture
 
-### Curves Catalog Structure
+### Centralized Catalog Structure
 - **Location**: `curves_catalog_files/`
 - **Format**: Split by entity (20 entities, 235 metrics, 825 datasets)
-- **Key Entity**: `Passenger_Cars.json` contains all cost and demand curves for vehicle forecasting
+- **Key Entities**:
+  - `Passenger_Cars.json` - EV, PHEV, ICE passenger vehicles
+  - `Commercial_Vehicles.json` - LCV, MDV, HDV, buses
+  - `Two_Wheeler.json`, `Three_Wheeler.json` - Light EVs
+  - `Solar.json`, `Wind.json` - Energy generation
+  - `Copper.json`, `Lithium.json`, `Lead.json` - Commodities
+  - `Coal.json`, `Crude_Oil.json` - Fossil fuels
 - **Index**: `_index.json` provides metadata about available entities
+
+### Skill-Specific Data
+Each skill has a self-contained `data/` directory with:
+- **Entity JSON files** - Cost and demand curves for products/commodities in that skill's scope
+- **Taxonomy files** - Map product names to datasets and define entity types (disruptor/incumbent/chimera)
+- **Intensity/mapping files** - Commodity intensity factors, disruption mappings, replacement cycles
 
 ### Data Format
 Each entity file contains:
@@ -116,9 +134,70 @@ Each entity file contains:
 ```
 
 ### Taxonomy Mapping
-- **File**: `passenger_vehicles_taxonomy_and_datasets.json`
-- **Purpose**: Maps product types (EV_Cars, BEV_Cars, PHEV_Cars, ICE_Cars) to dataset names
-- **Entity Types**: Defines whether each product is disruptor, incumbent, chimera, or market
+Taxonomy files map product types to datasets and define entity classifications:
+```json
+{
+  "products": {
+    "EV_Cars": {
+      "entity_type": "disruptor",
+      "datasets": ["EV_Cars_Cost", "EV_Cars_Demand"],
+      "description": "Battery electric passenger vehicles"
+    }
+  }
+}
+```
+
+## Skills Architecture Overview
+
+The forecasting system uses a **modular multi-skill architecture** with four specialized skills sharing a common core library.
+
+### Architecture Diagram
+
+```
+_forecasting_core (shared library)
+    ├── core/utils.py - CAGR, smoothing, interpolation
+    ├── core/cost_analyzer.py - Tipping point detection
+    ├── core/logistic_models.py - S-curve fitting
+    ├── core/data_loader.py - Taxonomy-driven loading
+    └── core/validators.py - Forecast validation
+
+         ↓ (imported by all skills)
+
+    ├── product-demand       (PRIMARY - all products, all sectors)
+    ├── commodity-demand     (metals, energy commodities)
+    ├── disruption-analysis  (cross-market impacts)
+    └── demand-forecasting   (LEGACY - passenger vehicles only)
+```
+
+### Inter-Skill Data Flow
+
+Skills can operate independently OR be chained together:
+
+```
+product-demand → forecast.json
+    ↓
+commodity-demand --product-forecasts-dir → commodity_demand.json
+    ↓
+disruption-analysis --forecasts-dir → disruption_timeline.json
+```
+
+### Core Library: `_forecasting_core/`
+
+**Location**: `.claude/skills/_forecasting_core/`
+
+**Purpose**: Provides reusable, stateless functions for all forecasting skills
+
+**Key Features**:
+- Taxonomy-driven data loading (supports any entity type)
+- Generic abstractions (disruptor/incumbent/chimera patterns apply across sectors)
+- Cost curve forecasting with log-CAGR extrapolation
+- Tipping point detection with 3-year rolling median smoothing
+- Logistic S-curve fitting using differential evolution
+- Comprehensive validation suite (sum consistency, non-negativity, smooth transitions)
+
+**No External Dependencies**: Core library doesn't call other skills - pure utility functions
+
+**Documentation**: `.claude/skills/_forecasting_core/README.md`
 
 ## Core Forecasting Methodology
 
@@ -139,11 +218,12 @@ Use these quick checks before/after major operations:
 **Before running forecast:**
 - [ ] Region parameter is valid (China, USA, Europe, Rest_of_World, Global)
 - [ ] End year is reasonable (2025-2100)
-- [ ] Required data files exist (Passenger_Cars.json, taxonomy)
+- [ ] Product/commodity name matches taxonomy definitions
+- [ ] Required data files exist in skill's data directory
 
 **After forecast completes:**
 - [ ] No negative demand values in any year
-- [ ] BEV + PHEV + ICE ≤ Market (tolerance: 0.1%)
+- [ ] For products with market: Disruptor + Chimera + Incumbent ≤ Market (tolerance: 0.1%)
 - [ ] Smooth year-over-year transitions (no sudden jumps >50%)
 - [ ] Tipping point detected or explicitly noted as "none found"
 
@@ -152,122 +232,449 @@ Use these quick checks before/after major operations:
 - [ ] Logistic parameters are physically reasonable (k ∈ [0.05, 1.5])
 - [ ] Terminology follows guardrails (no "transition", use "transformation")
 
-## Demand Forecasting Skill
+## Skill Selection Guide
 
-### Location
-`.claude/skills/demand-forecasting/`
+### Decision Tree: Which Skill to Use?
 
-### Module Structure
-- `scripts/forecast.py` - Main orchestration (ForecastOrchestrator class)
-- `scripts/data_loader.py` - Data loading utilities
-- `scripts/cost_analysis.py` - Cost curve analysis and tipping point detection
-- `scripts/demand_forecast.py` - Demand forecasting logic (logistic curves)
-- `scripts/utils.py` - Helper functions
-- `data/` - Self-contained datasets (Passenger_Cars.json, taxonomy, etc.)
+```
+User Query → Analyze Keywords → Select Skill
 
-### Running Forecasts
+Is it about PRODUCTS (vehicles, solar, wind, batteries)?
+    → Use product-demand
 
-**Command Line (using wrapper script - recommended):**
+Is it about COMMODITIES (copper, lithium, oil, coal)?
+    → Use commodity-demand
+
+Is it about DISRUPTION/DISPLACEMENT/IMPACTS?
+    → Use disruption-analysis
+
+Is it ONLY about passenger vehicles AND requires legacy output format?
+    → Use demand-forecasting (legacy)
+```
+
+### Trigger Keywords by Skill
+
+| Skill | Use When Query Contains | Example Questions |
+|-------|------------------------|-------------------|
+| **product-demand** | product demand, market penetration, sales forecasts, adoption rates, capacity forecasts, market share, tipping point, cost parity, EV adoption, solar capacity, wind capacity, vehicle sales, market transformation | "What is EV demand in China by 2040?"<br>"When will solar reach 50% market share?"<br>"Forecast commercial vehicle adoption in Europe"<br>"When does cost parity occur for batteries?" |
+| **commodity-demand** | commodity demand, material requirements, supply needs, copper demand, lithium demand, lead demand, oil demand, coal demand, metal requirements, peak demand | "When will lithium demand peak?"<br>"What is copper demand for EVs in 2035?"<br>"Forecast lead demand driven by vehicles"<br>"Oil demand for transportation sector" |
+| **disruption-analysis** | disrupt, displace, impact, peak, threshold, decline, when will X displace Y, cross-market, displacement timeline, 95% displaced, market disruption | "When will EVs disrupt oil demand?"<br>"Based on EV adoption when will oil peak?"<br>"When 95% of coal displaced by solar+wind?"<br>"Disruption timeline for ICE vehicles" |
+| **demand-forecasting** | (legacy) passenger vehicles ONLY, backward compatibility required | "Run legacy passenger vehicle forecast"<br>(Use product-demand instead for new work) |
+
+### Quick Reference: Skill Capabilities
+
+#### product-demand (PRIMARY SKILL)
+- **Scope**: 43 products across 8 entities
+- **Sectors**: Transportation (passenger, commercial, two/three-wheelers), Energy (solar, wind, batteries, coal, gas, oil), Storage (batteries, pumped hydro)
+- **Output**: Forecasts for disruptor, chimera, incumbent, market demand
+- **When**: User asks about ANY product demand, adoption, market share, sales, capacity
+
+#### commodity-demand
+- **Scope**: Copper, Lithium, Lead, Cobalt, Aluminum, Nickel, Oil, Coal, Natural Gas
+- **Methodology**: Intensity-based calculation (new sales + replacement cycles)
+- **Output**: Total commodity demand aggregated across contributing products
+- **When**: User asks about material/commodity requirements, supply needs, peak demand years
+
+#### disruption-analysis
+- **Scope**: Known disruption mappings (EV→oil, SWB→coal/gas, EV→ICE, etc.)
+- **Analysis Types**: Cross-market impact, threshold crossing, peak detection, displacement timeline
+- **Output**: Tipping point year, 50% displacement year, 95% displacement year, peak year
+- **When**: User asks about disruption impacts, displacement timelines, when one technology displaces another
+
+#### demand-forecasting (LEGACY)
+- **Scope**: Passenger vehicles ONLY (EV, PHEV, ICE)
+- **Status**: Superseded by product-demand for most use cases
+- **When**: Backward compatibility required, or user explicitly requests legacy skill
+
+### Chained Execution Patterns
+
+**Pattern 1: Product → Commodity**
+```bash
+# Generate product forecasts
+.claude/skills/product-demand/run_forecast.sh --product "EV_Cars" --region China --output json
+
+# Use for commodity analysis
+.claude/skills/commodity-demand/run_forecast.sh --commodity "lead" --region China --product-forecasts-dir ./outputs/
+```
+
+**Pattern 2: Product → Disruption**
+```bash
+# Generate product forecasts
+.claude/skills/product-demand/run_forecast.sh --product "EV_Cars" --region Global --output json
+.claude/skills/product-demand/run_forecast.sh --product "ICE_Cars" --region Global --output json
+
+# Analyze disruption impact
+.claude/skills/disruption-analysis/run_analysis.sh --event "EV disruption" --impact "oil" --region Global --forecasts-dir ./outputs/
+```
+
+**Pattern 3: Full Pipeline**
+```bash
+# 1. Product demand
+.claude/skills/product-demand/run_forecast.sh --product "EV_Cars" --region Global
+
+# 2. Commodity demand (uses product forecasts)
+.claude/skills/commodity-demand/run_forecast.sh --commodity "lithium" --region Global --product-forecasts-dir ./outputs/
+
+# 3. Disruption analysis (uses both)
+.claude/skills/disruption-analysis/run_analysis.sh --event "EV disruption" --impact "oil" --region Global --forecasts-dir ./outputs/
+```
+
+## Skills Reference
+
+This section documents all four forecasting skills in detail.
+
+### 1. product-demand (PRIMARY SKILL)
+
+**Location**: `.claude/skills/product-demand/`
+
+**Purpose**: Generic product demand forecasting using cost-driven disruption analysis across ALL sectors
+
+**Scope**: 43 products across 8 entities
+- **Transportation**: EV_Cars, BEV_Cars, PHEV_Cars, ICE_Cars, Passenger_Vehicles, Commercial_EV, Commercial_ICE, Commercial_NGV, LCV, MDV, HDV, EV_Two_Wheeler, ICE_Two_Wheeler, EV_Three_Wheeler, ICE_Three_Wheeler, EV_Forklift, ICE_Forklift
+- **Energy Generation**: Solar_PV, Onshore_Wind, Offshore_Wind, Coal_Power, Natural_Gas_Power, Oil_Power
+- **Energy Storage**: Battery_Storage, Pumped_Hydro, CAES
+- **Batteries**: Battery_Pack, Lithium_Ion_Battery
+
+**When to Use**:
+- User asks about **product demand**, market penetration, sales forecasts, adoption rates, capacity forecasts, market share
+- Questions like: "when will [product] reach [threshold]", "what is [product] demand in [region]", "when will [product] peak"
+- Examples: EV adoption, solar capacity, wind capacity, vehicle sales, market transformation, technology disruption, cost parity, tipping point detection
+
+**Parameters**:
+- `--product` (required): Product name (e.g., "EV_Cars", "Solar_PV", "Commercial_EV")
+- `--region` (required): China, USA, Europe, Rest_of_World, Global
+- `--end-year` (optional, default: 2040): Forecast horizon
+- `--logistic-ceiling` (optional, default: 1.0): Maximum adoption share (0.0-1.0)
+- `--output` (optional, default: csv): csv, json, or both
+
+**Execution**:
+```bash
+# Single product forecast
+.claude/skills/product-demand/run_forecast.sh --product "EV_Cars" --region China --end-year 2040 --output json
+
+# Global aggregation
+.claude/skills/product-demand/run_forecast.sh --product "Solar_PV" --region Global --output both
+
+# Custom ceiling (90% max adoption)
+.claude/skills/product-demand/run_forecast.sh --product "Battery_Storage" --region Europe --ceiling 0.9
+```
+
+**Forecasting Models**:
+- **Disruptor products** (BEV, Solar, Battery Storage): Logistic S-curve adoption post-tipping
+- **Chimera products** (PHEV, NGV, Hybrid): Hump trajectory (rise before tipping, decay with 3-year half-life after)
+- **Incumbent products** (ICE, Coal, Gas, Oil): Residual calculation (Market - Disruptor - Chimera)
+- **Non-disrupted markets**: Linear baseline with CAGR cap (±5%)
+
+**Output Format**:
+- **CSV**: Year, Product_Demand, Market_Demand, Cost, [related products]
+- **JSON**: Full forecast with product type, market context, tipping point, logistic parameters, validation results
+
+**Data**: Self-contained in `.claude/skills/product-demand/data/` with 8 entity JSON files + taxonomies
+
+**Dependencies**: Imports from `_forecasting_core`
+
+---
+
+### 2. commodity-demand
+
+**Location**: `.claude/skills/commodity-demand/`
+
+**Purpose**: Forecast commodity demand driven by product sales AND component replacement cycles
+
+**Scope**: Copper, Lithium, Lead, Cobalt, Aluminum, Nickel (for batteries/motors), Oil, Coal, Natural Gas (for energy)
+
+**When to Use**:
+- User asks about **commodity demand**, material requirements, supply needs, peak demand years
+- Questions like: "when will [commodity] demand peak", "what is [commodity] demand for [application]"
+- Calculates demand from BOTH new product sales AND installed base replacements
+
+**Parameters**:
+- `--commodity` (required): Commodity name (e.g., "lead", "copper", "lithium")
+- `--region` (required): China, USA, Europe, Rest_of_World, Global
+- `--end-year` (optional, default: 2040): Forecast horizon
+- `--product-forecasts-dir` (optional): Path to pre-computed product forecasts (for chained execution)
+- `--output` (optional, default: csv): csv, json, or both
+
+**Execution**:
+```bash
+# Standalone commodity forecast
+.claude/skills/commodity-demand/run_forecast.sh --commodity "lead" --region Global --end-year 2040 --output json
+
+# Chained with product forecasts
+.claude/skills/commodity-demand/run_forecast.sh --commodity "copper" --region China --product-forecasts-dir ./product_outputs/
+```
+
+**Methodology**:
+1. **Identify contributing products**: Find products that use this commodity (top 80% by volume)
+2. **Calculate new sales demand**: `product_units × intensity_factor` (e.g., 80 kg copper per EV)
+3. **Calculate replacement demand**: `installed_base × replacement_rate × intensity_factor`
+4. **Aggregate**: Total = new sales + replacement across all products
+5. **Validate**: Check non-negativity, smooth transitions, reasonable growth rates
+
+**Key Data Files**:
+- `commodity_intensity.json` - Intensity factors (e.g., 80 kg copper/EV, 12 kg lead/ICE starter battery)
+- `replacement_cycles.json` - Replacement cycles (e.g., 3-4 years for lead batteries, 8-10 years for EV batteries)
+- Entity files: `Copper.json`, `Lithium.json`, `Lead.json`, `Coal.json`, `Crude_Oil.json`, `Aluminium.json`
+
+**Output Format**:
+- **CSV**: Year, Total_Demand, New_Sales_Demand, Replacement_Demand, [by product]
+- **JSON**: Full breakdown by product, intensity factors, replacement cycles, validation
+
+**Dependencies**: Imports from `_forecasting_core`, can consume product-demand outputs
+
+---
+
+### 3. disruption-analysis
+
+**Location**: `.claude/skills/disruption-analysis/`
+
+**Purpose**: Analyze cross-market disruption impacts and displacement timelines by synthesizing product/commodity forecasts
+
+**Scope**: Disruption relationships across markets (EV→oil, SWB→coal/gas, EV→ICE, Solar/Wind→Fossil, etc.)
+
+**When to Use**:
+- User asks: "when will [disruptor] displace [incumbent]"
+- "Based on [X] disruption when will [Y] peak"
+- "When will [market] be disrupted"
+- Requests for disruption analysis, displacement timelines, threshold crossings (e.g., "when 95% displaced")
+
+**Parameters**:
+- `--event` (required): Disruption event description (e.g., "EV disruption", "SWB displacement")
+- `--impact` (required): Impacted market (e.g., "oil demand", "coal power", "ICE vehicles")
+- `--region` (required): China, USA, Europe, Rest_of_World, Global
+- `--forecasts-dir` (optional): Directory with pre-computed product/commodity forecasts
+- `--output` (optional, default: json): json, text
+
+**Execution**:
+```bash
+# Analyze EV disruption of oil demand
+.claude/skills/disruption-analysis/run_analysis.sh --event "EV disruption" --impact "oil" --region Global
+
+# Chained with product forecasts
+.claude/skills/disruption-analysis/run_analysis.sh --event "SWB displacement" --impact "coal" --region China --forecasts-dir ./forecasts/
+```
+
+**Known Disruption Mappings** (from `disruption_mappings.json`):
+1. **EV disrupts oil**: EVs → Oil_Demand_Transportation (2.5 barrels/day per 1000 vehicles)
+2. **SWB displaces coal**: Solar+Wind+Battery → Coal_Power_Generation (1:1 MWh)
+3. **SWB displaces gas**: Solar+Wind+Battery → Natural_Gas_Power_Generation (1:1 MWh)
+4. **EV impacts lead**: EVs reduce lead demand by eliminating starter batteries (-12 kg/vehicle)
+5. **ICE decline impacts oil**: ICE vehicle decline → Oil demand decline (direct relationship)
+6. **EV disrupts ICE**: EVs → ICE_Cars displacement (1:1 vehicles)
+7. **Solar/Wind displaces fossil**: Solar+Wind → Coal+Gas power generation (1:1 MWh)
+
+**Analysis Types**:
+- `cross_market_impact` - Calculate impact of one market on another
+- `threshold_crossing` - Detect when displacement reaches thresholds (50%, 95%, 100%)
+- `peak_detection` - Identify peak demand years for incumbent
+- `displacement_timeline` - Generate full displacement timeline
+
+**Output Format**:
+- **JSON**: Timeline with tipping point year, 50% displacement year, 95% displacement year, peak year, displacement rate
+- **Text**: Human-readable summary with key milestones
+
+**Dependencies**: Imports from `_forecasting_core`, can consume product-demand and commodity-demand outputs
+
+---
+
+### 4. demand-forecasting (LEGACY)
+
+**Location**: `.claude/skills/demand-forecasting/`
+
+**Status**: LEGACY - Superseded by `product-demand` for most use cases. Retained for backward compatibility.
+
+**Purpose**: Cost-driven demand forecasting specifically for passenger vehicles (EV, PHEV, ICE) only
+
+**Scope**: Passenger vehicles ONLY (EV_Cars, BEV_Cars, PHEV_Cars, ICE_Cars, Passenger_Vehicles)
+
+**When to Use**:
+- Backward compatibility with existing workflows required
+- User explicitly requests legacy demand-forecasting skill
+- **Recommendation**: Use `product-demand` instead for new work (same vehicles, broader capabilities)
+
+**Parameters**:
+- `--region` (required): China, USA, Europe, Rest_of_World, or Global
+- `--end-year` (optional, default: 2040): Forecast horizon
+- `--logistic-ceiling` (optional, default: 1.0): Maximum EV adoption share (0.0-1.0)
+- `--output` (optional, default: csv): csv, json, or both
+
+**Execution**:
 ```bash
 # Single region forecast
 .claude/skills/demand-forecasting/run_forecast.sh --region China --end-year 2040 --ceiling 1.0 --output csv
 
 # Global forecast (all regions + aggregation)
 .claude/skills/demand-forecasting/run_forecast.sh --region Global --end-year 2040 --output both
-
-# Custom EV ceiling (90% max adoption)
-.claude/skills/demand-forecasting/run_forecast.sh --region Europe --ceiling 0.9 --output json
 ```
 
-**Direct Python (alternative method):**
-```bash
-cd .claude/skills/demand-forecasting && python3.12 scripts/forecast.py --region Europe --end-year 2050 --output json
-```
+**Output Structure**:
+- **CSV**: Year, Market, BEV, PHEV, ICE, EV, EV_Cost, ICE_Cost
+- **JSON**: Contains region, cost_analysis (tipping_point, CAGRs), demand_forecast (years, arrays)
 
-**Programmatic:**
-```python
-import sys
-import os
-sys.path.insert(0, '.claude/skills/demand-forecasting/scripts')
-from forecast import ForecastOrchestrator
-
-forecaster = ForecastOrchestrator(end_year=2040, logistic_ceiling=1.0)
-result = forecaster.forecast_region("China")
-global_result = forecaster.forecast_global()
-forecaster.export_to_csv(result, "output.csv", "China")
-```
-
-### Parameters
-- **region** (required): China, USA, Europe, Rest_of_World, or Global
-- **end_year** (optional, default: 2040): Forecast horizon
-- **logistic_ceiling** (optional, default: 1.0): Maximum EV adoption share (0.0-1.0)
-- **output** (optional, default: csv): csv, json, or both
-
-### Output Structure
-**CSV format**: Year, Market, BEV, PHEV, ICE, EV, EV_Cost, ICE_Cost
-
-**JSON format**: Contains region, cost_analysis (tipping_point, CAGRs), demand_forecast (years, arrays)
+**Dependencies**: Self-contained (does not import from `_forecasting_core`)
 
 ## Development Commands
 
 ### Setup
+
+**Install dependencies for specific skill**:
 ```bash
-# Install dependencies
+# Product demand
+pip install -r .claude/skills/product-demand/requirements.txt
+
+# Commodity demand
+pip install -r .claude/skills/commodity-demand/requirements.txt
+
+# Disruption analysis
+pip install -r .claude/skills/disruption-analysis/requirements.txt
+
+# Legacy demand forecasting
 pip install -r .claude/skills/demand-forecasting/requirements.txt
 ```
 
+**Common dependencies** (all skills):
+- Python 3.7+
+- numpy >= 1.20.0
+- scipy >= 1.7.0 (for differential_evolution, Theil-Sen)
+- pandas >= 1.3.0
+
+**Additional dependencies**:
+- matplotlib >= 3.4.0 (for visualization, optional)
+
 ### Testing
-No formal test suite exists. Validate forecasts manually by:
-1. Checking BEV + PHEV + ICE ≤ Market (with small epsilon)
-2. Verifying smooth transitions near tipping year
-3. Ensuring no negative values
-4. Confirming physically realistic growth rates
+
+No formal test suite exists. Validate forecasts manually using the validation checkpoints above:
+
+**For product forecasts**:
+1. Check Disruptor + Chimera + Incumbent ≤ Market (tolerance: 0.1%)
+2. Verify smooth transitions near tipping year (no sudden jumps >50%)
+3. Ensure no negative values
+4. Confirm physically realistic growth rates (CAGR ≤ ±5% for market)
+5. Validate tipping point detection (or note "no cost parity found")
+
+**For commodity forecasts**:
+1. Verify non-negative demand values
+2. Check new sales + replacement = total (accounting consistency)
+3. Ensure reasonable intensity factors (e.g., 80 kg copper per EV)
+4. Validate replacement cycles (e.g., 3-4 years for lead batteries)
+
+**For disruption analysis**:
+1. Confirm known disruption mappings are correctly applied
+2. Verify threshold crossings are monotonic (50% before 95% before 100%)
+3. Check peak detection aligns with displacement timeline
+4. Ensure displacement rates are physically plausible
 
 ## Critical Implementation Notes
+
+### Universal Principles (All Skills)
 
 1. **Regional Independence**: Each region is analyzed separately; Global is aggregated afterward (avoid double counting)
 
 2. **Cost Curve Smoothing**: Always apply 3-year rolling median before tipping point detection to remove noise
 
 3. **Logistic Fitting**: Uses scipy.optimize.differential_evolution with bounds:
-   - k (slope): [0.05, 1.5]
-   - t₀ (inflection): [min_year-5, max_year+10]
+   - k (slope): [0.05, 1.5] - Controls steepness of S-curve
+   - t₀ (inflection): [min_year-5, max_year+10] - Midpoint of adoption curve
 
 4. **Fallback Strategy**: If logistic convergence fails (<3 data points), seed with k=0.4, t₀=tipping_year or fall back to linear trend
-
-   **Edge cases handled:**
-   - **No tipping point found**: Use conservative baseline (k < 0.1, slow adoption) or report "no cost parity by [end_year]"
-   - **Logistic fitting fails to converge**: Try seeded parameters (k=0.4, t₀=tipping_year) → Linear trend with market bounds → Use recent historical trend
-   - **Sparse data (<3 points)**: Skip logistic fitting, use linear extrapolation with CAGR bounds
-   - **Data gaps in time series**: Linear interpolation between available points, flag gaps in validation report
-   - **Unrealistic CAGR (>±20%)**: Cap at ±5% for market, flag anomaly in output metadata
 
 5. **Numerical Stability**:
    - Clamp all shares to [0, 1]
    - Clamp all demands to [0, market]
    - Ensure no negative forecasts
 
-6. **Data Consistency**: All costs must be in real USD, normalized basis (e.g., cost per mile or per vehicle at same trim level)
+### Edge Cases Handled
+
+- **No tipping point found**: Use conservative baseline (k < 0.1, slow adoption) or report "no cost parity by [end_year]"
+- **Logistic fitting fails to converge**: Try seeded parameters (k=0.4, t₀=tipping_year) → Linear trend with market bounds → Use recent historical trend
+- **Sparse data (<3 points)**: Skip logistic fitting, use linear extrapolation with CAGR bounds
+- **Data gaps in time series**: Linear interpolation between available points, flag gaps in validation report
+- **Unrealistic CAGR (>±20%)**: Cap at ±5% for market, flag anomaly in output metadata
+
+### Skill-Specific Notes
+
+**product-demand**:
+- Market CAGR capped at ±5% per year to prevent unrealistic growth/decline
+- Chimera (PHEV, NGV) decay half-life: 3 years after tipping point
+- Default logistic ceiling L = 1.0 (100%); use L = 0.9 if infrastructure/policy limits exist
+- Tipping point determines transition dynamics for both disruptor and chimera
+- Data consistency: All costs must be in real USD, normalized basis (e.g., cost per mile, cost per kWh)
+
+**commodity-demand**:
+- Intensity factors must be empirically grounded (e.g., 80 kg copper/EV, 12 kg lead/ICE starter)
+- Replacement cycles vary by product (3-4 years for lead batteries, 8-10 years for EV batteries, 10-15 years for motors)
+- Installed base calculated as cumulative sales minus retirements
+- Top 80% contributing products by volume are included; long-tail products excluded
+
+**disruption-analysis**:
+- Disruption mappings must be physically accurate (e.g., 2.5 barrels oil/day per 1000 EVs)
+- Threshold crossings must be monotonic (50% < 95% < 100%)
+- Peak detection looks backward from end_year to find maximum incumbent demand
+- Cross-market impacts can be positive (new demand) or negative (displacement)
 
 ## Important Constraints
 
-- Market CAGR capped at ±5% per year to prevent unrealistic growth/decline
-- PHEV decay half-life: 3 years after tipping point
-- Default logistic ceiling L = 1.0 (100%); use L = 0.9 if infrastructure/policy limits exist
-- Tipping point determines transition dynamics for both disruptor and chimera
+### Universal Constraints
+- **Regions**: China, USA, Europe, Rest_of_World, Global ONLY (no other regions supported)
+- **Forecast horizon**: 2025-2100 (default: 2040)
+- **Market CAGR cap**: ±5% per year to prevent unrealistic growth/decline
+- **Validation tolerance**: ±0.1% for sum consistency checks
+- **Smoothing window**: 3-year rolling median for cost curves
 
-## Data Loading Pattern
+### Product-Specific Constraints
+- **Logistic ceiling**: Default L = 1.0 (100%); use L = 0.9 if infrastructure/policy limits exist
+- **Chimera decay**: Half-life = 3 years after tipping point
+- **Tipping point**: Determines transition dynamics for disruptor, chimera, incumbent
+
+### Commodity-Specific Constraints
+- **Intensity factors**: Must be realistic and empirically validated
+- **Replacement cycles**: Must reflect actual product lifetimes
+- **Contributing products**: Top 80% by volume (long tail excluded)
+
+### Data Format Constraints
+- All costs: Real USD (not nominal), normalized basis
+- All demands: Units must be consistent within entity (e.g., million vehicles, TWh, million tonnes)
+- Time series: Annual data, no gaps or missing years in historical data
+
+## Data Loading Patterns
+
+### Using Core Library (Recommended)
+
+```python
+import sys
+sys.path.insert(0, '.claude/skills/_forecasting_core')
+
+from core.data_loader import load_curves, load_taxonomy
+
+# Load taxonomy
+taxonomy = load_taxonomy('passenger_vehicles_taxonomy_and_datasets.json')
+
+# Load curves for entity
+curves = load_curves('Passenger_Cars.json')
+
+# Access specific metric
+ev_cost_china = curves['Passenger Cars']['EV_Cars_Cost']['regions']['China']
+years = ev_cost_china['X']
+costs = ev_cost_china['Y']
+```
+
+### Direct JSON Loading (Alternative)
 
 ```python
 import json
 import os
 
+# Load from skill's data directory
+skill_data_dir = '.claude/skills/product-demand/data/'
+
 # Load taxonomy
-with open('passenger_vehicles_taxonomy_and_datasets.json') as f:
+taxonomy_path = os.path.join(skill_data_dir, 'passenger_vehicles_taxonomy_and_datasets.json')
+with open(taxonomy_path) as f:
     taxonomy = json.load(f)
 
-# Load curves from catalog
-with open('curves_catalog_files/Passenger_Cars.json') as f:
+# Load entity curves
+entity_path = os.path.join(skill_data_dir, 'Passenger_Cars.json')
+with open(entity_path) as f:
     curves = json.load(f)['Passenger Cars']
 
 # Access specific metric
@@ -276,10 +683,85 @@ years = ev_cost_china['X']
 costs = ev_cost_china['Y']
 ```
 
-## Dependencies
+### Using Skill Directly (Programmatic)
 
-- Python 3.7+
-- numpy >= 1.20.0
-- scipy >= 1.7.0 (for differential_evolution, Theil-Sen)
-- pandas >= 1.3.0
-- matplotlib >= 3.4.0 (for visualization)
+```python
+import sys
+sys.path.insert(0, '.claude/skills/product-demand/scripts')
+
+from forecast import ForecastOrchestrator
+
+# Initialize forecaster
+forecaster = ForecastOrchestrator(
+    product="EV_Cars",
+    end_year=2040,
+    logistic_ceiling=1.0
+)
+
+# Run forecast
+result = forecaster.forecast_region("China")
+
+# Export results
+forecaster.export_to_csv(result, "output.csv", "China")
+forecaster.export_to_json(result, "output.json")
+```
+
+## Quick Start Examples
+
+### Example 1: Product Demand Forecast
+
+```bash
+# Forecast EV adoption in China through 2040
+.claude/skills/product-demand/run_forecast.sh \
+  --product "EV_Cars" \
+  --region China \
+  --end-year 2040 \
+  --output json
+```
+
+### Example 2: Commodity Demand Forecast
+
+```bash
+# Forecast lithium demand driven by EV adoption
+.claude/skills/commodity-demand/run_forecast.sh \
+  --commodity "lithium" \
+  --region Global \
+  --end-year 2040 \
+  --output csv
+```
+
+### Example 3: Disruption Analysis
+
+```bash
+# Analyze when EVs will disrupt oil demand
+.claude/skills/disruption-analysis/run_analysis.sh \
+  --event "EV disruption" \
+  --impact "oil" \
+  --region Global \
+  --output json
+```
+
+### Example 4: Chained Pipeline
+
+```bash
+# 1. Generate EV forecast
+.claude/skills/product-demand/run_forecast.sh \
+  --product "EV_Cars" \
+  --region China \
+  --output json > ev_forecast.json
+
+# 2. Calculate copper demand from EVs
+.claude/skills/commodity-demand/run_forecast.sh \
+  --commodity "copper" \
+  --region China \
+  --product-forecasts-dir ./ \
+  --output json
+
+# 3. Analyze disruption impact on oil
+.claude/skills/disruption-analysis/run_analysis.sh \
+  --event "EV disruption" \
+  --impact "oil" \
+  --region China \
+  --forecasts-dir ./ \
+  --output json
+```
