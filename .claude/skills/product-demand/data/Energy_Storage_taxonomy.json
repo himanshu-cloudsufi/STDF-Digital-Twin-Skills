@@ -1,0 +1,63 @@
+{
+  "market": "Energy_Storage_Market",
+  "taxonomy": {
+    "Battery_Storage": {
+      "subproducts": []
+    },
+    "Pumped_Hydro": {
+      "subproducts": []
+    },
+    "CAES": {
+      "subproducts": []
+    }
+  },
+  "data": {
+    "Battery_Storage": {
+      "cost": {
+        "China": "Battery_Storage_LCOS",
+        "Europe": "Battery_Storage_LCOS",
+        "Global": "Battery_Storage_LCOS",
+        "Rest_of_World": "Battery_Storage_LCOS",
+        "USA": "Battery_Storage_LCOS"
+      },
+      "demand": {
+        "China": "Battery_Storage_Annual_Capacity",
+        "Europe": "Battery_Storage_Annual_Capacity",
+        "Global": "Battery_Storage_Annual_Capacity",
+        "Rest_of_World": "Battery_Storage_Annual_Capacity",
+        "USA": "Battery_Storage_Annual_Capacity"
+      },
+      "entity_type": "disruptor"
+    },
+    "Pumped_Hydro": {
+      "demand": {
+        "China": "Pumped_Hydro_Annual_Capacity",
+        "Europe": "Pumped_Hydro_Annual_Capacity",
+        "Global": "Pumped_Hydro_Annual_Capacity",
+        "Rest_of_World": "Pumped_Hydro_Annual_Capacity",
+        "USA": "Pumped_Hydro_Annual_Capacity"
+      },
+      "entity_type": "incumbent"
+    },
+    "CAES": {
+      "demand": {
+        "China": "CAES_Annual_Capacity",
+        "Europe": "CAES_Annual_Capacity",
+        "Global": "CAES_Annual_Capacity",
+        "Rest_of_World": "CAES_Annual_Capacity",
+        "USA": "CAES_Annual_Capacity"
+      },
+      "entity_type": "incumbent"
+    },
+    "Energy_Storage_Market": {
+      "demand": {
+        "China": "Total_Storage_Annual_Capacity",
+        "Europe": "Total_Storage_Annual_Capacity",
+        "Global": "Total_Storage_Annual_Capacity",
+        "Rest_of_World": "Total_Storage_Annual_Capacity",
+        "USA": "Total_Storage_Annual_Capacity"
+      },
+      "entity_type": "market"
+    }
+  }
+}

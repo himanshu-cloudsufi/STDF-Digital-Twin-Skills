@@ -1,0 +1,58 @@
+{
+  "ev_disrupts_oil": {
+    "keywords": ["EV", "electric vehicle", "oil", "petroleum", "crude"],
+    "disruptor": ["EV_Cars", "Commercial_EV"],
+    "impacted": "Oil_Demand_Transportation",
+    "conversion_factor": 2.5,
+    "units": "barrels_per_day per 1000 vehicles",
+    "description": "EVs displace oil demand in transportation sector"
+  },
+  "swb_displaces_coal": {
+    "keywords": ["SWB", "solar wind battery", "coal"],
+    "disruptor": ["Solar_PV", "Onshore_Wind", "Battery_Storage"],
+    "impacted": "Coal_Power_Generation",
+    "conversion_factor": 1.0,
+    "units": "MWh per MWh",
+    "description": "Solar+Wind+Battery displaces coal power generation"
+  },
+  "swb_displaces_gas": {
+    "keywords": ["SWB", "solar wind battery", "natural gas", "gas"],
+    "disruptor": ["Solar_PV", "Onshore_Wind", "Battery_Storage"],
+    "impacted": "Natural_Gas_Power_Generation",
+    "conversion_factor": 1.0,
+    "units": "MWh per MWh",
+    "description": "Solar+Wind+Battery displaces natural gas power generation"
+  },
+  "ev_impacts_lead": {
+    "keywords": ["EV", "electric vehicle", "lead"],
+    "disruptor": "EV_Cars",
+    "impacted": "Lead_Demand",
+    "conversion_factor": -12.0,
+    "units": "kg lead saved per EV (no starter battery)",
+    "description": "EVs reduce lead demand by eliminating starter batteries"
+  },
+  "ice_decline_impacts_oil": {
+    "keywords": ["ICE", "internal combustion", "oil"],
+    "disruptor": "ICE_Cars",
+    "impacted": "Oil_Demand_Transportation",
+    "conversion_factor": 1.0,
+    "units": "direct relationship",
+    "description": "ICE vehicle decline directly reduces oil demand"
+  },
+  "ev_disrupts_ice": {
+    "keywords": ["EV", "electric vehicle", "ICE", "displacement"],
+    "disruptor": "EV_Cars",
+    "impacted": "ICE_Cars",
+    "conversion_factor": 1.0,
+    "units": "vehicles per vehicle",
+    "description": "EVs directly displace ICE vehicles in passenger car market"
+  },
+  "solar_wind_displaces_fossil": {
+    "keywords": ["solar", "wind", "fossil", "power generation"],
+    "disruptor": ["Solar_PV", "Onshore_Wind"],
+    "impacted": ["Coal_Power_Generation", "Natural_Gas_Power_Generation"],
+    "conversion_factor": 1.0,
+    "units": "MWh per MWh",
+    "description": "Solar and wind directly displace fossil fuel power generation"
+  }
+}

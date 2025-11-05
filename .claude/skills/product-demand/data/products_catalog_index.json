@@ -1,0 +1,64 @@
+{
+  "products": {
+    "EV_Cars": {"entity": "Passenger_Cars", "type": "disruptor"},
+    "BEV_Cars": {"entity": "Passenger_Cars", "type": "disruptor"},
+    "PHEV_Cars": {"entity": "Passenger_Cars", "type": "chimera"},
+    "ICE_Cars": {"entity": "Passenger_Cars", "type": "incumbent"},
+    "Passenger_Vehicles": {"entity": "Passenger_Cars", "type": "market"},
+
+    "Commercial_EV": {"entity": "Commercial_Vehicle", "type": "disruptor"},
+    "Commercial_ICE": {"entity": "Commercial_Vehicle", "type": "incumbent"},
+    "Commercial_NGV": {"entity": "Commercial_Vehicle", "type": "chimera"},
+    "Commercial_Vehicles": {"entity": "Commercial_Vehicle", "type": "market"},
+    "LCV": {"entity": "Commercial_Vehicle", "type": "market"},
+    "MDV": {"entity": "Commercial_Vehicle", "type": "market"},
+    "HDV": {"entity": "Commercial_Vehicle", "type": "market"},
+
+    "EV_Two_Wheeler": {"entity": "Two_Wheeler", "type": "disruptor"},
+    "ICE_Two_Wheeler": {"entity": "Two_Wheeler", "type": "incumbent"},
+    "Two_Wheeler_Market": {"entity": "Two_Wheeler", "type": "market"},
+
+    "EV_Three_Wheeler": {"entity": "Three_Wheeler", "type": "disruptor"},
+    "ICE_Three_Wheeler": {"entity": "Three_Wheeler", "type": "incumbent"},
+    "Three_Wheeler_Market": {"entity": "Three_Wheeler", "type": "market"},
+
+    "Solar_PV": {"entity": "Energy_Generation", "type": "disruptor"},
+    "Onshore_Wind": {"entity": "Energy_Generation", "type": "disruptor"},
+    "Offshore_Wind": {"entity": "Energy_Generation", "type": "disruptor"},
+    "Coal_Power": {"entity": "Energy_Generation", "type": "incumbent"},
+    "Natural_Gas_Power": {"entity": "Energy_Generation", "type": "incumbent"},
+    "Oil_Power": {"entity": "Energy_Generation", "type": "incumbent"},
+    "Energy_Generation_Market": {"entity": "Energy_Generation", "type": "market"},
+
+    "Battery_Storage": {"entity": "Energy_Storage", "type": "disruptor"},
+    "Pumped_Hydro": {"entity": "Energy_Storage", "type": "incumbent"},
+    "CAES": {"entity": "Energy_Storage", "type": "incumbent"},
+    "Energy_Storage_Market": {"entity": "Energy_Storage", "type": "market"},
+
+    "Battery_Pack": {"entity": "Battery_Pack", "type": "disruptor"},
+    "Lithium_Ion_Battery": {"entity": "Battery_Pack", "type": "disruptor"},
+
+    "EV_Forklift": {"entity": "Forklift", "type": "disruptor"},
+    "ICE_Forklift": {"entity": "Forklift", "type": "incumbent"},
+    "Forklift_Market": {"entity": "Forklift", "type": "market"}
+  },
+  "entities": [
+    "Passenger_Cars",
+    "Commercial_Vehicle",
+    "Two_Wheeler",
+    "Three_Wheeler",
+    "Energy_Generation",
+    "Energy_Storage",
+    "Battery_Pack",
+    "Forklift"
+  ],
+  "metadata": {
+    "description": "Product catalog mapping products to their entity files and classification types",
+    "types": {
+      "disruptor": "Technologies that disrupt incumbents through cost advantages",
+      "incumbent": "Legacy technologies being displaced",
+      "chimera": "Transitional technologies that bridge disruptor and incumbent",
+      "market": "Total market demand aggregating all product types"
+    }
+  }
+}

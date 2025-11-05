@@ -1,0 +1,23 @@
+{
+  "default_parameters": {
+    "end_year": 2040,
+    "displacement_thresholds": [0.50, 0.95, 1.00]
+  },
+  "regions": [
+    "China",
+    "USA",
+    "Europe",
+    "Rest_of_World",
+    "Global"
+  ],
+  "output_formats": [
+    "json",
+    "text"
+  ],
+  "analysis_types": [
+    "cross_market_impact",
+    "threshold_crossing",
+    "peak_detection",
+    "displacement_timeline"
+  ]
+}

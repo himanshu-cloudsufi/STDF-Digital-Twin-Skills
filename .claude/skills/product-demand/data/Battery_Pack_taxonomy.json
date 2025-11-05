@@ -1,0 +1,44 @@
+{
+  "market": "Battery_Pack",
+  "taxonomy": {
+    "Lithium_Ion_Battery": {
+      "subproducts": ["NMC", "LFP", "NCA"]
+    }
+  },
+  "data": {
+    "Battery_Pack": {
+      "cost": {
+        "China": "Battery_Pack_Cost_per_kWh",
+        "Europe": "Battery_Pack_Cost_per_kWh",
+        "Global": "Battery_Pack_Cost_per_kWh",
+        "Rest_of_World": "Battery_Pack_Cost_per_kWh",
+        "USA": "Battery_Pack_Cost_per_kWh"
+      },
+      "demand": {
+        "China": "Battery_Pack_Annual_Production_GWh",
+        "Europe": "Battery_Pack_Annual_Production_GWh",
+        "Global": "Battery_Pack_Annual_Production_GWh",
+        "Rest_of_World": "Battery_Pack_Annual_Production_GWh",
+        "USA": "Battery_Pack_Annual_Production_GWh"
+      },
+      "entity_type": "disruptor"
+    },
+    "Lithium_Ion_Battery": {
+      "cost": {
+        "China": "Li_Ion_Battery_Cost_per_kWh",
+        "Europe": "Li_Ion_Battery_Cost_per_kWh",
+        "Global": "Li_Ion_Battery_Cost_per_kWh",
+        "Rest_of_World": "Li_Ion_Battery_Cost_per_kWh",
+        "USA": "Li_Ion_Battery_Cost_per_kWh"
+      },
+      "demand": {
+        "China": "Li_Ion_Annual_Production_GWh",
+        "Europe": "Li_Ion_Annual_Production_GWh",
+        "Global": "Li_Ion_Annual_Production_GWh",
+        "Rest_of_World": "Li_Ion_Annual_Production_GWh",
+        "USA": "Li_Ion_Annual_Production_GWh"
+      },
+      "entity_type": "disruptor"
+    }
+  }
+}

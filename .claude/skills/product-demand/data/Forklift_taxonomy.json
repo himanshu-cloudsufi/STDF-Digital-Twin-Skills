@@ -1,0 +1,57 @@
+{
+  "market": "Forklift_Market",
+  "taxonomy": {
+    "EV_Forklift": {
+      "subproducts": []
+    },
+    "ICE_Forklift": {
+      "subproducts": []
+    }
+  },
+  "data": {
+    "EV_Forklift": {
+      "cost": {
+        "China": "(EV)_Median_Cost",
+        "Europe": "(EV)_Median_Cost",
+        "Global": "(EV)_Median_Cost",
+        "Rest_of_World": "(EV)_Median_Cost",
+        "USA": "(EV)_Median_Cost"
+      },
+      "demand": {
+        "China": "(EV)_Annual_Sales",
+        "Europe": "(EV)_Annual_Sales",
+        "Global": "(EV)_Annual_Sales",
+        "Rest_of_World": "(EV)_Annual_Sales",
+        "USA": "(EV)_Annual_Sales"
+      },
+      "entity_type": "disruptor"
+    },
+    "ICE_Forklift": {
+      "cost": {
+        "China": "(ICE)_Median_Cost",
+        "Europe": "(ICE)_Median_Cost",
+        "Global": "(ICE)_Median_Cost",
+        "Rest_of_World": "(ICE)_Median_Cost",
+        "USA": "(ICE)_Median_Cost"
+      },
+      "demand": {
+        "China": "(ICE)_Annual_Sales",
+        "Europe": "(ICE)_Annual_Sales",
+        "Global": "(ICE)_Annual_Sales",
+        "Rest_of_World": "(ICE)_Annual_Sales",
+        "USA": "(ICE)_Annual_Sales"
+      },
+      "entity_type": "incumbent"
+    },
+    "Forklift_Market": {
+      "demand": {
+        "China": "Annual_Sales",
+        "Europe": "Annual_Sales",
+        "Global": "Annual_Sales",
+        "Rest_of_World": "Annual_Sales",
+        "USA": "Annual_Sales"
+      },
+      "entity_type": "market"
+    }
+  }
+}

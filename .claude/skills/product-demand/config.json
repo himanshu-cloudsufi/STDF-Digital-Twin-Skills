@@ -1,0 +1,22 @@
+{
+  "default_parameters": {
+    "end_year": 2040,
+    "logistic_ceiling": 1.0,
+    "market_cagr_cap": 0.05,
+    "smoothing_window": 3,
+    "chimera_decay_half_life": 3.0,
+    "phev_peak_share": 0.15
+  },
+  "regions": [
+    "China",
+    "USA",
+    "Europe",
+    "Rest_of_World",
+    "Global"
+  ],
+  "output_formats": [
+    "csv",
+    "json",
+    "both"
+  ]
+}

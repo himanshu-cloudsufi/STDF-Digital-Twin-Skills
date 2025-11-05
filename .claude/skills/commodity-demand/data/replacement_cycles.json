@@ -1,0 +1,25 @@
+{
+  "ICE_Cars": {
+    "lead": 3.5
+  },
+  "PHEV_Cars": {
+    "lead": 3.5
+  },
+  "EV_Cars": {
+    "lithium": 12.0,
+    "cobalt": 12.0,
+    "nickel": 12.0
+  },
+  "Commercial_ICE": {
+    "lead": 3.0
+  },
+  "Commercial_EV": {
+    "lithium": 10.0,
+    "cobalt": 10.0,
+    "nickel": 10.0
+  },
+  "Datacenter_UPS": {
+    "lead": 5.0
+  },
+  "units": "years"
+}
