@@ -1,3 +1,12 @@
+# Skill Manager specific (local config - keep private)
+skill-manager.config.json
+skill-manager.registry.json
+.skill-manager-cache/
+
+# uv
+.python-version
+uv.lock
+
 # Python
 *.py[cod]
 *$py.class

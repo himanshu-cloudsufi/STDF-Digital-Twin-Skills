@@ -1,0 +1,7 @@
+{
+  "api_key": "ANTHROPIC_API_KEY_ENV_VAR",
+  "api_version": "2023-06-01",
+  "beta": ["skills-2025-10-02"],
+  "skills_directory": ".claude/skills",
+  "auto_sync": false
+}
