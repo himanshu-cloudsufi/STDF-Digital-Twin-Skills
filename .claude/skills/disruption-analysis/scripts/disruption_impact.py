@@ -8,10 +8,9 @@ disruption, displacement, and peak demand years.
 
 import sys
 import os
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../../_forecasting_core'))
 
-from core.utils import calculate_cagr
-from core.validators import validate_non_negative
+from lib.utils import calculate_cagr
+from lib.validators import validate_non_negative
 
 import json
 import argparse
@@ -23,7 +22,6 @@ class DisruptionAnalyzer:
     """Analyze cross-market disruption impacts"""
 
     def __init__(self, event_description: str, region: str,
-                 forecasts_dir: Optional[str] = None,
                  config_path: Optional[str] = None):
         """
         Initialize disruption analyzer.
@@ -31,12 +29,10 @@ class DisruptionAnalyzer:
         Args:
             event_description: Description of disruption event (e.g., "EV disruption")
             region: Geographic region to analyze
-            forecasts_dir: Optional directory containing pre-computed forecasts
             config_path: Path to config.json file
         """
         self.event_description = event_description
         self.region = region
-        self.forecasts_dir = forecasts_dir
 
         # Load config
         if config_path is None:
@@ -154,34 +150,7 @@ class DisruptionAnalyzer:
         Returns:
             Dictionary with years and demand arrays
         """
-        if self.forecasts_dir:
-            # Load from provided directory
-            if isinstance(product_or_commodity, list):
-                # Aggregate multiple products (e.g., SWB = Solar + Wind + Battery)
-                forecasts = []
-                for product in product_or_commodity:
-                    forecast_path = os.path.join(
-                        self.forecasts_dir,
-                        f'{product}_{self.region}.json'
-                    )
-                    if os.path.exists(forecast_path):
-                        with open(forecast_path, 'r') as f:
-                            forecasts.append(json.load(f))
-
-                if forecasts:
-                    # Aggregate by summing demand across products
-                    return self._aggregate_forecasts(forecasts)
-            else:
-                # Single product
-                forecast_path = os.path.join(
-                    self.forecasts_dir,
-                    f'{product_or_commodity}_{self.region}.json'
-                )
-                if os.path.exists(forecast_path):
-                    with open(forecast_path, 'r') as f:
-                        return json.load(f)
-
-        # Fall back to internal estimation (placeholder)
+        # Use standalone internal estimation (no cross-skill dependencies)
         return self._estimate_simple_trend(product_or_commodity)
 
     def _estimate_simple_trend(self, product_or_commodity: Union[str, List[str]]) -> Dict[str, Any]:
@@ -389,8 +358,6 @@ def main():
                        help='Disruption event description (e.g., "EV disruption")')
     parser.add_argument('--region', required=True,
                        help='Region (China, USA, Europe, Rest_of_World, Global)')
-    parser.add_argument('--forecasts-dir', default=None,
-                       help='Directory with pre-computed forecast data')
     parser.add_argument('--output', choices=['json', 'text'], default='json',
                        help='Output format')
     parser.add_argument('--output-dir', default='./output',
@@ -402,7 +369,7 @@ def main():
     os.makedirs(args.output_dir, exist_ok=True)
 
     # Run analysis
-    analyzer = DisruptionAnalyzer(args.event, args.region, args.forecasts_dir)
+    analyzer = DisruptionAnalyzer(args.event, args.region)
     result = analyzer.analyze()
 
     # Output results

@@ -9,10 +9,9 @@ Calculates commodity demand from:
 
 import sys
 import os
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../../../_forecasting_core'))
 
-from core.utils import calculate_cagr, linear_extrapolation, rolling_median
-from core.validators import validate_non_negative
+from lib.utils import calculate_cagr, linear_extrapolation, rolling_median
+from lib.validators import validate_non_negative
 
 import json
 import argparse
@@ -24,11 +23,10 @@ class CommodityForecaster:
     """Main orchestrator for commodity demand forecasting"""
 
     def __init__(self, commodity_name: str, region: str, end_year: int,
-                 product_forecasts_dir: str = None, config_path: str = None):
+                 config_path: str = None):
         self.commodity_name = commodity_name.lower()
         self.region = region
         self.end_year = end_year
-        self.product_forecasts_dir = product_forecasts_dir
 
         # Determine config path
         if config_path is None:
@@ -124,19 +122,8 @@ class CommodityForecaster:
         return products
 
     def _get_product_demand(self, product: str) -> Dict[str, Any]:
-        """Get product demand: from files if available, else estimate"""
-        if self.product_forecasts_dir:
-            # Load pre-computed product forecast
-            forecast_path = os.path.join(
-                self.product_forecasts_dir,
-                f'{product}_{self.region}.json'
-            )
-            if os.path.exists(forecast_path):
-                with open(forecast_path, 'r') as f:
-                    data = json.load(f)
-                    return data.get('forecast', {}).get('demand')
-
-        # Fall back to built-in lightweight estimation
+        """Get product demand using built-in estimation"""
+        # Use standalone estimation (no cross-skill dependencies)
         return self._estimate_product_demand_simple(product)
 
     def _estimate_product_demand_simple(self, product: str) -> Dict[str, List]:
@@ -305,8 +292,6 @@ def main():
     parser.add_argument('--commodity', required=True, help='Commodity name')
     parser.add_argument('--region', required=True, help='Region name')
     parser.add_argument('--end-year', type=int, default=2040, help='Forecast end year')
-    parser.add_argument('--product-forecasts-dir', default=None,
-                       help='Directory with pre-computed product forecasts')
     parser.add_argument('--output', choices=['csv', 'json', 'both'], default='csv')
     parser.add_argument('--output-dir', default='./output', help='Output directory')
 
@@ -317,8 +302,7 @@ def main():
 
     # Run forecast
     forecaster = CommodityForecaster(
-        args.commodity, args.region, args.end_year,
-        product_forecasts_dir=args.product_forecasts_dir
+        args.commodity, args.region, args.end_year
     )
     result = forecaster.forecast()
 

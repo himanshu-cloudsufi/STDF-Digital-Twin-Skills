@@ -234,4 +234,4 @@ def aggregate_forecasts(forecasts):
 
 - Disruption mappings: `../data/disruption_mappings.json`
 - Configuration: `../config.json`
-- Shared forecasting utilities: `../../_forecasting_core/`
+- Self-contained utilities: `../scripts/lib/` (utils.py, validators.py)

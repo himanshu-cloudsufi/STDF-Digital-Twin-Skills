@@ -10,14 +10,11 @@ import argparse
 import numpy as np
 from typing import Dict, Optional, Tuple, List
 
-# Add shared library to path
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../_forecasting_core'))
-
-from core.utils import calculate_cagr, rolling_median, linear_extrapolation, find_intersection, clamp_array
-from core.cost_analyzer import CostAnalyzer
-from core.logistic_models import fit_logistic_curve, forecast_logistic_share, logistic_function
-from core.data_loader import DataLoader
-from core.validators import validate_forecast_consistency
+from lib.utils import calculate_cagr, rolling_median, linear_extrapolation, find_intersection, clamp_array
+from lib.cost_analyzer import CostAnalyzer
+from lib.logistic_models import fit_logistic_curve, forecast_logistic_share, logistic_function
+from lib.data_loader import DataLoader
+from lib.validators import validate_forecast_consistency
 
 
 class ProductForecaster:

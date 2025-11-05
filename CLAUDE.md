@@ -149,55 +149,44 @@ Taxonomy files map product types to datasets and define entity classifications:
 
 ## Skills Architecture Overview
 
-The forecasting system uses a **modular multi-skill architecture** with four specialized skills sharing a common core library.
+The forecasting system uses a **fully independent multi-skill architecture** with four specialized, self-contained skills.
 
 ### Architecture Diagram
 
 ```
-_forecasting_core (shared library)
-    ├── core/utils.py - CAGR, smoothing, interpolation
-    ├── core/cost_analyzer.py - Tipping point detection
-    ├── core/logistic_models.py - S-curve fitting
-    ├── core/data_loader.py - Taxonomy-driven loading
-    └── core/validators.py - Forecast validation
-
-         ↓ (imported by all skills)
-
     ├── product-demand       (PRIMARY - all products, all sectors)
+    │   └── scripts/lib/     (self-contained utilities)
+    │
     ├── commodity-demand     (metals, energy commodities)
+    │   └── scripts/lib/     (self-contained utilities)
+    │
     ├── disruption-analysis  (cross-market impacts)
+    │   └── scripts/lib/     (self-contained utilities)
+    │
     └── demand-forecasting   (LEGACY - passenger vehicles only)
+        └── scripts/         (self-contained, no lib/)
 ```
 
-### Inter-Skill Data Flow
+### Skill Independence
 
-Skills can operate independently OR be chained together:
+Each skill is completely self-contained:
 
-```
-product-demand → forecast.json
-    ↓
-commodity-demand --product-forecasts-dir → commodity_demand.json
-    ↓
-disruption-analysis --forecasts-dir → disruption_timeline.json
-```
+- **No cross-skill dependencies**: Each skill operates independently without requiring outputs from other skills
+- **Self-contained utilities**: Each skill has its own `scripts/lib/` directory with necessary utility functions
+- **Independent data access**: Each skill only accesses data within its own directory structure
+- **Standalone execution**: Skills can be run in isolation without any coordination
 
-### Core Library: `_forecasting_core/`
+### Shared Utility Code
 
-**Location**: `.claude/skills/_forecasting_core/`
+Each skill (except legacy demand-forecasting) contains identical copies of core utilities in `scripts/lib/`:
 
-**Purpose**: Provides reusable, stateless functions for all forecasting skills
+- `utils.py` - CAGR calculation, smoothing, interpolation, linear extrapolation
+- `cost_analyzer.py` - Cost curve forecasting, tipping point detection (product-demand only)
+- `logistic_models.py` - S-curve fitting, logistic adoption modeling (product-demand only)
+- `data_loader.py` - Taxonomy-driven data loading (product-demand only)
+- `validators.py` - Forecast validation, consistency checks
 
-**Key Features**:
-- Taxonomy-driven data loading (supports any entity type)
-- Generic abstractions (disruptor/incumbent/chimera patterns apply across sectors)
-- Cost curve forecasting with log-CAGR extrapolation
-- Tipping point detection with 3-year rolling median smoothing
-- Logistic S-curve fitting using differential evolution
-- Comprehensive validation suite (sum consistency, non-negativity, smooth transitions)
-
-**No External Dependencies**: Core library doesn't call other skills - pure utility functions
-
-**Documentation**: `.claude/skills/_forecasting_core/README.md`
+**Note**: Code duplication is intentional to ensure complete skill independence.
 
 ## Core Forecasting Methodology
 
@@ -286,38 +275,22 @@ Is it ONLY about passenger vehicles AND requires legacy output format?
 - **Status**: Superseded by product-demand for most use cases
 - **When**: Backward compatibility required, or user explicitly requests legacy skill
 
-### Chained Execution Patterns
+### Independent Execution
 
-**Pattern 1: Product → Commodity**
+Each skill operates completely independently with no cross-dependencies:
+
 ```bash
-# Generate product forecasts
+# Product demand - standalone
 .claude/skills/product-demand/run_forecast.sh --product "EV_Cars" --region China --output json
 
-# Use for commodity analysis
-.claude/skills/commodity-demand/run_forecast.sh --commodity "lead" --region China --product-forecasts-dir ./outputs/
+# Commodity demand - standalone (uses internal estimation)
+.claude/skills/commodity-demand/run_forecast.sh --commodity "lead" --region China
+
+# Disruption analysis - standalone (uses internal estimation)
+.claude/skills/disruption-analysis/run_analysis.sh --event "EV disruption" --region Global
 ```
 
-**Pattern 2: Product → Disruption**
-```bash
-# Generate product forecasts
-.claude/skills/product-demand/run_forecast.sh --product "EV_Cars" --region Global --output json
-.claude/skills/product-demand/run_forecast.sh --product "ICE_Cars" --region Global --output json
-
-# Analyze disruption impact
-.claude/skills/disruption-analysis/run_analysis.sh --event "EV disruption" --impact "oil" --region Global --forecasts-dir ./outputs/
-```
-
-**Pattern 3: Full Pipeline**
-```bash
-# 1. Product demand
-.claude/skills/product-demand/run_forecast.sh --product "EV_Cars" --region Global
-
-# 2. Commodity demand (uses product forecasts)
-.claude/skills/commodity-demand/run_forecast.sh --commodity "lithium" --region Global --product-forecasts-dir ./outputs/
-
-# 3. Disruption analysis (uses both)
-.claude/skills/disruption-analysis/run_analysis.sh --event "EV disruption" --impact "oil" --region Global --forecasts-dir ./outputs/
-```
+**Note**: Cross-skill data loading has been removed. Each skill uses its own internal estimation methods.
 
 ## Skills Reference
 
@@ -371,7 +344,7 @@ This section documents all four forecasting skills in detail.
 
 **Data**: Self-contained in `.claude/skills/product-demand/data/` with 8 entity JSON files + taxonomies
 
-**Dependencies**: Imports from `_forecasting_core`
+**Dependencies**: Self-contained with `scripts/lib/` utilities (utils.py, cost_analyzer.py, logistic_models.py, data_loader.py, validators.py)
 
 ---
 
@@ -392,16 +365,12 @@ This section documents all four forecasting skills in detail.
 - `--commodity` (required): Commodity name (e.g., "lead", "copper", "lithium")
 - `--region` (required): China, USA, Europe, Rest_of_World, Global
 - `--end-year` (optional, default: 2040): Forecast horizon
-- `--product-forecasts-dir` (optional): Path to pre-computed product forecasts (for chained execution)
 - `--output` (optional, default: csv): csv, json, or both
 
 **Execution**:
 ```bash
 # Standalone commodity forecast
 .claude/skills/commodity-demand/run_forecast.sh --commodity "lead" --region Global --end-year 2040 --output json
-
-# Chained with product forecasts
-.claude/skills/commodity-demand/run_forecast.sh --commodity "copper" --region China --product-forecasts-dir ./product_outputs/
 ```
 
 **Methodology**:
@@ -420,7 +389,7 @@ This section documents all four forecasting skills in detail.
 - **CSV**: Year, Total_Demand, New_Sales_Demand, Replacement_Demand, [by product]
 - **JSON**: Full breakdown by product, intensity factors, replacement cycles, validation
 
-**Dependencies**: Imports from `_forecasting_core`, can consume product-demand outputs
+**Dependencies**: Self-contained with `scripts/lib/` utilities (utils.py, validators.py)
 
 ---
 
@@ -442,16 +411,12 @@ This section documents all four forecasting skills in detail.
 - `--event` (required): Disruption event description (e.g., "EV disruption", "SWB displacement")
 - `--impact` (required): Impacted market (e.g., "oil demand", "coal power", "ICE vehicles")
 - `--region` (required): China, USA, Europe, Rest_of_World, Global
-- `--forecasts-dir` (optional): Directory with pre-computed product/commodity forecasts
 - `--output` (optional, default: json): json, text
 
 **Execution**:
 ```bash
-# Analyze EV disruption of oil demand
+# Analyze EV disruption of oil demand (standalone)
 .claude/skills/disruption-analysis/run_analysis.sh --event "EV disruption" --impact "oil" --region Global
-
-# Chained with product forecasts
-.claude/skills/disruption-analysis/run_analysis.sh --event "SWB displacement" --impact "coal" --region China --forecasts-dir ./forecasts/
 ```
 
 **Known Disruption Mappings** (from `disruption_mappings.json`):
@@ -473,7 +438,7 @@ This section documents all four forecasting skills in detail.
 - **JSON**: Timeline with tipping point year, 50% displacement year, 95% displacement year, peak year, displacement rate
 - **Text**: Human-readable summary with key milestones
 
-**Dependencies**: Imports from `_forecasting_core`, can consume product-demand and commodity-demand outputs
+**Dependencies**: Self-contained with `scripts/lib/` utilities (utils.py, validators.py)
 
 ---
 
@@ -741,27 +706,27 @@ forecaster.export_to_json(result, "output.json")
   --output json
 ```
 
-### Example 4: Chained Pipeline
+### Example 4: Multiple Independent Forecasts
 
 ```bash
+# Run multiple independent forecasts (no chaining required)
+
 # 1. Generate EV forecast
 .claude/skills/product-demand/run_forecast.sh \
   --product "EV_Cars" \
   --region China \
-  --output json > ev_forecast.json
+  --output json
 
-# 2. Calculate copper demand from EVs
+# 2. Calculate copper demand (standalone, uses internal estimation)
 .claude/skills/commodity-demand/run_forecast.sh \
   --commodity "copper" \
   --region China \
-  --product-forecasts-dir ./ \
   --output json
 
-# 3. Analyze disruption impact on oil
+# 3. Analyze disruption impact (standalone, uses internal estimation)
 .claude/skills/disruption-analysis/run_analysis.sh \
   --event "EV disruption" \
   --impact "oil" \
   --region China \
-  --forecasts-dir ./ \
   --output json
 ```

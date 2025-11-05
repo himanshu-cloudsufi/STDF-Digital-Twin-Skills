@@ -356,8 +356,8 @@ Year, Market, BEV, PHEV, ICE, EV, EV_Cost, ICE_Cost
 
 ## Implementation Notes
 
-- **Shared library**: Imports from `.claude/skills/_forecasting_core` for math utilities
+- **Self-contained utilities**: Uses local `scripts/lib/` for math utilities (no external skill dependencies)
 - **Taxonomy-driven**: Product names mapped to datasets via taxonomy files
-- **Self-contained**: All data in `data/` directory (no external dependencies)
+- **Independent**: All data and code in skill directory (fully standalone)
 - **Validated**: Every forecast runs comprehensive validation suite
 - **Stateless**: Each forecast is independent (no persistent state)
