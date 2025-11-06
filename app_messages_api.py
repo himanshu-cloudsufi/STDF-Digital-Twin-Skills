@@ -105,7 +105,7 @@ def build_container_with_skills():
         "skills": [
             {
                 "type": "custom",
-                "skill_id": "skill_016hAT2gnDn6HQrBY6gNvwos",  # demand-forecasting
+                "skill_id": "skill_01TipNr17oMetpLYXhSWnjb7",  # demand-forecasting
                 "version": "latest"
             }
         ]

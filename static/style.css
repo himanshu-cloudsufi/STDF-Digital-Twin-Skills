@@ -225,16 +225,20 @@ body {
     display: flex;
     align-items: center;
     gap: 15px;
+    background: #2c3e50;
+    color: white;
+    padding: 15px 20px;
+    border-bottom: 1px solid #ddd;
 }
 
 .header-content {
     flex: 1;
 }
-.header {
-    background: #2c3e50;
-    color: white;
-    padding: 15px 20px;
-    border-bottom: 1px solid #ddd;
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
 .header h1 {
@@ -248,12 +252,47 @@ body {
     margin-top: 3px;
 }
 
+.export-button {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.export-button.export-md {
+    background: #9b59b6;
+}
+
+.export-button.export-md:hover {
+    background: #8e44ad;
+}
+
+.export-button.export-pdf {
+    background: #27ae60;
+}
+
+.export-button.export-pdf:hover {
+    background: #229954;
+}
+
+.export-button:disabled {
+    background: #95a5a6;
+    cursor: not-allowed;
+}
+
 .connection-status {
     display: flex;
     align-items: center;
     gap: 6px;
     font-size: 12px;
-    margin-top: 8px;
 }
 
 .status-dot {
@@ -707,5 +746,19 @@ body {
     .quick-button {
         font-size: 11px;
         padding: 5px 10px;
+    }
+
+    .export-button {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+
+    .export-button svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .header-actions {
+        gap: 10px;
     }
 }

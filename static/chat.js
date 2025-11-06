@@ -622,6 +622,232 @@ function editSessionTitle(editSessionId, currentTitle) {
 }
 
 /**
+ * Export chat to Markdown
+ */
+function exportChatToMarkdown() {
+    const chatMessages = document.querySelectorAll('.message');
+
+    if (chatMessages.length === 0) {
+        alert('No messages to export!');
+        return;
+    }
+
+    // Disable button during export
+    const exportBtn = document.querySelector('.export-md');
+    const originalText = exportBtn.innerHTML;
+    exportBtn.disabled = true;
+    exportBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> ...';
+
+    try {
+        let markdown = '# Demand Forecasting Chat Export\n\n';
+        markdown += `**Exported:** ${new Date().toLocaleString()}\n\n`;
+        markdown += '---\n\n';
+
+        // Process each message
+        chatMessages.forEach(message => {
+            const isUser = message.classList.contains('message-user');
+            const isAssistant = message.classList.contains('message-assistant');
+            const isSystem = message.classList.contains('message-system');
+
+            // Skip typing indicators
+            if (message.id === 'typing-indicator') return;
+
+            const content = message.querySelector('.message-content');
+            if (!content) return;
+
+            // For assistant messages with markdown, get the raw text from dataset
+            let text;
+            if (isAssistant && content.dataset.rawText) {
+                text = content.dataset.rawText.trim();
+            } else {
+                text = (content.textContent || content.innerText).trim();
+            }
+
+            if (!text) return;
+
+            // Add role header
+            if (isUser) {
+                markdown += '## 👤 User\n\n';
+            } else if (isAssistant) {
+                markdown += '## 🤖 Assistant\n\n';
+            } else if (isSystem) {
+                markdown += '## ⚙️ System\n\n';
+            }
+
+            // Add message content
+            markdown += text + '\n\n';
+            markdown += '---\n\n';
+        });
+
+        // Create blob and download
+        const blob = new Blob([markdown], { type: 'text/markdown' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+
+        // Generate filename with timestamp
+        const timestamp = new Date().toISOString().slice(0, 19).replace(/:/g, '-');
+        a.download = `chat-export-${timestamp}.md`;
+
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+
+        // Show success message
+        addSystemMessage(`Chat exported successfully as ${a.download}`);
+    } catch (error) {
+        console.error('Markdown export error:', error);
+        alert('Failed to export Markdown. Please try again.');
+    } finally {
+        // Re-enable button
+        exportBtn.disabled = false;
+        exportBtn.innerHTML = originalText;
+    }
+}
+
+/**
+ * Export chat to PDF
+ */
+async function exportChatToPDF() {
+    const chatMessages = document.querySelectorAll('.message');
+
+    if (chatMessages.length === 0) {
+        alert('No messages to export!');
+        return;
+    }
+
+    // Disable button during export
+    const exportBtn = document.querySelector('.export-pdf');
+    const originalText = exportBtn.innerHTML;
+    exportBtn.disabled = true;
+    exportBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> ...';
+
+    try {
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF('p', 'mm', 'a4');
+
+        const pageWidth = pdf.internal.pageSize.getWidth();
+        const pageHeight = pdf.internal.pageSize.getHeight();
+        const margin = 15;
+        const contentWidth = pageWidth - (2 * margin);
+        let yPosition = margin;
+
+        // Add title
+        pdf.setFontSize(16);
+        pdf.setFont(undefined, 'bold');
+        pdf.text('Demand Forecasting Chat Export', margin, yPosition);
+        yPosition += 10;
+
+        // Add export date
+        pdf.setFontSize(10);
+        pdf.setFont(undefined, 'normal');
+        pdf.setTextColor(100, 100, 100);
+        const exportDate = new Date().toLocaleString();
+        pdf.text(`Exported: ${exportDate}`, margin, yPosition);
+        yPosition += 10;
+
+        // Add separator line
+        pdf.setDrawColor(200, 200, 200);
+        pdf.line(margin, yPosition, pageWidth - margin, yPosition);
+        yPosition += 8;
+
+        // Reset text color
+        pdf.setTextColor(0, 0, 0);
+
+        // Process each message
+        for (let i = 0; i < chatMessages.length; i++) {
+            const message = chatMessages[i];
+            const isUser = message.classList.contains('message-user');
+            const isAssistant = message.classList.contains('message-assistant');
+            const isSystem = message.classList.contains('message-system');
+
+            // Skip typing indicators
+            if (message.id === 'typing-indicator') continue;
+
+            const content = message.querySelector('.message-content');
+            if (!content) continue;
+
+            // Get text content, handling markdown content
+            let text = content.textContent || content.innerText;
+            text = text.trim();
+
+            if (!text) continue;
+
+            // Check if we need a new page
+            if (yPosition > pageHeight - 40) {
+                pdf.addPage();
+                yPosition = margin;
+            }
+
+            // Set role styling
+            if (isUser) {
+                pdf.setFillColor(52, 152, 219);
+                pdf.setTextColor(255, 255, 255);
+                pdf.setFont(undefined, 'bold');
+                pdf.text('User:', margin, yPosition);
+                yPosition += 6;
+            } else if (isAssistant) {
+                pdf.setFillColor(240, 240, 240);
+                pdf.setTextColor(0, 0, 0);
+                pdf.setFont(undefined, 'bold');
+                pdf.text('Assistant:', margin, yPosition);
+                yPosition += 6;
+            } else if (isSystem) {
+                pdf.setFillColor(255, 243, 205);
+                pdf.setTextColor(133, 100, 4);
+                pdf.setFont(undefined, 'bold');
+                pdf.text('System:', margin, yPosition);
+                yPosition += 6;
+            }
+
+            // Reset font for content
+            pdf.setFont(undefined, 'normal');
+            pdf.setTextColor(0, 0, 0);
+
+            // Split text into lines that fit the page width
+            const lines = pdf.splitTextToSize(text, contentWidth);
+
+            for (let line of lines) {
+                // Check if we need a new page
+                if (yPosition > pageHeight - 20) {
+                    pdf.addPage();
+                    yPosition = margin;
+                }
+
+                pdf.text(line, margin + 5, yPosition);
+                yPosition += 5;
+            }
+
+            // Add spacing between messages
+            yPosition += 5;
+
+            // Add separator line between messages
+            pdf.setDrawColor(230, 230, 230);
+            pdf.line(margin, yPosition, pageWidth - margin, yPosition);
+            yPosition += 5;
+        }
+
+        // Generate filename with timestamp
+        const timestamp = new Date().toISOString().slice(0, 19).replace(/:/g, '-');
+        const filename = `chat-export-${timestamp}.pdf`;
+
+        // Save the PDF
+        pdf.save(filename);
+
+        // Show success message
+        addSystemMessage(`Chat exported successfully as ${filename}`);
+    } catch (error) {
+        console.error('PDF export error:', error);
+        alert('Failed to export PDF. Please try again.');
+    } finally {
+        // Re-enable button
+        exportBtn.disabled = false;
+        exportBtn.innerHTML = originalText;
+    }
+}
+
+/**
  * Initialize on page load
  */
 document.addEventListener('DOMContentLoaded', () => {

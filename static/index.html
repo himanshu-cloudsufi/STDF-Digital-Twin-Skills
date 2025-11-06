@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -43,9 +45,27 @@
                 <div class="header-content">
                     <h1>Demand Forecasting Chatbot</h1>
                 </div>
-                <div class="connection-status" id="status">
-                    <span class="status-dot" id="statusDot"></span>
-                    <span id="statusText">Connecting...</span>
+                <div class="header-actions">
+                    <button class="export-button export-md" onclick="exportChatToMarkdown()" title="Export chat to Markdown">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="7 10 12 15 17 10"/>
+                            <line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg>
+                        MD
+                    </button>
+                    <button class="export-button export-pdf" onclick="exportChatToPDF()" title="Export chat to PDF">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="7 10 12 15 17 10"/>
+                            <line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg>
+                        PDF
+                    </button>
+                    <div class="connection-status" id="status">
+                        <span class="status-dot" id="statusDot"></span>
+                        <span id="statusText">Connecting...</span>
+                    </div>
                 </div>
             </header>
 
