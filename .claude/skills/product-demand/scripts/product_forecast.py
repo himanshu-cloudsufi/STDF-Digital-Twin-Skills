@@ -231,18 +231,23 @@ class ProductForecaster:
         if demand_data is None:
             return self._forecast_baseline(context)
 
-        hist_years = np.array(demand_data['X'])
-        hist_demand = np.array(demand_data['Y'])
+        hist_years = np.array(demand_data[0])
+        hist_demand = np.array(demand_data[1])
 
         # Load market data
         market_product = context.get('market_product')
         if market_product:
-            market_data = self.data_loader.get_demand_data(market_product, self.region)
-            if market_data:
-                market_years = np.array(market_data['X'])
-                market_demand = np.array(market_data['Y'])
-            else:
-                # Estimate market from historical product demand
+            try:
+                market_data = self.data_loader.get_demand_data(market_product, self.region)
+                if market_data:
+                    market_years = np.array(market_data[0])
+                    market_demand = np.array(market_data[1])
+                else:
+                    # Estimate market from historical product demand
+                    market_years = hist_years
+                    market_demand = hist_demand * 1.5  # Rough estimate
+            except (ValueError, KeyError):
+                # Market data not available, estimate from product demand
                 market_years = hist_years
                 market_demand = hist_demand * 1.5  # Rough estimate
         else:

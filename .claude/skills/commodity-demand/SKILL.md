@@ -15,20 +15,10 @@ Forecast commodity demand:
 
 ## Available Commodities
 
-**Metals:**
-- Copper (EVs, motors, infrastructure)
-- Lithium (batteries)
-- Lead (ICE batteries, UPS, datacenters)
-- Cobalt (batteries)
-- Aluminum (vehicle bodies, conductors)
-- Nickel (batteries)
+**Metals:** Copper, Lithium, Lead, Cobalt, Aluminum, Nickel
+**Energy:** Oil, Coal, Natural Gas
 
-**Energy:**
-- Oil (transportation fuel)
-- Coal (power generation)
-- Natural Gas (power generation, heating)
-
-For complete list and applications, see [reference/commodities_catalog.md](reference/commodities_catalog.md)
+See [reference/intensity_factors.md](reference/intensity_factors.md) for applications and intensity factors.
 
 ## Forecasting Process
 
@@ -49,67 +39,37 @@ For complete list and applications, see [reference/commodities_catalog.md](refer
 
 ## Product Demand Estimation
 
-**If product forecast files provided:**
-```bash
-./run_forecast.sh --commodity lead --region China --product-forecasts-dir ./product_outputs/
-```
-Uses pre-computed product forecasts (more accurate).
+The skill uses built-in lightweight product trend analysis (linear extrapolation of historical demand). For higher accuracy, use the product-demand skill first, then reference those forecasts.
 
-**Otherwise:**
-Uses built-in lightweight product trend analysis:
-- Linear extrapolation of historical product demand
-- No disruption/tipping point analysis (faster, less accurate)
+## Key Concepts
 
-## Intensity Factors
+**Intensity Factor:** Quantity of commodity per product unit (e.g., 80 kg copper/EV, 12 kg lead/ICE battery)
 
-Intensity = quantity of commodity per product unit
+**Replacement Cycle:** Component lifetime before replacement (e.g., 3-4 years for lead batteries, 10-15 years for EV batteries)
 
-**Examples:**
-- Copper in EV: 80 kg/vehicle
-- Copper in ICE: 20 kg/vehicle
-- Lithium in EV battery: 8 kg/kWh × 60 kWh = 480 kg/vehicle
-- Lead in ICE battery: 12 kg/vehicle
+**Installed Base:** `Cumulative_sales - Cumulative_retirements` based on product lifetime
 
-See [reference/intensity_factors.md](reference/intensity_factors.md) for complete table.
-
-## Replacement Cycles
-
-**Examples:**
-- Lead battery in ICE car: 3-4 year replacement cycle
-- EV battery pack: 10-15 year replacement cycle
-- Industrial motors: 15-20 year replacement cycle
-
-See [reference/replacement_cycles.md](reference/replacement_cycles.md) for complete table.
-
-## Installed Base Calculation
-
-```
-Installed_base(year) = Cumulative_sales - Cumulative_retirements
-```
-
-Retirement rate based on product lifetime (e.g., 15 years for vehicles).
-
-## Methodology
-
-See [reference/methodology.md](reference/methodology.md) for:
-- Product demand estimation methods
-- Intensity factor derivation
-- Replacement cycle modeling
-- Installed base calculation
+See reference documentation for complete tables.
 
 ## Examples
 
-See [reference/examples.md](reference/examples.md) for:
-- Lead demand from ICE battery replacements
-- Copper demand from EV sales
-- Lithium demand forecast
+**Copper demand from EV adoption:**
+```bash
+./run_forecast.sh --commodity copper --region China --end-year 2040
+```
 
-## Terminology Guardrails
+**Lead demand (ICE battery replacements):**
+```bash
+./run_forecast.sh --commodity lead --region Global --output json
+```
 
-When presenting results, use:
-- "transformation" or "disruption" (NOT "transition")
-- "market-driven" (NOT "policy-driven")
-- "exponential" (NOT "linear growth")
-- "superabundance" and "zero marginal cost" (NOT "sustainability" or "efficiency")
+See [reference/examples.md](reference/examples.md) for detailed examples.
 
-Avoid: "renewable energy", "sustainable", "green", "hydrogen economy", "grid parity"
+## Reference Documentation
+
+- [reference/methodology.md](reference/methodology.md) - Demand calculation algorithms
+- [reference/intensity_factors.md](reference/intensity_factors.md) - Complete intensity factor table
+- [reference/replacement_cycles.md](reference/replacement_cycles.md) - Component lifetime data
+- [reference/examples.md](reference/examples.md) - Detailed usage examples
+
+**Note:** For terminology guidelines, see CLAUDE.md in repository root.
