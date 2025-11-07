@@ -130,8 +130,25 @@ class CostAnalyzer:
         if forecasts["Onshore_Wind"] is not None and forecasts["Offshore_Wind"] is not None:
             onshore_years, onshore_lcoe = forecasts["Onshore_Wind"]
             offshore_years, offshore_lcoe = forecasts["Offshore_Wind"]
-            combined_lcoe = np.minimum(onshore_lcoe, offshore_lcoe)
-            forecasts["Wind_Combined"] = (onshore_years, combined_lcoe)
+
+            # Convert to numpy arrays for easier manipulation
+            onshore_years = np.array(onshore_years)
+            onshore_lcoe = np.array(onshore_lcoe)
+            offshore_years = np.array(offshore_years)
+            offshore_lcoe = np.array(offshore_lcoe)
+
+            # Find common years (they may differ if using fallback data)
+            common_years = np.intersect1d(onshore_years, offshore_years)
+            if len(common_years) > 0:
+                onshore_mask = np.isin(onshore_years, common_years)
+                offshore_mask = np.isin(offshore_years, common_years)
+                onshore_values = onshore_lcoe[onshore_mask]
+                offshore_values = offshore_lcoe[offshore_mask]
+                combined_lcoe = np.minimum(onshore_values, offshore_values)
+                forecasts["Wind_Combined"] = (common_years.tolist(), combined_lcoe.tolist())
+            else:
+                # No overlap, use onshore (typically has more data)
+                forecasts["Wind_Combined"] = forecasts["Onshore_Wind"]
         elif forecasts["Onshore_Wind"] is not None:
             forecasts["Wind_Combined"] = forecasts["Onshore_Wind"]
         elif forecasts["Offshore_Wind"] is not None:

@@ -192,13 +192,14 @@ class DataLoader:
 
         return self._get_curve_data(dataset_name, region)
 
-    def _get_curve_data(self, dataset_name: str, region: str) -> Tuple[List[int], List[float]]:
+    def _get_curve_data(self, dataset_name: str, region: str, fallback_to_global: bool = True) -> Tuple[List[int], List[float]]:
         """
         Helper to extract X, Y data from a dataset
 
         Args:
             dataset_name: Name of the dataset in curves_data
             region: Region name
+            fallback_to_global: If True, use Global data if region data not found
 
         Returns:
             Tuple of (years, values)
@@ -208,6 +209,12 @@ class DataLoader:
 
         curve = self.curves_data[dataset_name]
         region_data = curve.get("regions", {}).get(region, {})
+
+        # Fallback to Global if region not found and fallback enabled
+        if not region_data and fallback_to_global and region != "Global":
+            region_data = curve.get("regions", {}).get("Global", {})
+            if region_data:
+                print(f"  Note: Using Global data for {dataset_name} (region-specific data for {region} not available)")
 
         if not region_data:
             raise ValueError(f"No data for region {region} in dataset {dataset_name}")

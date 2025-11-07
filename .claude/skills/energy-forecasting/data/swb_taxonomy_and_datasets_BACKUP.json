@@ -1,0 +1,1491 @@
+{
+  "taxonomy": {
+    "market": "Electricity_System",
+    "products": {
+      "SWB": {
+        "subproducts": [
+          "Solar_PV",
+          "CSP",
+          "Onshore_Wind",
+          "Offshore_Wind",
+          "Battery_Storage"
+        ]
+      },
+      "Incumbents": {
+        "subproducts": [
+          "Coal_Power",
+          "Gas_Power"
+        ]
+      }
+    }
+  },
+  "datasets": {
+    "Coal_Annual_Power_Generation_China": {
+      "entity": "Coal_Power",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "demand",
+          "entity_type": "incumbent",
+          "subcategory": "generation"
+        },
+        "description": "Coal Annual Power Generation China"
+      }
+    },
+    "Coal_Annual_Power_Generation_Europe": {
+      "entity": "Coal_Power",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "demand",
+          "entity_type": "incumbent",
+          "subcategory": "generation"
+        },
+        "description": "Coal Annual Power Generation Europe"
+      }
+    },
+    "Coal_Annual_Power_Generation_Global": {
+      "entity": "Coal_Power",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "demand",
+          "entity_type": "incumbent",
+          "subcategory": "generation"
+        },
+        "description": "Coal Annual Power Generation Global"
+      }
+    },
+    "Coal_Annual_Power_Generation_Rest_of_World": {
+      "entity": "Coal_Power",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "demand",
+          "entity_type": "incumbent",
+          "subcategory": "generation"
+        },
+        "description": "Coal Annual Power Generation Rest of World"
+      }
+    },
+    "Coal_Annual_Power_Generation_USA": {
+      "entity": "Coal_Power",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "demand",
+          "entity_type": "incumbent",
+          "subcategory": "generation"
+        },
+        "description": "Coal Annual Power Generation USA"
+      }
+    },
+    "Coal_Installed_Capacity_China": {
+      "entity": "Coal_Power",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "installed_base",
+          "entity_type": "incumbent"
+        },
+        "description": "Coal Installed Capacity China"
+      }
+    },
+    "Coal_Installed_Capacity_Europe": {
+      "entity": "Coal_Power",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "installed_base",
+          "entity_type": "incumbent"
+        },
+        "description": "Coal Installed Capacity Europe"
+      }
+    },
+    "Coal_Installed_Capacity_Global": {
+      "entity": "Coal_Power",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "installed_base",
+          "entity_type": "incumbent"
+        },
+        "description": "Coal Installed Capacity Global"
+      }
+    },
+    "Coal_Installed_Capacity_Rest_of_World": {
+      "entity": "Coal_Power",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "installed_base",
+          "entity_type": "incumbent"
+        },
+        "description": "Coal Installed Capacity Rest of World"
+      }
+    },
+    "Coal_Installed_Capacity_USA": {
+      "entity": "Coal_Power",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "installed_base",
+          "entity_type": "incumbent"
+        },
+        "description": "Coal Installed Capacity USA"
+      }
+    },
+    "Concentrated_Solar_Power_Installed_Capacity_China": {
+      "entity": "CSP",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "installed_base",
+          "entity_type": "disruptor"
+        },
+        "description": "Concentrated Solar Power Installed Capacity China"
+      }
+    },
+    "Concentrated_Solar_Power_Installed_Capacity_Europe": {
+      "entity": "CSP",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "installed_base",
+          "entity_type": "disruptor"
+        },
+        "description": "Concentrated Solar Power Installed Capacity Europe"
+      }
+    },
+    "Concentrated_Solar_Power_Installed_Capacity_Global": {
+      "entity": "CSP",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "installed_base",
+          "entity_type": "disruptor"
+        },
+        "description": "Concentrated Solar Power Installed Capacity Global"
+      }
+    },
+    "Concentrated_Solar_Power_Installed_Capacity_Rest_of_World": {
+      "entity": "CSP",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "installed_base",
+          "entity_type": "disruptor"
+        },
+        "description": "Concentrated Solar Power Installed Capacity Rest of World"
+      }
+    },
+    "Concentrated_Solar_Power_Installed_Capacity_USA": {
+      "entity": "CSP",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "installed_base",
+          "entity_type": "disruptor"
+        },
+        "description": "Concentrated Solar Power Installed Capacity USA"
+      }
+    },
+    "Concentrated_Solar_Power_Installed_Cost_Global": {
+      "entity": "CSP",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "cost",
+          "entity_type": "disruptor",
+          "subcategory": "capex"
+        },
+        "description": "Concentrated Solar Power Installed Cost Global"
+      }
+    },
+    "Concentrated_Solar_Power_LCOE_Global": {
+      "entity": "CSP",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "cost",
+          "entity_type": "disruptor",
+          "subcategory": "lcoe"
+        },
+        "description": "Concentrated Solar Power LCOE Global"
+      }
+    },
+    "Natural_Gas_Annual_Power_Generation_China": {
+      "entity": "Gas_Power",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "demand",
+          "entity_type": "incumbent",
+          "subcategory": "generation"
+        },
+        "description": "Natural Gas Annual Power Generation China"
+      }
+    },
+    "Natural_Gas_Annual_Power_Generation_Europe": {
+      "entity": "Gas_Power",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "demand",
+          "entity_type": "incumbent",
+          "subcategory": "generation"
+        },
+        "description": "Natural Gas Annual Power Generation Europe"
+      }
+    },
+    "Natural_Gas_Annual_Power_Generation_Global": {
+      "entity": "Gas_Power",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "demand",
+          "entity_type": "incumbent",
+          "subcategory": "generation"
+        },
+        "description": "Natural Gas Annual Power Generation Global"
+      }
+    },
+    "Natural_Gas_Annual_Power_Generation_Rest_of_World": {
+      "entity": "Gas_Power",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "demand",
+          "entity_type": "incumbent",
+          "subcategory": "generation"
+        },
+        "description": "Natural Gas Annual Power Generation Rest of World"
+      }
+    },
+    "Natural_Gas_Annual_Power_Generation_USA": {
+      "entity": "Gas_Power",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "demand",
+          "entity_type": "incumbent",
+          "subcategory": "generation"
+        },
+        "description": "Natural Gas Annual Power Generation USA"
+      }
+    },
+    "Natural_Gas_Capacity_Factor_China": {
+      "entity": "Gas_Power",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "utilization",
+          "entity_type": "incumbent"
+        },
+        "description": "Natural Gas Capacity Factor China"
+      }
+    },
+    "Natural_Gas_Capacity_Factor_Europe": {
+      "entity": "Gas_Power",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "utilization",
+          "entity_type": "incumbent"
+        },
+        "description": "Natural Gas Capacity Factor Europe"
+      }
+    },
+    "Natural_Gas_Capacity_Factor_Global": {
+      "entity": "Gas_Power",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "utilization",
+          "entity_type": "incumbent"
+        },
+        "description": "Natural Gas Capacity Factor Global"
+      }
+    },
+    "Natural_Gas_Capacity_Factor_Rest_of_World": {
+      "entity": "Gas_Power",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "utilization",
+          "entity_type": "incumbent"
+        },
+        "description": "Natural Gas Capacity Factor Rest of World"
+      }
+    },
+    "Natural_Gas_Capacity_Factor_USA": {
+      "entity": "Gas_Power",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "utilization",
+          "entity_type": "incumbent"
+        },
+        "description": "Natural Gas Capacity Factor USA"
+      }
+    },
+    "Natural_Gas_Installed_Capacity_China": {
+      "entity": "Gas_Power",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "installed_base",
+          "entity_type": "incumbent"
+        },
+        "description": "Natural Gas Installed Capacity China"
+      }
+    },
+    "Natural_Gas_Installed_Capacity_Europe": {
+      "entity": "Gas_Power",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "installed_base",
+          "entity_type": "incumbent"
+        },
+        "description": "Natural Gas Installed Capacity Europe"
+      }
+    },
+    "Natural_Gas_Installed_Capacity_Global": {
+      "entity": "Gas_Power",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "installed_base",
+          "entity_type": "incumbent"
+        },
+        "description": "Natural Gas Installed Capacity Global"
+      }
+    },
+    "Natural_Gas_Installed_Capacity_Rest_of_World": {
+      "entity": "Gas_Power",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "installed_base",
+          "entity_type": "incumbent"
+        },
+        "description": "Natural Gas Installed Capacity Rest of World"
+      }
+    },
+    "Natural_Gas_Installed_Capacity_USA": {
+      "entity": "Gas_Power",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "installed_base",
+          "entity_type": "incumbent"
+        },
+        "description": "Natural Gas Installed Capacity USA"
+      }
+    },
+    "Offshore_Wind_Capacity_Factor_Global": {
+      "entity": "Offshore_Wind",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "utilization",
+          "entity_type": "disruptor"
+        },
+        "description": "Offshore Wind Capacity Factor Global"
+      }
+    },
+    "Offshore_Wind_Installed_Capacity_China": {
+      "entity": "Offshore_Wind",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "installed_base",
+          "entity_type": "disruptor"
+        },
+        "description": "Offshore Wind Installed Capacity China"
+      }
+    },
+    "Offshore_Wind_Installed_Capacity_Europe": {
+      "entity": "Offshore_Wind",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "installed_base",
+          "entity_type": "disruptor"
+        },
+        "description": "Offshore Wind Installed Capacity Europe"
+      }
+    },
+    "Offshore_Wind_Installed_Capacity_Global": {
+      "entity": "Offshore_Wind",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "installed_base",
+          "entity_type": "disruptor"
+        },
+        "description": "Offshore Wind Installed Capacity Global"
+      }
+    },
+    "Offshore_Wind_Installed_Capacity_Rest_of_World": {
+      "entity": "Offshore_Wind",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "installed_base",
+          "entity_type": "disruptor"
+        },
+        "description": "Offshore Wind Installed Capacity Rest of World"
+      }
+    },
+    "Offshore_Wind_Installed_Capacity_USA": {
+      "entity": "Offshore_Wind",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "installed_base",
+          "entity_type": "disruptor"
+        },
+        "description": "Offshore Wind Installed Capacity USA"
+      }
+    },
+    "Offshore_Wind_Installed_Cost_Global": {
+      "entity": "Offshore_Wind",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "cost",
+          "entity_type": "disruptor",
+          "subcategory": "capex"
+        },
+        "description": "Offshore Wind Installed Cost Global"
+      }
+    },
+    "Offshore_Wind_LCOE_Global": {
+      "entity": "Offshore_Wind",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "cost",
+          "entity_type": "disruptor",
+          "subcategory": "lcoe"
+        },
+        "description": "Offshore Wind LCOE Global"
+      }
+    },
+    "Onshore_Wind_Capacity_Factor_China": {
+      "entity": "Onshore_Wind",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "utilization",
+          "entity_type": "disruptor"
+        },
+        "description": "Onshore Wind Capacity Factor China"
+      }
+    },
+    "Onshore_Wind_Capacity_Factor_Global": {
+      "entity": "Onshore_Wind",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "utilization",
+          "entity_type": "disruptor"
+        },
+        "description": "Onshore Wind Capacity Factor Global"
+      }
+    },
+    "Onshore_Wind_Capacity_Factor_USA": {
+      "entity": "Onshore_Wind",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "utilization",
+          "entity_type": "disruptor"
+        },
+        "description": "Onshore Wind Capacity Factor USA"
+      }
+    },
+    "Onshore_Wind_Installed_Capacity_China": {
+      "entity": "Onshore_Wind",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "installed_base",
+          "entity_type": "disruptor"
+        },
+        "description": "Onshore Wind Installed Capacity China"
+      }
+    },
+    "Onshore_Wind_Installed_Capacity_Europe": {
+      "entity": "Onshore_Wind",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "installed_base",
+          "entity_type": "disruptor"
+        },
+        "description": "Onshore Wind Installed Capacity Europe"
+      }
+    },
+    "Onshore_Wind_Installed_Capacity_Global": {
+      "entity": "Onshore_Wind",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "installed_base",
+          "entity_type": "disruptor"
+        },
+        "description": "Onshore Wind Installed Capacity Global"
+      }
+    },
+    "Onshore_Wind_Installed_Capacity_Rest_of_World": {
+      "entity": "Onshore_Wind",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "installed_base",
+          "entity_type": "disruptor"
+        },
+        "description": "Onshore Wind Installed Capacity Rest of World"
+      }
+    },
+    "Onshore_Wind_Installed_Capacity_USA": {
+      "entity": "Onshore_Wind",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "installed_base",
+          "entity_type": "disruptor"
+        },
+        "description": "Onshore Wind Installed Capacity USA"
+      }
+    },
+    "Onshore_Wind_Installed_Cost_China": {
+      "entity": "Onshore_Wind",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "cost",
+          "entity_type": "disruptor",
+          "subcategory": "capex"
+        },
+        "description": "Onshore Wind Installed Cost China"
+      }
+    },
+    "Onshore_Wind_Installed_Cost_Global": {
+      "entity": "Onshore_Wind",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "cost",
+          "entity_type": "disruptor",
+          "subcategory": "capex"
+        },
+        "description": "Onshore Wind Installed Cost Global"
+      }
+    },
+    "Onshore_Wind_Installed_Cost_USA": {
+      "entity": "Onshore_Wind",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "cost",
+          "entity_type": "disruptor",
+          "subcategory": "capex"
+        },
+        "description": "Onshore Wind Installed Cost USA"
+      }
+    },
+    "Onshore_Wind_LCOE_China": {
+      "entity": "Onshore_Wind",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "cost",
+          "entity_type": "disruptor",
+          "subcategory": "lcoe"
+        },
+        "description": "Onshore Wind LCOE China"
+      }
+    },
+    "Onshore_Wind_LCOE_Global": {
+      "entity": "Onshore_Wind",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "cost",
+          "entity_type": "disruptor",
+          "subcategory": "lcoe"
+        },
+        "description": "Onshore Wind LCOE Global"
+      }
+    },
+    "Onshore_Wind_LCOE_USA": {
+      "entity": "Onshore_Wind",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "cost",
+          "entity_type": "disruptor",
+          "subcategory": "lcoe"
+        },
+        "description": "Onshore Wind LCOE USA"
+      }
+    },
+    "Solar_Annual_Power_Generation_China": {
+      "entity": "Solar_PV",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "demand",
+          "entity_type": "disruptor",
+          "subcategory": "generation"
+        },
+        "description": "Solar Annual Power Generation China"
+      }
+    },
+    "Solar_Annual_Power_Generation_Europe": {
+      "entity": "Solar_PV",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "demand",
+          "entity_type": "disruptor",
+          "subcategory": "generation"
+        },
+        "description": "Solar Annual Power Generation Europe"
+      }
+    },
+    "Solar_Annual_Power_Generation_Global": {
+      "entity": "Solar_PV",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "demand",
+          "entity_type": "disruptor",
+          "subcategory": "generation"
+        },
+        "description": "Solar Annual Power Generation Global"
+      }
+    },
+    "Solar_Annual_Power_Generation_Rest_of_World": {
+      "entity": "Solar_PV",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "demand",
+          "entity_type": "disruptor",
+          "subcategory": "generation"
+        },
+        "description": "Solar Annual Power Generation Rest of World"
+      }
+    },
+    "Solar_Annual_Power_Generation_USA": {
+      "entity": "Solar_PV",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "demand",
+          "entity_type": "disruptor",
+          "subcategory": "generation"
+        },
+        "description": "Solar Annual Power Generation USA"
+      }
+    },
+    "Solar_Installed_Capacity_China": {
+      "entity": "Solar_PV",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "installed_base",
+          "entity_type": "disruptor"
+        },
+        "description": "Solar Installed Capacity China"
+      }
+    },
+    "Solar_Installed_Capacity_Europe": {
+      "entity": "Solar_PV",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "installed_base",
+          "entity_type": "disruptor"
+        },
+        "description": "Solar Installed Capacity Europe"
+      }
+    },
+    "Solar_Installed_Capacity_Global": {
+      "entity": "Solar_PV",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "installed_base",
+          "entity_type": "disruptor"
+        },
+        "description": "Solar Installed Capacity Global"
+      }
+    },
+    "Solar_Installed_Capacity_Rest_of_World": {
+      "entity": "Solar_PV",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "installed_base",
+          "entity_type": "disruptor"
+        },
+        "description": "Solar Installed Capacity Rest of World"
+      }
+    },
+    "Solar_Installed_Capacity_USA": {
+      "entity": "Solar_PV",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "installed_base",
+          "entity_type": "disruptor"
+        },
+        "description": "Solar Installed Capacity USA"
+      }
+    },
+    "Solar_Photovoltaic_Capacity_Factor_Global": {
+      "entity": "Solar_PV",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "utilization",
+          "entity_type": "disruptor"
+        },
+        "description": "Solar Photovoltaic Capacity Factor Global"
+      }
+    },
+    "Solar_Photovoltaic_Installed_Cost_China": {
+      "entity": "Solar_PV",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "cost",
+          "entity_type": "disruptor",
+          "subcategory": "capex"
+        },
+        "description": "Solar Photovoltaic Installed Cost China"
+      }
+    },
+    "Solar_Photovoltaic_Installed_Cost_Global": {
+      "entity": "Solar_PV",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "cost",
+          "entity_type": "disruptor",
+          "subcategory": "capex"
+        },
+        "description": "Solar Photovoltaic Installed Cost Global"
+      }
+    },
+    "Solar_Photovoltaic_Installed_Cost_USA": {
+      "entity": "Solar_PV",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "cost",
+          "entity_type": "disruptor",
+          "subcategory": "capex"
+        },
+        "description": "Solar Photovoltaic Installed Cost USA"
+      }
+    },
+    "Solar_Photovoltaic_LCOE_China": {
+      "entity": "Solar_PV",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "cost",
+          "entity_type": "disruptor",
+          "subcategory": "lcoe"
+        },
+        "description": "Solar Photovoltaic LCOE China"
+      }
+    },
+    "Solar_Photovoltaic_LCOE_Global": {
+      "entity": "Solar_PV",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "cost",
+          "entity_type": "disruptor",
+          "subcategory": "lcoe"
+        },
+        "description": "Solar Photovoltaic LCOE Global"
+      }
+    },
+    "Solar_Photovoltaic_LCOE_USA": {
+      "entity": "Solar_PV",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "cost",
+          "entity_type": "disruptor",
+          "subcategory": "lcoe"
+        },
+        "description": "Solar Photovoltaic LCOE USA"
+      }
+    },
+    "Solar_PV_Module_(All_Black)_Cost_Europe": {
+      "entity": "Solar_PV",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "cost",
+          "entity_type": "disruptor",
+          "subcategory": "capex"
+        },
+        "description": "Solar PV Module (All Black) Cost Europe"
+      }
+    },
+    "Solar_PV_Module_(Bifacial)_Cost_Europe": {
+      "entity": "Solar_PV",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "cost",
+          "entity_type": "disruptor",
+          "subcategory": "capex"
+        },
+        "description": "Solar PV Module (Bifacial) Cost Europe"
+      }
+    },
+    "Solar_PV_Module_(High_efficiency)_Cost_Europe": {
+      "entity": "Solar_PV",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "cost",
+          "entity_type": "disruptor",
+          "subcategory": "capex"
+        },
+        "description": "Solar PV Module (High efficiency) Cost Europe"
+      }
+    },
+    "Solar_PV_Module_(Low_Cost_Technology)_Cost_Europe": {
+      "entity": "Solar_PV",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "cost",
+          "entity_type": "disruptor",
+          "subcategory": "capex"
+        },
+        "description": "Solar PV Module (Low Cost Technology) Cost Europe"
+      }
+    },
+    "Solar_PV_Module_(Mainstream)_Cost_Europe": {
+      "entity": "Solar_PV",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "cost",
+          "entity_type": "disruptor",
+          "subcategory": "capex"
+        },
+        "description": "Solar PV Module (Mainstream) Cost Europe"
+      }
+    },
+    "Wind_Annual_Power_Generation_China": {
+      "entity": "Wind_Mix",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "demand",
+          "entity_type": "disruptor",
+          "subcategory": "generation"
+        },
+        "description": "Wind Annual Power Generation China"
+      }
+    },
+    "Wind_Annual_Power_Generation_Europe": {
+      "entity": "Wind_Mix",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "demand",
+          "entity_type": "disruptor",
+          "subcategory": "generation"
+        },
+        "description": "Wind Annual Power Generation Europe"
+      }
+    },
+    "Wind_Annual_Power_Generation_Global": {
+      "entity": "Wind_Mix",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "demand",
+          "entity_type": "disruptor",
+          "subcategory": "generation"
+        },
+        "description": "Wind Annual Power Generation Global"
+      }
+    },
+    "Wind_Annual_Power_Generation_Rest_of_World": {
+      "entity": "Wind_Mix",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "demand",
+          "entity_type": "disruptor",
+          "subcategory": "generation"
+        },
+        "description": "Wind Annual Power Generation Rest of World"
+      }
+    },
+    "Wind_Annual_Power_Generation_USA": {
+      "entity": "Wind_Mix",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "demand",
+          "entity_type": "disruptor",
+          "subcategory": "generation"
+        },
+        "description": "Wind Annual Power Generation USA"
+      }
+    },
+    "Battery_Energy_Storage_System_(2-hour_Turnkey)_Cost_China": {
+      "entity": "Battery_Storage",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "cost",
+          "entity_type": "disruptor",
+          "subcategory": "capex"
+        },
+        "description": "Battery Energy Storage System (2-hour Turnkey) Cost China"
+      }
+    },
+    "Battery_Energy_Storage_System_(2-hour_Turnkey)_Cost_Europe": {
+      "entity": "Battery_Storage",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "cost",
+          "entity_type": "disruptor",
+          "subcategory": "capex"
+        },
+        "description": "Battery Energy Storage System (2-hour Turnkey) Cost Europe"
+      }
+    },
+    "Battery_Energy_Storage_System_(2-hour_Turnkey)_Cost_Global": {
+      "entity": "Battery_Storage",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "cost",
+          "entity_type": "disruptor",
+          "subcategory": "capex"
+        },
+        "description": "Battery Energy Storage System (2-hour Turnkey) Cost Global"
+      }
+    },
+    "Battery_Energy_Storage_System_(2-hour_Turnkey)_Cost_USA": {
+      "entity": "Battery_Storage",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "cost",
+          "entity_type": "disruptor",
+          "subcategory": "capex"
+        },
+        "description": "Battery Energy Storage System (2-hour Turnkey) Cost USA"
+      }
+    },
+    "Battery_Energy_Storage_System_(4-hour_Turnkey)_Cost_China": {
+      "entity": "Battery_Storage",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "cost",
+          "entity_type": "disruptor",
+          "subcategory": "capex"
+        },
+        "description": "Battery Energy Storage System (4-hour Turnkey) Cost China"
+      }
+    },
+    "Battery_Energy_Storage_System_(4-hour_Turnkey)_Cost_Europe": {
+      "entity": "Battery_Storage",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "cost",
+          "entity_type": "disruptor",
+          "subcategory": "capex"
+        },
+        "description": "Battery Energy Storage System (4-hour Turnkey) Cost Europe"
+      }
+    },
+    "Battery_Energy_Storage_System_(4-hour_Turnkey)_Cost_Global": {
+      "entity": "Battery_Storage",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "cost",
+          "entity_type": "disruptor",
+          "subcategory": "capex"
+        },
+        "description": "Battery Energy Storage System (4-hour Turnkey) Cost Global"
+      }
+    },
+    "Battery_Energy_Storage_System_(4-hour_Turnkey)_Cost_USA": {
+      "entity": "Battery_Storage",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "cost",
+          "entity_type": "disruptor",
+          "subcategory": "capex"
+        },
+        "description": "Battery Energy Storage System (4-hour Turnkey) Cost USA"
+      }
+    },
+    "Battery_Energy_Storage_System_Installed_Capacity_China": {
+      "entity": "Battery_Storage",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "installed_base",
+          "entity_type": "disruptor"
+        },
+        "description": "Battery Energy Storage System Installed Capacity China"
+      }
+    },
+    "Battery_Energy_Storage_System_Installed_Capacity_Europe": {
+      "entity": "Battery_Storage",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "installed_base",
+          "entity_type": "disruptor"
+        },
+        "description": "Battery Energy Storage System Installed Capacity Europe"
+      }
+    },
+    "Battery_Energy_Storage_System_Installed_Capacity_Global": {
+      "entity": "Battery_Storage",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "installed_base",
+          "entity_type": "disruptor"
+        },
+        "description": "Battery Energy Storage System Installed Capacity Global"
+      }
+    },
+    "Battery_Energy_Storage_System_Installed_Capacity_Rest_of_World": {
+      "entity": "Battery_Storage",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "installed_base",
+          "entity_type": "disruptor"
+        },
+        "description": "Battery Energy Storage System Installed Capacity Rest of World"
+      }
+    },
+    "Battery_Energy_Storage_System_Installed_Capacity_USA": {
+      "entity": "Battery_Storage",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "installed_base",
+          "entity_type": "disruptor"
+        },
+        "description": "Battery Energy Storage System Installed Capacity USA"
+      }
+    },
+    "Battery_Energy_Storage_System_Installed_Cost_Global": {
+      "entity": "Battery_Storage",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "cost",
+          "entity_type": "disruptor",
+          "subcategory": "capex"
+        },
+        "description": "Battery Energy Storage System Installed Cost Global"
+      }
+    },
+    "Electricity_Annual_Domestic_Consumption_China": {
+      "entity": "Electricity_System",
+      "region": "China",
+      "level_name": "market",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "demand",
+          "entity_type": "market",
+          "subcategory": "consumption"
+        },
+        "description": "Annual domestic electricity consumption (TWh) \u2014 China"
+      }
+    },
+    "Electricity_Annual_Domestic_Consumption_Europe": {
+      "entity": "Electricity_System",
+      "region": "Europe",
+      "level_name": "market",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "demand",
+          "entity_type": "market",
+          "subcategory": "consumption"
+        },
+        "description": "Annual domestic electricity consumption (TWh) \u2014 Europe"
+      }
+    },
+    "Electricity_Annual_Domestic_Consumption_Global": {
+      "entity": "Electricity_System",
+      "region": "Global",
+      "level_name": "market",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "demand",
+          "entity_type": "market",
+          "subcategory": "consumption"
+        },
+        "description": "Annual domestic electricity consumption (TWh) \u2014 Global"
+      }
+    },
+    "Electricity_Annual_Domestic_Consumption_Rest_of_World": {
+      "entity": "Electricity_System",
+      "region": "Rest_of_World",
+      "level_name": "market",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "demand",
+          "entity_type": "market",
+          "subcategory": "consumption"
+        },
+        "description": "Annual domestic electricity consumption (TWh) \u2014 Rest_of_World"
+      }
+    },
+    "Electricity_Annual_Domestic_Consumption_USA": {
+      "entity": "Electricity_System",
+      "region": "USA",
+      "level_name": "market",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "demand",
+          "entity_type": "market",
+          "subcategory": "consumption"
+        },
+        "description": "Annual domestic electricity consumption (TWh) \u2014 USA"
+      }
+    },
+    "Electricity_Annual_Production_China": {
+      "entity": "Electricity_System",
+      "region": "China",
+      "level_name": "market",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "demand",
+          "entity_type": "market",
+          "subcategory": "generation"
+        },
+        "description": "Annual electricity production/generation (TWh) \u2014 China"
+      }
+    },
+    "Electricity_Annual_Production_Europe": {
+      "entity": "Electricity_System",
+      "region": "Europe",
+      "level_name": "market",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "demand",
+          "entity_type": "market",
+          "subcategory": "generation"
+        },
+        "description": "Annual electricity production/generation (TWh) \u2014 Europe"
+      }
+    },
+    "Electricity_Annual_Production_Global": {
+      "entity": "Electricity_System",
+      "region": "Global",
+      "level_name": "market",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "demand",
+          "entity_type": "market",
+          "subcategory": "generation"
+        },
+        "description": "Annual electricity production/generation (TWh) \u2014 Global"
+      }
+    },
+    "Electricity_Annual_Production_Rest_of_World": {
+      "entity": "Electricity_System",
+      "region": "Rest_of_World",
+      "level_name": "market",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "demand",
+          "entity_type": "market",
+          "subcategory": "generation"
+        },
+        "description": "Annual electricity production/generation (TWh) \u2014 Rest_of_World"
+      }
+    },
+    "Electricity_Annual_Production_USA": {
+      "entity": "Electricity_System",
+      "region": "USA",
+      "level_name": "market",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "demand",
+          "entity_type": "market",
+          "subcategory": "generation"
+        },
+        "description": "Annual electricity production/generation (TWh) \u2014 USA"
+      }
+    },
+    "Electricity_Residential_Price_China": {
+      "entity": "Electricity_System",
+      "region": "China",
+      "level_name": "market",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "price",
+          "entity_type": "market",
+          "subcategory": "retail_residential"
+        },
+        "description": "Average residential electricity price \u2014 China"
+      }
+    },
+    "Electricity_Residential_Price_Europe": {
+      "entity": "Electricity_System",
+      "region": "Europe",
+      "level_name": "market",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "price",
+          "entity_type": "market",
+          "subcategory": "retail_residential"
+        },
+        "description": "Average residential electricity price \u2014 Europe"
+      }
+    },
+    "Electricity_Residential_Price_USA": {
+      "entity": "Electricity_System",
+      "region": "USA",
+      "level_name": "market",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "price",
+          "entity_type": "market",
+          "subcategory": "retail_residential"
+        },
+        "description": "Average residential electricity price \u2014 USA"
+      }
+    }
+  }
+}
