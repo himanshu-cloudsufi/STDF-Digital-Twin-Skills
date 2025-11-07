@@ -81,6 +81,11 @@ function initializeSocket() {
         sendButton.disabled = false;
     });
 
+    socket.on('retry_notification', (data) => {
+        console.log('Retry notification:', data);
+        addSystemMessage(`⚠️ ${data.message}`);
+    });
+
     // Session management events
     socket.on('sessions_list', (data) => {
         renderSessionList(data.sessions);
@@ -262,9 +267,8 @@ function handleAssistantChunk(data) {
     // Accumulate raw markdown text
     currentAssistantMessage.dataset.rawText += data.text;
 
-    // Render markdown
-    currentAssistantMessage.innerHTML = marked.parse(currentAssistantMessage.dataset.rawText);
-    scrollToBottom();
+    // Detect and render any choice blocks
+    detectAndRenderChoices(currentAssistantMessage);
 
     // Update session ID
     if (data.session_id) {

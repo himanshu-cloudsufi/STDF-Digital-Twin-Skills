@@ -284,6 +284,7 @@ def process_query(user_message, session_id=None):
 def stream_response_sync(client, messages, container, model, session_id):
     """
     Stream responses from Messages API to the client using SSE.
+    Includes retry logic for handling API overload errors.
 
     Args:
         client: Anthropic client instance
@@ -303,100 +304,153 @@ def stream_response_sync(client, messages, container, model, session_id):
     chunk_count = 0
     start_time = None
 
-    try:
-        # Create streaming request with stream=True
-        logger.info("[STREAM] Creating streaming request to Messages API")
-        logger.info(f"[STREAM] API call parameters:")
-        logger.info(f"[STREAM]   - model: {model}")
-        logger.info(f"[STREAM]   - max_tokens: 4096")
-        logger.info(f"[STREAM]   - messages: {len(messages)} items")
-        logger.info(f"[STREAM]   - system prompt: {len(SYSTEM_PROMPT)} chars")
-        logger.info(f"[STREAM]   - container skills: {len(container['skills'])}")
+    # Retry configuration
+    max_retries = 3
+    retry_count = 0
 
-        import time
-        start_time = time.time()
+    while retry_count <= max_retries:
+        try:
+            # Create streaming request with stream=True
+            logger.info("[STREAM] Creating streaming request to Messages API")
+            if retry_count > 0:
+                logger.info(f"[STREAM] Retry attempt {retry_count}/{max_retries}")
+            logger.info(f"[STREAM] API call parameters:")
+            logger.info(f"[STREAM]   - model: {model}")
+            logger.info(f"[STREAM]   - max_tokens: 4096")
+            logger.info(f"[STREAM]   - messages: {len(messages)} items")
+            logger.info(f"[STREAM]   - system prompt: {len(SYSTEM_PROMPT)} chars")
+            logger.info(f"[STREAM]   - container skills: {len(container['skills'])}")
 
-        with client.beta.messages.stream(
-            model=model,
-            max_tokens=4096,
-            system=SYSTEM_PROMPT,
-            messages=messages,
-            container=container,
-            tools=[{
-                "type": "code_execution_20250825",
-                "name": "code_execution"
-            }],
-            betas=["code-execution-2025-08-25", "skills-2025-10-02"]
-        ) as stream:
-            logger.info("[STREAM] Stream opened, receiving events...")
+            import time
+            start_time = time.time()
 
-            # Stream text as it arrives
-            for text in stream.text_stream:
-                chunk_count += 1
-                accumulated_text += text
+            with client.beta.messages.stream(
+                model=model,
+                max_tokens=4096,
+                system=SYSTEM_PROMPT,
+                messages=messages,
+                container=container,
+                tools=[{
+                    "type": "code_execution_20250825",
+                    "name": "code_execution"
+                }],
+                betas=["code-execution-2025-08-25", "skills-2025-10-02"]
+            ) as stream:
+                logger.info("[STREAM] Stream opened, receiving events...")
 
-                if chunk_count % 10 == 0:  # Log every 10th chunk to reduce noise
-                    logger.info(f"[STREAM] Chunk #{chunk_count}: {len(text)} chars (total: {len(accumulated_text)})")
+                # Stream text as it arrives
+                for text in stream.text_stream:
+                    chunk_count += 1
+                    accumulated_text += text
 
-                # Stream text chunk to client
-                socketio.emit('assistant_chunk', {
-                    'text': text,
-                    'session_id': session_id
+                    if chunk_count % 10 == 0:  # Log every 10th chunk to reduce noise
+                        logger.info(f"[STREAM] Chunk #{chunk_count}: {len(text)} chars (total: {len(accumulated_text)})")
+
+                    # Stream text chunk to client
+                    socketio.emit('assistant_chunk', {
+                        'text': text,
+                        'session_id': session_id
+                    })
+
+                # Get final message after stream completes
+                final_message = stream.get_final_message()
+                elapsed = time.time() - start_time
+                logger.info(f"[STREAM] Stream completed successfully")
+                logger.info(f"[STREAM] Statistics:")
+                logger.info(f"[STREAM]   - Total chunks: {chunk_count}")
+                logger.info(f"[STREAM]   - Total chars: {len(accumulated_text)}")
+                logger.info(f"[STREAM]   - Elapsed time: {elapsed:.2f}s")
+                logger.info(f"[STREAM]   - Final message type: {type(final_message)}")
+                logger.info(f"[STREAM]   - Final message content blocks: {len(final_message.content) if hasattr(final_message, 'content') else 'N/A'}")
+
+            # Store conversation in memory
+            if session_id:
+                logger.info(f"[MEMORY] Storing conversation for session {session_id}")
+
+                # Add assistant response to messages
+                messages.append({
+                    "role": "assistant",
+                    "content": final_message.content
+                })
+                session_conversations[session_id] = messages
+                logger.info(f"[MEMORY] Updated session. Total messages: {len(messages)}")
+
+                # Save to database
+                try:
+                    db.save_message(session_id, 'assistant', accumulated_text)
+                    logger.info(f"[DATABASE] Assistant response saved for session {session_id}")
+                    logger.info(f"[DATABASE] Saved {len(accumulated_text)} chars")
+
+                    # Verify save
+                    history = db.get_session_history(session_id)
+                    logger.info(f"[DATABASE] Verified - Total messages in DB: {len(history)}")
+                except Exception as db_error:
+                    logger.error(f"[DATABASE ERROR] Failed to save assistant response: {db_error}", exc_info=True)
+
+            # Send completion signal
+            logger.info("[OUTGOING] Emitting assistant_complete to client")
+            socketio.emit('assistant_complete', {
+                'full_text': accumulated_text,
+                'session_id': session_id
+            })
+            logger.info("[OUTGOING] Completion signal sent")
+
+            # Success - break out of retry loop
+            break
+
+        except anthropic.APIStatusError as e:
+            # Check if it's an overload error
+            error_str = str(e)
+            is_overload = 'overloaded' in error_str.lower() or (hasattr(e, 'status_code') and e.status_code == 529)
+
+            if is_overload and retry_count < max_retries:
+                retry_count += 1
+                wait_time = 2 ** (retry_count - 1)  # Exponential backoff: 1s, 2s, 4s
+                logger.warning("=" * 80)
+                logger.warning(f"[RETRY] API overloaded error detected")
+                logger.warning(f"[RETRY] Attempt {retry_count}/{max_retries}")
+                logger.warning(f"[RETRY] Waiting {wait_time}s before retry...")
+                logger.warning("=" * 80)
+
+                # Notify client about retry
+                socketio.emit('retry_notification', {
+                    'message': f'API temporarily overloaded. Retrying in {wait_time}s... (Attempt {retry_count}/{max_retries})',
+                    'retry_count': retry_count,
+                    'max_retries': max_retries,
+                    'wait_time': wait_time
                 })
 
-            # Get final message after stream completes
-            final_message = stream.get_final_message()
-            elapsed = time.time() - start_time
-            logger.info(f"[STREAM] Stream completed successfully")
-            logger.info(f"[STREAM] Statistics:")
-            logger.info(f"[STREAM]   - Total chunks: {chunk_count}")
-            logger.info(f"[STREAM]   - Total chars: {len(accumulated_text)}")
-            logger.info(f"[STREAM]   - Elapsed time: {elapsed:.2f}s")
-            logger.info(f"[STREAM]   - Final message type: {type(final_message)}")
-            logger.info(f"[STREAM]   - Final message content blocks: {len(final_message.content) if hasattr(final_message, 'content') else 'N/A'}")
+                import time
+                time.sleep(wait_time)
+                continue  # Retry the request
+            else:
+                # Max retries exceeded or different error type
+                logger.error("=" * 80)
+                logger.error(f"[STREAM ERROR] API Status Error")
+                logger.error(f"[STREAM ERROR] Exception type: {type(e).__name__}")
+                logger.error(f"[STREAM ERROR] Exception message: {str(e)}")
+                logger.error(f"[STREAM ERROR] Status code: {e.status_code if hasattr(e, 'status_code') else 'N/A'}")
+                logger.error(f"[STREAM ERROR] Session ID: {session_id}")
+                logger.error(f"[STREAM ERROR] Chunks received before error: {chunk_count}")
+                logger.error(f"[STREAM ERROR] Text accumulated: {len(accumulated_text)} chars")
+                if retry_count >= max_retries:
+                    logger.error(f"[STREAM ERROR] Max retries ({max_retries}) exceeded")
+                logger.error("=" * 80, exc_info=True)
+                socketio.emit('error', {'message': f'API error after {retry_count} retries: {str(e)}'})
+                break
 
-        # Store conversation in memory
-        if session_id:
-            logger.info(f"[MEMORY] Storing conversation for session {session_id}")
-
-            # Add assistant response to messages
-            messages.append({
-                "role": "assistant",
-                "content": final_message.content
-            })
-            session_conversations[session_id] = messages
-            logger.info(f"[MEMORY] Updated session. Total messages: {len(messages)}")
-
-            # Save to database
-            try:
-                db.save_message(session_id, 'assistant', accumulated_text)
-                logger.info(f"[DATABASE] Assistant response saved for session {session_id}")
-                logger.info(f"[DATABASE] Saved {len(accumulated_text)} chars")
-
-                # Verify save
-                history = db.get_session_history(session_id)
-                logger.info(f"[DATABASE] Verified - Total messages in DB: {len(history)}")
-            except Exception as db_error:
-                logger.error(f"[DATABASE ERROR] Failed to save assistant response: {db_error}", exc_info=True)
-
-        # Send completion signal
-        logger.info("[OUTGOING] Emitting assistant_complete to client")
-        socketio.emit('assistant_complete', {
-            'full_text': accumulated_text,
-            'session_id': session_id
-        })
-        logger.info("[OUTGOING] Completion signal sent")
-
-    except Exception as e:
-        logger.error("=" * 80)
-        logger.error(f"[STREAM ERROR] Error in stream response")
-        logger.error(f"[STREAM ERROR] Exception type: {type(e).__name__}")
-        logger.error(f"[STREAM ERROR] Exception message: {str(e)}")
-        logger.error(f"[STREAM ERROR] Session ID: {session_id}")
-        logger.error(f"[STREAM ERROR] Chunks received before error: {chunk_count}")
-        logger.error(f"[STREAM ERROR] Text accumulated: {len(accumulated_text)} chars")
-        logger.error("=" * 80, exc_info=True)
-        socketio.emit('error', {'message': f'Stream error: {str(e)}'})
+        except Exception as e:
+            # Non-API errors - don't retry
+            logger.error("=" * 80)
+            logger.error(f"[STREAM ERROR] Error in stream response")
+            logger.error(f"[STREAM ERROR] Exception type: {type(e).__name__}")
+            logger.error(f"[STREAM ERROR] Exception message: {str(e)}")
+            logger.error(f"[STREAM ERROR] Session ID: {session_id}")
+            logger.error(f"[STREAM ERROR] Chunks received before error: {chunk_count}")
+            logger.error(f"[STREAM ERROR] Text accumulated: {len(accumulated_text)} chars")
+            logger.error("=" * 80, exc_info=True)
+            socketio.emit('error', {'message': f'Stream error: {str(e)}'})
+            break
 
 
 @socketio.on('clear_session')
