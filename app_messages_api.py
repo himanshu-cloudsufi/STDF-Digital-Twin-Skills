@@ -9,7 +9,7 @@ import asyncio
 import argparse
 import json
 from pathlib import Path
-from flask import Flask, render_template, send_from_directory
+from flask import Flask
 from flask_socketio import SocketIO, emit
 from flask_cors import CORS
 from dotenv import load_dotenv
@@ -27,10 +27,10 @@ logger = logging.getLogger(__name__)
 # Initialize database
 db = SessionDatabase()
 
-# Initialize Flask app
-app = Flask(__name__, static_folder='static', static_url_path='')
+# Initialize Flask app (API only, no static files)
+app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'dev-secret-key-change-in-production')
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 # Initialize SocketIO with threading mode
 socketio = SocketIO(app, cors_allowed_origins="*", async_mode='threading')
@@ -145,8 +145,8 @@ def get_model_identifier(model_input):
 
 @app.route('/')
 def index():
-    """Serve the chat interface"""
-    return send_from_directory('static', 'index.html')
+    """Health check endpoint"""
+    return {'status': 'ok', 'service': 'Demand Forecasting Chatbot API'}, 200
 
 
 @socketio.on('connect')
@@ -496,6 +496,39 @@ def stream_response_sync(client, messages, container, model, session_id):
                     # Verify save
                     history = db.get_session_history(session_id)
                     logger.info(f"[DATABASE] Verified - Total messages in DB: {len(history)}")
+
+                    # Auto-generate title after 3rd assistant response
+                    assistant_count = sum(1 for msg in history if msg.get('role') == 'assistant')
+                    logger.info(f"[TITLE GEN] Assistant message count: {assistant_count}")
+
+                    if assistant_count == 3:
+                        logger.info("[TITLE GEN] 3rd assistant response detected - triggering auto-naming")
+
+                        # Get user messages only
+                        user_messages = [msg['content'] for msg in history if msg.get('role') == 'user']
+                        logger.info(f"[TITLE GEN] Extracted {len(user_messages)} user messages")
+
+                        # Generate title with Haiku
+                        generated_title = generate_chat_title_with_haiku(user_messages)
+
+                        if generated_title:
+                            # Update database
+                            success = db.update_session_title(session_id, generated_title)
+
+                            if success:
+                                logger.info(f"[TITLE GEN] Title auto-generated and saved: '{generated_title}'")
+
+                                # Notify frontend
+                                socketio.emit('session_title_updated', {
+                                    'session_id': session_id,
+                                    'title': generated_title
+                                })
+                                logger.info("[TITLE GEN] Frontend notified of new title")
+                            else:
+                                logger.warning("[TITLE GEN] Failed to save generated title to database")
+                        else:
+                            logger.warning("[TITLE GEN] Title generation returned None")
+
                 except Exception as db_error:
                     logger.error(f"[DATABASE ERROR] Failed to save assistant response: {db_error}", exc_info=True)
 
@@ -709,6 +742,92 @@ def handle_update_session_title(data):
         emit('error', {'message': f'Failed to update title: {str(e)}'})
 
 
+@socketio.on('backfill_session_titles')
+def handle_backfill_session_titles():
+    """
+    Backfill titles for existing sessions that have 3+ messages but no custom title.
+    Generates titles using Haiku for all qualifying sessions.
+    """
+    logger.info("=" * 80)
+    logger.info("[BACKFILL] Starting title backfill for existing sessions")
+
+    try:
+        # Get all sessions that need titles
+        # We look for sessions with at least 6 messages (3 user + 3 assistant)
+        # and either no title or default title pattern "Chat <session_id>"
+        sessions_to_update = db.get_sessions_needing_titles()
+
+        logger.info(f"[BACKFILL] Found {len(sessions_to_update)} sessions needing titles")
+
+        if not sessions_to_update:
+            emit('backfill_complete', {
+                'updated_count': 0,
+                'message': 'No sessions need title backfill'
+            })
+            return
+
+        updated_count = 0
+        failed_count = 0
+
+        for session in sessions_to_update:
+            session_id = session['session_id']
+            logger.info(f"[BACKFILL] Processing session {session_id}")
+
+            try:
+                # Get session history
+                history = db.get_session_history(session_id)
+
+                # Extract user messages only
+                user_messages = [msg['content'] for msg in history if msg.get('role') == 'user'][:3]
+
+                if len(user_messages) < 1:
+                    logger.warning(f"[BACKFILL] Skipping {session_id} - no user messages found")
+                    failed_count += 1
+                    continue
+
+                logger.info(f"[BACKFILL] Generating title for {session_id} using {len(user_messages)} user messages")
+
+                # Generate title
+                generated_title = generate_chat_title_with_haiku(user_messages)
+
+                if generated_title:
+                    # Update database
+                    success = db.update_session_title(session_id, generated_title)
+
+                    if success:
+                        updated_count += 1
+                        logger.info(f"[BACKFILL] Updated {session_id}: '{generated_title}'")
+                    else:
+                        failed_count += 1
+                        logger.warning(f"[BACKFILL] Failed to save title for {session_id}")
+                else:
+                    failed_count += 1
+                    logger.warning(f"[BACKFILL] Title generation failed for {session_id}")
+
+            except Exception as session_error:
+                failed_count += 1
+                logger.error(f"[BACKFILL ERROR] Error processing session {session_id}: {session_error}")
+                continue
+
+        # Send completion notification
+        logger.info("=" * 80)
+        logger.info(f"[BACKFILL] Complete: {updated_count} updated, {failed_count} failed")
+        logger.info("=" * 80)
+
+        emit('backfill_complete', {
+            'updated_count': updated_count,
+            'failed_count': failed_count,
+            'total_processed': len(sessions_to_update),
+            'message': f'Backfill complete: {updated_count} sessions updated, {failed_count} failed'
+        })
+
+    except Exception as e:
+        logger.error("=" * 80)
+        logger.error(f"[BACKFILL ERROR] Error during backfill: {e}")
+        logger.error("=" * 80, exc_info=True)
+        emit('error', {'message': f'Backfill failed: {str(e)}'})
+
+
 @socketio.on('compare_sessions')
 def handle_compare_sessions(data):
     """Compare two chat sessions using Haiku model to find numerical discrepancies"""
@@ -871,6 +990,79 @@ Keep your response focused and concise - aim for 3-10 bullet points highlighting
         return f"Error during comparison: {str(e)}"
 
 
+def generate_chat_title_with_haiku(user_messages):
+    """
+    Generate an action-oriented title for a chat session using Haiku.
+    Uses only user messages to create a concise, descriptive title.
+
+    Args:
+        user_messages: List of user message strings (first 3 messages recommended)
+
+    Returns:
+        String containing generated title (max 60 chars), or None if generation fails
+    """
+    logger.info("[TITLE GEN] Generating chat title with Haiku...")
+
+    if not user_messages:
+        logger.warning("[TITLE GEN] No user messages provided")
+        return None
+
+    # Limit to first 3 user messages for context
+    messages_to_use = user_messages[:3]
+
+    # Format messages for the prompt
+    formatted_messages = "\n\n".join([f"Message {i+1}: {msg}" for i, msg in enumerate(messages_to_use)])
+
+    logger.info(f"[TITLE GEN] Using {len(messages_to_use)} user messages")
+
+    # Build title generation prompt
+    title_prompt = f"""Based on the following user messages from a forecasting conversation, generate a brief, action-oriented title.
+
+User messages:
+{formatted_messages}
+
+Requirements:
+- Maximum 60 characters
+- Action-oriented format (describe what the user wants to do)
+- Examples: "Forecast solar capacity for 2040", "Analyze EV adoption in China", "Compare wind vs coal generation"
+- Focus on the main topic and action
+- Do NOT include quotes or extra punctuation
+
+Generate only the title text, nothing else:"""
+
+    logger.info(f"[TITLE GEN] Prompt length: {len(title_prompt)} chars")
+
+    try:
+        # Call Haiku model (fast and cost-efficient)
+        logger.info("[TITLE GEN] Making API call to Haiku model...")
+
+        response = anthropic_client.messages.create(
+            model=get_model_identifier('haiku'),
+            max_tokens=100,  # Small limit since we only need a short title
+            messages=[{
+                "role": "user",
+                "content": title_prompt
+            }]
+        )
+
+        # Extract text from response
+        title = ""
+        for block in response.content:
+            if hasattr(block, 'text'):
+                title += block.text
+
+        # Clean up title (remove quotes, trim whitespace, limit length)
+        title = title.strip().strip('"').strip("'")[:60]
+
+        logger.info(f"[TITLE GEN] Generated title: '{title}'")
+
+        return title
+
+    except Exception as e:
+        logger.error(f"[TITLE GEN ERROR] Error generating title: {e}", exc_info=True)
+        return None
+
+
 # ============================================================================
 # MAIN
 # ============================================================================
@@ -896,24 +1088,22 @@ if __name__ == '__main__':
         logger.error("Please create a .env file with your API key")
         exit(1)
 
-    # Verify static directory exists
-    static_dir = Path(__file__).parent / 'static'
-    static_dir.mkdir(exist_ok=True)
-
     # Get configuration
     port = int(os.getenv('PORT', 8000))
     model = os.getenv('MODEL', 'claude-sonnet-4-5')
 
     # Log startup information
     logger.info("=" * 80)
-    logger.info("Starting Demand Forecasting Chatbot Server (Messages API)")
+    logger.info("Starting Demand Forecasting Chatbot Server (API/WebSocket Only)")
     logger.info("=" * 80)
     logger.info(f"Configuration:")
+    logger.info(f"  - Mode: API + WebSocket Server (No file serving)")
     logger.info(f"  - Model: {model} (mapped to: {get_model_identifier(model)})")
     logger.info(f"  - Port: {port}")
-    logger.info(f"  - URL: http://localhost:{port}")
+    logger.info(f"  - WebSocket URL: ws://localhost:{port}")
+    logger.info(f"  - Health Check: http://localhost:{port}/")
     logger.info(f"  - Database: sessions.db")
-    logger.info(f"  - Static folder: {static_dir}")
+    logger.info(f"  - CORS: Enabled for all origins")
     logger.info(f"  - API Key: {'✓ Set' if os.getenv('ANTHROPIC_API_KEY') else '✗ Missing'}")
     logger.info(f"  - Debug mode: True")
     logger.info(f"  - Async mode: threading")
@@ -924,6 +1114,7 @@ if __name__ == '__main__':
         logger.info(f"  - {skill['skill_id']} (version: {skill['version']})")
     logger.info("=" * 80)
     logger.info("Server starting...")
+    logger.info("Ready for React app connections")
     logger.info("=" * 80)
 
     # Run with threading mode
