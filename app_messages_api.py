@@ -107,6 +107,11 @@ def build_container_with_skills():
                 "type": "custom",
                 "skill_id": "skill_01TipNr17oMetpLYXhSWnjb7",  # demand-forecasting
                 "version": "latest"
+            },
+            {
+                "type": "custom",
+                "skill_id": "skill_012PamxfW2Gygfu1P6N452WC",  # energy-forecasting
+                "version": "latest"
             }
         ]
     }
