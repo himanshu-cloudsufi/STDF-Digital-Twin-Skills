@@ -210,6 +210,45 @@ class SessionDatabase:
             logger.error(f"Error listing sessions: {e}")
             return []
 
+    def get_sessions_needing_titles(self) -> List[Dict[str, Any]]:
+        """
+        Get all sessions that have 3+ messages but no custom title.
+        Returns sessions with at least 6 messages (3 user + 3 assistant)
+        and either no title or default title pattern "Chat <session_id>".
+
+        Returns:
+            List of session dictionaries that need titles
+        """
+        try:
+            with self.get_connection() as conn:
+                cursor = conn.cursor()
+                cursor.execute("""
+                    SELECT session_id, created_at, last_activity, title,
+                           message_count, metadata
+                    FROM sessions
+                    WHERE message_count >= 6
+                      AND (title IS NULL OR title LIKE 'Chat %')
+                    ORDER BY created_at ASC
+                """)
+
+                sessions = []
+                for row in cursor.fetchall():
+                    sessions.append({
+                        'session_id': row['session_id'],
+                        'created_at': str(row['created_at']) if row['created_at'] else None,
+                        'last_activity': str(row['last_activity']) if row['last_activity'] else None,
+                        'title': row['title'],
+                        'message_count': row['message_count'],
+                        'metadata': json.loads(row['metadata']) if row['metadata'] else {}
+                    })
+
+                logger.info(f"Found {len(sessions)} sessions needing titles")
+                return sessions
+
+        except Exception as e:
+            logger.error(f"Error getting sessions needing titles: {e}")
+            return []
+
     def delete_session(self, session_id: str) -> bool:
         """
         Delete a session and all its messages
