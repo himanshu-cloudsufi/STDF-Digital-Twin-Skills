@@ -1,21 +1,9 @@
-import { useEffect, useRef } from 'react';
-import { marked } from 'marked';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import useStore from '../../store/useStore';
 
 const ComparisonModal = () => {
-  const contentRef = useRef(null);
   const { showComparisonModal, comparisonData, closeComparisonModal } = useStore();
-
-  useEffect(() => {
-    if (contentRef.current && comparisonData?.comparison) {
-      try {
-        contentRef.current.innerHTML = marked.parse(comparisonData.comparison);
-      } catch (error) {
-        console.error('Markdown rendering error:', error);
-        contentRef.current.textContent = comparisonData.comparison;
-      }
-    }
-  }, [comparisonData]);
 
   if (!showComparisonModal) return null;
 
@@ -63,10 +51,11 @@ const ComparisonModal = () => {
                 </div>
               </div>
 
-              <div
-                ref={contentRef}
-                className="leading-relaxed text-gray-700 prose prose-sm max-w-none"
-              />
+              <div className="leading-relaxed text-gray-700 prose prose-sm max-w-none">
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                  {comparisonData.comparison}
+                </ReactMarkdown>
+              </div>
             </>
           ) : (
             <div className="text-center p-10 text-gray-600 text-base">
