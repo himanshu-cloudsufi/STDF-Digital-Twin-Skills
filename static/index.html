@@ -28,6 +28,22 @@
                 </svg>
                 New Chat
             </button>
+            <button class="compare-mode-button" onclick="toggleCompareMode()" id="compareModeButton">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 11l3 3L22 4"/>
+                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                </svg>
+                Compare Chats
+            </button>
+            <div class="compare-controls" id="compareControls" style="display: none;">
+                <p class="compare-instructions">Select 2 chats to compare</p>
+                <button class="compare-action-button" onclick="compareSelectedChats()" id="compareActionButton" disabled>
+                    Compare Selected
+                </button>
+                <button class="cancel-compare-button" onclick="toggleCompareMode()">
+                    Cancel
+                </button>
+            </div>
             <div class="session-list" id="sessionList">
                 <div class="session-list-loading">Loading sessions...</div>
             </div>
@@ -87,6 +103,35 @@
                             <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
                         </svg>
                     </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Comparison Modal -->
+    <div class="modal-overlay" id="comparisonModal" style="display: none;" onclick="closeComparisonModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h2>Chat Comparison Results</h2>
+                <button class="modal-close" onclick="closeComparisonModal()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="comparison-info" id="comparisonInfo">
+                    <div class="chat-info">
+                        <strong>Chat 1:</strong> <span id="chat1Title">-</span>
+                        <span class="message-count" id="chat1Count">-</span>
+                    </div>
+                    <div class="chat-info">
+                        <strong>Chat 2:</strong> <span id="chat2Title">-</span>
+                        <span class="message-count" id="chat2Count">-</span>
+                    </div>
+                </div>
+                <div class="comparison-result" id="comparisonResult">
+                    <div class="loading-spinner">Analyzing chats...</div>
                 </div>
             </div>
         </div>

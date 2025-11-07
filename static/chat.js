@@ -7,6 +7,11 @@ let socket = null;
 let sessionId = null;
 let isWaitingForResponse = false;
 let currentAssistantMessage = null;
+let contentBlocks = {};  // Track content blocks by index for tool use and code execution
+
+// Comparison mode state
+let isCompareMode = false;
+let selectedSessions = [];
 
 // DOM elements
 const chatContainer = document.getElementById('chatContainer');
@@ -109,6 +114,42 @@ function initializeSocket() {
         if (sessionEl) {
             sessionEl.textContent = data.title;
         }
+    });
+
+    // New event handlers for code execution and tool use visibility
+    socket.on('content_block_start', (data) => {
+        console.log('Content block started:', data);
+        handleContentBlockStart(data);
+    });
+
+    socket.on('tool_input_delta', (data) => {
+        console.log('Tool input delta:', data);
+        handleToolInputDelta(data);
+    });
+
+    socket.on('thinking_chunk', (data) => {
+        console.log('Thinking chunk:', data);
+        handleThinkingChunk(data);
+    });
+
+    socket.on('content_block_stop', (data) => {
+        console.log('Content block stopped:', data);
+        handleContentBlockStop(data);
+    });
+
+    socket.on('message_start', (data) => {
+        console.log('Message started:', data);
+    });
+
+    socket.on('usage_update', (data) => {
+        console.log('Usage update:', data);
+        handleUsageUpdate(data);
+    });
+
+    // Comparison events
+    socket.on('comparison_complete', (data) => {
+        console.log('Comparison complete:', data);
+        displayComparisonResults(data);
     });
 }
 
@@ -267,8 +308,8 @@ function handleAssistantChunk(data) {
     // Accumulate raw markdown text
     currentAssistantMessage.dataset.rawText += data.text;
 
-    // Detect and render any choice blocks
-    detectAndRenderChoices(currentAssistantMessage);
+    // Render the accumulated markdown
+    renderMarkdownContent(currentAssistantMessage);
 
     // Update session ID
     if (data.session_id) {
@@ -278,10 +319,31 @@ function handleAssistantChunk(data) {
 }
 
 /**
+ * Render markdown content from raw text
+ */
+function renderMarkdownContent(contentElement) {
+    if (!contentElement || !contentElement.dataset.rawText) {
+        return;
+    }
+
+    try {
+        // Parse and render markdown
+        const rawText = contentElement.dataset.rawText;
+        contentElement.innerHTML = marked.parse(rawText);
+        scrollToBottom();
+    } catch (error) {
+        console.error('Markdown rendering error:', error);
+        // Fallback to plain text if markdown parsing fails
+        contentElement.textContent = contentElement.dataset.rawText;
+    }
+}
+
+/**
  * Handle assistant message completion
  */
 function handleAssistantComplete(data) {
     currentAssistantMessage = null;
+    contentBlocks = {};  // Clear content blocks for next message
     isWaitingForResponse = false;
     sendButton.disabled = false;
     messageInput.focus();
@@ -850,6 +912,438 @@ async function exportChatToPDF() {
         exportBtn.innerHTML = originalText;
     }
 }
+
+/**
+ * Handle content block start event
+ */
+function handleContentBlockStart(data) {
+    // Remove typing indicator if this is the first block
+    if (Object.keys(contentBlocks).length === 0 && !currentAssistantMessage) {
+        removeTypingIndicator();
+    }
+
+    const blockIndex = data.index;
+    const blockType = data.type;
+
+    console.log(`Content block started: index=${blockIndex}, type=${blockType}`);
+
+    // Initialize block tracking
+    contentBlocks[blockIndex] = {
+        type: blockType,
+        tool_name: data.tool_name,
+        tool_id: data.tool_id,
+        accumulated_json: '',
+        element: null
+    };
+
+    // Create UI element based on block type
+    if (blockType === 'tool_use' || blockType === 'server_tool_use') {
+        createToolUseBlock(blockIndex, data.tool_name);
+    } else if (blockType === 'thinking') {
+        createThinkingBlock(blockIndex);
+    } else if (blockType === 'text') {
+        // Text blocks are handled by existing assistant_chunk handler
+        if (!currentAssistantMessage) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message message-assistant';
+
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'message-content markdown-content';
+            contentDiv.id = 'current-assistant-message';
+            contentDiv.dataset.rawText = '';
+
+            messageDiv.appendChild(contentDiv);
+            chatContainer.appendChild(messageDiv);
+
+            currentAssistantMessage = contentDiv;
+        }
+    }
+}
+
+/**
+ * Create a tool use block in the chat
+ */
+function createToolUseBlock(blockIndex, toolName) {
+    const toolBlock = document.createElement('div');
+    toolBlock.className = 'tool-execution-block';
+    toolBlock.id = `tool-block-${blockIndex}`;
+    toolBlock.dataset.blockIndex = blockIndex;
+
+    // Determine if this is code execution or another tool
+    const isCodeExecution = toolName === 'code_execution' || toolName === 'text_editor_code_execution';
+    const isWebSearch = toolName === 'web_search';
+
+    let icon = '🔧';
+    let displayName = toolName || 'Tool';
+
+    if (isCodeExecution) {
+        icon = '⚙️';
+        displayName = 'Code Execution';
+    } else if (isWebSearch) {
+        icon = '🔍';
+        displayName = 'Web Search';
+    } else if (toolName) {
+        // Format tool name for display (e.g., "my_tool" -> "My Tool")
+        displayName = toolName.split('_').map(word =>
+            word.charAt(0).toUpperCase() + word.slice(1)
+        ).join(' ');
+    }
+
+    toolBlock.innerHTML = `
+        <div class="tool-header">
+            <div class="tool-title">
+                <span class="tool-icon">${icon}</span>
+                <span class="tool-name">${displayName}</span>
+                <span class="tool-status running">Running...</span>
+            </div>
+            <button class="tool-toggle" onclick="toggleToolDetails(${blockIndex})">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </button>
+        </div>
+        <div class="tool-details" id="tool-details-${blockIndex}">
+            <div class="tool-input">
+                <div class="tool-section-label">Input Parameters:</div>
+                <pre class="tool-input-json" id="tool-input-${blockIndex}"><code>Loading...</code></pre>
+            </div>
+        </div>
+    `;
+
+    chatContainer.appendChild(toolBlock);
+    scrollToBottom();
+
+    // Store reference
+    contentBlocks[blockIndex].element = toolBlock;
+}
+
+/**
+ * Create a thinking block in the chat
+ */
+function createThinkingBlock(blockIndex) {
+    const thinkingBlock = document.createElement('div');
+    thinkingBlock.className = 'thinking-block';
+    thinkingBlock.id = `thinking-block-${blockIndex}`;
+    thinkingBlock.dataset.blockIndex = blockIndex;
+
+    thinkingBlock.innerHTML = `
+        <div class="thinking-header" onclick="toggleThinkingDetails(${blockIndex})">
+            <div class="thinking-title">
+                <span class="thinking-icon">💭</span>
+                <span class="thinking-label">Claude's Thinking Process</span>
+            </div>
+            <button class="thinking-toggle">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </button>
+        </div>
+        <div class="thinking-content" id="thinking-content-${blockIndex}" style="display: none;">
+            <div class="thinking-text"></div>
+        </div>
+    `;
+
+    chatContainer.appendChild(thinkingBlock);
+    scrollToBottom();
+
+    // Store reference
+    contentBlocks[blockIndex].element = thinkingBlock;
+}
+
+/**
+ * Handle tool input delta event
+ */
+function handleToolInputDelta(data) {
+    const blockIndex = data.index;
+    const blockInfo = contentBlocks[blockIndex];
+
+    if (!blockInfo) {
+        console.warn(`Received tool input delta for unknown block ${blockIndex}`);
+        return;
+    }
+
+    // Update accumulated JSON
+    blockInfo.accumulated_json = data.accumulated_json;
+
+    // Update the UI with the latest JSON
+    const inputElement = document.getElementById(`tool-input-${blockIndex}`);
+    if (inputElement) {
+        try {
+            // Try to parse and pretty-print the JSON
+            const parsed = JSON.parse(data.accumulated_json);
+            inputElement.innerHTML = `<code>${escapeHtml(JSON.stringify(parsed, null, 2))}</code>`;
+        } catch (e) {
+            // If not valid JSON yet, show raw accumulated text
+            inputElement.innerHTML = `<code>${escapeHtml(data.accumulated_json)}</code>`;
+        }
+    }
+}
+
+/**
+ * Handle thinking chunk event
+ */
+function handleThinkingChunk(data) {
+    const blockIndex = data.index;
+    const blockInfo = contentBlocks[blockIndex];
+
+    if (!blockInfo) {
+        console.warn(`Received thinking chunk for unknown block ${blockIndex}`);
+        return;
+    }
+
+    // Append thinking text
+    const thinkingBlock = document.getElementById(`thinking-block-${blockIndex}`);
+    if (thinkingBlock) {
+        const textContainer = thinkingBlock.querySelector('.thinking-text');
+        if (textContainer) {
+            textContainer.textContent += data.text;
+            scrollToBottom();
+        }
+    }
+}
+
+/**
+ * Handle content block stop event
+ */
+function handleContentBlockStop(data) {
+    const blockIndex = data.index;
+    const blockInfo = contentBlocks[blockIndex];
+
+    if (!blockInfo) {
+        console.warn(`Received block stop for unknown block ${blockIndex}`);
+        return;
+    }
+
+    console.log(`Content block stopped: index=${blockIndex}, type=${blockInfo.type}`);
+
+    // Update tool block status if it's a tool
+    if (blockInfo.type === 'tool_use' || blockInfo.type === 'server_tool_use') {
+        const toolBlock = document.getElementById(`tool-block-${blockIndex}`);
+        if (toolBlock) {
+            const statusElement = toolBlock.querySelector('.tool-status');
+            if (statusElement) {
+                statusElement.textContent = 'Completed';
+                statusElement.className = 'tool-status completed';
+            }
+
+            // Parse and display final JSON
+            if (data.accumulated_json) {
+                try {
+                    const parsed = JSON.parse(data.accumulated_json);
+                    const inputElement = document.getElementById(`tool-input-${blockIndex}`);
+                    if (inputElement) {
+                        inputElement.innerHTML = `<code>${escapeHtml(JSON.stringify(parsed, null, 2))}</code>`;
+                    }
+                } catch (e) {
+                    console.error('Failed to parse final JSON:', e);
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Handle usage update event
+ */
+function handleUsageUpdate(data) {
+    console.log('Token usage:', data.usage);
+    // Could display this in the UI if desired
+    // For now, just logging
+}
+
+/**
+ * Toggle tool details visibility
+ */
+function toggleToolDetails(blockIndex) {
+    const details = document.getElementById(`tool-details-${blockIndex}`);
+    const toggle = document.querySelector(`#tool-block-${blockIndex} .tool-toggle svg`);
+
+    if (details && toggle) {
+        if (details.style.display === 'none') {
+            details.style.display = 'block';
+            toggle.style.transform = 'rotate(180deg)';
+        } else {
+            details.style.display = 'none';
+            toggle.style.transform = 'rotate(0deg)';
+        }
+    }
+}
+
+/**
+ * Toggle thinking details visibility
+ */
+function toggleThinkingDetails(blockIndex) {
+    const content = document.getElementById(`thinking-content-${blockIndex}`);
+    const toggle = document.querySelector(`#thinking-block-${blockIndex} .thinking-toggle svg`);
+
+    if (content && toggle) {
+        if (content.style.display === 'none') {
+            content.style.display = 'block';
+            toggle.style.transform = 'rotate(180deg)';
+        } else {
+            content.style.display = 'none';
+            toggle.style.transform = 'rotate(0deg)';
+        }
+    }
+}
+
+// ============================================================================
+// COMPARISON FUNCTIONS
+// ============================================================================
+
+/**
+ * Toggle comparison mode
+ */
+function toggleCompareMode() {
+    isCompareMode = !isCompareMode;
+    selectedSessions = [];
+
+    const compareModeButton = document.getElementById('compareModeButton');
+    const compareControls = document.getElementById('compareControls');
+    const sessionList = document.getElementById('sessionList');
+
+    if (isCompareMode) {
+        // Enter compare mode
+        compareModeButton.classList.add('active');
+        compareControls.style.display = 'block';
+
+        // Add checkboxes to all session items
+        const sessions = sessionList.querySelectorAll('.session-item');
+        sessions.forEach(sessionItem => {
+            if (!sessionItem.querySelector('.session-checkbox')) {
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.className = 'session-checkbox';
+                checkbox.dataset.sessionId = sessionItem.dataset.sessionId;
+                checkbox.addEventListener('change', handleSessionCheckboxChange);
+                sessionItem.insertBefore(checkbox, sessionItem.firstChild);
+            }
+        });
+    } else {
+        // Exit compare mode
+        compareModeButton.classList.remove('active');
+        compareControls.style.display = 'none';
+
+        // Remove all checkboxes
+        const checkboxes = sessionList.querySelectorAll('.session-checkbox');
+        checkboxes.forEach(checkbox => checkbox.remove());
+    }
+
+    updateCompareButton();
+}
+
+/**
+ * Handle session checkbox change
+ */
+function handleSessionCheckboxChange(event) {
+    const sessionId = event.target.dataset.sessionId;
+    const isChecked = event.target.checked;
+
+    if (isChecked) {
+        // Add to selected sessions (max 2)
+        if (selectedSessions.length < 2) {
+            selectedSessions.push(sessionId);
+        } else {
+            // Already have 2 selected, uncheck this one
+            event.target.checked = false;
+            return;
+        }
+    } else {
+        // Remove from selected sessions
+        selectedSessions = selectedSessions.filter(id => id !== sessionId);
+    }
+
+    // If trying to select more than 2, uncheck all others
+    if (selectedSessions.length === 2) {
+        const allCheckboxes = document.querySelectorAll('.session-checkbox');
+        allCheckboxes.forEach(cb => {
+            if (!selectedSessions.includes(cb.dataset.sessionId)) {
+                cb.disabled = true;
+            }
+        });
+    } else {
+        // Re-enable all checkboxes
+        const allCheckboxes = document.querySelectorAll('.session-checkbox');
+        allCheckboxes.forEach(cb => {
+            cb.disabled = false;
+        });
+    }
+
+    updateCompareButton();
+}
+
+/**
+ * Update compare button state
+ */
+function updateCompareButton() {
+    const compareActionButton = document.getElementById('compareActionButton');
+    compareActionButton.disabled = selectedSessions.length !== 2;
+
+    const instructions = document.querySelector('.compare-instructions');
+    if (selectedSessions.length === 0) {
+        instructions.textContent = 'Select 2 chats to compare';
+    } else if (selectedSessions.length === 1) {
+        instructions.textContent = 'Select 1 more chat';
+    } else {
+        instructions.textContent = 'Ready to compare!';
+    }
+}
+
+/**
+ * Compare selected chats
+ */
+function compareSelectedChats() {
+    if (selectedSessions.length !== 2) {
+        return;
+    }
+
+    console.log('Comparing sessions:', selectedSessions);
+
+    // Show modal with loading state
+    const modal = document.getElementById('comparisonModal');
+    const resultDiv = document.getElementById('comparisonResult');
+    resultDiv.innerHTML = '<div class="loading-spinner">Analyzing chats with Haiku model...</div>';
+    modal.style.display = 'flex';
+
+    // Emit comparison request
+    socket.emit('compare_sessions', {
+        session_id_1: selectedSessions[0],
+        session_id_2: selectedSessions[1]
+    });
+}
+
+/**
+ * Display comparison results in modal
+ */
+function displayComparisonResults(data) {
+    console.log('Displaying comparison results:', data);
+
+    // Update chat info
+    document.getElementById('chat1Title').textContent = data.session_1.title;
+    document.getElementById('chat1Count').textContent = `(${data.session_1.message_count} messages)`;
+    document.getElementById('chat2Title').textContent = data.session_2.title;
+    document.getElementById('chat2Count').textContent = `(${data.session_2.message_count} messages)`;
+
+    // Display comparison result (use markdown rendering)
+    const resultDiv = document.getElementById('comparisonResult');
+    const comparisonHtml = marked.parse(data.comparison);
+    resultDiv.innerHTML = comparisonHtml;
+}
+
+/**
+ * Close comparison modal
+ */
+function closeComparisonModal(event) {
+    // Only close if clicking overlay or close button
+    if (!event || event.target === event.currentTarget || event === undefined) {
+        const modal = document.getElementById('comparisonModal');
+        modal.style.display = 'none';
+    }
+}
+
+// ============================================================================
+// INITIALIZATION
+// ============================================================================
 
 /**
  * Initialize on page load

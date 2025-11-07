@@ -10,17 +10,14 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     background: #f5f5f5;
     height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin: 0;
+    overflow: hidden;
 }
 
 .container {
-    width: 95%;
-    max-width: 1400px;
-    height: 90vh;
+    width: 100%;
+    height: 100vh;
     background: white;
-    border: 1px solid #ddd;
     display: flex;
     flex-direction: row;
     overflow: hidden;
@@ -760,5 +757,563 @@ body {
 
     .header-actions {
         gap: 10px;
+    }
+}
+
+/* ============================================================================
+   Tool Execution & Code Execution Blocks
+   ============================================================================ */
+
+.tool-execution-block {
+    background: #f8f9fa;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    margin: 12px 0;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.tool-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+    cursor: pointer;
+    user-select: none;
+}
+
+.tool-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+}
+
+.tool-icon {
+    font-size: 18px;
+    line-height: 1;
+}
+
+.tool-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: #1f2937;
+}
+
+.tool-status {
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.tool-status.running {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.tool-status.completed {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.tool-status.error {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.tool-toggle {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+}
+
+.tool-toggle:hover {
+    background: #f3f4f6;
+    border-radius: 4px;
+}
+
+.tool-toggle svg {
+    transition: transform 0.2s ease;
+}
+
+.tool-details {
+    padding: 16px;
+    background: #ffffff;
+}
+
+.tool-section-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+}
+
+.tool-input-json {
+    background: #1e293b;
+    color: #e2e8f0;
+    padding: 16px;
+    border-radius: 6px;
+    overflow-x: auto;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.tool-input-json code {
+    color: #e2e8f0;
+    font-family: inherit;
+    white-space: pre;
+}
+
+/* ============================================================================
+   Thinking Blocks
+   ============================================================================ */
+
+.thinking-block {
+    background: #fef3c7;
+    border: 1px solid #fbbf24;
+    border-radius: 8px;
+    margin: 12px 0;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.thinking-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: #fffbeb;
+    border-bottom: 1px solid #fde68a;
+    cursor: pointer;
+    user-select: none;
+}
+
+.thinking-header:hover {
+    background: #fef9e7;
+}
+
+.thinking-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+}
+
+.thinking-icon {
+    font-size: 18px;
+    line-height: 1;
+}
+
+.thinking-label {
+    font-weight: 600;
+    font-size: 14px;
+    color: #92400e;
+}
+
+.thinking-toggle {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.thinking-toggle svg {
+    transition: transform 0.2s ease;
+    stroke: #92400e;
+}
+
+.thinking-content {
+    padding: 16px;
+    background: #fffbeb;
+}
+
+.thinking-text {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #78350f;
+    white-space: pre-wrap;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+}
+
+/* ============================================================================
+   Animations for tool execution
+   ============================================================================ */
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.tool-status.running {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* ============================================================================
+   Comparison Mode UI
+   ============================================================================ */
+
+/* Compare mode button */
+.compare-mode-button {
+    width: 100%;
+    padding: 12px 16px;
+    margin-bottom: 16px;
+    background: #f3f4f6;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    color: #374151;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.compare-mode-button:hover {
+    background: #e5e7eb;
+    border-color: #9ca3af;
+}
+
+.compare-mode-button.active {
+    background: #dbeafe;
+    border-color: #3b82f6;
+    color: #1e40af;
+}
+
+/* Compare controls container */
+.compare-controls {
+    padding: 12px;
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+
+.compare-instructions {
+    font-size: 13px;
+    color: #1e40af;
+    margin: 0 0 12px 0;
+    text-align: center;
+    font-weight: 500;
+}
+
+.compare-action-button {
+    width: 100%;
+    padding: 10px 16px;
+    background: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-bottom: 8px;
+}
+
+.compare-action-button:hover:not(:disabled) {
+    background: #2563eb;
+    transform: translateY(-1px);
+}
+
+.compare-action-button:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.cancel-compare-button {
+    width: 100%;
+    padding: 8px 16px;
+    background: transparent;
+    color: #6b7280;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.cancel-compare-button:hover {
+    background: #f3f4f6;
+    border-color: #9ca3af;
+}
+
+/* Session checkboxes in compare mode */
+.session-checkbox {
+    margin-right: 12px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: #3b82f6;
+}
+
+.session-checkbox:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.session-item:has(.session-checkbox) {
+    display: flex;
+    align-items: center;
+}
+
+/* ============================================================================
+   Comparison Modal
+   ============================================================================ */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    backdrop-filter: blur(4px);
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-content {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    max-width: 800px;
+    width: 90%;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: #111827;
+}
+
+.modal-close {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: background 0.2s ease;
+}
+
+.modal-close:hover {
+    background: #f3f4f6;
+}
+
+.modal-close svg {
+    stroke: #6b7280;
+}
+
+.modal-body {
+    padding: 24px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+/* Comparison info */
+.comparison-info {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 20px;
+}
+
+.chat-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.chat-info:last-child {
+    margin-bottom: 0;
+}
+
+.chat-info strong {
+    color: #374151;
+    font-weight: 600;
+}
+
+.message-count {
+    color: #6b7280;
+    font-size: 13px;
+    margin-left: auto;
+}
+
+/* Comparison result */
+.comparison-result {
+    line-height: 1.7;
+    color: #374151;
+}
+
+.comparison-result h1,
+.comparison-result h2,
+.comparison-result h3 {
+    color: #111827;
+    margin-top: 24px;
+    margin-bottom: 12px;
+}
+
+.comparison-result h1 {
+    font-size: 24px;
+}
+
+.comparison-result h2 {
+    font-size: 20px;
+}
+
+.comparison-result h3 {
+    font-size: 16px;
+}
+
+.comparison-result ul,
+.comparison-result ol {
+    margin: 12px 0;
+    padding-left: 24px;
+}
+
+.comparison-result li {
+    margin: 8px 0;
+}
+
+.comparison-result p {
+    margin: 12px 0;
+}
+
+.comparison-result strong {
+    color: #111827;
+    font-weight: 600;
+}
+
+.comparison-result code {
+    background: #f3f4f6;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+}
+
+.comparison-result pre {
+    background: #1e293b;
+    color: #e2e8f0;
+    padding: 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 16px 0;
+}
+
+.comparison-result pre code {
+    background: transparent;
+    padding: 0;
+    color: inherit;
+}
+
+/* Loading spinner for comparison */
+.loading-spinner {
+    text-align: center;
+    padding: 40px;
+    color: #6b7280;
+    font-size: 15px;
+}
+
+.loading-spinner::before {
+    content: "⏳";
+    display: block;
+    font-size: 32px;
+    margin-bottom: 12px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Responsive modal */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 95%;
+        max-height: 90vh;
+    }
+
+    .modal-header {
+        padding: 16px 20px;
+    }
+
+    .modal-header h2 {
+        font-size: 18px;
+    }
+
+    .modal-body {
+        padding: 20px;
     }
 }

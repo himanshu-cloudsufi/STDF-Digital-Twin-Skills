@@ -338,19 +338,131 @@ def stream_response_sync(client, messages, container, model, session_id):
             ) as stream:
                 logger.info("[STREAM] Stream opened, receiving events...")
 
-                # Stream text as it arrives
-                for text in stream.text_stream:
+                # Track content blocks for proper handling
+                content_blocks = {}  # index -> {type, accumulated_data}
+
+                # Process all events from the stream
+                for event in stream:
                     chunk_count += 1
-                    accumulated_text += text
 
-                    if chunk_count % 10 == 0:  # Log every 10th chunk to reduce noise
-                        logger.info(f"[STREAM] Chunk #{chunk_count}: {len(text)} chars (total: {len(accumulated_text)})")
+                    if chunk_count % 20 == 0:  # Log every 20th event to reduce noise
+                        logger.info(f"[STREAM] Event #{chunk_count}: {event.type}")
 
-                    # Stream text chunk to client
-                    socketio.emit('assistant_chunk', {
-                        'text': text,
-                        'session_id': session_id
-                    })
+                    # Handle different event types
+                    if event.type == "content_block_start":
+                        block_index = event.index
+                        block_type = event.content_block.type
+
+                        logger.info(f"[STREAM] Content block #{block_index} started: {block_type}")
+
+                        # Initialize block tracking
+                        content_blocks[block_index] = {
+                            'type': block_type,
+                            'accumulated_text': '',
+                            'accumulated_json': '',
+                            'tool_name': getattr(event.content_block, 'name', None),
+                            'tool_id': getattr(event.content_block, 'id', None)
+                        }
+
+                        # Emit block start event to frontend
+                        socketio.emit('content_block_start', {
+                            'index': block_index,
+                            'type': block_type,
+                            'tool_name': content_blocks[block_index]['tool_name'],
+                            'tool_id': content_blocks[block_index]['tool_id'],
+                            'session_id': session_id
+                        })
+
+                    elif event.type == "content_block_delta":
+                        block_index = event.index
+                        delta = event.delta
+
+                        if block_index not in content_blocks:
+                            logger.warning(f"[STREAM] Received delta for unknown block index {block_index}")
+                            continue
+
+                        block_info = content_blocks[block_index]
+
+                        # Handle text delta
+                        if delta.type == "text_delta":
+                            text = delta.text
+                            block_info['accumulated_text'] += text
+                            accumulated_text += text
+
+                            # Stream text chunk to client (existing behavior)
+                            socketio.emit('assistant_chunk', {
+                                'text': text,
+                                'index': block_index,
+                                'session_id': session_id
+                            })
+
+                        # Handle input JSON delta (tool parameters)
+                        elif delta.type == "input_json_delta":
+                            json_chunk = delta.partial_json
+                            block_info['accumulated_json'] += json_chunk
+
+                            logger.info(f"[STREAM] Tool input delta: {json_chunk}")
+
+                            # Emit tool input delta to frontend
+                            socketio.emit('tool_input_delta', {
+                                'index': block_index,
+                                'partial_json': json_chunk,
+                                'accumulated_json': block_info['accumulated_json'],
+                                'tool_name': block_info['tool_name'],
+                                'session_id': session_id
+                            })
+
+                        # Handle thinking delta
+                        elif delta.type == "thinking_delta":
+                            thinking_text = delta.thinking
+                            block_info['accumulated_text'] += thinking_text
+
+                            logger.info(f"[STREAM] Thinking delta: {thinking_text[:100]}...")
+
+                            # Emit thinking chunk to frontend
+                            socketio.emit('thinking_chunk', {
+                                'index': block_index,
+                                'text': thinking_text,
+                                'session_id': session_id
+                            })
+
+                    elif event.type == "content_block_stop":
+                        block_index = event.index
+
+                        if block_index in content_blocks:
+                            block_info = content_blocks[block_index]
+                            logger.info(f"[STREAM] Content block #{block_index} stopped: {block_info['type']}")
+
+                            # Emit block stop event to frontend
+                            socketio.emit('content_block_stop', {
+                                'index': block_index,
+                                'type': block_info['type'],
+                                'accumulated_json': block_info['accumulated_json'],
+                                'session_id': session_id
+                            })
+
+                    elif event.type == "message_start":
+                        logger.info(f"[STREAM] Message started: {event.message.id}")
+
+                        # Emit message start with metadata
+                        socketio.emit('message_start', {
+                            'message_id': event.message.id,
+                            'model': event.message.model,
+                            'session_id': session_id
+                        })
+
+                    elif event.type == "message_delta":
+                        logger.info(f"[STREAM] Message delta: stop_reason={event.delta.stop_reason}")
+
+                        # Emit usage statistics if available
+                        if hasattr(event, 'usage'):
+                            socketio.emit('usage_update', {
+                                'usage': {
+                                    'input_tokens': getattr(event.usage, 'input_tokens', 0),
+                                    'output_tokens': getattr(event.usage, 'output_tokens', 0)
+                                },
+                                'session_id': session_id
+                            })
 
                 # Get final message after stream completes
                 final_message = stream.get_final_message()
@@ -595,6 +707,168 @@ def handle_update_session_title(data):
     except Exception as e:
         logger.error(f"[SESSION ERROR] Error updating session title: {e}")
         emit('error', {'message': f'Failed to update title: {str(e)}'})
+
+
+@socketio.on('compare_sessions')
+def handle_compare_sessions(data):
+    """Compare two chat sessions using Haiku model to find numerical discrepancies"""
+    session_id_1 = data.get('session_id_1')
+    session_id_2 = data.get('session_id_2')
+
+    logger.info("=" * 80)
+    logger.info(f"[COMPARE] Compare request for sessions: {session_id_1} and {session_id_2}")
+
+    if not session_id_1 or not session_id_2:
+        logger.warning("[COMPARE] Missing session IDs")
+        emit('error', {'message': 'Two session IDs required for comparison'})
+        return
+
+    if session_id_1 == session_id_2:
+        logger.warning("[COMPARE] Same session ID provided twice")
+        emit('error', {'message': 'Cannot compare a session with itself'})
+        return
+
+    try:
+        # Get both session info and history
+        session_1_info = db.get_session(session_id_1)
+        session_2_info = db.get_session(session_id_2)
+
+        if not session_1_info or not session_2_info:
+            logger.warning("[COMPARE] One or both sessions not found")
+            emit('error', {'message': 'One or both sessions not found'})
+            return
+
+        history_1 = db.get_session_history(session_id_1)
+        history_2 = db.get_session_history(session_id_2)
+
+        logger.info(f"[COMPARE] Session 1: {len(history_1)} messages")
+        logger.info(f"[COMPARE] Session 2: {len(history_2)} messages")
+
+        # Format transcripts
+        transcript_1 = format_transcript(history_1)
+        transcript_2 = format_transcript(history_2)
+
+        # Call Haiku for comparison
+        logger.info("[COMPARE] Calling Haiku model for analysis...")
+        comparison_result = compare_with_haiku(
+            transcript_1,
+            transcript_2,
+            session_1_info.get('title', 'Chat 1'),
+            session_2_info.get('title', 'Chat 2')
+        )
+
+        logger.info("[COMPARE] Comparison complete")
+        logger.info("=" * 80)
+
+        # Emit results
+        emit('comparison_complete', {
+            'session_1': {
+                'id': session_id_1,
+                'title': session_1_info.get('title', 'Chat 1'),
+                'message_count': len(history_1)
+            },
+            'session_2': {
+                'id': session_id_2,
+                'title': session_2_info.get('title', 'Chat 2'),
+                'message_count': len(history_2)
+            },
+            'comparison': comparison_result
+        })
+
+    except Exception as e:
+        logger.error("=" * 80)
+        logger.error(f"[COMPARE ERROR] Error comparing sessions")
+        logger.error(f"[COMPARE ERROR] Exception: {str(e)}")
+        logger.error("=" * 80, exc_info=True)
+        emit('error', {'message': f'Failed to compare sessions: {str(e)}'})
+
+
+def format_transcript(history):
+    """Format conversation history into readable transcript"""
+    lines = []
+    for msg in history:
+        role = msg['role'].upper()
+        content = msg['content']
+        timestamp = msg.get('timestamp', '')
+        lines.append(f"[{role}]: {content}\n")
+    return "\n".join(lines)
+
+
+def compare_with_haiku(transcript_1, transcript_2, title_1, title_2):
+    """
+    Use Haiku model to compare two transcripts and identify numerical discrepancies.
+    Focuses on forecast/prediction differences.
+
+    Args:
+        transcript_1: Full conversation transcript from first session
+        transcript_2: Full conversation transcript from second session
+        title_1: Title of first session
+        title_2: Title of second session
+
+    Returns:
+        String containing comparison summary
+    """
+    logger.info("[HAIKU] Building comparison prompt...")
+
+    # Build comparison prompt
+    comparison_prompt = f"""You are analyzing two different chat conversations about forecasting and predictions.
+
+**Chat 1: {title_1}**
+{transcript_1}
+
+---
+
+**Chat 2: {title_2}**
+{transcript_2}
+
+---
+
+Please analyze these two conversations and identify any significant numerical discrepancies, particularly focusing on:
+- Forecast results and predictions
+- Key metrics and statistics
+- Years, dates, or timeframes
+- Percentages, growth rates, or CAGRs
+- Capacity, demand, or generation figures
+- Cost calculations or tipping points
+
+Provide a **concise summary** of the major differences. For each discrepancy:
+1. Describe what the difference is about (the topic/metric)
+2. State the value from Chat 1
+3. State the value from Chat 2
+4. Briefly explain why this difference might be significant
+
+If there are no significant numerical differences, state that clearly.
+
+Keep your response focused and concise - aim for 3-10 bullet points highlighting only the most important discrepancies."""
+
+    logger.info(f"[HAIKU] Prompt length: {len(comparison_prompt)} chars")
+
+    try:
+        # Call Haiku model directly (non-streaming for simplicity)
+        logger.info("[HAIKU] Making API call to Haiku model...")
+
+        response = anthropic_client.messages.create(
+            model=get_model_identifier('haiku'),
+            max_tokens=2048,
+            messages=[{
+                "role": "user",
+                "content": comparison_prompt
+            }]
+        )
+
+        # Extract text from response
+        result_text = ""
+        for block in response.content:
+            if hasattr(block, 'text'):
+                result_text += block.text
+
+        logger.info(f"[HAIKU] Response received: {len(result_text)} chars")
+
+        return result_text
+
+    except Exception as e:
+        logger.error(f"[HAIKU ERROR] Error calling Haiku model: {e}", exc_info=True)
+        return f"Error during comparison: {str(e)}"
 
 
 # ============================================================================
