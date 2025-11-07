@@ -109,4 +109,4 @@ Files saved to: `output/{Product}_{Region}_{EndYear}.{format}`
 - [reference/parameters.md](reference/parameters.md) - Parameter tuning guidance
 - [reference/examples.md](reference/examples.md) - Common usage patterns
 
-**Note:** For terminology guidelines, see CLAUDE.md in repository root.
+

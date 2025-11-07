@@ -72,4 +72,4 @@ See [reference/examples.md](reference/examples.md) for detailed examples.
 - [reference/replacement_cycles.md](reference/replacement_cycles.md) - Component lifetime data
 - [reference/examples.md](reference/examples.md) - Detailed usage examples
 
-**Note:** For terminology guidelines, see CLAUDE.md in repository root.
+

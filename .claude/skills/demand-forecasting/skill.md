@@ -76,4 +76,4 @@ python3 scripts/forecast.py --region Global --output json
 - [reference/output-formats-reference.md](reference/output-formats-reference.md) - Output specs
 - [reference/troubleshooting-reference.md](reference/troubleshooting-reference.md) - Error solutions
 
-**Note:** For terminology guidelines, see CLAUDE.md in repository root.
+
