@@ -80,13 +80,26 @@ class EnergyForecastOrchestrator:
         generation_forecasts = swb_results["generation"]
 
         # Calculate total SWB generation
+        # First, find the common year range across all technologies
         years = None
-        total_swb_generation = None
         for tech, (tech_years, tech_generation) in generation_forecasts.items():
             if years is None:
                 years = tech_years
-                total_swb_generation = np.zeros_like(tech_generation)
-            total_swb_generation += tech_generation
+            else:
+                # Use the longest year range
+                if len(tech_years) > len(years):
+                    years = tech_years
+
+        # Now sum generation, interpolating if necessary
+        total_swb_generation = np.zeros(len(years))
+        for tech, (tech_years, tech_generation) in generation_forecasts.items():
+            if len(tech_years) == len(years) and np.array_equal(tech_years, years):
+                # Years match, add directly
+                total_swb_generation += tech_generation
+            else:
+                # Interpolate to match the common year range
+                aligned_generation = np.interp(years, tech_years, tech_generation)
+                total_swb_generation += aligned_generation
 
         print(f"  - Forecasted {len(capacity_forecasts)} SWB components")
 
@@ -139,12 +152,25 @@ class EnergyForecastOrchestrator:
         print(f"  - {message}")
 
         # Compile results
+        # Convert tipping_points numpy arrays to lists for JSON serialization
+        tipping_points_serializable = {}
+        for key, value in tipping_points.items():
+            if key == "swb_stack_cost" and value is not None:
+                years_arr, costs_arr = value
+                tipping_points_serializable[key] = {
+                    "years": years_arr.tolist() if hasattr(years_arr, 'tolist') else years_arr,
+                    "costs": costs_arr.tolist() if hasattr(costs_arr, 'tolist') else costs_arr
+                }
+            else:
+                tipping_points_serializable[key] = value
+
         result = {
             "region": region,
             "end_year": self.end_year,
             "cost_analysis": {
-                "tipping_points": tipping_points,
-                "cost_forecasts": {k: {"years": v[0].tolist(), "costs": v[1].tolist()}
+                "tipping_points": tipping_points_serializable,
+                "cost_forecasts": {k: {"years": v[0].tolist() if hasattr(v[0], 'tolist') else v[0],
+                                       "costs": v[1].tolist() if hasattr(v[1], 'tolist') else v[1]}
                                    for k, v in cost_forecasts.items() if v is not None}
             },
             "capacity_forecasts": {k: {"years": v[0].tolist(), "capacity_gw": v[1].tolist()}
