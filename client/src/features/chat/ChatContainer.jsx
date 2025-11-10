@@ -29,7 +29,7 @@ const ChatContainer = () => {
         if (message.role === 'user') {
           return <UserMessage key={index} content={message.content} />;
         } else if (message.role === 'assistant') {
-          return <AssistantMessage key={index} content={message.content} />;
+          return <AssistantMessage key={index} content={message.content} messageIndex={index} />;
         } else if (message.role === 'system') {
           return <SystemMessage key={index} content={message.content} />;
         } else if (message.role === 'tool') {
@@ -46,7 +46,7 @@ const ChatContainer = () => {
       })}
 
       {currentAssistantMessage && (
-        <AssistantMessage content={currentAssistantMessage.content} />
+        <AssistantMessage content={currentAssistantMessage.content} messageIndex={messages.length} />
       )}
 
       {Object.entries(contentBlocks).map(([index, block]) => {

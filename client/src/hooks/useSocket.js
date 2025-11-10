@@ -171,6 +171,21 @@ const useSocket = () => {
     };
 
     const handleAssistantComplete = (data) => {
+      // Mark the last message as no longer streaming
+      const store = useStore.getState();
+      if (store.messages.length > 0) {
+        const lastMessage = store.messages[store.messages.length - 1];
+        if (lastMessage.isStreaming) {
+          useStore.setState((state) => ({
+            messages: state.messages.map((msg, idx) =>
+              idx === state.messages.length - 1
+                ? { ...msg, isStreaming: false }
+                : msg
+            )
+          }));
+        }
+      }
+
       setCurrentAssistantMessage(null);
       clearContentBlocks();
       setWaitingForResponse(false);

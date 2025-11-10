@@ -23,6 +23,9 @@ const useStore = create((set, get) => ({
   comparisonData: null,
   showComparisonModal: false,
 
+  // Artifact panel state (per session)
+  artifactPanelState: {}, // { [sessionId]: { isOpen, currentArtifact: { type, content, messageIndex }, panelWidth } }
+
   // Actions
   setSocket: (socket) => set({ socket }),
 
@@ -55,12 +58,22 @@ const useStore = create((set, get) => ({
 
   setCurrentAssistantMessage: (message) => set({ currentAssistantMessage: message }),
 
-  appendToCurrentAssistant: (text) => set((state) => ({
-    currentAssistantMessage: {
+  appendToCurrentAssistant: (text) => set((state) => {
+    const updatedMessage = {
       ...state.currentAssistantMessage,
       content: (state.currentAssistantMessage?.content || '') + text
-    }
-  })),
+    };
+
+    // Update both currentAssistantMessage AND the last message in the array
+    return {
+      currentAssistantMessage: updatedMessage,
+      messages: state.messages.map((msg, idx) =>
+        idx === state.messages.length - 1 && msg.isStreaming
+          ? updatedMessage
+          : msg
+      )
+    };
+  }),
 
   setMessages: (messages) => set({ messages }),
 
@@ -131,6 +144,53 @@ const useStore = create((set, get) => ({
     const url = new URL(window.location);
     url.searchParams.set('session', sessionId);
     window.history.replaceState({}, '', url);
+  },
+
+  // Artifact panel actions
+  openArtifactPanel: (artifact, messageIndex) => set((state) => {
+    const sessionId = state.sessionId || 'temp';
+    return {
+      artifactPanelState: {
+        ...state.artifactPanelState,
+        [sessionId]: {
+          isOpen: true,
+          currentArtifact: { ...artifact, messageIndex },
+          panelWidth: state.artifactPanelState[sessionId]?.panelWidth || 450
+        }
+      }
+    };
+  }),
+
+  closeArtifactPanel: () => set((state) => {
+    const sessionId = state.sessionId || 'temp';
+    return {
+      artifactPanelState: {
+        ...state.artifactPanelState,
+        [sessionId]: {
+          ...state.artifactPanelState[sessionId],
+          isOpen: false
+        }
+      }
+    };
+  }),
+
+  setArtifactPanelWidth: (width) => set((state) => {
+    const sessionId = state.sessionId || 'temp';
+    return {
+      artifactPanelState: {
+        ...state.artifactPanelState,
+        [sessionId]: {
+          ...state.artifactPanelState[sessionId],
+          panelWidth: width
+        }
+      }
+    };
+  }),
+
+  getArtifactPanelState: () => {
+    const state = get();
+    const sessionId = state.sessionId || 'temp';
+    return state.artifactPanelState[sessionId] || { isOpen: false, currentArtifact: null, panelWidth: 450 };
   },
 }));
 
