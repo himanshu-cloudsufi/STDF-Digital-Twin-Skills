@@ -1,0 +1,618 @@
+{
+  "taxonomy": {
+    "market": "Datacenter_UPS",
+    "products": {
+      "Batteries": {
+        "subproducts": [
+          "VRLA",
+          "Li_ion"
+        ]
+      }
+    }
+  },
+  "datasets": {
+    "Data_Center_Battery_Demand_Annual_Capacity_Demand_China": {
+      "entity": "Datacenter_UPS",
+      "region": "China",
+      "level_name": "market",
+      "metadata": {
+        "type": "historical_or_input",
+        "tags": {
+          "category": "demand",
+          "entity_type": "market",
+          "subcategory": "total"
+        },
+        "description": "Total datacenter UPS battery annual capacity demand (MWh) \u2014 China"
+      }
+    },
+    "Data_Center_Battery_Demand_Annual_Capacity_Demand_Europe": {
+      "entity": "Datacenter_UPS",
+      "region": "Europe",
+      "level_name": "market",
+      "metadata": {
+        "type": "historical_or_input",
+        "tags": {
+          "category": "demand",
+          "entity_type": "market",
+          "subcategory": "total"
+        },
+        "description": "Total datacenter UPS battery annual capacity demand (MWh) \u2014 Europe"
+      }
+    },
+    "Data_Center_Battery_Demand_Annual_Capacity_Demand_Global": {
+      "entity": "Datacenter_UPS",
+      "region": "Global",
+      "level_name": "market",
+      "metadata": {
+        "type": "historical_or_input",
+        "tags": {
+          "category": "demand",
+          "entity_type": "market",
+          "subcategory": "total"
+        },
+        "description": "Total datacenter UPS battery annual capacity demand (MWh) \u2014 Global"
+      }
+    },
+    "Data_Center_Battery_Demand_Annual_Capacity_Demand_Rest_of_World": {
+      "entity": "Datacenter_UPS",
+      "region": "Rest_of_World",
+      "level_name": "market",
+      "metadata": {
+        "type": "historical_or_input",
+        "tags": {
+          "category": "demand",
+          "entity_type": "market",
+          "subcategory": "total"
+        },
+        "description": "Total datacenter UPS battery annual capacity demand (MWh) \u2014 Rest_of_World"
+      }
+    },
+    "Data_Center_Battery_Demand_Annual_Capacity_Demand_USA": {
+      "entity": "Datacenter_UPS",
+      "region": "USA",
+      "level_name": "market",
+      "metadata": {
+        "type": "historical_or_input",
+        "tags": {
+          "category": "demand",
+          "entity_type": "market",
+          "subcategory": "total"
+        },
+        "description": "Total datacenter UPS battery annual capacity demand (MWh) \u2014 USA"
+      }
+    },
+    "Data_Center_Battery_Demand_(LAB)_Annual_Capacity_Demand_China": {
+      "entity": "VRLA",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical_or_input",
+        "tags": {
+          "category": "demand",
+          "entity_type": "incumbent",
+          "subcategory": "total"
+        },
+        "description": "Lead-acid/VRLA UPS battery annual capacity demand (MWh) \u2014 China",
+        "alias": [
+          "Lead_Acid",
+          "VRLA"
+        ]
+      }
+    },
+    "Data_Center_Battery_Demand_(LAB)_Annual_Capacity_Demand_Europe": {
+      "entity": "VRLA",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical_or_input",
+        "tags": {
+          "category": "demand",
+          "entity_type": "incumbent",
+          "subcategory": "total"
+        },
+        "description": "Lead-acid/VRLA UPS battery annual capacity demand (MWh) \u2014 Europe",
+        "alias": [
+          "Lead_Acid",
+          "VRLA"
+        ]
+      }
+    },
+    "Data_Center_Battery_Demand_(LAB)_Annual_Capacity_Demand_Global": {
+      "entity": "VRLA",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical_or_input",
+        "tags": {
+          "category": "demand",
+          "entity_type": "incumbent",
+          "subcategory": "total"
+        },
+        "description": "Lead-acid/VRLA UPS battery annual capacity demand (MWh) \u2014 Global",
+        "alias": [
+          "Lead_Acid",
+          "VRLA"
+        ]
+      }
+    },
+    "Data_Center_Battery_Demand_(LAB)_Annual_Capacity_Demand_Rest_of_World": {
+      "entity": "VRLA",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical_or_input",
+        "tags": {
+          "category": "demand",
+          "entity_type": "incumbent",
+          "subcategory": "total"
+        },
+        "description": "Lead-acid/VRLA UPS battery annual capacity demand (MWh) \u2014 Rest_of_World",
+        "alias": [
+          "Lead_Acid",
+          "VRLA"
+        ]
+      }
+    },
+    "Data_Center_Battery_Demand_(LAB)_Annual_Capacity_Demand_USA": {
+      "entity": "VRLA",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical_or_input",
+        "tags": {
+          "category": "demand",
+          "entity_type": "incumbent",
+          "subcategory": "total"
+        },
+        "description": "Lead-acid/VRLA UPS battery annual capacity demand (MWh) \u2014 USA",
+        "alias": [
+          "Lead_Acid",
+          "VRLA"
+        ]
+      }
+    },
+    "Data_Center_Battery_Demand_(Li-Ion)_Annual_Capacity_Demand_China": {
+      "entity": "Li_ion",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical_or_input",
+        "tags": {
+          "category": "demand",
+          "entity_type": "disruptor",
+          "subcategory": "total"
+        },
+        "description": "Li-ion UPS battery annual capacity demand (MWh) \u2014 China",
+        "alias": [
+          "Li_ion",
+          "Lithium_Ion"
+        ]
+      }
+    },
+    "Data_Center_Battery_Demand_(Li-Ion)_Annual_Capacity_Demand_Europe": {
+      "entity": "Li_ion",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical_or_input",
+        "tags": {
+          "category": "demand",
+          "entity_type": "disruptor",
+          "subcategory": "total"
+        },
+        "description": "Li-ion UPS battery annual capacity demand (MWh) \u2014 Europe",
+        "alias": [
+          "Li_ion",
+          "Lithium_Ion"
+        ]
+      }
+    },
+    "Data_Center_Battery_Demand_(Li-Ion)_Annual_Capacity_Demand_Global": {
+      "entity": "Li_ion",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical_or_input",
+        "tags": {
+          "category": "demand",
+          "entity_type": "disruptor",
+          "subcategory": "total"
+        },
+        "description": "Li-ion UPS battery annual capacity demand (MWh) \u2014 Global",
+        "alias": [
+          "Li_ion",
+          "Lithium_Ion"
+        ]
+      }
+    },
+    "Data_Center_Battery_Demand_(Li-Ion)_Annual_Capacity_Demand_Rest_of_World": {
+      "entity": "Li_ion",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical_or_input",
+        "tags": {
+          "category": "demand",
+          "entity_type": "disruptor",
+          "subcategory": "total"
+        },
+        "description": "Li-ion UPS battery annual capacity demand (MWh) \u2014 Rest_of_World",
+        "alias": [
+          "Li_ion",
+          "Lithium_Ion"
+        ]
+      }
+    },
+    "Data_Center_Battery_Demand_(Li-Ion)_Annual_Capacity_Demand_USA": {
+      "entity": "Li_ion",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical_or_input",
+        "tags": {
+          "category": "demand",
+          "entity_type": "disruptor",
+          "subcategory": "total"
+        },
+        "description": "Li-ion UPS battery annual capacity demand (MWh) \u2014 USA",
+        "alias": [
+          "Li_ion",
+          "Lithium_Ion"
+        ]
+      }
+    },
+    "Datacenter_capacity_growth_projections_China": {
+      "entity": "Datacenter_UPS",
+      "region": "China",
+      "level_name": "market",
+      "metadata": {
+        "type": "assumption_or_input",
+        "tags": {
+          "category": "driver",
+          "entity_type": "market",
+          "subcategory": "capacity_growth_projection"
+        },
+        "description": "Datacenter capacity growth projection (proxy for UPS demand growth) \u2014 China"
+      }
+    },
+    "Datacenter_capacity_growth_projections_Europe": {
+      "entity": "Datacenter_UPS",
+      "region": "Europe",
+      "level_name": "market",
+      "metadata": {
+        "type": "assumption_or_input",
+        "tags": {
+          "category": "driver",
+          "entity_type": "market",
+          "subcategory": "capacity_growth_projection"
+        },
+        "description": "Datacenter capacity growth projection (proxy for UPS demand growth) \u2014 Europe"
+      }
+    },
+    "Datacenter_capacity_growth_projections_Global": {
+      "entity": "Datacenter_UPS",
+      "region": "Global",
+      "level_name": "market",
+      "metadata": {
+        "type": "assumption_or_input",
+        "tags": {
+          "category": "driver",
+          "entity_type": "market",
+          "subcategory": "capacity_growth_projection"
+        },
+        "description": "Datacenter capacity growth projection (proxy for UPS demand growth) \u2014 Global"
+      }
+    },
+    "Datacenter_capacity_growth_projections_Rest_of_World": {
+      "entity": "Datacenter_UPS",
+      "region": "Rest_of_World",
+      "level_name": "market",
+      "metadata": {
+        "type": "assumption_or_input",
+        "tags": {
+          "category": "driver",
+          "entity_type": "market",
+          "subcategory": "capacity_growth_projection"
+        },
+        "description": "Datacenter capacity growth projection (proxy for UPS demand growth) \u2014 Rest_of_World"
+      }
+    },
+    "Datacenter_capacity_growth_projections_USA": {
+      "entity": "Datacenter_UPS",
+      "region": "USA",
+      "level_name": "market",
+      "metadata": {
+        "type": "assumption_or_input",
+        "tags": {
+          "category": "driver",
+          "entity_type": "market",
+          "subcategory": "capacity_growth_projection"
+        },
+        "description": "Datacenter capacity growth projection (proxy for UPS demand growth) \u2014 USA"
+      }
+    },
+    "Data_Center_UPS_Battery_(Li-Ion)_Average_Lithium_content_Global": {
+      "entity": "Li_ion",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "assumption_or_input",
+        "tags": {
+          "category": "intensity",
+          "entity_type": "disruptor",
+          "subcategory": "lithium_content"
+        },
+        "description": "Average lithium content per UPS battery (Li-ion) \u2014 Global",
+        "alias": [
+          "Li_ion",
+          "Lithium_Ion"
+        ]
+      }
+    },
+    "Lead_acid_batteries_UPS_Datacenter_Installed_Base_China": {
+      "entity": "VRLA",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical_or_estimated",
+        "tags": {
+          "category": "installed_base",
+          "entity_type": "incumbent"
+        },
+        "description": "Lead-acid/VRLA UPS installed base (MWh) \u2014 China"
+      }
+    },
+    "Lead_acid_batteries_UPS_Datacenter_Installed_Base_Europe": {
+      "entity": "VRLA",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical_or_estimated",
+        "tags": {
+          "category": "installed_base",
+          "entity_type": "incumbent"
+        },
+        "description": "Lead-acid/VRLA UPS installed base (MWh) \u2014 Europe"
+      }
+    },
+    "Lead_acid_batteries_UPS_Datacenter_Installed_Base_Global": {
+      "entity": "VRLA",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical_or_estimated",
+        "tags": {
+          "category": "installed_base",
+          "entity_type": "incumbent"
+        },
+        "description": "Lead-acid/VRLA UPS installed base (MWh) \u2014 Global"
+      }
+    },
+    "Lead_acid_batteries_UPS_Datacenter_Installed_Base_Rest_of_World": {
+      "entity": "VRLA",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical_or_estimated",
+        "tags": {
+          "category": "installed_base",
+          "entity_type": "incumbent"
+        },
+        "description": "Lead-acid/VRLA UPS installed base (MWh) \u2014 Rest_of_World"
+      }
+    },
+    "Lead_acid_batteries_UPS_Datacenter_Installed_Base_USA": {
+      "entity": "VRLA",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical_or_estimated",
+        "tags": {
+          "category": "installed_base",
+          "entity_type": "incumbent"
+        },
+        "description": "Lead-acid/VRLA UPS installed base (MWh) \u2014 USA"
+      }
+    },
+    "Lead_acid_batteries_UPS_Datacenter_Replacement_cycle_Battery_Replacement_cycle_Global": {
+      "entity": "VRLA",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "assumption_or_input",
+        "tags": {
+          "category": "lifetime",
+          "entity_type": "incumbent",
+          "subcategory": "replacement_cycle"
+        },
+        "description": "Lead-acid/VRLA UPS replacement cycle (years) \u2014 Global"
+      }
+    },
+    "Battery_Energy_Storage_System_(4-hour_Turnkey)_Cost_China": {
+      "entity": "Li_ion",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical_or_input",
+        "tags": {
+          "category": "cost",
+          "entity_type": "disruptor",
+          "subcategory": "capex_proxy"
+        },
+        "description": "Turnkey cost for 4-hour Li-ion Battery Energy Storage System ($/kWh) — China",
+        "units": "$/kWh",
+        "notes": "Proxy for Li-ion UPS CapEx; includes battery + PCS + installation; grid-scale BESS used as directional proxy for UPS batteries"
+      }
+    },
+    "Battery_Energy_Storage_System_(4-hour_Turnkey)_Cost_Europe": {
+      "entity": "Li_ion",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical_or_input",
+        "tags": {
+          "category": "cost",
+          "entity_type": "disruptor",
+          "subcategory": "capex_proxy"
+        },
+        "description": "Turnkey cost for 4-hour Li-ion Battery Energy Storage System ($/kWh) — Europe",
+        "units": "$/kWh",
+        "notes": "Proxy for Li-ion UPS CapEx; includes battery + PCS + installation; grid-scale BESS used as directional proxy for UPS batteries"
+      }
+    },
+    "Battery_Energy_Storage_System_(4-hour_Turnkey)_Cost_Global": {
+      "entity": "Li_ion",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical_or_input",
+        "tags": {
+          "category": "cost",
+          "entity_type": "disruptor",
+          "subcategory": "capex_proxy"
+        },
+        "description": "Turnkey cost for 4-hour Li-ion Battery Energy Storage System ($/kWh) — Global",
+        "units": "$/kWh",
+        "notes": "Proxy for Li-ion UPS CapEx; includes battery + PCS + installation; grid-scale BESS used as directional proxy for UPS batteries"
+      }
+    },
+    "Battery_Energy_Storage_System_(4-hour_Turnkey)_Cost_USA": {
+      "entity": "Li_ion",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical_or_input",
+        "tags": {
+          "category": "cost",
+          "entity_type": "disruptor",
+          "subcategory": "capex_proxy"
+        },
+        "description": "Turnkey cost for 4-hour Li-ion Battery Energy Storage System ($/kWh) — USA",
+        "units": "$/kWh",
+        "notes": "Proxy for Li-ion UPS CapEx; includes battery + PCS + installation; grid-scale BESS used as directional proxy for UPS batteries"
+      }
+    },
+    "Battery_Energy_Storage_System_(2-hour_Turnkey)_Cost_China": {
+      "entity": "Li_ion",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical_or_input",
+        "tags": {
+          "category": "cost",
+          "entity_type": "disruptor",
+          "subcategory": "capex_proxy"
+        },
+        "description": "Turnkey cost for 2-hour Li-ion Battery Energy Storage System ($/kWh) — China",
+        "units": "$/kWh",
+        "notes": "Alternative duration for sensitivity analysis; default UPS duration is 4h"
+      }
+    },
+    "Battery_Energy_Storage_System_(2-hour_Turnkey)_Cost_Europe": {
+      "entity": "Li_ion",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical_or_input",
+        "tags": {
+          "category": "cost",
+          "entity_type": "disruptor",
+          "subcategory": "capex_proxy"
+        },
+        "description": "Turnkey cost for 2-hour Li-ion Battery Energy Storage System ($/kWh) — Europe",
+        "units": "$/kWh",
+        "notes": "Alternative duration for sensitivity analysis; default UPS duration is 4h"
+      }
+    },
+    "Battery_Energy_Storage_System_(2-hour_Turnkey)_Cost_Global": {
+      "entity": "Li_ion",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical_or_input",
+        "tags": {
+          "category": "cost",
+          "entity_type": "disruptor",
+          "subcategory": "capex_proxy"
+        },
+        "description": "Turnkey cost for 2-hour Li-ion Battery Energy Storage System ($/kWh) — Global",
+        "units": "$/kWh",
+        "notes": "Alternative duration for sensitivity analysis; default UPS duration is 4h"
+      }
+    },
+    "Battery_Energy_Storage_System_(2-hour_Turnkey)_Cost_USA": {
+      "entity": "Li_ion",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical_or_input",
+        "tags": {
+          "category": "cost",
+          "entity_type": "disruptor",
+          "subcategory": "capex_proxy"
+        },
+        "description": "Turnkey cost for 2-hour Li-ion Battery Energy Storage System ($/kWh) — USA",
+        "units": "$/kWh",
+        "notes": "Alternative duration for sensitivity analysis; default UPS duration is 4h"
+      }
+    },
+    "Battery_Energy_Storage_System_Installed_Cost_Global": {
+      "entity": "Li_ion",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical_or_input",
+        "tags": {
+          "category": "cost",
+          "entity_type": "disruptor",
+          "subcategory": "capex_power_basis"
+        },
+        "description": "Capital cost for Battery Energy Storage Systems ($/kW) — Global",
+        "units": "$/kW",
+        "notes": "Power-basis cost; convert to $/kWh using duration: Cost_kWh = Cost_kW / duration_hours"
+      }
+    },
+    "VRLA_Battery_Cost_Global": {
+      "entity": "VRLA",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "assumption_or_input",
+        "tags": {
+          "category": "cost",
+          "entity_type": "incumbent",
+          "subcategory": "capex"
+        },
+        "description": "VRLA battery cost ($/kWh) — Global; assume flat trajectory ~$220/kWh",
+        "units": "$/kWh",
+        "notes": "Based on industry benchmarks; VRLA costs relatively stable; apply regional multipliers if needed"
+      }
+    },
+    "Li_ion_UPS_Replacement_cycle_Global": {
+      "entity": "Li_ion",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "assumption_or_input",
+        "tags": {
+          "category": "lifetime",
+          "entity_type": "disruptor",
+          "subcategory": "replacement_cycle"
+        },
+        "description": "Li-ion UPS replacement cycle (years) — Global; default 12 years",
+        "units": "years",
+        "notes": "Use for installed base accounting and retirement calculations"
+      }
+    }
+  },
+  "_info": {
+    "generated_at": "2025-11-07T08:08:09.372605Z",
+    "updated_at": "2025-11-07T15:30:00.000000Z",
+    "notes": [
+      "Dataset keys are exactly the names provided by the user.",
+      "Tags and categories chosen to match the SWB taxonomy structure (market vs product, demand vs installed_base vs lifetime vs intensity vs drivers).",
+      "Units are implied: demand in MWh/year; installed_base in MWh; replacement_cycle in years unless otherwise defined.",
+      "Cost datasets added: BESS turnkey costs (2-hour and 4-hour) used as proxies for Li-ion UPS CapEx; VRLA cost and Li-ion replacement cycle added for completeness."
+    ]
+  }
+}

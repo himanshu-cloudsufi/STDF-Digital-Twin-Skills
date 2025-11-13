@@ -1,0 +1,1150 @@
+{
+  "metadata": {
+    "document_version": "2.0_hybrid",
+    "methodology": "Hybrid Bottom-Up + Top-Down Framework",
+    "last_updated": "2024-Q4",
+    "description": "Copper demand forecasting taxonomy and datasets aligned with data-constrained hybrid methodology"
+  },
+  "taxonomy": {
+    "Commodity": "Copper",
+    "methodology_tiers": {
+      "TIER_1_BOTTOM_UP": {
+        "description": "Segments with complete driver data for installed-base accounting",
+        "confidence": "HIGH",
+        "segments": ["Automotive", "Grid_Generation_Linked"]
+      },
+      "TIER_2_TOP_DOWN": {
+        "description": "Segments using share allocation due to missing driver data",
+        "confidence": "LOW_TO_MEDIUM",
+        "segments": ["Construction", "Grid_T&D", "Industrial", "Electronics", "Other_Uses"]
+      }
+    },
+    "use_cases": {
+      "Automotive": {
+        "tier": "TIER_1_BOTTOM_UP",
+        "confidence": "HIGH",
+        "data_availability": "COMPLETE",
+        "applications": [
+          {
+            "name": "Passenger_Cars",
+            "powertrains": ["ICE", "HEV", "PHEV", "BEV"],
+            "unit": "units",
+            "copper_intensity_range_kg": {
+              "ICE": "20-25",
+              "HEV": "30-40",
+              "PHEV": "55-65",
+              "BEV": "80-90"
+            },
+            "description": "Bottom-up calculation from sales × coefficients"
+          },
+          {
+            "name": "Commercial_Vehicles",
+            "powertrains": ["ICE", "EV", "NGV"],
+            "unit": "units",
+            "copper_intensity_range_kg": {
+              "ICE": "30-40",
+              "EV": "110-130",
+              "NGV": "35-42"
+            }
+          },
+          {
+            "name": "Two_Wheelers",
+            "powertrains": ["ICE", "EV"],
+            "unit": "units",
+            "copper_intensity_range_kg": {
+              "ICE": "2-4",
+              "EV": "3-5"
+            }
+          },
+          {
+            "name": "Three_Wheelers",
+            "powertrains": ["ICE", "EV"],
+            "unit": "units",
+            "copper_intensity_range_kg": {
+              "ICE": "3-5",
+              "EV": "4-6"
+            }
+          }
+        ]
+      },
+      "Grid_Generation_Linked": {
+        "tier": "TIER_1_BOTTOM_UP",
+        "confidence": "MEDIUM",
+        "data_availability": "PARTIAL",
+        "note": "Have installed capacity; derive new capacity via differencing",
+        "applications": [
+          {
+            "name": "Wind_Onshore",
+            "unit": "MW",
+            "copper_intensity_range_tonnes_per_MW": "4-10",
+            "description": "Turbine windings, cables, transformers"
+          },
+          {
+            "name": "Wind_Offshore",
+            "unit": "MW",
+            "copper_intensity_range_tonnes_per_MW": "8-12",
+            "description": "Higher intensity due to offshore cables"
+          },
+          {
+            "name": "Solar_PV",
+            "unit": "MW",
+            "copper_intensity_range_tonnes_per_MW": "4-6",
+            "description": "Inverters, transformers, wiring"
+          },
+          {
+            "name": "Natural_Gas",
+            "unit": "MW",
+            "copper_intensity_range_tonnes_per_MW": "0.8-1.2"
+          },
+          {
+            "name": "Coal",
+            "unit": "MW",
+            "copper_intensity_range_tonnes_per_MW": "0.8-1.2"
+          }
+        ]
+      },
+      "Grid_T&D_and_Transformers": {
+        "tier": "TIER_2_TOP_DOWN",
+        "confidence": "LOW",
+        "data_availability": "MISSING",
+        "fallback_method": "Residual from Electrical share after generation-linked component",
+        "applications": [
+          {
+            "name": "Transmission_Lines",
+            "unit": "km",
+            "copper_intensity_range_tonnes_per_km": "7-12",
+            "description": "HV/HVDC lines and conductors",
+            "note": "DATA MISSING - Use residual allocation"
+          },
+          {
+            "name": "Distribution_Lines",
+            "unit": "km",
+            "copper_intensity_range_tonnes_per_km": "3-5",
+            "description": "MV/LV distribution networks",
+            "note": "DATA MISSING - Use residual allocation"
+          },
+          {
+            "name": "Transformers",
+            "unit": "GW",
+            "copper_intensity_range_tonnes_per_GW": "600-1000",
+            "description": "Installed transformer capacity",
+            "note": "DATA MISSING - Use residual allocation"
+          }
+        ]
+      },
+      "Construction_Buildings": {
+        "tier": "TIER_2_TOP_DOWN",
+        "confidence": "LOW",
+        "data_availability": "MISSING",
+        "fallback_method": "Top-down allocation from Electrical share × 0.48",
+        "applications": [
+          {
+            "name": "Residential_New_Build",
+            "unit": "sqm",
+            "copper_intensity_range_kg_per_sqm": "3-5",
+            "description": "New household wiring, plumbing, HVAC",
+            "note": "DATA MISSING - Use share allocation"
+          },
+          {
+            "name": "Residential_Retrofit",
+            "unit": "sqm",
+            "copper_intensity_range_kg_per_sqm": "1-3",
+            "description": "Renovation and retrofit",
+            "note": "DATA MISSING - Use share allocation"
+          },
+          {
+            "name": "NonResidential_New_Build",
+            "unit": "sqm",
+            "copper_intensity_range_kg_per_sqm": "5-8",
+            "description": "Commercial & institutional buildings",
+            "note": "DATA MISSING - Use share allocation"
+          },
+          {
+            "name": "NonResidential_Retrofit",
+            "unit": "sqm",
+            "copper_intensity_range_kg_per_sqm": "2-4",
+            "description": "Renovation and retrofit",
+            "note": "DATA MISSING - Use share allocation"
+          }
+        ]
+      },
+      "Industrial_Machinery": {
+        "tier": "TIER_2_TOP_DOWN",
+        "confidence": "LOW",
+        "data_availability": "MISSING",
+        "fallback_method": "Top-down allocation from Electrical share × 0.17",
+        "applications": [
+          {
+            "name": "Motors",
+            "unit": "MW",
+            "copper_intensity_range_tonnes_per_MW": "4-6",
+            "note": "DATA MISSING - Use share allocation"
+          },
+          {
+            "name": "HVAC",
+            "unit": "units",
+            "description": "Industrial heating, ventilation, air conditioning",
+            "note": "DATA MISSING - Use share allocation"
+          },
+          {
+            "name": "Other_Machinery",
+            "description": "General industrial equipment",
+            "note": "DATA MISSING - Use share allocation"
+          }
+        ]
+      },
+      "Electronics_and_Appliances": {
+        "tier": "TIER_2_TOP_DOWN",
+        "confidence": "LOW",
+        "data_availability": "MISSING",
+        "fallback_method": "Fixed share (11% of total) or residual",
+        "applications": [
+          {
+            "name": "Phones",
+            "unit": "units",
+            "copper_intensity_range_kg_per_unit": "0.010-0.020",
+            "description": "Smartphones, feature phones",
+            "note": "DATA MISSING - Use fixed share"
+          },
+          {
+            "name": "PCs",
+            "unit": "units",
+            "copper_intensity_range_kg_per_unit": "0.6-1.0",
+            "description": "Personal computers, laptops",
+            "note": "DATA MISSING - Use fixed share"
+          },
+          {
+            "name": "Appliances",
+            "unit": "units",
+            "copper_intensity_range_kg_per_unit": "1.0-2.0",
+            "description": "White goods (refrigerators, washers, etc.)",
+            "note": "DATA MISSING - Use fixed share"
+          }
+        ]
+      },
+      "Other_Uses": {
+        "tier": "TIER_2_TOP_DOWN",
+        "confidence": "LOW",
+        "data_availability": "MISSING",
+        "fallback_method": "Residual with bounds (8-18%) and 5-year smoothing",
+        "description": "Alloys (brass/bronze), ammunition, pigments, architectural, chemicals",
+        "target_share": "10-15%",
+        "note": "DATA MISSING - Calculate as bounded residual"
+      }
+    }
+  },
+  "datasets": {
+    "Copper_Annual_Consumption_Global": {
+      "entity": "Copper",
+      "region": "Global",
+      "level_name": "market",
+      "usage_type": "anchor",
+      "calculation_method": "aggregate",
+      "tier": "REFERENCE",
+      "confidence": "HIGH",
+      "metadata": {
+        "type": "consumption",
+        "tags": {
+          "category": "demand",
+          "entity_type": "market",
+          "subcategory": "total"
+        },
+        "description": "PRIMARY ANCHOR - Refined copper consumption (Global total)",
+        "role": "All segment demands must reconcile to this total"
+      }
+    },
+    "Copper_Annual_Consumption_China": {
+      "entity": "Copper",
+      "region": "China",
+      "level_name": "market",
+      "usage_type": "validation",
+      "calculation_method": "aggregate",
+      "metadata": {
+        "type": "consumption",
+        "tags": {
+          "category": "demand",
+          "entity_type": "market",
+          "subcategory": "total"
+        },
+        "description": "Refined copper consumption — China (regional validation)"
+      }
+    },
+    "Copper_Annual_Consumption_Europe": {
+      "entity": "Copper",
+      "region": "Europe",
+      "level_name": "market",
+      "usage_type": "validation",
+      "calculation_method": "aggregate",
+      "metadata": {
+        "type": "consumption",
+        "tags": {
+          "category": "demand",
+          "entity_type": "market",
+          "subcategory": "total"
+        },
+        "description": "Refined copper consumption — Europe (regional validation)"
+      }
+    },
+    "Copper_Annual_Consumption_Rest_of_World": {
+      "entity": "Copper",
+      "region": "Rest_of_World",
+      "level_name": "market",
+      "usage_type": "validation",
+      "calculation_method": "aggregate",
+      "metadata": {
+        "type": "consumption",
+        "tags": {
+          "category": "demand",
+          "entity_type": "market",
+          "subcategory": "total"
+        },
+        "description": "Refined copper consumption — Rest of World"
+      }
+    },
+    "Copper_Annual_Consumption_USA": {
+      "entity": "Copper",
+      "region": "USA",
+      "level_name": "market",
+      "usage_type": "validation",
+      "calculation_method": "aggregate",
+      "metadata": {
+        "type": "consumption",
+        "tags": {
+          "category": "demand",
+          "entity_type": "market",
+          "subcategory": "total"
+        },
+        "description": "Refined copper consumption — USA (regional validation)"
+      }
+    },
+    "Copper_Demand_Transportation_Percentage_Global": {
+      "entity": "Copper_Transportation_Share",
+      "region": "Global",
+      "level_name": "segment_share",
+      "usage_type": "validation",
+      "calculation_method": "direct",
+      "tier": "TIER_1_VALIDATION",
+      "confidence": "HIGH",
+      "metadata": {
+        "type": "share",
+        "tags": {
+          "category": "share",
+          "entity_type": "segment",
+          "subcategory": "transportation"
+        },
+        "description": "Share of copper demand from transportation (validates Automotive bottom-up)",
+        "role": "PRIMARY VALIDATION for Automotive segment",
+        "tolerance": "±2%"
+      }
+    },
+    "Copper_Electrical_Demand_Percentage_Global": {
+      "entity": "Copper_Electrical_Share",
+      "region": "Global",
+      "level_name": "segment_share",
+      "usage_type": "allocation",
+      "calculation_method": "direct",
+      "tier": "TIER_2_ALLOCATION",
+      "confidence": "HIGH",
+      "metadata": {
+        "type": "share",
+        "tags": {
+          "category": "share",
+          "entity_type": "segment",
+          "subcategory": "electrical"
+        },
+        "description": "Share of copper demand from electrical uses (Construction+Grid+Industrial)",
+        "role": "PRIMARY ALLOCATION BASIS for TIER 2 segments",
+        "tolerance": "±5%",
+        "allocation_split": {
+          "construction": 0.48,
+          "grid": 0.35,
+          "industrial": 0.17
+        }
+      }
+    },
+    "Copper_EV_Demand_Percentage_Global": {
+      "entity": "Copper_EV_Share",
+      "region": "Global",
+      "level_name": "segment_share",
+      "usage_type": "validation",
+      "calculation_method": "direct",
+      "tier": "TIER_1_VALIDATION",
+      "confidence": "MEDIUM",
+      "metadata": {
+        "type": "share",
+        "tags": {
+          "category": "share",
+          "entity_type": "segment",
+          "subcategory": "ev"
+        },
+        "description": "Share of copper demand from EVs (validates BEV calculation)",
+        "role": "Validates BEV vs ICE split in Automotive",
+        "tolerance": "±3%"
+      }
+    },
+    "Copper_Solar_Demand_Percentage_Global": {
+      "entity": "Copper_Solar_Share",
+      "region": "Global",
+      "level_name": "segment_share",
+      "usage_type": "validation",
+      "calculation_method": "direct",
+      "tier": "TIER_1_VALIDATION",
+      "confidence": "MEDIUM",
+      "metadata": {
+        "type": "share",
+        "tags": {
+          "category": "share",
+          "entity_type": "segment",
+          "subcategory": "solar"
+        },
+        "description": "Share of copper demand from solar PV (validates Solar generation-linked)",
+        "role": "Validates Grid Solar component",
+        "tolerance": "±4%"
+      }
+    },
+    "Copper_Wind_Turbines_Percentage_Global": {
+      "entity": "Copper_Wind_Share",
+      "region": "Global",
+      "level_name": "segment_share",
+      "usage_type": "validation",
+      "calculation_method": "direct",
+      "tier": "TIER_1_VALIDATION",
+      "confidence": "MEDIUM",
+      "metadata": {
+        "type": "share",
+        "tags": {
+          "category": "share",
+          "entity_type": "segment",
+          "subcategory": "wind"
+        },
+        "description": "Share of copper demand from wind turbines (validates Wind generation-linked)",
+        "role": "Validates Grid Wind component",
+        "tolerance": "±4%"
+      }
+    },
+    "Electricity_Annual_Production_Global": {
+      "entity": "Electricity_Annual_Production_Global",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "proxy",
+      "calculation_method": "direct",
+      "tier": "PROXY",
+      "confidence": "HIGH",
+      "metadata": {
+        "type": "energy_driver",
+        "tags": {
+          "category": "energy",
+          "entity_type": "power_system",
+          "subcategory": "production"
+        },
+        "description": "Electricity production (TWh) — Used as GDP/IPI proxy",
+        "role": "Growth proxy for Construction, Industrial, Grid T&D OEM/Replacement splits"
+      }
+    },
+    "Copper_Price_Global": {
+      "entity": "Copper",
+      "region": "Global",
+      "level_name": "market",
+      "usage_type": "driver",
+      "calculation_method": "direct",
+      "tier": "OPTIONAL",
+      "confidence": "HIGH",
+      "metadata": {
+        "type": "price_series",
+        "tags": {
+          "category": "cost",
+          "entity_type": "market",
+          "subcategory": "price"
+        },
+        "description": "Copper market price ($/tonne) — Used for Other Uses elasticity (optional)",
+        "role": "Optional price elasticity for Other Uses segment"
+      }
+    },
+    "Copper_Annual_Recycling_Rate_Global": {
+      "entity": "Copper",
+      "region": "Global",
+      "level_name": "market",
+      "usage_type": "context",
+      "calculation_method": "direct",
+      "metadata": {
+        "type": "ratio",
+        "tags": {
+          "category": "circularity",
+          "entity_type": "market",
+          "subcategory": "recycling_rate"
+        },
+        "description": "Annual recycling rate of copper — Context for primary supply estimation"
+      }
+    },
+    "Passenger_Vehicle_(BEV)_Annual_Sales_Global": {
+      "entity": "Passenger_Vehicle_(BEV)_Annual_Sales",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "primary_input",
+      "calculation_method": "bottom_up",
+      "tier": "TIER_1_INPUT",
+      "confidence": "HIGH",
+      "metadata": {
+        "type": "adoption",
+        "tags": {
+          "category": "sales",
+          "entity_type": "vehicle",
+          "subcategory": "driver"
+        },
+        "description": "Annual BEV passenger car sales (units)"
+      },
+      "role": "sales"
+    },
+    "Passenger_Vehicle_(BEV)_Total_Fleet_Global": {
+      "entity": "Passenger_Vehicle_(BEV)_Total_Fleet",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "primary_input",
+      "calculation_method": "bottom_up",
+      "tier": "TIER_1_INPUT",
+      "confidence": "HIGH",
+      "metadata": {
+        "type": "installed_base",
+        "tags": {
+          "category": "stock",
+          "entity_type": "vehicle",
+          "subcategory": "driver"
+        },
+        "description": "Installed base BEV passenger cars (units)"
+      },
+      "role": "installed_base"
+    },
+    "Passenger_Vehicle_(ICE)_Annual_Sales_Global": {
+      "entity": "Passenger_Vehicle_(ICE)_Annual_Sales",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "primary_input",
+      "calculation_method": "bottom_up",
+      "tier": "TIER_1_INPUT",
+      "confidence": "HIGH",
+      "metadata": {
+        "type": "adoption",
+        "tags": {
+          "category": "sales",
+          "entity_type": "vehicle",
+          "subcategory": "driver"
+        },
+        "description": "Annual ICE passenger car sales (units)"
+      },
+      "role": "sales"
+    },
+    "Passenger_Vehicle_(ICE)_Total_Fleet_Global": {
+      "entity": "Passenger_Vehicle_(ICE)_Total_Fleet",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "primary_input",
+      "calculation_method": "bottom_up",
+      "tier": "TIER_1_INPUT",
+      "confidence": "HIGH",
+      "metadata": {
+        "type": "installed_base",
+        "tags": {
+          "category": "stock",
+          "entity_type": "vehicle",
+          "subcategory": "driver"
+        },
+        "description": "Installed base ICE passenger cars (units)"
+      },
+      "role": "installed_base"
+    },
+    "Passenger_Vehicle_(PHEV)_Annual_Sales_Global": {
+      "entity": "Passenger_Vehicle_(PHEV)_Annual_Sales",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "primary_input",
+      "calculation_method": "bottom_up",
+      "tier": "TIER_1_INPUT",
+      "confidence": "HIGH",
+      "metadata": {
+        "type": "adoption",
+        "tags": {
+          "category": "sales",
+          "entity_type": "vehicle",
+          "subcategory": "driver"
+        },
+        "description": "Annual PHEV passenger car sales (units)"
+      },
+      "role": "sales"
+    },
+    "Passenger_Vehicle_(PHEV)_Total_Fleet_Global": {
+      "entity": "Passenger_Vehicle_(PHEV)_Total_Fleet",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "primary_input",
+      "calculation_method": "bottom_up",
+      "tier": "TIER_1_INPUT",
+      "confidence": "HIGH",
+      "metadata": {
+        "type": "installed_base",
+        "tags": {
+          "category": "stock",
+          "entity_type": "vehicle",
+          "subcategory": "driver"
+        },
+        "description": "Installed base PHEV passenger cars (units)"
+      },
+      "role": "installed_base"
+    },
+    "Commercial_Vehicle_(EV)_Annual_Sales_Global": {
+      "entity": "Commercial_Vehicle_(EV)_Annual_Sales",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "primary_input",
+      "calculation_method": "bottom_up",
+      "tier": "TIER_1_INPUT",
+      "confidence": "MEDIUM",
+      "metadata": {
+        "type": "adoption",
+        "tags": {
+          "category": "sales",
+          "entity_type": "vehicle",
+          "subcategory": "driver"
+        },
+        "description": "Annual EV commercial vehicle sales (units)"
+      },
+      "role": "sales"
+    },
+    "Commercial_Vehicle_(EV)_Total_Fleet_Global": {
+      "entity": "Commercial_Vehicle_(EV)_Total_Fleet",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "primary_input",
+      "calculation_method": "bottom_up",
+      "tier": "TIER_1_INPUT",
+      "confidence": "MEDIUM",
+      "metadata": {
+        "type": "installed_base",
+        "tags": {
+          "category": "stock",
+          "entity_type": "vehicle",
+          "subcategory": "driver"
+        },
+        "description": "Installed base EV commercial vehicles (units)"
+      },
+      "role": "installed_base"
+    },
+    "Commercial_Vehicle_(ICE)_Annual_Sales_Global": {
+      "entity": "Commercial_Vehicle_(ICE)_Annual_Sales",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "primary_input",
+      "calculation_method": "bottom_up",
+      "tier": "TIER_1_INPUT",
+      "confidence": "MEDIUM",
+      "metadata": {
+        "type": "adoption",
+        "tags": {
+          "category": "sales",
+          "entity_type": "vehicle",
+          "subcategory": "driver"
+        },
+        "description": "Annual ICE commercial vehicle sales (units)"
+      },
+      "role": "sales"
+    },
+    "Commercial_Vehicle_(ICE)_Total_Fleet_Global": {
+      "entity": "Commercial_Vehicle_(ICE)_Total_Fleet",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "primary_input",
+      "calculation_method": "bottom_up",
+      "tier": "TIER_1_INPUT",
+      "confidence": "MEDIUM",
+      "metadata": {
+        "type": "installed_base",
+        "tags": {
+          "category": "stock",
+          "entity_type": "vehicle",
+          "subcategory": "driver"
+        },
+        "description": "Installed base ICE commercial vehicles (units)"
+      },
+      "role": "installed_base"
+    },
+    "Commercial_Vehicle_(NGV)_Annual_Sales_Global": {
+      "entity": "Commercial_Vehicle_(NGV)_Annual_Sales",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "primary_input",
+      "calculation_method": "bottom_up",
+      "tier": "TIER_1_INPUT",
+      "confidence": "LOW",
+      "metadata": {
+        "type": "adoption",
+        "tags": {
+          "category": "sales",
+          "entity_type": "vehicle",
+          "subcategory": "driver"
+        },
+        "description": "Annual NGV commercial vehicle sales (units)"
+      },
+      "role": "sales"
+    },
+    "Commercial_Vehicle_(NGV)_Total_Fleet_Global": {
+      "entity": "Commercial_Vehicle_(NGV)_Total_Fleet",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "primary_input",
+      "calculation_method": "bottom_up",
+      "tier": "TIER_1_INPUT",
+      "confidence": "LOW",
+      "metadata": {
+        "type": "installed_base",
+        "tags": {
+          "category": "stock",
+          "entity_type": "vehicle",
+          "subcategory": "driver"
+        },
+        "description": "Installed base NGV commercial vehicles (units)"
+      },
+      "role": "installed_base"
+    },
+    "Two_Wheeler_(EV)_Annual_Sales_Global": {
+      "entity": "Two_Wheeler_(EV)_Annual_Sales",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "primary_input",
+      "calculation_method": "bottom_up",
+      "tier": "TIER_1_INPUT",
+      "confidence": "MEDIUM",
+      "metadata": {
+        "type": "adoption",
+        "tags": {
+          "category": "sales",
+          "entity_type": "vehicle",
+          "subcategory": "driver"
+        },
+        "description": "Annual EV two-wheeler sales (units)"
+      },
+      "role": "sales"
+    },
+    "Two_Wheeler_(EV)_Total_Fleet_Global": {
+      "entity": "Two_Wheeler_(EV)_Total_Fleet",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "primary_input",
+      "calculation_method": "bottom_up",
+      "tier": "TIER_1_INPUT",
+      "confidence": "MEDIUM",
+      "metadata": {
+        "type": "installed_base",
+        "tags": {
+          "category": "stock",
+          "entity_type": "vehicle",
+          "subcategory": "driver"
+        },
+        "description": "Installed base EV two-wheelers (units)"
+      },
+      "role": "installed_base"
+    },
+    "Two_Wheeler_(ICE)_Annual_Sales_Global": {
+      "entity": "Two_Wheeler_(ICE)_Annual_Sales",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "primary_input",
+      "calculation_method": "bottom_up",
+      "tier": "TIER_1_INPUT",
+      "confidence": "MEDIUM",
+      "metadata": {
+        "type": "adoption",
+        "tags": {
+          "category": "sales",
+          "entity_type": "vehicle",
+          "subcategory": "driver"
+        },
+        "description": "Annual ICE two-wheeler sales (units)"
+      },
+      "role": "sales"
+    },
+    "Two_Wheeler_(ICE)_Total_Fleet_Global": {
+      "entity": "Two_Wheeler_(ICE)_Total_Fleet",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "primary_input",
+      "calculation_method": "bottom_up",
+      "tier": "TIER_1_INPUT",
+      "confidence": "MEDIUM",
+      "metadata": {
+        "type": "installed_base",
+        "tags": {
+          "category": "stock",
+          "entity_type": "vehicle",
+          "subcategory": "driver"
+        },
+        "description": "Installed base ICE two-wheelers (units)"
+      },
+      "role": "installed_base"
+    },
+    "Three_Wheeler_(EV)_Annual_Sales_Global": {
+      "entity": "Three_Wheeler_(EV)_Annual_Sales",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "primary_input",
+      "calculation_method": "bottom_up",
+      "tier": "TIER_1_INPUT",
+      "confidence": "LOW",
+      "metadata": {
+        "type": "adoption",
+        "tags": {
+          "category": "sales",
+          "entity_type": "vehicle",
+          "subcategory": "driver"
+        },
+        "description": "Annual EV three-wheeler sales (units)"
+      },
+      "role": "sales"
+    },
+    "Three_Wheeler_(EV)_Total_Fleet_Global": {
+      "entity": "Three_Wheeler_(EV)_Total_Fleet",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "primary_input",
+      "calculation_method": "bottom_up",
+      "tier": "TIER_1_INPUT",
+      "confidence": "LOW",
+      "metadata": {
+        "type": "installed_base",
+        "tags": {
+          "category": "stock",
+          "entity_type": "vehicle",
+          "subcategory": "driver"
+        },
+        "description": "Installed base EV three-wheelers (units)"
+      },
+      "role": "installed_base"
+    },
+    "Three_Wheeler_(ICE)_Annual_Sales_Global": {
+      "entity": "Three_Wheeler_(ICE)_Annual_Sales",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "primary_input",
+      "calculation_method": "bottom_up",
+      "tier": "TIER_1_INPUT",
+      "confidence": "LOW",
+      "metadata": {
+        "type": "adoption",
+        "tags": {
+          "category": "sales",
+          "entity_type": "vehicle",
+          "subcategory": "driver"
+        },
+        "description": "Annual ICE three-wheeler sales (units)"
+      },
+      "role": "sales"
+    },
+    "Three_Wheeler_(ICE)_Total_Fleet_Global": {
+      "entity": "Three_Wheeler_(ICE)_Total_Fleet",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "primary_input",
+      "calculation_method": "bottom_up",
+      "tier": "TIER_1_INPUT",
+      "confidence": "LOW",
+      "metadata": {
+        "type": "installed_base",
+        "tags": {
+          "category": "stock",
+          "entity_type": "vehicle",
+          "subcategory": "driver"
+        },
+        "description": "Installed base ICE three-wheelers (units)"
+      },
+      "role": "installed_base"
+    },
+    "Onshore_Wind_Installed_Capacity_Global": {
+      "entity": "Onshore_Wind_Installed_Capacity_Global",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "primary_input",
+      "calculation_method": "bottom_up",
+      "tier": "TIER_1_INPUT",
+      "confidence": "HIGH",
+      "metadata": {
+        "type": "energy_driver",
+        "tags": {
+          "category": "energy",
+          "entity_type": "power_system",
+          "subcategory": "installed_capacity"
+        },
+        "description": "Onshore wind installed capacity (GW) — CUMULATIVE",
+        "note": "Derive NEW capacity via differencing: New(t) = Installed(t) - Installed(t-1)"
+      }
+    },
+    "Offshore_Wind_Installed_Capacity_Global": {
+      "entity": "Offshore_Wind_Installed_Capacity_Global",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "primary_input",
+      "calculation_method": "bottom_up",
+      "tier": "TIER_1_INPUT",
+      "confidence": "HIGH",
+      "metadata": {
+        "type": "energy_driver",
+        "tags": {
+          "category": "energy",
+          "entity_type": "power_system",
+          "subcategory": "installed_capacity"
+        },
+        "description": "Offshore wind installed capacity (GW) — CUMULATIVE",
+        "note": "Derive NEW capacity via differencing"
+      }
+    },
+    "Solar_Installed_Capacity_Global": {
+      "entity": "Solar_Installed_Capacity_Global",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "primary_input",
+      "calculation_method": "bottom_up",
+      "tier": "TIER_1_INPUT",
+      "confidence": "HIGH",
+      "metadata": {
+        "type": "energy_driver",
+        "tags": {
+          "category": "energy",
+          "entity_type": "power_system",
+          "subcategory": "installed_capacity"
+        },
+        "description": "Solar PV installed capacity (GW) — CUMULATIVE",
+        "note": "Derive NEW capacity via differencing"
+      }
+    },
+    "Coal_Installed_Capacity_Global": {
+      "entity": "Coal_Installed_Capacity_Global",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "primary_input",
+      "calculation_method": "bottom_up",
+      "tier": "TIER_1_INPUT",
+      "confidence": "HIGH",
+      "metadata": {
+        "type": "energy_driver",
+        "tags": {
+          "category": "energy",
+          "entity_type": "power_system",
+          "subcategory": "installed_capacity"
+        },
+        "description": "Coal installed capacity (GW) — CUMULATIVE",
+        "note": "Derive NEW capacity via differencing"
+      }
+    },
+    "Natural_Gas_Installed_Capacity_Global": {
+      "entity": "Natural_Gas_Installed_Capacity_Global",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "primary_input",
+      "calculation_method": "bottom_up",
+      "tier": "TIER_1_INPUT",
+      "confidence": "HIGH",
+      "metadata": {
+        "type": "energy_driver",
+        "tags": {
+          "category": "energy",
+          "entity_type": "power_system",
+          "subcategory": "installed_capacity"
+        },
+        "description": "Natural gas installed capacity (GW) — CUMULATIVE",
+        "note": "Derive NEW capacity via differencing"
+      }
+    }
+  },
+  "missing_datasets": {
+    "description": "Datasets required by instructions but NOT available — require fallback methods",
+    "construction": {
+      "missing": [
+        "Global_New_Residential_Floorspace_Completions_sqm",
+        "Global_New_NonResidential_Floorspace_Completions_sqm",
+        "Global_Residential_Floorspace_IB_sqm",
+        "Global_NonResidential_Floorspace_IB_sqm"
+      ],
+      "fallback": "Top-down allocation from Electrical_Demand_Percentage × 0.48",
+      "impact": "Cannot separately model residential vs. non-residential; Cannot validate with building permits"
+    },
+    "grid_td": {
+      "missing": [
+        "Global_Grid_T_and_D_New_km",
+        "Global_Grid_T_and_D_IB_km",
+        "Global_Transformer_New_GW",
+        "Global_Transformer_IB_GW"
+      ],
+      "fallback": "Residual from Electrical_Demand_Percentage × 0.35 minus generation-linked component",
+      "impact": "Cannot separately model transmission vs. distribution vs. transformers"
+    },
+    "industrial": {
+      "missing": [
+        "Global_Industrial_Motor_Sales_MW",
+        "Global_Industrial_Motor_IB_MW"
+      ],
+      "fallback": "Top-down allocation from Electrical_Demand_Percentage × 0.17",
+      "impact": "Cannot link to industrial production data; Cannot separately model motors vs. HVAC"
+    },
+    "electronics": {
+      "missing": [
+        "Global_Smartphone_Annual_Sales_units",
+        "Global_PC_Annual_Sales_units",
+        "Global_Appliance_Annual_Sales_units"
+      ],
+      "fallback": "Fixed share (11% of total demand) or residual allocation",
+      "impact": "Cannot capture technology shifts; Cannot model phones vs. PCs vs. appliances separately"
+    },
+    "other_uses": {
+      "missing": [
+        "Copper_Demand_Other_Uses_Global"
+      ],
+      "fallback": "Residual with bounds (8-18%) and 5-year smoothing",
+      "impact": "High uncertainty; cannot model alloys vs. ammunition vs. other separately"
+    },
+    "macro_drivers": {
+      "missing": [
+        "Global_GDP",
+        "Global_IPI"
+      ],
+      "fallback": "Use Electricity_Annual_Production_Global growth as proxy",
+      "impact": "Less precise forward forecasts; Cannot use econometric model for Other Uses"
+    }
+  },
+  "calculation_relationships": {
+    "automotive": {
+      "tier": "TIER_1_BOTTOM_UP",
+      "method": "Full installed-base accounting",
+      "demand_formula": "Σ(Sales_v,p × Coefficient_v,p) / 1000 → tonnes",
+      "oem_replacement_split": "100% OEM (replacement captured via sales)",
+      "validation": {
+        "primary": "Copper_Demand_Transportation_Percentage_Global",
+        "secondary": "Copper_EV_Demand_Percentage_Global"
+      },
+      "confidence": "HIGH"
+    },
+    "grid_generation": {
+      "tier": "TIER_1_BOTTOM_UP",
+      "method": "Partial bottom-up (derive new capacity from installed)",
+      "demand_formula": "Σ(New_Capacity_gen × 1000 MW/GW × k_tonnes_per_MW)",
+      "oem_replacement_split": "100% OEM (decommissioning offset by new builds)",
+      "validation": {
+        "primary": "Copper_Solar_Demand_Percentage_Global + Copper_Wind_Turbines_Percentage_Global"
+      },
+      "confidence": "MEDIUM"
+    },
+    "construction": {
+      "tier": "TIER_2_TOP_DOWN",
+      "method": "Share allocation",
+      "demand_formula": "Electrical_Total × 0.48",
+      "oem_replacement_split": "65% OEM / 35% Replacement (default) OR link to electricity growth",
+      "validation": {
+        "primary": "Part of Copper_Electrical_Demand_Percentage_Global"
+      },
+      "confidence": "LOW"
+    },
+    "grid_td": {
+      "tier": "TIER_2_TOP_DOWN",
+      "method": "Residual allocation",
+      "demand_formula": "(Electrical_Total × 0.35) - Grid_Generation_OEM",
+      "oem_replacement_split": "70% OEM / 30% Replacement (default) OR link to electricity growth",
+      "validation": {
+        "primary": "Part of Copper_Electrical_Demand_Percentage_Global"
+      },
+      "confidence": "LOW"
+    },
+    "industrial": {
+      "tier": "TIER_2_TOP_DOWN",
+      "method": "Share allocation",
+      "demand_formula": "Electrical_Total × 0.17",
+      "oem_replacement_split": "60% OEM / 40% Replacement (default)",
+      "validation": {
+        "primary": "Part of Copper_Electrical_Demand_Percentage_Global"
+      },
+      "confidence": "LOW"
+    },
+    "electronics": {
+      "tier": "TIER_2_TOP_DOWN",
+      "method": "Fixed share",
+      "demand_formula": "Total_Consumption × 0.11",
+      "oem_replacement_split": "100% OEM (replacement captured via sales)",
+      "confidence": "LOW"
+    },
+    "other_uses": {
+      "tier": "TIER_2_TOP_DOWN",
+      "method": "Bounded residual",
+      "demand_formula": "Total_Consumption - Σ(All_Segments), bounded 8-18%, 5-yr smoothing",
+      "confidence": "LOW"
+    }
+  },
+  "reconciliation_framework": {
+    "anchor": "Copper_Annual_Consumption_Global",
+    "priority_order": [
+      "1. Calculate TIER 1 bottom-up (Automotive, Grid Generation)",
+      "2. Validate TIER 1 against Transportation and Renewables shares",
+      "3. Allocate TIER 2 using Electrical share and split factors",
+      "4. Calculate Other Uses as residual",
+      "5. Force reconciliation: Σ(All Segments) = Total_Consumption (±0.1%)"
+    ],
+    "adjustment_strategy": "Proportionally adjust TIER 2 segments only; preserve TIER 1 bottom-up values"
+  },
+  "validation_framework": {
+    "primary_checks": [
+      {
+        "segment": "Automotive",
+        "calculated": "Auto_Total / Total_Consumption",
+        "reference": "Copper_Demand_Transportation_Percentage_Global",
+        "tolerance": 0.02,
+        "priority": "HIGH"
+      },
+      {
+        "segment": "Electrical",
+        "calculated": "(Construction + Grid + Industrial) / Total_Consumption",
+        "reference": "Copper_Electrical_Demand_Percentage_Global",
+        "tolerance": 0.05,
+        "priority": "HIGH"
+      },
+      {
+        "segment": "EV",
+        "calculated": "Auto_BEV_Demand / Total_Consumption",
+        "reference": "Copper_EV_Demand_Percentage_Global",
+        "tolerance": 0.03,
+        "priority": "MEDIUM"
+      },
+      {
+        "segment": "Renewables",
+        "calculated": "(Grid_Solar + Grid_Wind) / Total_Consumption",
+        "reference": "Copper_Solar_Demand_Percentage_Global + Copper_Wind_Turbines_Percentage_Global",
+        "tolerance": 0.04,
+        "priority": "MEDIUM"
+      }
+    ],
+    "reconciliation_check": {
+      "calculated": "Σ(All Segments)",
+      "reference": "Copper_Annual_Consumption_Global",
+      "tolerance": 0.001,
+      "priority": "CRITICAL"
+    }
+  },
+  "implementation_notes": {
+    "data_quality": [
+      "Apply 3-year rolling median to TIER 1 bottom-up flows",
+      "Apply 5-year rolling median to TIER 2 allocated flows",
+      "Apply growth rate guards: flag if YoY > +50% or < -30%",
+      "Bound Other Uses to 8-18% of total"
+    ],
+    "coefficients": {
+      "note": "All coefficients from literature, NOT calibrated to your data",
+      "source_priority": "ICA > ICSG > NREL > IRENA > Academic literature",
+      "update_frequency": "Review annually for technology changes (esp. EV, Solar, Wind)"
+    },
+    "forward_forecasting": {
+      "automotive": "Continue IB accounting if sales forecasts available; otherwise S-curve for EV adoption",
+      "grid_generation": "Use IEA/BNEF capacity forecasts if available; otherwise extrapolate growth rates",
+      "tier_2_segments": "Continue share allocation OR link to electricity production growth with elasticities"
+    },
+    "scenarios": {
+      "baseline": "70-80% EV, 15 TW renewables by 2045",
+      "accelerated": "90%+ EV, 20+ TW renewables (+20-30% demand)",
+      "delayed": "50-60% EV, 10-12 TW renewables (-15-20% demand)",
+      "substitution": "Base transition + Al substitution + thrifting (-10-15% demand)"
+    }
+  }
+}
+

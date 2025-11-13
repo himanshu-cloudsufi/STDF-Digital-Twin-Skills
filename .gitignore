@@ -90,3 +90,6 @@ tmp/
 Thumbs.db
 .DS_Store
 sessions.db
+
+node_modules/
+client/.vite/

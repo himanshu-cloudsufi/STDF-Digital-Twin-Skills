@@ -1,0 +1,1043 @@
+{
+  "taxonomy": {
+    "Commodity": "Lead",
+    "use_cases": {
+      "Lead_Batteries": {
+        "applications": [
+          {
+            "name": "SLI",
+            "description": "Starting, Lighting, Ignition batteries for vehicles",
+            "sub_applications": [
+              {
+                "name": "Passenger_Cars_SLI",
+                "vehicle_types": ["ICE", "BEV", "PHEV"],
+                "description": "Lead-acid batteries for passenger cars; BEV/PHEV use smaller 12V auxiliary batteries"
+              },
+              {
+                "name": "Two_Wheelers_SLI",
+                "vehicle_types": ["ICE", "EV"],
+                "description": "Lead-acid batteries for two-wheelers (motorcycles, scooters)"
+              },
+              {
+                "name": "Three_Wheelers_SLI",
+                "vehicle_types": ["ICE", "EV"],
+                "description": "Lead-acid batteries for three-wheelers (auto-rickshaws, tuk-tuks)"
+              },
+              {
+                "name": "Commercial_Vehicles_SLI",
+                "vehicle_types": ["ICE", "EV", "NGV"],
+                "description": "Lead-acid batteries for commercial vehicles; includes natural gas vehicles (NGV)"
+              }
+            ]
+          },
+          {
+            "name": "Industrial_Batteries_Motive",
+            "description": "Motive power batteries for material handling equipment",
+            "sub_applications": [
+              {
+                "name": "Forklifts",
+                "description": "Electric forklifts and material handling equipment"
+              }
+            ]
+          },
+          {
+            "name": "Industrial_Batteries_Stationary",
+            "description": "Stationary power backup and energy storage",
+            "sub_applications": [
+              {
+                "name": "UPS_Datacenter",
+                "description": "Uninterruptible Power Supply systems for datacenters"
+              },
+              {
+                "name": "UPS_Telecom",
+                "description": "UPS systems for telecommunications infrastructure"
+              }
+            ]
+          }
+        ]
+      },
+      "Other_Uses": {
+        "description": "Non-battery lead uses including pigments, alloys, radiation shielding, ammunition",
+        "share_of_total": "~15%"
+      }
+    }
+  },
+  "datasets": {
+    "_comment": "Datasets organized by category: Market Aggregates, Direct Lead Demand, Vehicle Sales, Fleet/IB, Parameters",
+    
+    "Lead_Annual_Implied_Demand_Global": {
+      "entity": "Lead",
+      "region": "Global",
+      "level_name": "market",
+      "usage_type": "validation",
+      "calculation_method": "aggregate",
+      "metadata": {
+        "type": "forecasted_or_implied",
+        "tags": {
+          "category": "demand",
+          "entity_type": "market",
+          "subcategory": "total"
+        },
+        "description": "Total annual implied demand for refined lead — Global",
+        "validation_source": "ILZSG"
+      }
+    },
+    
+    "Lead_Annual_Implied_Demand-Industrial_batteries_motive_power_Global": {
+      "entity": "Industrial_Batteries_Motive",
+      "region": "Global",
+      "level_name": "subproduct",
+      "usage_type": "fallback",
+      "calculation_method": "aggregate",
+      "metadata": {
+        "type": "forecasted_or_implied",
+        "tags": {
+          "category": "demand",
+          "entity_type": "subproduct",
+          "subcategory": "motive"
+        },
+        "description": "Lead demand for industrial batteries (motive applications) — Global",
+        "note": "Use as fallback if forklift sales/fleet data unavailable"
+      }
+    },
+    
+    "Lead_Annual_Implied_Demand-Industrial_batteries_stationary_Global": {
+      "entity": "Industrial_Batteries_Stationary",
+      "region": "Global",
+      "level_name": "subproduct",
+      "usage_type": "fallback",
+      "calculation_method": "aggregate",
+      "metadata": {
+        "type": "forecasted_or_implied",
+        "tags": {
+          "category": "demand",
+          "entity_type": "subproduct",
+          "subcategory": "stationary"
+        },
+        "description": "Lead demand for industrial batteries (stationary applications) — Global",
+        "note": "Use as fallback if UPS MWh data unavailable"
+      }
+    },
+    
+    "Lead_Annual_Implied_Demand-Non-battery_uses_Global": {
+      "entity": "Other_Uses",
+      "region": "Global",
+      "level_name": "category",
+      "usage_type": "primary",
+      "calculation_method": "direct",
+      "metadata": {
+        "type": "forecasted_or_implied",
+        "tags": {
+          "category": "demand",
+          "entity_type": "market",
+          "subcategory": "non_battery"
+        },
+        "description": "Lead demand for non-battery uses — Global",
+        "note": "Recommended primary method for Other Uses (~15% of total demand)"
+      }
+    },
+    
+    "Lead_Cost_Global": {
+      "entity": "Lead",
+      "region": "Global",
+      "level_name": "market",
+      "usage_type": "driver",
+      "metadata": {
+        "type": "price_series",
+        "tags": {
+          "category": "cost",
+          "entity_type": "market",
+          "subcategory": "price"
+        },
+        "description": "Global lead market price series (LME)",
+        "note": "Can be used for econometric modeling of Other Uses or price sensitivity analysis"
+      }
+    },
+    
+    "Lead_Annual_Implied_Demand-Sales_2_wheelers_Global": {
+      "entity": "SLI_TwoWheelers_OEM",
+      "region": "Global",
+      "level_name": "subproduct",
+      "usage_type": "validation",
+      "calculation_method": "direct",
+      "related_bottom_up_inputs": ["Two_Wheeler_(ICE)_Annual_Sales_Global", "Two_Wheeler_(EV)_Annual_Sales_Global"],
+      "metadata": {
+        "type": "forecasted_or_implied",
+        "tags": {
+          "category": "demand",
+          "entity_type": "subproduct",
+          "subcategory": "sli_oem_2w"
+        },
+        "description": "Lead demand for two-wheeler OEM battery sales — Global",
+        "note": "Use for validation of bottom-up calculation"
+      }
+    },
+    
+    "Lead_Annual_Implied_Demand-Vehicle_replacement_2_wheelers_Global": {
+      "entity": "SLI_TwoWheelers_Replacement",
+      "region": "Global",
+      "level_name": "subproduct",
+      "usage_type": "validation",
+      "calculation_method": "direct",
+      "related_bottom_up_inputs": ["Two_Wheeler_(ICE)_Total_Fleet_Global", "Two_Wheeler_(EV)_Total_Fleet_Global"],
+      "metadata": {
+        "type": "forecasted_or_implied",
+        "tags": {
+          "category": "demand",
+          "entity_type": "subproduct",
+          "subcategory": "sli_replacement_2w"
+        },
+        "description": "Lead demand for two-wheeler replacement batteries — Global",
+        "note": "Use for validation of bottom-up calculation"
+      }
+    },
+    
+    "Lead_Annual_Implied_Demand-Sales_3_wheelers_Global": {
+      "entity": "SLI_ThreeWheelers_OEM",
+      "region": "Global",
+      "level_name": "subproduct",
+      "usage_type": "validation",
+      "calculation_method": "direct",
+      "related_bottom_up_inputs": ["Three_Wheeler_(ICE)_Annual_Sales_Global", "Three_Wheeler_(EV)_Annual_Sales_Global"],
+      "metadata": {
+        "type": "forecasted_or_implied",
+        "tags": {
+          "category": "demand",
+          "entity_type": "subproduct",
+          "subcategory": "sli_oem_3w"
+        },
+        "description": "Lead demand for three-wheeler OEM battery sales — Global"
+      }
+    },
+    
+    "Lead_Annual_Implied_Demand-Vehicle_replacement_3_wheelers_Global": {
+      "entity": "SLI_ThreeWheelers_Replacement",
+      "region": "Global",
+      "level_name": "subproduct",
+      "usage_type": "validation",
+      "calculation_method": "direct",
+      "related_bottom_up_inputs": ["Three_Wheeler_(ICE)_Total_Fleet_Global", "Three_Wheeler_(EV)_Total_Fleet_Global"],
+      "metadata": {
+        "type": "forecasted_or_implied",
+        "tags": {
+          "category": "demand",
+          "entity_type": "subproduct",
+          "subcategory": "sli_replacement_3w"
+        },
+        "description": "Lead demand for three-wheeler replacement batteries — Global"
+      }
+    },
+    
+    "Lead_Annual_Implied_Demand-Sales_Cars_Global": {
+      "entity": "SLI_PassengerCars_OEM",
+      "region": "Global",
+      "level_name": "subproduct",
+      "usage_type": "validation",
+      "calculation_method": "direct",
+      "related_bottom_up_inputs": ["Passenger_Vehicle_(ICE)_Annual_Sales_Global", "Passenger_Vehicle_(BEV)_Annual_Sales_Global", "Passenger_Vehicle_(PHEV)_Annual_Sales_Global"],
+      "metadata": {
+        "type": "forecasted_or_implied",
+        "tags": {
+          "category": "demand",
+          "entity_type": "subproduct",
+          "subcategory": "sli_oem_cars"
+        },
+        "description": "Lead demand for passenger car OEM battery sales — Global",
+        "note": "Largest component of SLI demand; use for coefficient calibration"
+      }
+    },
+    
+    "Lead_Annual_Implied_Demand-Vehicle_replacement_Cars_Global": {
+      "entity": "SLI_PassengerCars_Replacement",
+      "region": "Global",
+      "level_name": "subproduct",
+      "usage_type": "validation",
+      "calculation_method": "direct",
+      "related_bottom_up_inputs": ["Passenger_Vehicle_(ICE)_Total_Fleet_Global", "Passenger_Vehicle_(BEV)_Total_Fleet_Global", "Passenger_Vehicle_(PHEV)_Total_Fleet_Global"],
+      "metadata": {
+        "type": "forecasted_or_implied",
+        "tags": {
+          "category": "demand",
+          "entity_type": "subproduct",
+          "subcategory": "sli_replacement_cars"
+        },
+        "description": "Lead demand for passenger car replacement batteries — Global",
+        "note": "Replacement typically dominates over OEM in steady-state markets"
+      }
+    },
+    
+    "Three_Wheeler_Annual_Sales_Global": {
+      "entity": "Three_Wheeler",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "primary_input",
+      "calculation_method": "bottom_up",
+      "role": "sales",
+      "metadata": {
+        "type": "adoption",
+        "tags": {
+          "category": "sales",
+          "entity_type": "vehicle",
+          "subcategory": "three_wheeler_total"
+        },
+        "description": "Annual sales of all three-wheelers (ICE + EV) — Global",
+        "note": "Aggregate of ICE and EV sales"
+      }
+    },
+    
+    "Three_Wheeler_(EV)_Annual_Sales_Global": {
+      "entity": "Three_Wheeler_EV",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "primary_input",
+      "calculation_method": "bottom_up",
+      "role": "sales",
+      "metadata": {
+        "type": "adoption",
+        "tags": {
+          "category": "sales",
+          "entity_type": "vehicle",
+          "subcategory": "three_wheeler_ev"
+        },
+        "description": "Annual sales of electric three-wheelers — Global",
+        "note": "Use smaller lead coefficient than ICE (typically 50-70% of ICE)"
+      }
+    },
+    
+    "Three_Wheeler_(EV)_Total_Fleet_Global": {
+      "entity": "Three_Wheeler_EV",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "primary_input",
+      "calculation_method": "bottom_up",
+      "role": "installed_base",
+      "metadata": {
+        "type": "installed_base",
+        "tags": {
+          "category": "stock",
+          "entity_type": "vehicle",
+          "subcategory": "three_wheeler_ev_fleet"
+        },
+        "description": "Total fleet (installed base) of electric three-wheelers — Global",
+        "note": "Used for replacement demand calculation: IB / battery_lifetime × coefficient"
+      }
+    },
+    
+    "Three_Wheeler_(ICE)_Annual_Sales_Global": {
+      "entity": "Three_Wheeler_ICE",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "primary_input",
+      "calculation_method": "bottom_up",
+      "role": "sales",
+      "metadata": {
+        "type": "adoption",
+        "tags": {
+          "category": "sales",
+          "entity_type": "vehicle",
+          "subcategory": "three_wheeler_ice"
+        },
+        "description": "Annual sales of ICE three-wheelers — Global",
+        "note": "Use standard lead coefficient (~7 kg/unit)"
+      }
+    },
+    
+    "Three_Wheeler_(ICE)_Total_Fleet_Global": {
+      "entity": "Three_Wheeler_ICE",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "primary_input",
+      "calculation_method": "bottom_up",
+      "role": "installed_base",
+      "metadata": {
+        "type": "installed_base",
+        "tags": {
+          "category": "stock",
+          "entity_type": "vehicle",
+          "subcategory": "three_wheeler_ice_fleet"
+        },
+        "description": "Total fleet (installed base) of ICE three-wheelers — Global"
+      }
+    },
+    
+    "Two_Wheeler_Annual_Sales_Global": {
+      "entity": "Two_Wheeler",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "primary_input",
+      "calculation_method": "bottom_up",
+      "role": "sales",
+      "metadata": {
+        "type": "adoption",
+        "tags": {
+          "category": "sales",
+          "entity_type": "vehicle",
+          "subcategory": "two_wheeler_total"
+        },
+        "description": "Annual sales of all two-wheelers (ICE + EV) — Global",
+        "note": "Aggregate of ICE and EV sales"
+      }
+    },
+    
+    "Two_Wheeler_(EV)_Annual_Sales_Global": {
+      "entity": "Two_Wheeler_EV",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "primary_input",
+      "calculation_method": "bottom_up",
+      "role": "sales",
+      "metadata": {
+        "type": "adoption",
+        "tags": {
+          "category": "sales",
+          "entity_type": "vehicle",
+          "subcategory": "two_wheeler_ev"
+        },
+        "description": "Annual sales of electric two-wheelers — Global",
+        "note": "Growing segment especially in Asia; use reduced lead coefficient"
+      }
+    },
+    
+    "Two_Wheeler_(EV)_Total_Fleet_Global": {
+      "entity": "Two_Wheeler_EV",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "primary_input",
+      "calculation_method": "bottom_up",
+      "role": "installed_base",
+      "metadata": {
+        "type": "installed_base",
+        "tags": {
+          "category": "stock",
+          "entity_type": "vehicle",
+          "subcategory": "two_wheeler_ev_fleet"
+        },
+        "description": "Total fleet (installed base) of electric two-wheelers — Global"
+      }
+    },
+    
+    "Two_Wheeler_(ICE)_Annual_Sales_Global": {
+      "entity": "Two_Wheeler_ICE",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "primary_input",
+      "calculation_method": "bottom_up",
+      "role": "sales",
+      "metadata": {
+        "type": "adoption",
+        "tags": {
+          "category": "sales",
+          "entity_type": "vehicle",
+          "subcategory": "two_wheeler_ice"
+        },
+        "description": "Annual sales of ICE two-wheelers — Global",
+        "note": "Use standard lead coefficient (~2.5 kg/unit)"
+      }
+    },
+    
+    "Two_Wheeler_(ICE)_Total_Fleet_Global": {
+      "entity": "Two_Wheeler_ICE",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "primary_input",
+      "calculation_method": "bottom_up",
+      "role": "installed_base",
+      "metadata": {
+        "type": "installed_base",
+        "tags": {
+          "category": "stock",
+          "entity_type": "vehicle",
+          "subcategory": "two_wheeler_ice_fleet"
+        },
+        "description": "Total fleet (installed base) of ICE two-wheelers — Global"
+      }
+    },
+    
+    "Passenger_Vehicle_Annual_Sales_Global": {
+      "entity": "Passenger_Vehicle",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "primary_input",
+      "calculation_method": "bottom_up",
+      "role": "sales",
+      "metadata": {
+        "type": "adoption",
+        "tags": {
+          "category": "sales",
+          "entity_type": "vehicle",
+          "subcategory": "passenger_car_total"
+        },
+        "description": "Annual sales of all passenger vehicles (ICE + BEV + PHEV) — Global",
+        "note": "Aggregate; use powertrain-specific datasets for detailed modeling"
+      }
+    },
+    
+    "Passenger_Vehicle_(BEV)_Annual_Sales_Global": {
+      "entity": "Passenger_Vehicle_BEV",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "primary_input",
+      "calculation_method": "bottom_up",
+      "role": "sales",
+      "metadata": {
+        "type": "adoption",
+        "tags": {
+          "category": "sales",
+          "entity_type": "vehicle",
+          "subcategory": "passenger_car_bev"
+        },
+        "description": "Annual sales of battery electric passenger vehicles — Global",
+        "note": "BEVs use smaller 12V auxiliary lead-acid batteries (~8-10 kg vs ~12-15 kg for ICE)"
+      }
+    },
+    
+    "Passenger_Vehicle_(BEV)_Total_Fleet_Global": {
+      "entity": "Passenger_Vehicle_BEV",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "primary_input",
+      "calculation_method": "bottom_up",
+      "role": "installed_base",
+      "metadata": {
+        "type": "installed_base",
+        "tags": {
+          "category": "stock",
+          "entity_type": "vehicle",
+          "subcategory": "passenger_car_bev_fleet"
+        },
+        "description": "Total fleet (installed base) of BEV passenger vehicles — Global"
+      }
+    },
+    
+    "Passenger_Vehicle_(EV)_Annual_Sales_Global": {
+      "entity": "Passenger_Vehicle_EV",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "secondary_input",
+      "calculation_method": "bottom_up",
+      "role": "sales",
+      "metadata": {
+        "type": "adoption",
+        "tags": {
+          "category": "sales",
+          "entity_type": "vehicle",
+          "subcategory": "passenger_car_ev_aggregate"
+        },
+        "description": "Annual sales of electric passenger vehicles (may include BEV + PHEV) — Global",
+        "note": "WARNING: May overlap with BEV and PHEV datasets; verify scope to avoid double-counting"
+      }
+    },
+    
+    "Passenger_Vehicle_(ICE)_Annual_Sales_Global": {
+      "entity": "Passenger_Vehicle_ICE",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "primary_input",
+      "calculation_method": "bottom_up",
+      "role": "sales",
+      "metadata": {
+        "type": "adoption",
+        "tags": {
+          "category": "sales",
+          "entity_type": "vehicle",
+          "subcategory": "passenger_car_ice"
+        },
+        "description": "Annual sales of ICE passenger vehicles — Global",
+        "note": "Largest segment but declining; use standard lead coefficient (~11.5 kg/unit)"
+      }
+    },
+    
+    "Passenger_Vehicle_(ICE)_Total_Fleet_Global": {
+      "entity": "Passenger_Vehicle_ICE",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "primary_input",
+      "calculation_method": "bottom_up",
+      "role": "installed_base",
+      "metadata": {
+        "type": "installed_base",
+        "tags": {
+          "category": "stock",
+          "entity_type": "vehicle",
+          "subcategory": "passenger_car_ice_fleet"
+        },
+        "description": "Total fleet (installed base) of ICE passenger vehicles — Global"
+      }
+    },
+    
+    "Passenger_Vehicle_(PHEV)_Annual_Lead_Implied_Demand_Global": {
+      "entity": "Passenger_Vehicle_PHEV",
+      "region": "Global",
+      "level_name": "subproduct",
+      "usage_type": "validation",
+      "calculation_method": "direct",
+      "metadata": {
+        "type": "forecasted_or_implied",
+        "tags": {
+          "category": "demand",
+          "entity_type": "subproduct",
+          "subcategory": "sli_phev_direct"
+        },
+        "description": "Pre-calculated annual lead demand for PHEV batteries — Global",
+        "note": "Use for validation of bottom-up PHEV calculation"
+      }
+    },
+    
+    "Passenger_Vehicle_(PHEV)_Annual_Sales_Global": {
+      "entity": "Passenger_Vehicle_PHEV",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "primary_input",
+      "calculation_method": "bottom_up",
+      "role": "sales",
+      "metadata": {
+        "type": "adoption",
+        "tags": {
+          "category": "sales",
+          "entity_type": "vehicle",
+          "subcategory": "passenger_car_phev"
+        },
+        "description": "Annual sales of plug-in hybrid passenger vehicles — Global",
+        "note": "Use PHEV-specific lead coefficient dataset"
+      }
+    },
+    
+    "Passenger_Vehicle_(PHEV)_Average_lead_content_Global": {
+      "entity": "Passenger_Vehicle_PHEV",
+      "region": "Global",
+      "level_name": "parameter",
+      "usage_type": "coefficient",
+      "calculation_method": "bottom_up",
+      "role": "parameter",
+      "metadata": {
+        "type": "parameter",
+        "tags": {
+          "category": "coefficient",
+          "entity_type": "parameter",
+          "subcategory": "lead_content_kg_per_unit"
+        },
+        "description": "Average lead content per PHEV passenger vehicle (kg/unit) — Global",
+        "note": "Use this coefficient for PHEV calculations; may differ from pure ICE or BEV"
+      }
+    },
+    
+    "Passenger_Vehicle_(PHEV)_Total_Fleet_Global": {
+      "entity": "Passenger_Vehicle_PHEV",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "primary_input",
+      "calculation_method": "bottom_up",
+      "role": "installed_base",
+      "metadata": {
+        "type": "installed_base",
+        "tags": {
+          "category": "stock",
+          "entity_type": "vehicle",
+          "subcategory": "passenger_car_phev_fleet"
+        },
+        "description": "Total fleet (installed base) of PHEV passenger vehicles — Global"
+      }
+    },
+    
+    "Commercial_Vehicle_Annual_Sales_Global": {
+      "entity": "Commercial_Vehicle",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "primary_input",
+      "calculation_method": "bottom_up",
+      "role": "sales",
+      "metadata": {
+        "type": "adoption",
+        "tags": {
+          "category": "sales",
+          "entity_type": "vehicle",
+          "subcategory": "commercial_vehicle_total"
+        },
+        "description": "Annual sales of all commercial vehicles (ICE + EV + NGV) — Global",
+        "note": "Aggregate; use powertrain-specific datasets for detailed modeling"
+      }
+    },
+    
+    "Commercial_Vehicle_(EV)_Annual_Sales_Global": {
+      "entity": "Commercial_Vehicle_EV",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "primary_input",
+      "calculation_method": "bottom_up",
+      "role": "sales",
+      "metadata": {
+        "type": "adoption",
+        "tags": {
+          "category": "sales",
+          "entity_type": "vehicle",
+          "subcategory": "commercial_vehicle_ev"
+        },
+        "description": "Annual sales of electric commercial vehicles — Global",
+        "note": "EVs use smaller 12V auxiliary batteries for starting/control systems"
+      }
+    },
+    
+    "Commercial_Vehicle_(EV)_Total_Fleet_Global": {
+      "entity": "Commercial_Vehicle_EV",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "primary_input",
+      "calculation_method": "bottom_up",
+      "role": "installed_base",
+      "metadata": {
+        "type": "installed_base",
+        "tags": {
+          "category": "stock",
+          "entity_type": "vehicle",
+          "subcategory": "commercial_vehicle_ev_fleet"
+        },
+        "description": "Total fleet (installed base) of electric commercial vehicles — Global"
+      }
+    },
+    
+    "Commercial_Vehicle_(ICE)_Annual_Sales_Global": {
+      "entity": "Commercial_Vehicle_ICE",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "primary_input",
+      "calculation_method": "bottom_up",
+      "role": "sales",
+      "metadata": {
+        "type": "adoption",
+        "tags": {
+          "category": "sales",
+          "entity_type": "vehicle",
+          "subcategory": "commercial_vehicle_ice"
+        },
+        "description": "Annual sales of ICE commercial vehicles — Global",
+        "note": "Use standard CV lead coefficient (~22 kg/unit); largest component of CV segment"
+      }
+    },
+    
+    "Commercial_Vehicle_(ICE)_Total_Fleet_Global": {
+      "entity": "Commercial_Vehicle_ICE",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "primary_input",
+      "calculation_method": "bottom_up",
+      "role": "installed_base",
+      "metadata": {
+        "type": "installed_base",
+        "tags": {
+          "category": "stock",
+          "entity_type": "vehicle",
+          "subcategory": "commercial_vehicle_ice_fleet"
+        },
+        "description": "Total fleet (installed base) of ICE commercial vehicles — Global"
+      }
+    },
+    
+    "Commercial_Vehicle_(NGV)_Annual_Sales_Global": {
+      "entity": "Commercial_Vehicle_NGV",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "primary_input",
+      "calculation_method": "bottom_up",
+      "role": "sales",
+      "metadata": {
+        "type": "adoption",
+        "tags": {
+          "category": "sales",
+          "entity_type": "vehicle",
+          "subcategory": "commercial_vehicle_ngv"
+        },
+        "description": "Annual sales of natural gas commercial vehicles (CNG/LNG) — Global",
+        "note": "NGVs use lead-acid SLI batteries similar to diesel/petrol CVs; apply same coefficient as ICE (~22 kg/unit)"
+      }
+    },
+    
+    "Commercial_Vehicle_(NGV)_Total_Fleet_Global": {
+      "entity": "Commercial_Vehicle_NGV",
+      "region": "Global",
+      "level_name": "driver",
+      "usage_type": "primary_input",
+      "calculation_method": "bottom_up",
+      "role": "installed_base",
+      "metadata": {
+        "type": "installed_base",
+        "tags": {
+          "category": "stock",
+          "entity_type": "vehicle",
+          "subcategory": "commercial_vehicle_ngv_fleet"
+        },
+        "description": "Total fleet (installed base) of natural gas commercial vehicles — Global",
+        "note": "Growing segment in regions with CNG/LNG infrastructure (India, China, etc.)"
+      }
+    }
+  },
+  
+  "dataset_relationships": {
+    "description": "Maps how driver datasets (sales, fleet) relate to demand outputs",
+    
+    "sli_passenger_cars": {
+      "demand_outputs": {
+        "oem": "Lead_Annual_Implied_Demand-Sales_Cars_Global",
+        "replacement": "Lead_Annual_Implied_Demand-Vehicle_replacement_Cars_Global"
+      },
+      "driver_inputs": {
+        "sales": [
+          "Passenger_Vehicle_(ICE)_Annual_Sales_Global",
+          "Passenger_Vehicle_(BEV)_Annual_Sales_Global",
+          "Passenger_Vehicle_(PHEV)_Annual_Sales_Global"
+        ],
+        "fleet": [
+          "Passenger_Vehicle_(ICE)_Total_Fleet_Global",
+          "Passenger_Vehicle_(BEV)_Total_Fleet_Global",
+          "Passenger_Vehicle_(PHEV)_Total_Fleet_Global"
+        ],
+        "coefficients": [
+          "Passenger_Vehicle_(PHEV)_Average_lead_content_Global"
+        ],
+        "validation": [
+          "Passenger_Vehicle_(PHEV)_Annual_Lead_Implied_Demand_Global"
+        ]
+      },
+      "calculation_formula": {
+        "oem": "SUM(Sales_by_powertrain × coefficient_by_powertrain)",
+        "replacement": "SUM((Fleet_by_powertrain / battery_lifetime) × coefficient_by_powertrain)"
+      },
+      "note": "Largest SLI segment; use for coefficient calibration and validation"
+    },
+    
+    "sli_two_wheelers": {
+      "demand_outputs": {
+        "oem": "Lead_Annual_Implied_Demand-Sales_2_wheelers_Global",
+        "replacement": "Lead_Annual_Implied_Demand-Vehicle_replacement_2_wheelers_Global"
+      },
+      "driver_inputs": {
+        "sales": [
+          "Two_Wheeler_(ICE)_Annual_Sales_Global",
+          "Two_Wheeler_(EV)_Annual_Sales_Global"
+        ],
+        "fleet": [
+          "Two_Wheeler_(ICE)_Total_Fleet_Global",
+          "Two_Wheeler_(EV)_Total_Fleet_Global"
+        ]
+      },
+      "calculation_formula": {
+        "oem": "Sales_ICE × k_2W_ICE + Sales_EV × k_2W_EV",
+        "replacement": "(Fleet_ICE / life_batt) × k_2W_ICE + (Fleet_EV / life_batt) × k_2W_EV"
+      }
+    },
+    
+    "sli_three_wheelers": {
+      "demand_outputs": {
+        "oem": "Lead_Annual_Implied_Demand-Sales_3_wheelers_Global",
+        "replacement": "Lead_Annual_Implied_Demand-Vehicle_replacement_3_wheelers_Global"
+      },
+      "driver_inputs": {
+        "sales": [
+          "Three_Wheeler_(ICE)_Annual_Sales_Global",
+          "Three_Wheeler_(EV)_Annual_Sales_Global"
+        ],
+        "fleet": [
+          "Three_Wheeler_(ICE)_Total_Fleet_Global",
+          "Three_Wheeler_(EV)_Total_Fleet_Global"
+        ]
+      },
+      "calculation_formula": {
+        "oem": "Sales_ICE × k_3W_ICE + Sales_EV × k_3W_EV",
+        "replacement": "(Fleet_ICE / life_batt) × k_3W_ICE + (Fleet_EV / life_batt) × k_3W_EV"
+      }
+    },
+    
+    "sli_commercial_vehicles": {
+      "demand_outputs": {
+        "oem": null,
+        "replacement": null,
+        "note": "No direct demand datasets available for CVs; must use bottom-up calculation"
+      },
+      "driver_inputs": {
+        "sales": [
+          "Commercial_Vehicle_(ICE)_Annual_Sales_Global",
+          "Commercial_Vehicle_(EV)_Annual_Sales_Global",
+          "Commercial_Vehicle_(NGV)_Annual_Sales_Global"
+        ],
+        "fleet": [
+          "Commercial_Vehicle_(ICE)_Total_Fleet_Global",
+          "Commercial_Vehicle_(EV)_Total_Fleet_Global",
+          "Commercial_Vehicle_(NGV)_Total_Fleet_Global"
+        ]
+      },
+      "calculation_formula": {
+        "oem": "Sales_ICE × k_CV_ICE + Sales_EV × k_CV_EV + Sales_NGV × k_CV_NGV",
+        "replacement": "(Fleet_ICE / life_batt) × k_CV_ICE + (Fleet_EV / life_batt) × k_CV_EV + (Fleet_NGV / life_batt) × k_CV_NGV"
+      },
+      "note": "NGV uses same coefficient as ICE unless specific data indicates otherwise"
+    },
+    
+    "industrial_motive": {
+      "demand_outputs": {
+        "aggregate": "Lead_Annual_Implied_Demand-Industrial_batteries_motive_power_Global"
+      },
+      "driver_inputs": {
+        "bottom_up": "Not available (forklift sales/fleet datasets missing)"
+      },
+      "calculation_approach": "Use aggregate demand dataset as fallback",
+      "note": "Bottom-up calculation requires forklift sales, fleet, and coefficient data"
+    },
+    
+    "industrial_stationary": {
+      "demand_outputs": {
+        "aggregate": "Lead_Annual_Implied_Demand-Industrial_batteries_stationary_Global"
+      },
+      "driver_inputs": {
+        "bottom_up": "Not available (UPS MWh datasets missing)"
+      },
+      "calculation_approach": "Use aggregate demand dataset as fallback",
+      "note": "Bottom-up calculation requires UPS installed MWh, fleet, and coefficient data"
+    },
+    
+    "other_uses": {
+      "demand_outputs": {
+        "direct": "Lead_Annual_Implied_Demand-Non-battery_uses_Global"
+      },
+      "driver_inputs": {
+        "price": "Lead_Cost_Global",
+        "macro": "IPI, GDP (if available)"
+      },
+      "calculation_approach": "Recommended: use direct dataset; Alternative: econometric model if macro drivers available",
+      "note": "~15% of total demand; relatively stable over time"
+    }
+  },
+  
+  "data_availability_status": {
+    "fully_available": {
+      "description": "Complete data for bottom-up calculation AND validation",
+      "segments": [
+        "SLI_Passenger_Cars",
+        "SLI_Two_Wheelers",
+        "SLI_Three_Wheelers",
+        "SLI_Commercial_Vehicles"
+      ],
+      "note": "CVs have sales/fleet data but no direct demand validation datasets"
+    },
+    
+    "partially_available": {
+      "description": "Aggregate demand available but missing bottom-up drivers",
+      "segments": [
+        "Industrial_Motive",
+        "Industrial_Stationary",
+        "Other_Uses"
+      ],
+      "fallback_strategy": "Use aggregate demand datasets directly"
+    },
+    
+    "missing_details": {
+      "Industrial_Motive": {
+        "available": ["Lead_Annual_Implied_Demand-Industrial_batteries_motive_power_Global"],
+        "missing": [
+          "Electric forklift sales (units/year)",
+          "Electric forklift fleet (units)",
+          "Forklift lead coefficient (kg/unit)"
+        ],
+        "impact": "Cannot perform bottom-up calculation; must use aggregate"
+      },
+      "Industrial_Stationary": {
+        "available": ["Lead_Annual_Implied_Demand-Industrial_batteries_stationary_Global"],
+        "missing": [
+          "New UPS installed capacity (MWh/year)",
+          "UPS installed base (MWh)",
+          "UPS lead coefficient (kg/MWh)"
+        ],
+        "impact": "Cannot perform bottom-up calculation; must use aggregate"
+      },
+      "Other_Uses": {
+        "available": [
+          "Lead_Cost_Global",
+          "Lead_Annual_Implied_Demand-Non-battery_uses_Global"
+        ],
+        "missing": [
+          "Global Industrial Production Index (IPI)",
+          "Global GDP time series"
+        ],
+        "impact": "Cannot perform full econometric model; use direct dataset or simplified price-trend model"
+      },
+      "Commercial_Vehicles_Validation": {
+        "available": [
+          "Commercial_Vehicle_(ICE)_Annual_Sales_Global",
+          "Commercial_Vehicle_(EV)_Annual_Sales_Global",
+          "Commercial_Vehicle_(NGV)_Annual_Sales_Global",
+          "Commercial_Vehicle_(ICE)_Total_Fleet_Global",
+          "Commercial_Vehicle_(EV)_Total_Fleet_Global",
+          "Commercial_Vehicle_(NGV)_Total_Fleet_Global"
+        ],
+        "missing": [
+          "Lead_Annual_Implied_Demand-Sales_CV_Global",
+          "Lead_Annual_Implied_Demand-Vehicle_replacement_CV_Global"
+        ],
+        "impact": "Can perform bottom-up calculation but no direct validation; use Cars validation as proxy"
+      }
+    }
+  },
+  
+  "special_notes": {
+    "ngv_treatment": {
+      "description": "Natural Gas Vehicles (NGV) in commercial vehicle segment use lead-acid SLI batteries similar to ICE vehicles",
+      "coefficient_approach": "Use same k_CV coefficient as ICE (default: 22.0 kg/unit) unless specific data indicates otherwise",
+      "affected_datasets": [
+        "Commercial_Vehicle_(NGV)_Annual_Sales_Global",
+        "Commercial_Vehicle_(NGV)_Total_Fleet_Global"
+      ],
+      "geographic_relevance": "Significant in regions with CNG/LNG infrastructure (India, China, parts of Europe and South America)"
+    },
+    
+    "ev_lead_content": {
+      "description": "BEV/EV vehicles use smaller 12V auxiliary lead-acid batteries compared to ICE",
+      "coefficient_approach": "Either use separate k_EV coefficient (8-10 kg for cars, 1.5-2.5 kg for 2W, 4-6 kg for 3W, 15-20 kg for CV) OR scale ICE coefficient (k_EV = 0.6-0.7 × k_ICE)",
+      "requires_validation": true,
+      "impact_on_demand": "Increasing EV share reduces total lead demand; monitor blended coefficient trend over time"
+    },
+    
+    "phev_special_handling": {
+      "description": "PHEV has dedicated lead content coefficient dataset and pre-calculated demand",
+      "primary_source": "Passenger_Vehicle_(PHEV)_Average_lead_content_Global",
+      "validation_source": "Passenger_Vehicle_(PHEV)_Annual_Lead_Implied_Demand_Global",
+      "calculation_approach": "Use coefficient dataset in bottom-up calculation; validate result against pre-calculated demand"
+    },
+    
+    "passenger_vehicle_ev_ambiguity": {
+      "description": "Passenger_Vehicle_(EV)_Annual_Sales_Global may include both BEV and PHEV",
+      "risk": "Potential double-counting if used alongside separate BEV and PHEV datasets",
+      "recommendation": "Verify dataset scope; prefer using BEV and PHEV datasets separately for clarity",
+      "action": "Cross-check: EV_sales ≈ BEV_sales + PHEV_sales"
+    },
+    
+    "validation_approach": {
+      "description": "How to use direct demand datasets for validation",
+      "method": "Calculate bottom-up demand from sales/fleet × coefficients; compare with direct demand datasets",
+      "acceptable_variance": "< 10% difference is acceptable; > 10% requires investigation",
+      "calibration_priority": "Calibrate coefficients using Cars data first (largest segment), then apply similar logic to 2W, 3W, CV",
+      "use_case": "Direct demand datasets serve as validation checkpoints, not primary calculation method"
+    }
+  },
+  
+  "calculation_priorities": {
+    "recommended_approach": {
+      "SLI_segments": "Bottom-up (primary) with direct demand validation",
+      "Industrial_segments": "Use aggregate demand datasets (fallback due to missing bottom-up data)",
+      "Other_Uses": "Use direct demand dataset (recommended); econometric model if sensitivity analysis needed"
+    },
+    
+    "coefficient_calibration_order": [
+      "1. Passenger Cars (largest segment, best validation data)",
+      "2. Commercial Vehicles (second largest, no direct validation)",
+      "3. Two-Wheelers (good validation data)",
+      "4. Three-Wheelers (smallest segment, good validation data)"
+    ],
+    
+    "data_quality_priorities": [
+      "1. Ensure ICE fleet data is consistent with historical sales and scrappage",
+      "2. Verify EV/BEV/PHEV datasets don't double-count",
+      "3. Check NGV data completeness (may be sparse in some regions)",
+      "4. Validate that aggregate sales = sum of powertrain-specific sales",
+      "5. Ensure fleet data starting point is reasonable (warm-up period may be needed)"
+    ]
+  }
+}
+
