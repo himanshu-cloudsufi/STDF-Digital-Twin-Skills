@@ -33,7 +33,7 @@ const InputArea = () => {
 
     // Send to server
     socket.emit('message', {
-      message: message,
+      content: message,  // Changed from 'message' to 'content' to match backend
       session_id: sessionId
     });
 

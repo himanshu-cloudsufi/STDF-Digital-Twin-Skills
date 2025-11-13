@@ -18,8 +18,11 @@ logger = logging.getLogger(__name__)
 class SessionDatabase:
     """Manages SQLite database for session persistence"""
 
-    def __init__(self, db_path: str = "sessions.db"):
+    def __init__(self, db_path: str = None):
         """Initialize database connection and create tables if needed"""
+        if db_path is None:
+            # Default to data/sessions.db relative to this file's location
+            db_path = Path(__file__).parent / "data" / "sessions.db"
         self.db_path = Path(db_path)
         self.local = threading.local()
         self._init_database()

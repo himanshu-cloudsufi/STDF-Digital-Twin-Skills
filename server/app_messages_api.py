@@ -17,8 +17,9 @@ import anthropic
 import logging
 from database import SessionDatabase
 
-# Load environment variables
-load_dotenv()
+# Load environment variables from server directory
+env_path = Path(__file__).parent / '.env'
+load_dotenv(dotenv_path=env_path)
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -41,7 +42,7 @@ anthropic_client = anthropic.Anthropic()
 # Load system prompt from external file
 def load_system_prompt():
     """Load system prompt from external file."""
-    prompt_path = Path(__file__).parent / 'system_prompt.txt'
+    prompt_path = Path(__file__).parent / 'prompts' / 'system_prompt.txt'
     try:
         with open(prompt_path, 'r', encoding='utf-8') as f:
             return f.read()
@@ -171,7 +172,7 @@ def handle_message(data):
     """Handle incoming chat messages from client"""
     logger.info(f"[INCOMING] Raw data received: {data}")
 
-    user_message = data.get('message', '').strip()
+    user_message = data.get('content', '').strip()  # Changed from 'message' to 'content'
     session_id = data.get('session_id')
 
     # Auto-create session if none provided
@@ -366,11 +367,9 @@ def stream_response_sync(client, messages, container, model, session_id):
 
                         # Emit block start event to frontend
                         socketio.emit('content_block_start', {
-                            'index': block_index,
                             'type': block_type,
-                            'tool_name': content_blocks[block_index]['tool_name'],
-                            'tool_id': content_blocks[block_index]['tool_id'],
-                            'session_id': session_id
+                            'id': content_blocks[block_index]['tool_id'] or f"block_{block_index}",
+                            'name': content_blocks[block_index]['tool_name']
                         })
 
                     elif event.type == "content_block_delta":
@@ -391,8 +390,7 @@ def stream_response_sync(client, messages, container, model, session_id):
 
                             # Stream text chunk to client (existing behavior)
                             socketio.emit('assistant_chunk', {
-                                'text': text,
-                                'index': block_index,
+                                'content': text,
                                 'session_id': session_id
                             })
 
@@ -405,11 +403,8 @@ def stream_response_sync(client, messages, container, model, session_id):
 
                             # Emit tool input delta to frontend
                             socketio.emit('tool_input_delta', {
-                                'index': block_index,
-                                'partial_json': json_chunk,
-                                'accumulated_json': block_info['accumulated_json'],
-                                'tool_name': block_info['tool_name'],
-                                'session_id': session_id
+                                'id': block_info['tool_id'] or f"block_{block_index}",
+                                'input': json_chunk
                             })
 
                         # Handle thinking delta
@@ -421,9 +416,8 @@ def stream_response_sync(client, messages, container, model, session_id):
 
                             # Emit thinking chunk to frontend
                             socketio.emit('thinking_chunk', {
-                                'index': block_index,
-                                'text': thinking_text,
-                                'session_id': session_id
+                                'id': block_info['tool_id'] or f"block_{block_index}",
+                                'content': thinking_text
                             })
 
                     elif event.type == "content_block_stop":
@@ -435,10 +429,7 @@ def stream_response_sync(client, messages, container, model, session_id):
 
                             # Emit block stop event to frontend
                             socketio.emit('content_block_stop', {
-                                'index': block_index,
-                                'type': block_info['type'],
-                                'accumulated_json': block_info['accumulated_json'],
-                                'session_id': session_id
+                                'id': block_info['tool_id'] or f"block_{block_index}"
                             })
 
                     elif event.type == "message_start":
@@ -519,7 +510,7 @@ def stream_response_sync(client, messages, container, model, session_id):
                                 logger.info(f"[TITLE GEN] Title auto-generated and saved: '{generated_title}'")
 
                                 # Notify frontend
-                                socketio.emit('session_title_updated', {
+                                socketio.emit('session_renamed', {
                                     'session_id': session_id,
                                     'title': generated_title
                                 })
@@ -668,8 +659,7 @@ def handle_resume_session(data):
         # Send session info and history to client
         emit('session_resumed', {
             'session_id': session_id,
-            'session_info': session_info,
-            'history': history
+            'messages': history
         })
 
         logger.info(f"[SESSION] Session {session_id} resumed successfully")
@@ -729,7 +719,7 @@ def handle_update_session_title(data):
         success = db.update_session_title(session_id, new_title)
 
         if success:
-            emit('session_title_updated', {
+            emit('session_renamed', {
                 'session_id': session_id,
                 'title': new_title
             })
