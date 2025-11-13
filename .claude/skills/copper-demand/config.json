@@ -1,0 +1,158 @@
+{
+  "skill_name": "copper-demand",
+  "version": "1.0.0",
+  "description": "Hybrid bottom-up + top-down copper demand forecasting",
+  "default_parameters": {
+    "start_year": 2020,
+    "end_year": 2045,
+    "smoothing_window": 3,
+    "force_reconciliation": true,
+    "confidence_tagging": true,
+    "scenario": "baseline"
+  },
+  "regions": ["China", "USA", "Europe", "Rest_of_World", "Global"],
+  "output_formats": ["csv", "json", "plot"],
+  "data_sources": {
+    "base_path": "data",
+    "copper": "Copper.json",
+    "passenger_cars": "Passenger_Cars.json",
+    "commercial_vehicles": "Commercial_Vehicle.json",
+    "two_wheelers": "Two_Wheeler.json",
+    "three_wheelers": "Three_Wheeler.json",
+    "energy_generation": "Energy_Generation.json"
+  },
+  "copper_coefficients": {
+    "automotive": {
+      "car_ice": 23.0,
+      "car_bev": 83.0,
+      "car_phev": 60.0,
+      "car_hev": 35.0,
+      "cv_ice": 35.0,
+      "cv_ev": 120.0,
+      "cv_ngv": 38.0,
+      "two_wheeler_ice": 3.0,
+      "two_wheeler_ev": 4.0,
+      "three_wheeler_ice": 4.0,
+      "three_wheeler_ev": 5.0
+    },
+    "grid_generation": {
+      "per_mw_wind_onshore": 6.0,
+      "per_mw_wind_offshore": 10.0,
+      "per_mw_solar_pv": 5.0,
+      "per_mw_gas_ccgt": 1.0,
+      "per_mw_coal": 1.0
+    },
+    "construction_reference": {
+      "sqm_blended_new": 4.5,
+      "sqm_blended_retrofit": 2.5
+    },
+    "grid_td_reference": {
+      "per_km_transmission": 7.0,
+      "per_km_distribution": 3.5,
+      "per_gw_transformer": 800.0
+    },
+    "industrial_reference": {
+      "per_mw_motor": 5.0
+    }
+  },
+  "segment_allocation": {
+    "electrical_segments": {
+      "construction_pct": 0.48,
+      "grid_pct": 0.35,
+      "industrial_pct": 0.17
+    },
+    "direct_shares": {
+      "electronics_pct": 0.11,
+      "other_uses_target_pct": 0.12
+    },
+    "other_uses_bounds": {
+      "min_pct": 0.08,
+      "max_pct": 0.18
+    }
+  },
+  "oem_replacement_splits": {
+    "construction_oem_pct": 0.65,
+    "grid_td_oem_pct": 0.70,
+    "industrial_oem_pct": 0.60
+  },
+  "lifespans": {
+    "component_replacement_years": {
+      "grid_refurb_cycle": 40.0,
+      "construction_retrofit_cycle": 25.0,
+      "industrial_motor": 18.0,
+      "transformer": 45.0
+    },
+    "asset_scrappage_years": {
+      "passenger_car": 18.0,
+      "commercial_vehicle": 20.0,
+      "two_wheeler": 12.0,
+      "three_wheeler": 10.0,
+      "building_shell": 70.0
+    }
+  },
+  "growth_proxies": {
+    "construction_electricity_elasticity": 0.7,
+    "industrial_electricity_elasticity": 0.8,
+    "electronics_annual_growth": 0.025,
+    "other_uses_annual_growth": 0.015,
+    "other_uses_price_elasticity": -0.15
+  },
+  "validation_rules": {
+    "share_tolerances": {
+      "transportation": 0.02,
+      "electrical": 0.05,
+      "ev": 0.03,
+      "renewables": 0.04
+    },
+    "growth_guards": {
+      "max_yoy_growth_pct": 50.0,
+      "max_yoy_decline_pct": -30.0
+    },
+    "smoothing": {
+      "bottom_up_window": 3,
+      "allocated_window": 5
+    }
+  },
+  "calculation_strategy": {
+    "automotive_method": "bottom_up_full",
+    "grid_generation_method": "bottom_up_partial",
+    "grid_td_method": "residual_allocation",
+    "construction_method": "share_allocation",
+    "industrial_method": "share_allocation",
+    "electronics_method": "fixed_share",
+    "other_uses_method": "residual_bounded"
+  },
+  "scenarios": {
+    "baseline": {
+      "description": "70-80% EV adoption, 15 TW renewables by 2045",
+      "ev_adoption_2045": 0.75,
+      "renewable_capacity_2045_tw": 15
+    },
+    "accelerated": {
+      "description": "90%+ EV, 20+ TW renewables",
+      "ev_adoption_2045": 0.92,
+      "renewable_capacity_2045_tw": 20,
+      "demand_multiplier": 1.25
+    },
+    "delayed": {
+      "description": "50-60% EV, 10-12 TW renewables",
+      "ev_adoption_2045": 0.55,
+      "renewable_capacity_2045_tw": 11,
+      "demand_multiplier": 0.85
+    },
+    "substitution": {
+      "description": "Base transition with aluminum substitution risk",
+      "ev_adoption_2045": 0.75,
+      "renewable_capacity_2045_tw": 15,
+      "coefficient_reduction": 0.15,
+      "annual_thrifting": 0.007
+    }
+  },
+  "dependencies": [
+    "numpy",
+    "pandas",
+    "scipy",
+    "matplotlib",
+    "seaborn"
+  ]
+}

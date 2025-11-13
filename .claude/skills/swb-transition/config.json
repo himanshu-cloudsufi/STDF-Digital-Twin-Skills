@@ -1,0 +1,177 @@
+{
+  "skill_name": "swb-transition",
+  "version": "1.0.0",
+  "description": "Solar-Wind-Battery electricity system transition forecasting",
+  "default_parameters": {
+    "start_year": 2020,
+    "end_year": 2040,
+    "battery_duration_hours": 4,
+    "cost_forecast_method": "log_cagr",
+    "smoothing_window": 3
+  },
+  "regions": ["China", "USA", "Europe", "Rest_of_World", "Global"],
+  "output_formats": ["csv", "json", "plot"],
+  "data_sources": {
+    "solar_lcoe": "Energy_Generation.json",
+    "wind_lcoe": "Energy_Generation.json",
+    "coal_lcoe": "Energy_Generation.json",
+    "gas_lcoe": "Energy_Generation.json",
+    "capacity_data": "Energy_Generation.json",
+    "generation_data": "Energy_Generation.json",
+    "bess_costs": "Energy_Storage.json",
+    "electricity_demand": "Electricity.json"
+  },
+  "displacement_sequencing": {
+    "China": "coal_first",
+    "USA": "gas_first",
+    "Europe": "coal_first",
+    "Rest_of_World": "coal_first",
+    "Global": "coal_first"
+  },
+  "reserve_floors": {
+    "coal_minimum_share": 0.10,
+    "gas_minimum_share": 0.15,
+    "description": "Minimum shares of peak load for system reliability"
+  },
+  "capacity_factors": {
+    "solar": {
+      "base": 0.20,
+      "improvement_per_year": 0.003,
+      "max": 0.30
+    },
+    "onshore_wind": {
+      "base": 0.30,
+      "improvement_per_year": 0.003,
+      "max": 0.40
+    },
+    "offshore_wind": {
+      "base": 0.40,
+      "improvement_per_year": 0.004,
+      "max": 0.55
+    },
+    "coal": {
+      "typical": 0.60,
+      "variation": "regional"
+    },
+    "gas": {
+      "typical": 0.40,
+      "variation": "regional"
+    }
+  },
+  "battery_sizing": {
+    "resilience_days": 0.5,
+    "duration_hours": 4,
+    "cycles_per_year": 250,
+    "round_trip_efficiency": 0.88
+  },
+  "cost_forecasting": {
+    "method": "log_cagr",
+    "historical_window_years": 5,
+    "smoothing_years": 3,
+    "cap_annual_decline": 0.30,
+    "floor_cost_ratio": 0.20,
+    "solar_learning_rate": 0.20,
+    "wind_learning_rate": 0.15,
+    "battery_learning_rate": 0.18
+  },
+  "tipping_point_detection": {
+    "metric": "lcoe_difference",
+    "threshold": 0,
+    "persistence_years": 2,
+    "early_warning_threshold": 10
+  },
+  "scenarios": {
+    "baseline": {
+      "description": "Current cost trajectories and policies",
+      "solar_cost_decline_rate": 0.08,
+      "wind_cost_decline_rate": 0.05,
+      "battery_cost_decline_rate": 0.10,
+      "coal_cost_change": 0.01,
+      "gas_cost_change": 0.02,
+      "displacement_speed": 1.0
+    },
+    "accelerated": {
+      "description": "Faster cost declines and policy support",
+      "solar_cost_decline_rate": 0.12,
+      "wind_cost_decline_rate": 0.08,
+      "battery_cost_decline_rate": 0.15,
+      "coal_cost_change": 0.03,
+      "gas_cost_change": 0.02,
+      "displacement_speed": 1.5
+    },
+    "delayed": {
+      "description": "Slower transition, incumbent advantages",
+      "solar_cost_decline_rate": 0.05,
+      "wind_cost_decline_rate": 0.03,
+      "battery_cost_decline_rate": 0.07,
+      "coal_cost_change": 0.0,
+      "gas_cost_change": 0.01,
+      "displacement_speed": 0.7
+    }
+  },
+  "emission_factors": {
+    "coal_kg_co2_per_mwh": 1000,
+    "gas_kg_co2_per_mwh": 450,
+    "solar_kg_co2_per_mwh": 45,
+    "wind_kg_co2_per_mwh": 12,
+    "description": "Lifecycle emissions including manufacturing"
+  },
+  "validation_rules": {
+    "generation_demand_balance_tolerance": 0.05,
+    "mass_balance_tolerance": 0.001,
+    "non_negativity": true,
+    "capacity_factor_bounds_check": true
+  },
+  "output_columns": {
+    "core": [
+      "year",
+      "region",
+      "total_generation_twh",
+      "total_capacity_gw"
+    ],
+    "generation": [
+      "solar_generation_twh",
+      "onshore_wind_generation_twh",
+      "offshore_wind_generation_twh",
+      "coal_generation_twh",
+      "gas_generation_twh",
+      "swb_generation_twh",
+      "fossil_generation_twh"
+    ],
+    "capacity": [
+      "solar_capacity_gw",
+      "onshore_wind_capacity_gw",
+      "offshore_wind_capacity_gw",
+      "coal_capacity_gw",
+      "gas_capacity_gw",
+      "battery_capacity_gwh"
+    ],
+    "costs": [
+      "solar_lcoe_per_mwh",
+      "wind_lcoe_per_mwh",
+      "battery_scoe_per_mwh",
+      "swb_stack_cost_per_mwh",
+      "coal_lcoe_per_mwh",
+      "gas_lcoe_per_mwh"
+    ],
+    "tipping_points": [
+      "tipping_vs_coal_year",
+      "tipping_vs_gas_year",
+      "swb_coal_cost_advantage",
+      "swb_gas_cost_advantage"
+    ],
+    "emissions": [
+      "total_co2_emissions_mt",
+      "coal_co2_emissions_mt",
+      "gas_co2_emissions_mt",
+      "swb_co2_emissions_mt"
+    ]
+  },
+  "dependencies": [
+    "numpy",
+    "pandas",
+    "scipy",
+    "matplotlib",
+    "seaborn"
+  ]
+}

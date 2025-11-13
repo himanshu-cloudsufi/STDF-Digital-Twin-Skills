@@ -1,0 +1,20 @@
+{
+  "name": "Scenario Differentiation",
+  "skills": ["copper-demand"],
+  "query": "Compare copper demand forecasts between baseline and accelerated green transition scenarios through 2045. Show me how the scenarios differ in total demand and green copper (EV + renewables).",
+  "expected_behavior": [
+    "Runs forecasts for both baseline and accelerated scenarios",
+    "Shows clear differentiation between scenarios with accelerated demand 20-30% higher than baseline",
+    "Identifies that accelerated scenario has 1.25x demand multiplier",
+    "Compares green copper (EV + Solar + Wind) between scenarios",
+    "Shows accelerated scenario has higher EV adoption rate (92% vs 75% by 2045)",
+    "Shows accelerated scenario has higher renewable capacity target (20 TW vs 15 TW)",
+    "Provides year-by-year comparison showing progressive divergence"
+  ],
+  "success_criteria": {
+    "accelerated_vs_baseline_2045": 1.25,
+    "baseline_ev_adoption_2045": 0.75,
+    "accelerated_ev_adoption_2045": 0.92,
+    "scenarios_differ": true
+  }
+}

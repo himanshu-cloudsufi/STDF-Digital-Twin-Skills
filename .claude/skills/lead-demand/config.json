@@ -1,0 +1,166 @@
+{
+  "skill_name": "lead-demand",
+  "version": "1.0.0",
+  "description": "Lead demand forecasting with bottom-up installed-base accounting",
+  "default_parameters": {
+    "start_year": 2020,
+    "end_year": 2040,
+    "smoothing_window": 3,
+    "validation_enabled": true,
+    "scenario": "baseline",
+    "vehicle_data_scenario": "standard"
+  },
+  "regions": ["China", "USA", "Europe", "Rest_of_World", "Global"],
+  "output_formats": ["csv", "json", "plot"],
+  "data_sources": {
+    "vehicle_sales": "vehicle_sales_by_powertrain.json",
+    "vehicle_fleet": "vehicle_fleet_by_powertrain.json",
+    "lead_coefficients": "lead_content_coefficients.json",
+    "industrial_demand": "industrial_battery_demand.json",
+    "validation_data": "lead_demand_validation.json",
+    "taxonomy": "lead_taxonomy_and_datasets.json"
+  },
+  "lead_coefficients": {
+    "sli_batteries": {
+      "passenger_car": {
+        "ice": 11.5,
+        "bev": 9.0,
+        "phev": "dataset",
+        "phev_fallback": 10.5,
+        "hev": 10.5
+      },
+      "two_wheeler": {
+        "ice": 2.5,
+        "ev": 1.8
+      },
+      "three_wheeler": {
+        "ice": 7.0,
+        "ev": 5.0
+      },
+      "commercial_vehicle": {
+        "ice": 22.0,
+        "ev": 18.0,
+        "ngv": 22.0
+      }
+    },
+    "industrial_batteries": {
+      "motive_kg_per_unit": 250.0,
+      "stationary_kg_per_mwh": 120000.0
+    }
+  },
+  "battery_lifetimes": {
+    "sli_years": 4.5,
+    "motive_years": 7.0,
+    "stationary_years": 6.0
+  },
+  "asset_lifetimes": {
+    "passenger_car_years": 18.0,
+    "two_wheeler_years": 11.0,
+    "three_wheeler_years": 9.0,
+    "commercial_vehicle_years": 20.0,
+    "forklift_years": 14.0,
+    "ups_system_years": 10.0
+  },
+  "market_shares": {
+    "battery_share_of_total": 0.85,
+    "other_uses_share": 0.15,
+    "sli_share_of_battery": 0.75,
+    "industrial_share_of_battery": 0.25
+  },
+  "oem_replacement_method": {
+    "sli": "installed_base_lifecycle",
+    "industrial": "aggregate_fallback"
+  },
+  "validation_rules": {
+    "tolerance_percent": 10.0,
+    "mass_balance_tolerance": 0.001,
+    "non_negativity": true,
+    "fleet_consistency": true
+  },
+  "calculation_methods": {
+    "sli_method": "bottom_up_full",
+    "industrial_method": "aggregate_with_split",
+    "other_uses_method": "econometric_or_fixed"
+  },
+  "ev_impact": {
+    "lead_reduction_factors": {
+      "car_bev_vs_ice": 0.78,
+      "tw_ev_vs_ice": 0.72,
+      "thw_ev_vs_ice": 0.71,
+      "cv_ev_vs_ice": 0.82
+    }
+  },
+  "scenarios": {
+    "baseline": {
+      "description": "Moderate EV adoption, standard replacement cycles",
+      "ev_adoption_2040": 0.50,
+      "battery_life_improvement": 1.0
+    },
+    "accelerated_ev": {
+      "description": "Faster electrification, reduced lead demand",
+      "ev_adoption_2040": 0.75,
+      "battery_life_improvement": 1.0,
+      "demand_multiplier": 0.85
+    },
+    "extended_lifecycles": {
+      "description": "Longer battery life, reduced replacement",
+      "ev_adoption_2040": 0.50,
+      "battery_life_improvement": 1.25,
+      "demand_multiplier": 0.90
+    },
+    "high_growth": {
+      "description": "Increased vehicle sales, higher total demand",
+      "ev_adoption_2040": 0.50,
+      "battery_life_improvement": 1.0,
+      "sales_growth_multiplier": 1.20
+    }
+  },
+  "econometric_parameters": {
+    "other_uses_gdp_elasticity": 0.7,
+    "other_uses_price_elasticity": -0.3,
+    "base_growth_rate": 0.015
+  },
+  "output_columns": {
+    "core": [
+      "year",
+      "total_lead_demand_tonnes",
+      "battery_demand_tonnes",
+      "other_uses_demand_tonnes"
+    ],
+    "sli_detail": [
+      "sli_total_tonnes",
+      "sli_oem_tonnes",
+      "sli_replacement_tonnes",
+      "sli_cars_tonnes",
+      "sli_2w_tonnes",
+      "sli_3w_tonnes",
+      "sli_cv_tonnes"
+    ],
+    "industrial": [
+      "industrial_total_tonnes",
+      "motive_demand_tonnes",
+      "stationary_demand_tonnes"
+    ],
+    "fleet": [
+      "car_fleet_ice_units",
+      "car_fleet_bev_units",
+      "car_fleet_phev_units",
+      "tw_fleet_ice_units",
+      "tw_fleet_ev_units",
+      "cv_fleet_ice_units",
+      "cv_fleet_ev_units",
+      "cv_fleet_ngv_units"
+    ],
+    "validation": [
+      "calculated_vs_reference_variance",
+      "bottom_up_vs_aggregate_variance"
+    ]
+  },
+  "dependencies": [
+    "numpy",
+    "pandas",
+    "scipy",
+    "matplotlib",
+    "seaborn"
+  ]
+}
