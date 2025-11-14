@@ -29,9 +29,25 @@
     "Global": "coal_first"
   },
   "reserve_floors": {
-    "coal_minimum_share": 0.10,
-    "gas_minimum_share": 0.15,
-    "description": "Minimum shares of peak load for system reliability"
+    "description": "Minimum shares of peak load for system reliability (scenario-specific)",
+    "baseline": {
+      "coal_minimum_share": 0.10,
+      "gas_minimum_share": 0.15
+    },
+    "accelerated": {
+      "coal_minimum_share": 0.05,
+      "gas_minimum_share": 0.10
+    },
+    "delayed": {
+      "coal_minimum_share": 0.15,
+      "gas_minimum_share": 0.20
+    }
+  },
+  "swb_generation_mix": {
+    "description": "Target mix of solar and wind generation in SWB system",
+    "solar_share": 0.60,
+    "onshore_wind_share": 0.32,
+    "offshore_wind_share": 0.08
   },
   "capacity_factors": {
     "solar": {
@@ -63,6 +79,20 @@
     "duration_hours": 4,
     "cycles_per_year": 250,
     "round_trip_efficiency": 0.88
+  },
+  "integration_costs": {
+    "description": "Grid integration costs for variable renewables (increases with penetration)",
+    "enabled": true,
+    "base_cost_per_mwh": 5,
+    "penetration_exponent": 2,
+    "max_additional_cost_per_mwh": 30,
+    "regional_multipliers": {
+      "China": 1.2,
+      "USA": 0.9,
+      "Europe": 0.8,
+      "Rest_of_World": 1.3,
+      "Global": 1.0
+    }
   },
   "cost_forecasting": {
     "method": "log_cagr",
@@ -114,7 +144,30 @@
     "gas_kg_co2_per_mwh": 450,
     "solar_kg_co2_per_mwh": 45,
     "wind_kg_co2_per_mwh": 12,
+    "nuclear_kg_co2_per_mwh": 12,
+    "hydro_kg_co2_per_mwh": 24,
+    "geothermal_kg_co2_per_mwh": 38,
+    "biomass_kg_co2_per_mwh": 230,
     "description": "Lifecycle emissions including manufacturing"
+  },
+  "carbon_pricing": {
+    "description": "Carbon price trajectories by region ($/tCO2)",
+    "enabled": true,
+    "regional_base_prices_2020": {
+      "China": 10,
+      "USA": 0,
+      "Europe": 30,
+      "Rest_of_World": 5,
+      "Global": 15
+    },
+    "base_annual_growth_rate": 0.05,
+    "scenario_multipliers": {
+      "baseline": 1.0,
+      "accelerated": 1.8,
+      "delayed": 0.5
+    },
+    "price_floor_per_ton": 0,
+    "price_ceiling_per_ton": 300
   },
   "validation_rules": {
     "generation_demand_balance_tolerance": 0.05,
@@ -135,8 +188,13 @@
       "offshore_wind_generation_twh",
       "coal_generation_twh",
       "gas_generation_twh",
+      "nuclear_generation_twh",
+      "hydro_generation_twh",
+      "geothermal_generation_twh",
+      "biomass_generation_twh",
       "swb_generation_twh",
-      "fossil_generation_twh"
+      "fossil_generation_twh",
+      "baseline_generation_twh"
     ],
     "capacity": [
       "solar_capacity_gw",
@@ -164,7 +222,12 @@
       "total_co2_emissions_mt",
       "coal_co2_emissions_mt",
       "gas_co2_emissions_mt",
-      "swb_co2_emissions_mt"
+      "swb_co2_emissions_mt",
+      "baseline_co2_emissions_mt",
+      "nuclear_co2_emissions_mt",
+      "hydro_co2_emissions_mt",
+      "geothermal_co2_emissions_mt",
+      "biomass_co2_emissions_mt"
     ]
   },
   "dependencies": [

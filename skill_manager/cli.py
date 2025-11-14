@@ -204,7 +204,7 @@ def list(remote, source):
                 skill['name'],
                 skill.get('skill_id', 'Not uploaded')[:24],
                 f"[{status_color}]{has_remote}[/{status_color}]",
-                skill.get('last_sync', 'Never')[:19]
+                (skill.get('last_sync') or 'Never')[:19]
             )
 
         console.print(table)
@@ -241,7 +241,7 @@ def status():
             local_mark,
             remote_mark,
             changes_mark,
-            status.get('last_sync', 'Never')[:19]
+            (status.get('last_sync') or 'Never')[:19]
         )
 
     console.print(table)

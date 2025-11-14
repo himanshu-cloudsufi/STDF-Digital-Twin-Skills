@@ -41,6 +41,20 @@ class SWBTransitionForecast:
         self.battery_sizing = self.config['battery_sizing']
         self.cost_forecasting = self.config['cost_forecasting']
         self.emission_factors = self.config['emission_factors']
+        self.carbon_pricing = self.config.get('carbon_pricing', {'enabled': False})
+        self.swb_generation_mix = self.config['swb_generation_mix']
+        self.integration_costs = self.config.get('integration_costs', {'enabled': False})
+
+        # Load scenario-specific reserve floors
+        reserve_floors_config = self.config['reserve_floors']
+        if scenario in reserve_floors_config:
+            self.reserve_floors = reserve_floors_config[scenario]
+        else:
+            # Fallback to baseline if scenario not found
+            self.reserve_floors = reserve_floors_config.get('baseline', {
+                'coal_minimum_share': 0.10,
+                'gas_minimum_share': 0.15
+            })
 
         # Initialize results
         self.years = list(range(self.start_year, self.end_year + 1))
@@ -98,32 +112,173 @@ class SWBTransitionForecast:
 
         return forecasted
 
+    def get_regional_fossil_lcoe_defaults(self, technology):
+        """
+        Get reasonable default LCOE values for fossil fuels by region
+        Based on industry data and regional characteristics
+
+        Args:
+            technology: 'coal' or 'gas'
+
+        Returns:
+            dict with 'base_2020' ($/MWh) and 'annual_change_rate'
+        """
+        # Regional defaults based on fuel costs, plant efficiency, carbon regulations
+        defaults = {
+            'coal': {
+                'China': {'base_2020': 65, 'annual_change': 0.015},  # Lower coal costs, older fleet
+                'USA': {'base_2020': 75, 'annual_change': 0.020},    # Aging plants, rising costs
+                'Europe': {'base_2020': 85, 'annual_change': 0.025}, # High carbon costs, retiring
+                'Rest_of_World': {'base_2020': 70, 'annual_change': 0.015},
+                'Global': {'base_2020': 70, 'annual_change': 0.018}
+            },
+            'gas': {
+                'China': {'base_2020': 90, 'annual_change': 0.010},  # Imported LNG, high cost
+                'USA': {'base_2020': 60, 'annual_change': 0.012},    # Abundant domestic gas
+                'Europe': {'base_2020': 110, 'annual_change': 0.015},# Import dependence, high costs
+                'Rest_of_World': {'base_2020': 80, 'annual_change': 0.012},
+                'Global': {'base_2020': 80, 'annual_change': 0.012}
+            }
+        }
+
+        if technology in defaults and self.region in defaults[technology]:
+            return defaults[technology][self.region]
+        elif technology in defaults and 'Global' in defaults[technology]:
+            return defaults[technology]['Global']
+        else:
+            # Ultimate fallback
+            return {'base_2020': 80, 'annual_change': 0.015}
+
+    def forecast_fossil_lcoe_from_defaults(self, technology):
+        """
+        Forecast fossil fuel LCOE using regional defaults
+
+        Args:
+            technology: 'coal' or 'gas'
+
+        Returns:
+            pd.Series with forecasted LCOE
+        """
+        defaults = self.get_regional_fossil_lcoe_defaults(technology)
+        base_2020 = defaults['base_2020']
+        annual_change = defaults['annual_change']
+
+        # Override with scenario-specific change rate if available
+        change_key = f"{technology}_cost_change"
+        if change_key in self.scenario:
+            annual_change = self.scenario[change_key]
+
+        forecasted = pd.Series(index=self.years, dtype=float)
+
+        for year in self.years:
+            years_from_2020 = year - 2020
+            # Compound growth from 2020 baseline
+            forecasted[year] = base_2020 * ((1 + annual_change) ** years_from_2020)
+
+        return forecasted
+
+    def calculate_carbon_price_trajectory(self):
+        """
+        Calculate carbon price trajectory over forecast period
+
+        Returns:
+            pd.Series with carbon price ($/ton CO2) by year
+        """
+        if not self.carbon_pricing.get('enabled', False):
+            return pd.Series(0, index=self.years)
+
+        # Get regional base price (2020)
+        regional_prices = self.carbon_pricing.get('regional_base_prices_2020', {})
+        base_price_2020 = regional_prices.get(self.region,
+                                              regional_prices.get('Global', 10))
+
+        # Get growth rate
+        base_growth_rate = self.carbon_pricing.get('base_annual_growth_rate', 0.05)
+
+        # Apply scenario multiplier
+        scenario_multipliers = self.carbon_pricing.get('scenario_multipliers', {})
+        scenario_multiplier = scenario_multipliers.get(self.scenario_name, 1.0)
+
+        effective_growth_rate = base_growth_rate * scenario_multiplier
+
+        # Get price limits
+        price_floor = self.carbon_pricing.get('price_floor_per_ton', 0)
+        price_ceiling = self.carbon_pricing.get('price_ceiling_per_ton', 300)
+
+        # Calculate trajectory
+        carbon_price = pd.Series(index=self.years, dtype=float)
+
+        for year in self.years:
+            years_from_2020 = year - 2020
+            price = base_price_2020 * ((1 + effective_growth_rate) ** years_from_2020)
+
+            # Apply bounds
+            price = max(price, price_floor)
+            price = min(price, price_ceiling)
+
+            carbon_price[year] = price
+
+        return carbon_price
+
+    def add_carbon_price_to_lcoe(self, lcoe, technology, carbon_price):
+        """
+        Add carbon pricing to fossil fuel LCOE
+
+        Formula: LCOE_with_carbon = LCOE_base + (Carbon_Price × Emission_Factor / 1000)
+        Where emission factor is in kg/MWh, carbon price in $/ton, result in $/MWh
+
+        Args:
+            lcoe: Base LCOE series ($/MWh)
+            technology: 'coal' or 'gas'
+            carbon_price: Carbon price series ($/ton CO2)
+
+        Returns:
+            pd.Series with LCOE including carbon price
+        """
+        # Get emission factor (kg CO2 per MWh)
+        emission_factor_key = f"{technology}_kg_co2_per_mwh"
+        emission_factor = self.emission_factors.get(emission_factor_key, 0)
+
+        # Convert: ($/ton CO2) × (kg CO2/MWh) × (1 ton / 1000 kg) = $/MWh
+        carbon_cost_per_mwh = carbon_price * emission_factor / 1000
+
+        return lcoe + carbon_cost_per_mwh
+
     def forecast_all_lcoe(self):
-        """Forecast LCOE for all technologies"""
+        """Forecast LCOE for all technologies, including carbon pricing for fossils"""
         lcoe_data = self.data['lcoe']
 
         forecasts = {}
 
         # Renewable technologies
         for tech in ['solar', 'onshore_wind', 'offshore_wind']:
-            if self.region in lcoe_data[tech]:
+            if self.region in lcoe_data[tech] and len(lcoe_data[tech][self.region]) > 0:
                 forecasts[tech] = self.forecast_lcoe(
                     lcoe_data[tech][self.region],
                     tech
                 )
             else:
                 # Use Global as proxy
-                if 'Global' in lcoe_data[tech]:
+                if 'Global' in lcoe_data[tech] and len(lcoe_data[tech]['Global']) > 0:
+                    print(f"ℹ️  Using Global {tech} LCOE data for {self.region}")
                     forecasts[tech] = self.forecast_lcoe(
                         lcoe_data[tech]['Global'],
                         tech
                     )
                 else:
+                    print(f"⚠️  WARNING: No {tech} LCOE data found, using zero")
                     forecasts[tech] = pd.Series(0, index=self.years)
+
+        # Calculate carbon price trajectory
+        carbon_price = self.calculate_carbon_price_trajectory()
+
+        if self.carbon_pricing.get('enabled', False):
+            print(f"ℹ️  Carbon pricing enabled: ${carbon_price[2020]:.1f}/ton (2020) → "
+                  f"${carbon_price[self.end_year]:.1f}/ton ({self.end_year})")
 
         # Fossil fuel technologies
         for tech in ['coal', 'gas']:
-            if self.region in lcoe_data[tech]:
+            if self.region in lcoe_data[tech] and len(lcoe_data[tech][self.region]) > 0:
                 hist_data = lcoe_data[tech][self.region]
 
                 # Fossil fuels may increase slightly
@@ -143,12 +298,137 @@ class SWBTransitionForecast:
 
                 forecasts[tech] = forecasted
             else:
-                if 'Global' in lcoe_data[tech]:
-                    forecasts[tech] = self.forecast_lcoe(lcoe_data[tech]['Global'], tech)
+                # Try Global data
+                if 'Global' in lcoe_data[tech] and len(lcoe_data[tech]['Global']) > 0:
+                    print(f"ℹ️  Using Global {tech} LCOE data for {self.region}")
+                    hist_data = lcoe_data[tech]['Global']
+                    forecasts[tech] = self.forecast_lcoe(hist_data, tech)
                 else:
-                    forecasts[tech] = pd.Series(100, index=self.years)  # Default value
+                    # Use regional defaults based on known industry costs
+                    print(f"⚠️  WARNING: No {tech} LCOE data found in files")
+                    defaults = self.get_regional_fossil_lcoe_defaults(tech)
+                    print(f"   Using regional default: {defaults['base_2020']} $/MWh (2020) "
+                          f"with {defaults['annual_change']*100:.1f}% annual change")
+                    forecasts[tech] = self.forecast_fossil_lcoe_from_defaults(tech)
+
+            # Add carbon pricing to fossil fuel LCOE
+            forecasts[tech] = self.add_carbon_price_to_lcoe(forecasts[tech], tech, carbon_price)
 
         return forecasts
+
+    def get_regional_baseline_generation(self, technology, year=2020):
+        """
+        Get reasonable baseline generation estimates by region and technology
+        Based on known 2020 data
+
+        Args:
+            technology: 'nuclear', 'hydro', 'geothermal', 'biomass', 'other'
+            year: Base year for estimates (default 2020)
+
+        Returns:
+            Generation in TWh
+        """
+        # Based on IEA and other sources for 2020 data
+        baselines = {
+            'nuclear': {
+                'China': 370,
+                'USA': 840,
+                'Europe': 780,
+                'Rest_of_World': 720,
+                'Global': 2700
+            },
+            'hydro': {
+                'China': 1360,
+                'USA': 290,
+                'Europe': 380,
+                'Rest_of_World': 2270,
+                'Global': 4300
+            },
+            'geothermal': {
+                'China': 0.2,
+                'USA': 17,
+                'Europe': 7,
+                'Rest_of_World': 60,
+                'Global': 94
+            },
+            'biomass': {
+                'China': 130,
+                'USA': 60,
+                'Europe': 180,
+                'Rest_of_World': 300,
+                'Global': 670
+            }
+        }
+
+        if technology in baselines and self.region in baselines[technology]:
+            return baselines[technology][self.region]
+        elif technology in baselines and 'Global' in baselines[technology]:
+            # Scale Global down proportionally if specific region not available
+            return baselines[technology]['Global'] * 0.2  # Conservative estimate
+        else:
+            return 0
+
+    def calculate_baseline_trajectory(self):
+        """
+        Calculate generation trajectory for non-SWB, non-fossil technologies
+        Nuclear: slight decline or flat (aging plants, few new builds)
+        Hydro: stable (capacity-constrained, limited sites)
+        Others: slight growth
+        """
+        generation_data = self.data['generation']
+        baseline = {
+            'nuclear': pd.Series(index=self.years, dtype=float),
+            'hydro': pd.Series(index=self.years, dtype=float),
+            'geothermal': pd.Series(index=self.years, dtype=float),
+            'biomass': pd.Series(index=self.years, dtype=float),
+            'other': pd.Series(index=self.years, dtype=float)
+        }
+
+        # Growth rates by technology
+        growth_rates = {
+            'nuclear': -0.01,  # Slight decline: plant retirements exceed new builds
+            'hydro': 0.005,    # Very slow growth: limited sites available
+            'geothermal': 0.03, # Modest growth
+            'biomass': 0.02,   # Slight growth
+            'other': 0.02      # Slight growth
+        }
+
+        for tech in ['nuclear', 'hydro', 'geothermal', 'biomass']:
+            # Try to load historical data
+            if tech in generation_data and self.region in generation_data[tech]:
+                hist = generation_data[tech][self.region]
+                if len(hist) > 0:
+                    # Use historical data as base
+                    base_year = hist.index.max()
+                    base_value = hist[base_year]
+                else:
+                    # Use defaults
+                    base_year = 2020
+                    base_value = self.get_regional_baseline_generation(tech, 2020)
+            else:
+                # Use defaults
+                base_year = 2020
+                base_value = self.get_regional_baseline_generation(tech, 2020)
+
+            # Forecast forward from base
+            growth_rate = growth_rates[tech]
+            for year in self.years:
+                if year <= base_year and tech in generation_data and self.region in generation_data[tech]:
+                    # Use historical if available
+                    hist = generation_data[tech][self.region]
+                    if year in hist.index:
+                        baseline[tech][year] = hist[year]
+                    else:
+                        years_from_base = year - base_year
+                        baseline[tech][year] = base_value * ((1 + growth_rate) ** years_from_base)
+                else:
+                    years_from_base = year - base_year
+                    baseline[tech][year] = base_value * ((1 + growth_rate) ** years_from_base)
+
+        # Aggregate 'other' renewables
+        baseline['other'] = baseline['geothermal'] + baseline['biomass']
+
+        return baseline
 
     def calculate_battery_scoe(self):
         """
@@ -189,8 +469,9 @@ class SWBTransitionForecast:
             lifetime_years = 10
             efficiency = self.battery_sizing['round_trip_efficiency']
 
-            # SCOE = capex / (cycles_per_year × lifetime_years × efficiency)
-            scoe[year] = capex / (cycles_per_year * lifetime_years * efficiency)
+            # SCOE = capex ($/kWh) / (cycles_per_year × lifetime_years × efficiency) × 1000
+            # Factor of 1000 converts $/kWh to $/MWh
+            scoe[year] = (capex / (cycles_per_year * lifetime_years * efficiency)) * 1000
 
         return scoe
 
@@ -216,6 +497,44 @@ class SWBTransitionForecast:
         swb_total_cost = generation_cost + battery_contribution
 
         return swb_total_cost
+
+    def calculate_integration_cost(self, swb_share):
+        """
+        Calculate grid integration costs for variable renewables
+
+        Integration costs increase non-linearly with SWB penetration due to:
+        - Grid reinforcement and balancing requirements
+        - Curtailment and storage needs
+        - Transmission and distribution upgrades
+
+        Formula: integration_cost = base_cost × regional_multiplier × (swb_share ^ exponent)
+        Capped at max_additional_cost_per_mwh
+
+        Args:
+            swb_share: SWB share of total generation (0-1)
+
+        Returns:
+            Integration cost ($/MWh)
+        """
+        if not self.integration_costs.get('enabled', False):
+            return 0
+
+        base_cost = self.integration_costs['base_cost_per_mwh']
+        exponent = self.integration_costs['penetration_exponent']
+        max_cost = self.integration_costs['max_additional_cost_per_mwh']
+
+        # Get regional multiplier
+        regional_multipliers = self.integration_costs['regional_multipliers']
+        regional_multiplier = regional_multipliers.get(self.region, 1.0)
+
+        # Calculate integration cost
+        # Cost increases non-linearly with penetration
+        integration_cost = base_cost * regional_multiplier * (swb_share ** exponent)
+
+        # Cap at maximum
+        integration_cost = min(integration_cost, max_cost)
+
+        return integration_cost
 
     def detect_tipping_points(self, swb_cost, coal_lcoe, gas_lcoe):
         """
@@ -247,6 +566,7 @@ class SWBTransitionForecast:
                                          tipping_vs_coal, tipping_vs_gas):
         """
         Calculate how SWB displaces fossil fuel generation over time
+        Now accounts for baseline technologies (nuclear, hydro, etc.)
         """
         # Get historical generation data
         generation_data = self.data['generation']
@@ -268,13 +588,21 @@ class SWBTransitionForecast:
         else:
             total_demand = electricity_demand.get('Global', pd.Series())
 
+        # Calculate baseline technology trajectories
+        baseline = self.calculate_baseline_trajectory()
+
         # Build generation forecast
         results = {
             'solar': pd.Series(index=self.years, dtype=float),
             'wind': pd.Series(index=self.years, dtype=float),
             'coal': pd.Series(index=self.years, dtype=float),
             'gas': pd.Series(index=self.years, dtype=float),
-            'total_demand': pd.Series(index=self.years, dtype=float)
+            'nuclear': pd.Series(index=self.years, dtype=float),
+            'hydro': pd.Series(index=self.years, dtype=float),
+            'geothermal': pd.Series(index=self.years, dtype=float),
+            'biomass': pd.Series(index=self.years, dtype=float),
+            'total_demand': pd.Series(index=self.years, dtype=float),
+            'residual_demand': pd.Series(index=self.years, dtype=float)
         }
 
         # Displacement sequencing
@@ -293,6 +621,18 @@ class SWBTransitionForecast:
                 demand = last_demand * (1.02 ** years_ahead)
 
             results['total_demand'][year] = demand
+
+            # Add baseline technology generation
+            for tech in ['nuclear', 'hydro', 'geothermal', 'biomass']:
+                if year in baseline[tech].index:
+                    results[tech][year] = baseline[tech][year]
+                else:
+                    results[tech][year] = 0
+
+            # Calculate residual demand (total - baseline)
+            baseline_total = sum(results[tech][year] for tech in ['nuclear', 'hydro', 'geothermal', 'biomass'])
+            residual_demand = demand - baseline_total
+            results['residual_demand'][year] = residual_demand
 
             # Before tipping point: use historical or slow growth
             if (tipping_vs_coal is None or year < tipping_vs_coal) and \
@@ -314,9 +654,9 @@ class SWBTransitionForecast:
                     years_ahead = year - last_year
                     results['wind'][year] = last_value * (1.12 ** years_ahead)  # 12% growth
 
-                # Fossil fills the rest
+                # Fossil fills the rest of residual demand (after baseline and SWB)
                 swb_total = results['solar'][year] + results['wind'][year]
-                fossil_needed = demand - swb_total
+                fossil_needed = residual_demand - swb_total
 
                 if displacement_order == 'coal_first':
                     coal_share = 0.55
@@ -329,7 +669,7 @@ class SWBTransitionForecast:
                 results['gas'][year] = fossil_needed * gas_share
 
             else:
-                # Post-tipping: rapid renewable growth
+                # Post-tipping: rapid renewable growth (competing for residual demand)
                 years_since_tipping = year - min(t for t in [tipping_vs_coal, tipping_vs_gas] if t is not None)
 
                 # S-curve adoption
@@ -338,49 +678,209 @@ class SWBTransitionForecast:
                 t0 = 10  # Midpoint at 10 years
                 swb_share = 1 / (1 + np.exp(-k * (years_since_tipping - t0)))
 
-                # Reserve floors for reliability
-                coal_floor = self.config['reserve_floors']['coal_minimum_share']
-                gas_floor = self.config['reserve_floors']['gas_minimum_share']
+                # Reserve floors for reliability (scenario-specific)
+                coal_floor = self.reserve_floors['coal_minimum_share']
+                gas_floor = self.reserve_floors['gas_minimum_share']
 
-                # Maximum SWB can reach
+                # Maximum SWB can reach (of residual demand)
                 max_swb_share = 1 - coal_floor - gas_floor
                 swb_share = min(swb_share, max_swb_share)
 
-                swb_generation = demand * swb_share
+                swb_generation = residual_demand * swb_share
 
-                # Split SWB between solar and wind (60/40)
-                results['solar'][year] = swb_generation * 0.60
-                results['wind'][year] = swb_generation * 0.40
+                # Split SWB between solar and wind using configurable mix
+                solar_share = self.swb_generation_mix['solar_share']
+                onshore_wind_share = self.swb_generation_mix['onshore_wind_share']
+                offshore_wind_share = self.swb_generation_mix['offshore_wind_share']
 
-                # Remaining for fossils
-                fossil_needed = demand * (1 - swb_share)
+                results['solar'][year] = swb_generation * solar_share
+                # Wind is split between onshore and offshore
+                total_wind = swb_generation * (onshore_wind_share + offshore_wind_share)
+                results['wind'][year] = total_wind
+
+                # Remaining residual for fossils
+                fossil_needed = residual_demand * (1 - swb_share)
 
                 if displacement_order == 'coal_first':
                     # Displace coal first, then gas
                     coal_max_share = coal_floor
                     gas_gets_rest = True
-                    results['coal'][year] = demand * coal_max_share
+                    results['coal'][year] = residual_demand * coal_max_share
                     results['gas'][year] = fossil_needed - results['coal'][year]
                 else:
                     # Displace gas first, then coal
                     gas_max_share = gas_floor
                     coal_gets_rest = True
-                    results['gas'][year] = demand * gas_max_share
+                    results['gas'][year] = residual_demand * gas_max_share
                     results['coal'][year] = fossil_needed - results['gas'][year]
 
         return results
 
-    def calculate_emissions(self, generation):
-        """Calculate CO2 emissions from generation mix"""
-        emissions = {
-            'coal': generation['coal'] * self.emission_factors['coal_kg_co2_per_mwh'] / 1e6,  # Mt
-            'gas': generation['gas'] * self.emission_factors['gas_kg_co2_per_mwh'] / 1e6,
-            'swb': (generation['solar'] + generation['wind']) *
-                   ((self.emission_factors['solar_kg_co2_per_mwh'] +
-                     self.emission_factors['wind_kg_co2_per_mwh']) / 2) / 1e6
+    def get_capacity_factor(self, technology, year):
+        """
+        Get capacity factor for a technology with temporal evolution
+
+        Args:
+            technology: Technology name ('solar', 'onshore_wind', 'offshore_wind', 'coal', 'gas')
+            year: Year to calculate capacity factor for
+
+        Returns:
+            Capacity factor (0-1)
+        """
+        cf_config = self.capacity_factors.get(technology, {})
+
+        if 'base' in cf_config:
+            # Renewable technologies with improvement over time
+            base_cf = cf_config['base']
+            improvement_rate = cf_config.get('improvement_per_year', 0)
+            max_cf = cf_config.get('max', base_cf)
+
+            # Calculate improvement from base year (2020)
+            years_since_base = year - 2020
+            improved_cf = base_cf + (improvement_rate * years_since_base)
+
+            # Cap at maximum
+            return min(improved_cf, max_cf)
+        elif 'typical' in cf_config:
+            # Fossil technologies with regional variation
+            return cf_config['typical']
+        else:
+            # Fallback defaults
+            defaults = {
+                'solar': 0.20,
+                'onshore_wind': 0.30,
+                'offshore_wind': 0.40,
+                'coal': 0.60,
+                'gas': 0.40,
+                'nuclear': 0.85,
+                'hydro': 0.45,
+                'geothermal': 0.75,
+                'biomass': 0.70
+            }
+            return defaults.get(technology, 0.30)
+
+    def calculate_capacity(self, generation):
+        """
+        Calculate installed capacity (GW) from generation (TWh) using capacity factors
+
+        Formula: Capacity (GW) = Generation (TWh) / (Capacity Factor × 8760 hours/year)
+
+        Args:
+            generation: Dict of technology: pd.Series(generation_twh)
+
+        Returns:
+            Dict of technology: pd.Series(capacity_gw)
+        """
+        capacity = {}
+
+        # Map generation tech names to capacity factor names
+        tech_mapping = {
+            'solar': 'solar',
+            'wind': 'onshore_wind',  # Assume wind is mostly onshore
+            'coal': 'coal',
+            'gas': 'gas',
+            'nuclear': 'nuclear',
+            'hydro': 'hydro',
+            'geothermal': 'geothermal',
+            'biomass': 'biomass'
         }
 
-        emissions['total'] = emissions['coal'] + emissions['gas'] + emissions['swb']
+        for gen_tech, cf_tech in tech_mapping.items():
+            if gen_tech not in generation:
+                continue
+
+            gen_series = generation[gen_tech]
+            cap_series = pd.Series(index=gen_series.index, dtype=float)
+
+            for year in gen_series.index:
+                cf = self.get_capacity_factor(cf_tech, year)
+                gen_twh = gen_series[year]
+
+                # Capacity (GW) = Generation (TWh) / (CF × 8760 h/year) × 1e6 GWh/TWh / 1000 GWh/GW
+                # Simplifies to: GW = TWh × 1000 / (CF × 8760)
+                cap_series[year] = gen_twh * 1000 / (cf * 8760)
+
+            capacity[gen_tech] = cap_series
+
+        # Split wind into onshore/offshore (80% onshore, 20% offshore)
+        if 'wind' in capacity:
+            capacity['onshore_wind'] = capacity['wind'] * 0.80
+            capacity['offshore_wind'] = capacity['wind'] * 0.20
+
+        return capacity
+
+    def calculate_battery_capacity(self, generation):
+        """
+        Calculate required battery storage capacity (GWh) for SWB system
+
+        Formula: Battery Capacity (GWh) = Daily SWB Generation × Resilience Days
+
+        Where:
+        - Daily SWB Generation = Annual SWB Generation (TWh) / 365 days × 1000 GWh/TWh
+        - Resilience Days = days of storage needed for grid stability
+
+        Args:
+            generation: Dict with 'solar' and 'wind' Series (TWh)
+
+        Returns:
+            pd.Series of battery capacity (GWh) by year
+        """
+        resilience_days = self.battery_sizing['resilience_days']
+
+        # Calculate SWB generation (solar + wind)
+        swb_generation = generation['solar'] + generation['wind']  # TWh
+
+        # Calculate battery capacity
+        # Daily generation (GWh/day) = Annual (TWh) / 365 days × 1000 GWh/TWh
+        # Battery capacity (GWh) = Daily generation × resilience_days
+        battery_capacity = swb_generation / 365 * 1000 * resilience_days
+
+        return battery_capacity
+
+    def calculate_emissions(self, generation):
+        """
+        Calculate CO2 emissions from generation mix
+
+        Formula: emissions_mt = generation_twh * emission_factor_kg_per_mwh / 1000
+        Explanation:
+        - TWh × 1e6 MWh/TWh = MWh
+        - MWh × kg/MWh = kg
+        - kg / 1e9 kg/Mt = Mt
+        - Simplifies to: TWh × kg/MWh / 1000
+        """
+        emissions = {}
+
+        # Convert TWh to MWh, multiply by kg/MWh, divide by 1000 to get Mt
+        for tech, emission_factor_key in [
+            ('coal', 'coal_kg_co2_per_mwh'),
+            ('gas', 'gas_kg_co2_per_mwh'),
+            ('solar', 'solar_kg_co2_per_mwh'),
+            ('wind', 'wind_kg_co2_per_mwh'),
+            ('nuclear', 'nuclear_kg_co2_per_mwh'),
+            ('hydro', 'hydro_kg_co2_per_mwh'),
+            ('geothermal', 'geothermal_kg_co2_per_mwh'),
+            ('biomass', 'biomass_kg_co2_per_mwh')
+        ]:
+            if tech in generation:
+                gen_twh = generation[tech]
+                emission_factor = self.emission_factors[emission_factor_key]
+                # TWh × 1e6 MWh/TWh × kg/MWh / 1e9 kg/Mt = TWh × kg/MWh / 1000
+                emissions[tech] = gen_twh * emission_factor / 1000  # Mt
+
+        # Calculate SWB emissions (solar + wind)
+        emissions['swb'] = emissions.get('solar', 0) + emissions.get('wind', 0)
+
+        # Calculate fossil emissions
+        emissions['fossil'] = emissions.get('coal', 0) + emissions.get('gas', 0)
+
+        # Calculate baseline emissions (nuclear + hydro + geothermal + biomass)
+        emissions['baseline'] = (emissions.get('nuclear', 0) +
+                                 emissions.get('hydro', 0) +
+                                 emissions.get('geothermal', 0) +
+                                 emissions.get('biomass', 0))
+
+        # Total emissions (all sources)
+        emissions['total'] = emissions['fossil'] + emissions['swb'] + emissions['baseline']
 
         return emissions
 
@@ -418,6 +918,12 @@ class SWBTransitionForecast:
             tipping_vs_gas
         )
 
+        print("Calculating installed capacity...")
+        capacity = self.calculate_capacity(generation)
+
+        print("Calculating battery storage capacity...")
+        battery_capacity = self.calculate_battery_capacity(generation)
+
         print("Calculating emissions...")
         emissions = self.calculate_emissions(generation)
 
@@ -430,11 +936,51 @@ class SWBTransitionForecast:
         self.results['wind_generation_twh'] = generation['wind'].values
         self.results['coal_generation_twh'] = generation['coal'].values
         self.results['gas_generation_twh'] = generation['gas'].values
+        self.results['nuclear_generation_twh'] = generation['nuclear'].values
+        self.results['hydro_generation_twh'] = generation['hydro'].values
+        self.results['geothermal_generation_twh'] = generation['geothermal'].values
+        self.results['biomass_generation_twh'] = generation['biomass'].values
         self.results['total_generation_twh'] = generation['total_demand'].values
 
         swb_gen = generation['solar'] + generation['wind']
+        baseline_gen = (generation['nuclear'] + generation['hydro'] +
+                       generation['geothermal'] + generation['biomass'])
         self.results['swb_generation_twh'] = swb_gen.values
-        self.results['swb_share_pct'] = (swb_gen / generation['total_demand'] * 100).values
+        self.results['baseline_generation_twh'] = baseline_gen.values
+        swb_share_series = swb_gen / generation['total_demand']
+        self.results['swb_share_pct'] = (swb_share_series * 100).values
+
+        # Calculate integration costs based on SWB penetration
+        print("Calculating integration costs...")
+        integration_costs_series = pd.Series(index=self.years, dtype=float)
+        for year in self.years:
+            swb_share = swb_share_series[year]
+            integration_costs_series[year] = self.calculate_integration_cost(swb_share)
+
+        self.results['integration_cost_per_mwh'] = integration_costs_series.values
+
+        # Total SWB system cost including integration
+        swb_total_system_cost = swb_stack_cost + integration_costs_series
+        self.results['swb_total_system_cost_per_mwh'] = swb_total_system_cost.values
+
+        # Capacity (GW)
+        self.results['solar_capacity_gw'] = capacity['solar'].values
+        if 'onshore_wind' in capacity:
+            self.results['onshore_wind_capacity_gw'] = capacity['onshore_wind'].values
+            self.results['offshore_wind_capacity_gw'] = capacity['offshore_wind'].values
+        self.results['coal_capacity_gw'] = capacity['coal'].values
+        self.results['gas_capacity_gw'] = capacity['gas'].values
+
+        # Battery storage capacity (GWh)
+        self.results['battery_capacity_gwh'] = battery_capacity.values
+
+        # Total capacity
+        total_capacity = (capacity['solar'] +
+                         capacity.get('onshore_wind', 0) +
+                         capacity.get('offshore_wind', 0) +
+                         capacity['coal'] +
+                         capacity['gas'])
+        self.results['total_capacity_gw'] = total_capacity.values
 
         # Costs ($/MWh)
         self.results['solar_lcoe_per_mwh'] = lcoe_forecasts['solar'].values
@@ -456,6 +1002,11 @@ class SWBTransitionForecast:
         self.results['coal_co2_emissions_mt'] = emissions['coal'].values
         self.results['gas_co2_emissions_mt'] = emissions['gas'].values
         self.results['swb_co2_emissions_mt'] = emissions['swb'].values
+        self.results['nuclear_co2_emissions_mt'] = emissions['nuclear'].values
+        self.results['hydro_co2_emissions_mt'] = emissions['hydro'].values
+        self.results['geothermal_co2_emissions_mt'] = emissions['geothermal'].values
+        self.results['biomass_co2_emissions_mt'] = emissions['biomass'].values
+        self.results['baseline_co2_emissions_mt'] = emissions['baseline'].values
         self.results['total_co2_emissions_mt'] = emissions['total'].values
 
     def print_summary(self):
