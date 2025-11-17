@@ -19,13 +19,14 @@ class CopperDemandForecast:
     TIER 2: Top-down allocation for Construction, Industrial, Electronics
     """
 
-    def __init__(self, config_path, region='Global', scenario='baseline'):
+    def __init__(self, config_path, region='Global', scenario='baseline', end_year=None):
         """Initialize with configuration"""
         with open(config_path, 'r') as f:
             self.config = json.load(f)
 
         self.start_year = self.config['default_parameters']['start_year']
-        self.end_year = self.config['default_parameters']['end_year']
+        # Use passed end_year if provided, otherwise use config default
+        self.end_year = end_year if end_year is not None else self.config['default_parameters']['end_year']
         self.coefficients = self.config['copper_coefficients']
         self.allocation = self.config['segment_allocation']
         self.lifespans = self.config['lifespans']
@@ -537,9 +538,12 @@ def main():
 
     # Run forecast with region and scenario
     try:
-        model = CopperDemandForecast(args.config, region=args.region, scenario=args.scenario)
-        model.end_year = args.end_year
-
+        model = CopperDemandForecast(
+            args.config,
+            region=args.region,
+            scenario=args.scenario,
+            end_year=args.end_year
+        )
         results = model.run_forecast()
 
         # Save results with region and scenario in filename

@@ -10,8 +10,8 @@
     "confidence_tagging": true,
     "scenario": "baseline",
     "standard_forecast_years": [2030, 2035],
-    "extended_forecast_year": 2040,
-    "max_forecast_year": 2040
+    "extended_forecast_year": 2045,
+    "max_forecast_year": 2045
   },
   "regions": ["China", "USA", "Europe", "Rest_of_World", "Global"],
   "output_formats": ["csv", "json", "plot"],
@@ -127,22 +127,26 @@
   },
   "scenarios": {
     "baseline": {
-      "description": "70-80% EV adoption, 12-15 TW renewables by 2040",
+      "description": "70-80% EV adoption, 12-15 TW renewables by 2045",
       "ev_adoption_2030": 0.45,
       "ev_adoption_2035": 0.60,
       "ev_adoption_2040": 0.75,
+      "ev_adoption_2045": 0.80,
       "renewable_capacity_2030_tw": 8,
       "renewable_capacity_2035_tw": 11,
-      "renewable_capacity_2040_tw": 15
+      "renewable_capacity_2040_tw": 15,
+      "renewable_capacity_2045_tw": 17
     },
     "accelerated": {
       "description": "90%+ EV, 20+ TW renewables",
       "ev_adoption_2030": 0.60,
       "ev_adoption_2035": 0.80,
       "ev_adoption_2040": 0.92,
+      "ev_adoption_2045": 0.95,
       "renewable_capacity_2030_tw": 12,
       "renewable_capacity_2035_tw": 16,
       "renewable_capacity_2040_tw": 20,
+      "renewable_capacity_2045_tw": 22,
       "demand_multiplier": 1.25
     },
     "delayed": {
@@ -150,9 +154,11 @@
       "ev_adoption_2030": 0.30,
       "ev_adoption_2035": 0.42,
       "ev_adoption_2040": 0.55,
+      "ev_adoption_2045": 0.60,
       "renewable_capacity_2030_tw": 6,
       "renewable_capacity_2035_tw": 8,
       "renewable_capacity_2040_tw": 11,
+      "renewable_capacity_2045_tw": 12,
       "demand_multiplier": 0.85
     },
     "substitution": {
@@ -160,9 +166,11 @@
       "ev_adoption_2030": 0.45,
       "ev_adoption_2035": 0.60,
       "ev_adoption_2040": 0.75,
+      "ev_adoption_2045": 0.80,
       "renewable_capacity_2030_tw": 8,
       "renewable_capacity_2035_tw": 11,
       "renewable_capacity_2040_tw": 15,
+      "renewable_capacity_2045_tw": 17,
       "coefficient_reduction": 0.15,
       "annual_thrifting": 0.007
     }
