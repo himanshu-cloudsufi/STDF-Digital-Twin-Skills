@@ -1,0 +1,18 @@
+{
+  "skills": ["lead-demand"],
+  "query": "Run a complete calibration workflow for Global lead demand: generate baseline forecast, check validation variance, run calibration if variance is high, and re-run forecast with calibrated parameters",
+  "files": [],
+  "expected_behavior": [
+    "Step 1: Runs initial baseline forecast (forecast.py --region Global --scenario baseline)",
+    "Step 2: Generates QA report (qa_report.py) on the initial forecast output",
+    "Step 3: Identifies validation variance from QA report or output CSV columns",
+    "Step 4: If variance >50% for any segment, runs calibrate_coefficients.py with appropriate threshold",
+    "Step 5: Verifies that config.json was backed up before calibration",
+    "Step 6: Reviews calibration report showing which coefficients were adjusted",
+    "Step 7: Re-runs forecast.py with the calibrated parameters",
+    "Step 8: Compares initial vs calibrated variance to verify improvement",
+    "Demonstrates understanding of the feedback loop: forecast → validate → calibrate → re-forecast",
+    "Outputs show improved validation variance after calibration (lower percentage values)",
+    "Creates calibration report file documenting the adjustments made"
+  ]
+}

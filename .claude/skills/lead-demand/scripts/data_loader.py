@@ -26,6 +26,7 @@ class LeadDataLoader:
             self.base_data_path = Path(base_data_path)
 
         self.regions = ['China', 'USA', 'Europe', 'Rest_of_World', 'Global']
+        self.taxonomy = None  # Loaded on demand
 
     def _load_json_file(self, filename):
         """Helper to load and parse JSON file"""
@@ -51,6 +52,87 @@ class LeadDataLoader:
                     result[region] = pd.Series(values, index=years, name=metric_name)
 
         return result
+
+    def load_taxonomy(self):
+        """Load the taxonomy and dataset mapping file"""
+        if self.taxonomy is None:
+            self.taxonomy = self._load_json_file('lead_taxonomy_and_datasets.json')
+        return self.taxonomy
+
+    def get_dataset_name(self, vehicle_type, metric_type, region='Global'):
+        """
+        Get dataset name from taxonomy
+
+        Args:
+            vehicle_type: Vehicle type (e.g., 'Passenger_Cars', 'Two_Wheeler', 'Lead')
+            metric_type: Type of metric (e.g., 'sales_ice', 'fleet_ev', 'lead_demand')
+            region: Region name (default: 'Global')
+
+        Returns:
+            Dataset name string, or None if not found
+        """
+        if self.taxonomy is None:
+            self.load_taxonomy()
+
+        try:
+            data_section = self.taxonomy['data'].get(vehicle_type, {})
+            metric_data = data_section.get(metric_type, {})
+            return metric_data.get(region)
+        except (KeyError, AttributeError):
+            return None
+
+    def get_data_by_taxonomy(self, vehicle_type, metric_type, region='Global'):
+        """
+        Get data using taxonomy mapping
+
+        Args:
+            vehicle_type: Vehicle type (e.g., 'Passenger_Cars', 'Two_Wheeler', 'Lead')
+            metric_type: Type of metric (e.g., 'sales_ice', 'fleet_ev', 'lead_demand')
+            region: Region name (default: 'Global')
+
+        Returns:
+            pandas Series with the requested data, or None if not found
+        """
+        dataset_name = self.get_dataset_name(vehicle_type, metric_type, region)
+        if dataset_name is None:
+            return None
+
+        # Determine which file to load based on vehicle_type
+        file_map = {
+            'Lead': 'Lead.json',
+            'Passenger_Cars': 'Passenger_Cars.json',
+            'Two_Wheeler': 'Two_Wheeler.json',
+            'Three_Wheeler': 'Three_Wheeler.json',
+            'Commercial_Vehicle': 'Commercial_Vehicle.json'
+        }
+
+        filename = file_map.get(vehicle_type)
+        if filename is None:
+            return None
+
+        # Load the data file
+        data = self._load_json_file(filename)
+
+        # Extract the category (first key that's not metadata/config)
+        category_map = {
+            'Lead.json': 'Lead',
+            'Passenger_Cars.json': 'Passenger Cars',
+            'Two_Wheeler.json': 'Two Wheeler',
+            'Three_Wheeler.json': 'Three Wheeler',
+            'Commercial_Vehicle.json': 'Commercial Vehicle'
+        }
+
+        category = category_map.get(filename)
+        if category is None:
+            return None
+
+        category_data = data.get(category, {})
+
+        # Extract the regional series
+        regional_data = self._extract_regional_series(category_data, dataset_name)
+
+        # Return the specific region's data
+        return regional_data.get(region)
 
     def load_total_lead_demand(self):
         """Load total annual implied lead demand"""
@@ -79,6 +161,76 @@ class LeadDataLoader:
         data = self._load_json_file('Lead.json')
         lead_data = data.get('Lead', {})
         return self._extract_regional_series(lead_data, 'Cost')
+
+    def load_validation_datasets(self):
+        """
+        Load direct demand validation datasets for comparison with bottom-up calculations
+        Returns dict with OEM and replacement demand by vehicle type
+        """
+        validation_data = {
+            'cars_oem': {},
+            'cars_replacement': {},
+            '2w_oem': {},
+            '2w_replacement': {},
+            '3w_oem': {},
+            '3w_replacement': {}
+        }
+
+        # Load passenger car validation data
+        try:
+            pc_data = self._load_json_file('Passenger_Cars.json')
+            pc_category = pc_data.get('Passenger Cars', {})
+
+            # OEM demand (from sales)
+            oem_metric = 'Lead_Annual_Implied_Demand-Sales_Cars'
+            if oem_metric in pc_category:
+                validation_data['cars_oem'] = self._extract_regional_series(pc_category, oem_metric)
+
+            # Replacement demand
+            repl_metric = 'Lead_Annual_Implied_Demand-Vehicle_replacement_Cars'
+            if repl_metric in pc_category:
+                validation_data['cars_replacement'] = self._extract_regional_series(pc_category, repl_metric)
+
+        except FileNotFoundError:
+            print("⚠️  Passenger car validation data not found")
+
+        # Load two-wheeler validation data
+        try:
+            tw_data = self._load_json_file('Two_Wheeler.json')
+            tw_category = tw_data.get('Two Wheeler', {})
+
+            # OEM demand
+            oem_metric = 'Lead_Annual_Implied_Demand-Sales_2W'
+            if oem_metric in tw_category:
+                validation_data['2w_oem'] = self._extract_regional_series(tw_category, oem_metric)
+
+            # Replacement demand
+            repl_metric = 'Lead_Annual_Implied_Demand-Vehicle_replacement_2W'
+            if repl_metric in tw_category:
+                validation_data['2w_replacement'] = self._extract_regional_series(tw_category, repl_metric)
+
+        except FileNotFoundError:
+            print("⚠️  Two-wheeler validation data not found")
+
+        # Load three-wheeler validation data
+        try:
+            thw_data = self._load_json_file('Three_Wheeler.json')
+            thw_category = thw_data.get('Three Wheeler', {})
+
+            # OEM demand
+            oem_metric = 'Lead_Annual_Implied_Demand-Sales_3W'
+            if oem_metric in thw_category:
+                validation_data['3w_oem'] = self._extract_regional_series(thw_category, oem_metric)
+
+            # Replacement demand
+            repl_metric = 'Lead_Annual_Implied_Demand-Vehicle_replacement_3W'
+            if repl_metric in thw_category:
+                validation_data['3w_replacement'] = self._extract_regional_series(thw_category, repl_metric)
+
+        except FileNotFoundError:
+            print("⚠️  Three-wheeler validation data not found")
+
+        return validation_data
 
     def _extract_vehicle_series(self, metric_data, scenario='standard'):
         """
@@ -245,6 +397,7 @@ class LeadDataLoader:
             'industrial_batteries': self.load_industrial_battery_demand(),
             'non_battery_uses': self.load_non_battery_demand(),
             'lead_cost': self.load_lead_cost(),
+            'validation': self.load_validation_datasets(),
             'vehicles': {
                 'passenger_cars': self.load_vehicle_data('Passenger_Cars', scenario),
                 'commercial_vehicles': self.load_vehicle_data('Commercial_Vehicle', scenario),
@@ -257,6 +410,7 @@ class LeadDataLoader:
         print(f"✓ Loaded industrial battery demand (motive + stationary)")
         print(f"✓ Loaded vehicle data for 4 vehicle types")
         print(f"✓ Loaded lead cost data")
+        print(f"✓ Loaded validation datasets")
 
         return all_data
 

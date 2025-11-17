@@ -4,7 +4,7 @@
   "description": "Lead demand forecasting with bottom-up installed-base accounting",
   "default_parameters": {
     "start_year": 2020,
-    "end_year": 2035,
+    "end_year": 2040,
     "smoothing_window": 3,
     "validation_enabled": true,
     "scenario": "baseline",
@@ -47,8 +47,8 @@
       }
     },
     "industrial_batteries": {
-      "motive_kg_per_unit": 250.0,
-      "stationary_kg_per_mwh": 120000.0
+      "motive_kg_per_unit": 875.0,
+      "stationary_kg_per_mwh": 300000.0
     }
   },
   "battery_lifetimes": {

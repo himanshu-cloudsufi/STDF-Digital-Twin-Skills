@@ -1,0 +1,16 @@
+{
+  "skills": ["lead-demand"],
+  "query": "Forecast China lead demand from 2025 to 2035 using the baseline scenario",
+  "files": [],
+  "expected_behavior": [
+    "Successfully loads China vehicle data from data/ directory",
+    "Runs forecast.py with correct parameters (--region China --scenario baseline)",
+    "Generates CSV output file with filename pattern: lead_demand_forecast_China_baseline.csv",
+    "Output CSV contains 60+ columns including total_lead_demand_kt, battery_demand_kt, sli_demand_kt",
+    "Shows realistic demand values (China total demand typically 1500-3000 kt range)",
+    "Output includes all years from 2025 to 2035 (11 rows minimum)",
+    "Creates output in output/ directory within the skill folder",
+    "No errors or warnings about missing data files",
+    "Validation variance columns (*_variance_pct) are populated where validation data exists"
+  ]
+}

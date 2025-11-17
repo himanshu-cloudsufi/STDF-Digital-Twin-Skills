@@ -1,0 +1,240 @@
+{
+  "commodity": "Lead",
+  "taxonomy": {
+    "Passenger_Cars": {
+      "vehicle_types": ["ICE", "BEV", "PHEV"]
+    },
+    "Two_Wheeler": {
+      "vehicle_types": ["ICE", "EV"]
+    },
+    "Three_Wheeler": {
+      "vehicle_types": ["ICE", "EV"]
+    },
+    "Commercial_Vehicle": {
+      "vehicle_types": ["ICE", "EV", "NGV"],
+      "sub_categories": ["Light_Duty", "Medium_Duty", "Heavy_Duty"]
+    },
+    "Lead": {
+      "categories": ["Total", "Industrial_Motive", "Industrial_Stationary", "Non_Battery"]
+    }
+  },
+  "data": {
+    "Lead": {
+      "total_demand": {
+        "Global": "Annual_Implied_Demand"
+      },
+      "industrial_motive": {
+        "Global": "Annual_Implied_Demand-Industrial_batteries_motive_power"
+      },
+      "industrial_stationary": {
+        "Global": "Annual_Implied_Demand-Industrial_batteries_stationary"
+      },
+      "non_battery": {
+        "Global": "Annual_Implied_Demand-Non-battery_uses"
+      },
+      "cost": {
+        "Global": "Cost"
+      },
+      "entity_type": "commodity"
+    },
+    "Passenger_Cars": {
+      "sales_ice": {
+        "Global": "Passenger_Vehicle_(ICE)_Annual_Sales",
+        "China": "Passenger_Vehicle_(ICE)_Annual_Sales",
+        "USA": "Passenger_Vehicle_(ICE)_Annual_Sales",
+        "Europe": "Passenger_Vehicle_(ICE)_Annual_Sales",
+        "Rest_of_World": "Passenger_Vehicle_(ICE)_Annual_Sales"
+      },
+      "sales_bev": {
+        "Global": "Passenger_Vehicle_(BEV)_Annual_Sales"
+      },
+      "sales_phev": {
+        "Global": "Passenger_Vehicle_(PHEV)_Annual_Sales"
+      },
+      "fleet_ice": {
+        "Global": "Passenger_Vehicle_(ICE)_Total_Fleet"
+      },
+      "fleet_bev": {
+        "Global": "Passenger_Vehicle_(BEV)_Total_Fleet"
+      },
+      "lead_demand": {
+        "Global": "Lead_Annual_Implied_Demand-Sales_Cars"
+      },
+      "entity_type": "market"
+    },
+    "Two_Wheeler": {
+      "sales_total": {
+        "Global": "Annual_Sales",
+        "China": "Annual_Sales",
+        "Europe": "Annual_Sales",
+        "USA": "Annual_Sales",
+        "Rest_of_World": "Annual_Sales"
+      },
+      "sales_ice": {
+        "Global": "(ICE)_Annual_Sales",
+        "China": "(ICE)_Annual_Sales",
+        "Europe": "(ICE)_Annual_Sales",
+        "USA": "(ICE)_Annual_Sales",
+        "Rest_of_World": "(ICE)_Annual_Sales"
+      },
+      "sales_ev": {
+        "Global": "(EV)_Annual_Sales",
+        "China": "(EV)_Annual_Sales",
+        "Europe": "(EV)_Annual_Sales",
+        "USA": "(EV)_Annual_Sales",
+        "Rest_of_World": "(EV)_Annual_Sales"
+      },
+      "fleet_ice": {
+        "Global": "(ICE)_Total_Fleet",
+        "China": "(ICE)_Total_Fleet",
+        "Europe": "(ICE)_Total_Fleet",
+        "USA": "(ICE)_Total_Fleet",
+        "Rest_of_World": "(ICE)_Total_Fleet"
+      },
+      "fleet_ev": {
+        "Global": "(EV)_Total_Fleet",
+        "Europe": "(EV)_Total_Fleet",
+        "Rest_of_World": "(EV)_Total_Fleet",
+        "USA": "(EV)_Total_Fleet"
+      },
+      "lead_demand_sales": {
+        "Global": "Lead_Annual_Implied_Demand-Sales_2_wheelers"
+      },
+      "lead_demand_replacement": {
+        "Global": "Lead_Annual_Implied_Demand-Vehicle_replacement_2_wheelers"
+      },
+      "cost_ice": {
+        "Global": "(ICE)_Median_Cost",
+        "China": "(ICE)_Median_Cost",
+        "Europe": "(ICE)_Median_Cost",
+        "USA": "(ICE)_Median_Cost",
+        "Rest_of_World": "(ICE)_Median_Cost"
+      },
+      "cost_ev": {
+        "Global": "(EV)_Median_Cost",
+        "China": "(EV)_Median_Cost",
+        "Europe": "(EV)_Median_Cost",
+        "Rest_of_World": "(EV)_Median_Cost"
+      },
+      "entity_type": "market"
+    },
+    "Three_Wheeler": {
+      "sales_total": {
+        "Global": "Annual_Sales",
+        "China": "Annual_Sales",
+        "Europe": "Annual_Sales",
+        "Rest_of_World": "Annual_Sales"
+      },
+      "sales_ice": {
+        "Global": "(ICE)_Annual_Sales",
+        "China": "(ICE)_Annual_Sales",
+        "Europe": "(ICE)_Annual_Sales",
+        "Rest_of_World": "(ICE)_Annual_Sales"
+      },
+      "sales_ev": {
+        "Global": "(EV)_Annual_Sales",
+        "China": "(EV)_Annual_Sales",
+        "Europe": "(EV)_Annual_Sales",
+        "Rest_of_World": "(EV)_Annual_Sales"
+      },
+      "fleet_ice": {
+        "Global": "(ICE)_Total_Fleet",
+        "China": "(ICE)_Total_Fleet",
+        "Europe": "(ICE)_Total_Fleet",
+        "Rest_of_World": "(ICE)_Total_Fleet"
+      },
+      "fleet_ev": {
+        "Global": "(EV)_Total_Fleet",
+        "China": "(EV)_Total_Fleet",
+        "Europe": "(EV)_Total_Fleet",
+        "Rest_of_World": "(EV)_Total_Fleet"
+      },
+      "lead_demand_sales": {
+        "Global": "Lead_Annual_Implied_Demand-Sales_3_wheelers"
+      },
+      "lead_demand_replacement": {
+        "Global": "Lead_Annual_Implied_Demand-Vehicle_replacement_3_wheelers"
+      },
+      "cost_ice": {
+        "Global": "(ICE)_Median_Cost",
+        "China": "(ICE)_Median_Cost",
+        "Europe": "(ICE)_Median_Cost",
+        "Rest_of_World": "(ICE)_Median_Cost"
+      },
+      "cost_ev": {
+        "Global": "(EV)_Median_Cost",
+        "China": "(EV)_Median_Cost",
+        "Europe": "(EV)_Median_Cost",
+        "Rest_of_World": "(EV)_Median_Cost"
+      },
+      "entity_type": "market"
+    },
+    "Commercial_Vehicle": {
+      "sales_total": {
+        "Global": "Annual_Sales",
+        "China": "Annual_Sales",
+        "Europe": "Annual_Sales",
+        "USA": "Annual_Sales",
+        "Rest_of_World": "Annual_Sales"
+      },
+      "sales_ice": {
+        "Global": "(ICE)_Annual_Sales",
+        "China": "(ICE)_Annual_Sales",
+        "Europe": "(ICE)_Annual_Sales",
+        "USA": "(ICE)_Annual_Sales",
+        "Rest_of_World": "(ICE)_Annual_Sales"
+      },
+      "sales_ev": {
+        "Global": "(EV)_Annual_Sales",
+        "China": "(EV)_Annual_Sales",
+        "Europe": "(EV)_Annual_Sales",
+        "USA": "(EV)_Annual_Sales",
+        "Rest_of_World": "(EV)_Annual_Sales"
+      },
+      "sales_ngv": {
+        "Global": "(NGV)_Annual_Sales",
+        "China": "(NGV)_Annual_Sales",
+        "Europe": "(NGV)_Annual_Sales",
+        "USA": "(NGV)_Annual_Sales",
+        "Rest_of_World": "(NGV)_Annual_Sales"
+      },
+      "fleet_ice": {
+        "Global": "(ICE)_Total_Fleet",
+        "China": "(ICE)_Total_Fleet",
+        "Europe": "(ICE)_Total_Fleet",
+        "USA": "(ICE)_Total_Fleet",
+        "Rest_of_World": "(ICE)_Total_Fleet"
+      },
+      "fleet_ev": {
+        "Global": "(EV)_Total_Fleet",
+        "China": "(EV)_Total_Fleet",
+        "Europe": "(EV)_Total_Fleet",
+        "USA": "(EV)_Total_Fleet",
+        "Rest_of_World": "(EV)_Total_Fleet"
+      },
+      "fleet_ngv": {
+        "Global": "(NGV)_Total_Fleet",
+        "China": "(NGV)_Total_Fleet",
+        "Europe": "(NGV)_Total_Fleet",
+        "USA": "(NGV)_Total_Fleet",
+        "Rest_of_World": "(NGV)_Total_Fleet"
+      },
+      "lead_demand_sales": {
+        "Global": "Lead_Annual_Implied_Demand-Sales_Commercial_vehicles"
+      },
+      "lead_demand_buses": {
+        "Global": "Lead_Annual_Implied_Demand-Sales_Buses"
+      },
+      "lead_demand_replacement": {
+        "Global": "Lead_Annual_Implied_Demand-Vehicle_replacement_Commercial"
+      },
+      "cost_ice": {
+        "Global": "(ICE)_Median_Cost"
+      },
+      "cost_ev": {
+        "Global": "(EV)_Median_Cost"
+      },
+      "entity_type": "market"
+    }
+  }
+}

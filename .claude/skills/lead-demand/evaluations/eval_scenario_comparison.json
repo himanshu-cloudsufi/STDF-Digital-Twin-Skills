@@ -1,0 +1,19 @@
+{
+  "skills": ["lead-demand"],
+  "query": "Compare three scenarios for Europe: baseline, accelerated_ev, and extended_lifecycles. Generate comparative analysis showing how each scenario affects lead demand from 2025-2035",
+  "files": [],
+  "expected_behavior": [
+    "Step 1: Runs forecast for Europe baseline scenario",
+    "Step 2: Runs forecast for Europe accelerated_ev scenario",
+    "Step 3: Runs forecast for Europe extended_lifecycles scenario",
+    "Step 4: Uses compare_scenarios.py to generate comparative analysis",
+    "Generates comparison report showing differential analysis vs baseline",
+    "Report includes absolute differences (kt) and percentage differences for each scenario vs baseline",
+    "Shows that accelerated_ev scenario results in lower lead demand (due to more EVs with smaller batteries)",
+    "Shows that extended_lifecycles scenario results in lower replacement demand (longer battery life)",
+    "Creates comparative visualization plots in output/plots directory",
+    "Comparison includes growth rate analysis across scenarios",
+    "Output demonstrates understanding that different scenarios have directional impacts (EV adoption reduces demand, extended lifecycles reduce replacement frequency)",
+    "Successfully handles multiple CSV inputs from the three forecast runs"
+  ]
+}
