@@ -4,10 +4,13 @@
   "description": "Solar-Wind-Battery electricity system transition forecasting",
   "default_parameters": {
     "start_year": 2020,
-    "end_year": 2040,
+    "end_year": 2035,
     "battery_duration_hours": 4,
     "cost_forecast_method": "log_cagr",
-    "smoothing_window": 3
+    "smoothing_window": 3,
+    "standard_forecast_years": [2030, 2035],
+    "extended_forecast_year": 2040,
+    "max_forecast_year": 2040
   },
   "regions": ["China", "USA", "Europe", "Rest_of_World", "Global"],
   "output_formats": ["csv", "json", "plot"],

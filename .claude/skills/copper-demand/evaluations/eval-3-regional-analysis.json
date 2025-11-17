@@ -1,10 +1,10 @@
 {
   "name": "Regional Analysis",
   "skills": ["copper-demand"],
-  "query": "Analyze copper demand specifically for China through 2045, focusing on construction and industrial segments which typically dominate in China.",
+  "query": "Analyze copper demand specifically for China through 2040, focusing on construction and industrial segments which typically dominate in China.",
   "expected_behavior": [
     "Runs forecast with --region China parameter",
-    "Generates China-specific output file (copper_demand_China_baseline_2045.csv)",
+    "Generates China-specific output file (copper_demand_China_baseline_2040.csv)",
     "Shows regional consumption patterns",
     "Identifies construction and industrial segments as significant portions of demand",
     "Provides breakdown by all segments for China region",

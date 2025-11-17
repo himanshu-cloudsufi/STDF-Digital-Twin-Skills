@@ -18,7 +18,7 @@ Five comprehensive evaluation scenarios were created to test skill functionality
 1. **eval-1-basic-forecast.json** - Basic forecast generation
    - Tests fundamental forecasting capability
    - Validates output format and structure
-   - Success: Total demand > 25 Mt for 2045
+   - Success: Total demand > 25 Mt for 2040
 
 2. **eval-2-scenario-comparison.json** - Scenario differentiation
    - Tests accelerated vs baseline scenarios
@@ -210,7 +210,7 @@ Created five comprehensive workflow guides in `reference/workflows.md`:
 1. **Green Transition Scenario Analysis**
    - 6-step workflow with 24 checklist items
    - Define scenarios → Run forecasts → Validate → Compare → Identify drivers → Document insights
-   - Expected results: 25.5-37.5 Mt range by 2045
+   - Expected results: 25.5-37.5 Mt range by 2040
 
 2. **Regional Demand Analysis**
    - 6-step workflow with 23 checklist items
@@ -220,7 +220,7 @@ Created five comprehensive workflow guides in `reference/workflows.md`:
 3. **Substitution Risk Assessment**
    - 6-step workflow with 22 checklist items
    - Define scenario → Run scenarios → Validate → Compare → Quantify impact → Assess vulnerability → Document risks
-   - Expected impact: ~7% demand reduction, -2 Mt by 2045
+   - Expected impact: ~7% demand reduction, -2 Mt by 2040
 
 4. **Multi-Scenario Comparison**
    - 6-step workflow with 23 checklist items
@@ -240,7 +240,7 @@ Added quick reference section with common commands:
 python3 scripts/validate_scenario.py config.json [scenario_name]
 
 # Run forecast
-python3 scripts/forecast.py --scenario [scenario] --region [region] --end-year 2045
+python3 scripts/forecast.py --scenario [scenario] --region [region] --end-year 2040
 
 # Validate output
 python3 scripts/validate_output.py output/[filename]
@@ -258,7 +258,7 @@ python3 scripts/compare_scenarios.py output/[file1] output/[file2] [file3...]
 **Basic Forecast Test:**
 ```
 ✓ Forecast runs successfully with new data structure
-✓ Output: 30 Mt for 2045 baseline
+✓ Output: 30 Mt for 2040 baseline
 ✓ CAGR: 0.70%
 ✓ Automotive share: 19.0%
 ✓ EV share: 17.6%
@@ -284,7 +284,7 @@ python3 scripts/compare_scenarios.py output/[file1] output/[file2] [file3...]
 ### Test Query Results
 
 All 10 test queries from `skill-test-queries/copper-demand-test-queries.md` pass:
-1. ✅ Basic forecast (Global, baseline, 2045)
+1. ✅ Basic forecast (Global, baseline, 2040)
 2. ✅ Scenario comparison output
 3. ✅ EV impact quantification
 4. ✅ Regional forecast (China)

@@ -57,7 +57,7 @@ The skill forecasts the energy transition across:
 skill swb-transition
 
 # With custom parameters
-skill swb-transition --end-year 2045 --region China --sequence coal-first
+skill swb-transition --end-year 2040 --region China --sequence coal-first
 
 # Generate cost comparison
 skill swb-transition --analyze-lcoe --output-format csv
@@ -145,7 +145,7 @@ Pre-configured scenarios:
 
 ## Technical Details
 
-- **Horizon**: 15-25 years (2024-2045/2050)
+- **Horizon**: 15-20 years (2024-2040)
 - **Time Step**: Annual
 - **Primary Units**: TWh (generation), GW (capacity), $/MWh (costs)
 - **Emissions Factors**: Coal 0.9-1.0 tCO₂/MWh, Gas 0.4-0.5 tCO₂/MWh

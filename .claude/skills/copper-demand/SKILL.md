@@ -18,18 +18,18 @@ Forecasts refined copper consumption using a two-tier hybrid methodology that co
 
 **Basic forecast:**
 ```bash
-python3 scripts/forecast.py --scenario baseline --region Global --end-year 2045
+python3 scripts/forecast.py --scenario baseline --region Global --end-year 2040
 ```
 
 **Compare scenarios:**
 ```bash
-python3 scripts/compare_scenarios.py output/copper_demand_Global_baseline_2045.csv \
-                                      output/copper_demand_Global_accelerated_2045.csv
+python3 scripts/compare_scenarios.py output/copper_demand_Global_baseline_2040.csv \
+                                      output/copper_demand_Global_accelerated_2040.csv
 ```
 
 **Validate output:**
 ```bash
-python3 scripts/validate_output.py output/copper_demand_Global_baseline_2045.csv
+python3 scripts/validate_output.py output/copper_demand_Global_baseline_2040.csv
 ```
 
 ## Key Capabilities
@@ -54,7 +54,7 @@ See `reference/methodology.md` for detailed methodology.
 
 ## Available Scenarios
 
-| Scenario | EV Adoption 2045 | Renewables 2045 | 2045 Demand | vs Baseline |
+| Scenario | EV Adoption 2040 | Renewables 2040 | 2040 Demand | vs Baseline |
 |----------|------------------|-----------------|-------------|-------------|
 | **Baseline** | 75% | 15 TW | ~30 Mt | - |
 | **Accelerated** | 92% | 20 TW | ~37.5 Mt | +25% |
@@ -82,7 +82,7 @@ python3 scripts/validate_scenario.py config.json baseline
 
 **Post-run validation:**
 ```bash
-python3 scripts/validate_output.py output/copper_demand_Global_baseline_2045.csv
+python3 scripts/validate_output.py output/copper_demand_Global_baseline_2040.csv
 ```
 
 Checks reconciliation, segment shares, growth rates, and data completeness.
@@ -139,7 +139,7 @@ Historical data from:
 
 ## Technical Notes
 
-- **Forecast Horizon**: 2020-2045 (26 years), annual granularity
+- **Forecast Horizon**: 2020-2040 (21 years), annual granularity
 - **Reconciliation**: Forces segments to sum exactly to total consumption
 - **Smoothing**: 3-year rolling window for noise reduction
 - **Guards**: Growth rate limits (max +50% YoY, min -30% YoY), non-negativity

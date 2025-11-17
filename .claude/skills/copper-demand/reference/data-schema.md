@@ -10,7 +10,7 @@
 
 | Column | Type | Description |
 |--------|------|-------------|
-| year | int | Forecast year (2020-2045) |
+| year | int | Forecast year (2020-2040) |
 | auto_total | float | Total automotive copper (tonnes) |
 | auto_oem | float | Automotive OEM demand |
 | auto_repl | float | Automotive replacement |
@@ -82,7 +82,7 @@
 
   "default_parameters": {
     "start_year": 2020,
-    "end_year": 2045,
+    "end_year": 2040,
     "smoothing_window": 3,
     "force_reconciliation": true,
     "confidence_tagging": true,
@@ -128,22 +128,22 @@
 
   "scenarios": {
     "baseline": {
-      "ev_adoption_2045": 0.75,
-      "renewable_capacity_2045_tw": 15
+      "ev_adoption_2040": 0.75,
+      "renewable_capacity_2040_tw": 15
     },
     "accelerated": {
-      "ev_adoption_2045": 0.92,
-      "renewable_capacity_2045_tw": 20,
+      "ev_adoption_2040": 0.92,
+      "renewable_capacity_2040_tw": 20,
       "demand_multiplier": 1.25
     },
     "delayed": {
-      "ev_adoption_2045": 0.55,
-      "renewable_capacity_2045_tw": 11,
+      "ev_adoption_2040": 0.55,
+      "renewable_capacity_2040_tw": 11,
       "demand_multiplier": 0.85
     },
     "substitution": {
-      "ev_adoption_2045": 0.75,
-      "renewable_capacity_2045_tw": 15,
+      "ev_adoption_2040": 0.75,
+      "renewable_capacity_2040_tw": 15,
       "coefficient_reduction": 0.15,
       "annual_thrifting": 0.007
     }

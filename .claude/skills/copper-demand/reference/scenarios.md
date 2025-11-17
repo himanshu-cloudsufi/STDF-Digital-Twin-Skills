@@ -11,8 +11,8 @@ Scenarios model different pathways for the green energy transition and their imp
 **Description:** Moderate green transition aligned with current policy commitments
 
 **Parameters:**
-- EV Adoption 2045: 75%
-- Renewable Capacity 2045: 15 TW
+- EV Adoption 2040: 75%
+- Renewable Capacity 2040: 15 TW
 - Demand Multiplier: 1.0× (no adjustment)
 
 **Characteristics:**
@@ -26,7 +26,7 @@ Scenarios model different pathways for the green energy transition and their imp
 - Want conservative estimates
 - Modeling most likely scenario
 
-**Expected 2045 Results:**
+**Expected 2040 Results:**
 - Total Demand: ~30 Mt
 - Automotive Share: ~19%
 - EV Share: ~18%
@@ -39,8 +39,8 @@ Scenarios model different pathways for the green energy transition and their imp
 **Description:** Aggressive green transition exceeding policy targets
 
 **Parameters:**
-- EV Adoption 2045: 92%
-- Renewable Capacity 2045: 20 TW
+- EV Adoption 2040: 92%
+- Renewable Capacity 2040: 20 TW
 - Demand Multiplier: 1.25× (25% increase)
 
 **Characteristics:**
@@ -54,7 +54,7 @@ Scenarios model different pathways for the green energy transition and their imp
 - Planning for high-demand futures
 - Stress-testing supply adequacy
 
-**Expected 2045 Results:**
+**Expected 2040 Results:**
 - Total Demand: ~37.5 Mt (+25% vs baseline)
 - Automotive Share: ~15%
 - EV Share: ~14%
@@ -72,8 +72,8 @@ Scenarios model different pathways for the green energy transition and their imp
 **Description:** Slower green transition due to economic or policy constraints
 
 **Parameters:**
-- EV Adoption 2045: 55%
-- Renewable Capacity 2045: 11 TW
+- EV Adoption 2040: 55%
+- Renewable Capacity 2040: 11 TW
 - Demand Multiplier: 0.85× (15% decrease)
 
 **Characteristics:**
@@ -87,7 +87,7 @@ Scenarios model different pathways for the green energy transition and their imp
 - Planning for low-demand scenarios
 - Assessing supply surplus risks
 
-**Expected 2045 Results:**
+**Expected 2040 Results:**
 - Total Demand: ~25.5 Mt (-15% vs baseline)
 - Automotive Share: ~22%
 - EV Share: ~12%
@@ -105,8 +105,8 @@ Scenarios model different pathways for the green energy transition and their imp
 **Description:** Baseline transition with aluminum substitution in vulnerable segments
 
 **Parameters:**
-- EV Adoption 2045: 75% (baseline)
-- Renewable Capacity 2045: 15 TW (baseline)
+- EV Adoption 2040: 75% (baseline)
+- Renewable Capacity 2040: 15 TW (baseline)
 - Coefficient Reduction: 15%
 - Annual Thrifting: 0.7% per year
 
@@ -121,7 +121,7 @@ Scenarios model different pathways for the green energy transition and their imp
 - Assessing demand risks from high copper prices
 - Planning for competition from alternative materials
 
-**Expected 2045 Results:**
+**Expected 2040 Results:**
 - Total Demand: ~28 Mt (-7% vs baseline)
 - Automotive Share: ~20% (unchanged)
 - EV Share: ~19% (unchanged)
@@ -142,14 +142,14 @@ Scenarios model different pathways for the green energy transition and their imp
 
 | Aspect | Baseline | Accelerated | Delayed | Substitution |
 |--------|----------|-------------|---------|--------------|
-| **2045 Total Demand** | 30 Mt | 37.5 Mt | 25.5 Mt | 28 Mt |
+| **2040 Total Demand** | 30 Mt | 37.5 Mt | 25.5 Mt | 28 Mt |
 | **vs Baseline** | - | +25% | -15% | -7% |
 | **EV Adoption** | 75% | 92% | 55% | 75% |
 | **Renewable Capacity** | 15 TW | 20 TW | 11 TW | 15 TW |
 | **CAGR** | 0.7% | 1.2% | 0.3% | 0.5% |
 | **Automotive Share** | 19% | 15% | 22% | 20% |
 | **Green Copper %** | 27% | 24% | 30% | 29% |
-| **Peak Demand Year** | 2045 | 2045 | 2040 | 2043 |
+| **Peak Demand Year** | 2040 | 2040 | 2040 | 2040 |
 
 ## Using Scenarios
 
@@ -157,16 +157,16 @@ Scenarios model different pathways for the green energy transition and their imp
 
 ```bash
 # Baseline (default)
-python3 scripts/forecast.py --scenario baseline --region Global --end-year 2045
+python3 scripts/forecast.py --scenario baseline --region Global --end-year 2040
 
 # Accelerated
-python3 scripts/forecast.py --scenario accelerated --region Global --end-year 2045
+python3 scripts/forecast.py --scenario accelerated --region Global --end-year 2040
 
 # Delayed
-python3 scripts/forecast.py --scenario delayed --region Global --end-year 2045
+python3 scripts/forecast.py --scenario delayed --region Global --end-year 2040
 
 # Substitution
-python3 scripts/forecast.py --scenario substitution --region Global --end-year 2045
+python3 scripts/forecast.py --scenario substitution --region Global --end-year 2040
 ```
 
 ### Comparing Scenarios
@@ -184,9 +184,9 @@ python3 scripts/forecast.py --scenario accelerated --output-format json
 # Compare outputs
 python3 -c "
 import json
-with open('output/copper_demand_Global_baseline_2045.json') as f:
+with open('output/copper_demand_Global_baseline_2040.json') as f:
     baseline = json.load(f)
-with open('output/copper_demand_Global_accelerated_2045.json') as f:
+with open('output/copper_demand_Global_accelerated_2040.json') as f:
     accel = json.load(f)
 # Analysis code...
 "
@@ -226,8 +226,8 @@ To create custom scenarios, modify `config.json`:
   "scenarios": {
     "custom_scenario": {
       "description": "Your scenario description",
-      "ev_adoption_2045": 0.80,
-      "renewable_capacity_2045_tw": 18,
+      "ev_adoption_2040": 0.80,
+      "renewable_capacity_2040_tw": 18,
       "demand_multiplier": 1.15,
       "coefficient_reduction": 0.10  // optional
     }
@@ -259,8 +259,8 @@ python3 scripts/forecast.py --scenario custom_scenario
    - Global aggregation follows weighted average
 
 4. **Timeline:**
-   - All scenarios run 2020-2045 (26 years)
-   - EV adoption follows logistic curve to 2045 target
+   - All scenarios run 2020-2040 (21 years)
+   - EV adoption follows logistic curve to 2040 target
    - Renewable buildout linear with acceleration
 
 ### Scenario-Specific Assumptions

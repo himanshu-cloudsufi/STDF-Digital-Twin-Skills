@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "description": "Cost-driven demand forecasting for passenger vehicles (EV, PHEV, ICE)",
   "default_parameters": {
-    "end_year": 2040,
+    "end_year": 2035,
     "logistic_ceiling": 1.0,
     "smoothing_window": 3,
+    "standard_forecast_years": [2030, 2035],
+    "extended_forecast_year": 2040,
+    "max_forecast_year": 2040,
     "max_market_cagr": 0.05,
     "phev_peak_share": 0.15,
     "phev_decay_half_life": 3.0,

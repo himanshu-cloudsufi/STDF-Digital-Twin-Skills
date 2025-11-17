@@ -13,7 +13,7 @@
   ],
   "success_criteria": {
     "coefficient_reduction": 0.15,
-    "total_demand_reduction_2045_range": [0.06, 0.08],
+    "total_demand_reduction_2040_range": [0.06, 0.08],
     "construction_affected": true,
     "automotive_protected": true
   }

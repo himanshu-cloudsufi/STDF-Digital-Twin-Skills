@@ -269,21 +269,21 @@ class LeadDataLoader:
             print(f"Total Lead Demand:")
             print(f"  Years: {total.index.min()} - {total.index.max()}")
             print(f"  Range: {total.min():.0f} - {total.max():.0f} kt")
+            print(f"  2010: {total.get(2010, 'N/A')} kt")
+            print(f"  2020: {total.get(2020, 'N/A')} kt")
             print(f"  2024: {total.get(2024, 'N/A')} kt")
-            print(f"  2030: {total.get(2030, 'N/A')} kt")
-            print(f"  2040: {total.get(2040, 'N/A')} kt")
 
         if region in all_data['industrial_batteries']['motive']:
             motive = all_data['industrial_batteries']['motive'][region]
             print(f"\nIndustrial Motive Power Batteries:")
+            print(f"  2010: {motive.get(2010, 'N/A')} kt")
             print(f"  2024: {motive.get(2024, 'N/A')} kt")
-            print(f"  2040: {motive.get(2040, 'N/A')} kt")
 
         if region in all_data['industrial_batteries']['stationary']:
             stat = all_data['industrial_batteries']['stationary'][region]
             print(f"\nIndustrial Stationary Batteries:")
+            print(f"  2010: {stat.get(2010, 'N/A')} kt")
             print(f"  2024: {stat.get(2024, 'N/A')} kt")
-            print(f"  2040: {stat.get(2040, 'N/A')} kt")
 
         # Vehicle fleet summary
         if region in all_data['vehicles']['passenger_cars']['fleet']:

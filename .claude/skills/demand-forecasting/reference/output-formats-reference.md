@@ -147,7 +147,7 @@ Year,Market,BEV,PHEV,ICE,EV
 ```
 Examples:
 - `China_2040.csv`
-- `USA_2050.csv`
+- `USA_2040.csv`
 - `Europe_2035.csv`
 - `Rest_of_World_2040.csv`
 
@@ -329,7 +329,7 @@ Contains all demand forecasts and validation results:
 ```
 Examples:
 - `China_2040.json`
-- `USA_2050.json`
+- `USA_2040.json`
 
 **Global forecast**:
 ```

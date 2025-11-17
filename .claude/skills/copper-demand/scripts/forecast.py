@@ -163,8 +163,8 @@ class CopperDemandForecast:
                         last_total = last_ice + last_bev
 
                         # Project using scenario EV adoption target
-                        target_ev_share = self.scenario['ev_adoption_2045']
-                        years_to_target = 2045 - last_year
+                        target_ev_share = self.scenario.get(f'ev_adoption_{self.end_year}', self.scenario.get('ev_adoption_2040', 0.75))
+                        years_to_target = self.end_year - last_year
                         years_from_last = year - last_year
 
                         if years_to_target > 0:
@@ -252,8 +252,9 @@ class CopperDemandForecast:
                     last_year = wind_series.index.max()
                     last_value = wind_series.iloc[-1]
                     # Accelerated growth for renewables in accelerated scenario
-                    if 'renewable_capacity_2045_tw' in self.scenario:
-                        target_tw = self.scenario['renewable_capacity_2045_tw']
+                    target_key = f'renewable_capacity_{self.end_year}_tw'
+                    if target_key in self.scenario or 'renewable_capacity_2040_tw' in self.scenario:
+                        target_tw = self.scenario.get(target_key, self.scenario.get('renewable_capacity_2040_tw', 15))
                         growth_factor = target_tw / 15.0  # Baseline is 15 TW
                         new_wind_onshore = 50 * growth_factor + (year_idx * 5 * growth_factor)
                     else:
@@ -265,8 +266,9 @@ class CopperDemandForecast:
                     new_solar = max(0, solar_series[year] - solar_series[year-1])
                 elif year > solar_series.index.max():
                     # Project using scenario
-                    if 'renewable_capacity_2045_tw' in self.scenario:
-                        target_tw = self.scenario['renewable_capacity_2045_tw']
+                    target_key = f'renewable_capacity_{self.end_year}_tw'
+                    if target_key in self.scenario or 'renewable_capacity_2040_tw' in self.scenario:
+                        target_tw = self.scenario.get(target_key, self.scenario.get('renewable_capacity_2040_tw', 15))
                         growth_factor = target_tw / 15.0
                         new_solar = 100 * growth_factor + (year_idx * 10 * growth_factor)
                     else:
@@ -278,8 +280,9 @@ class CopperDemandForecast:
 
             # If no real data, use scenario-based projections
             if new_wind_onshore == 0 and new_solar == 0:
-                if 'renewable_capacity_2045_tw' in self.scenario:
-                    target_tw = self.scenario['renewable_capacity_2045_tw']
+                target_key = f'renewable_capacity_{self.end_year}_tw'
+                if target_key in self.scenario or 'renewable_capacity_2040_tw' in self.scenario:
+                    target_tw = self.scenario.get(target_key, self.scenario.get('renewable_capacity_2040_tw', 15))
                     growth_factor = target_tw / 15.0
                     new_wind_onshore = 50 * growth_factor + (year_idx * 5 * growth_factor)
                     new_solar = 100 * growth_factor + (year_idx * 10 * growth_factor)
@@ -508,9 +511,9 @@ class CopperDemandForecast:
         summary = {
             'region': self.region,
             'scenario': self.scenario_name,
-            'total_demand_2045': self.results[self.results['year'] == self.end_year]['total_demand'].values[0],
-            'auto_share_2045': self.results[self.results['year'] == self.end_year]['share_transport_calc'].values[0],
-            'ev_share_2045': self.results[self.results['year'] == self.end_year]['share_ev_calc'].values[0],
+            f'total_demand_{self.end_year}': self.results[self.results['year'] == self.end_year]['total_demand'].values[0],
+            f'auto_share_{self.end_year}': self.results[self.results['year'] == self.end_year]['share_transport_calc'].values[0],
+            f'ev_share_{self.end_year}': self.results[self.results['year'] == self.end_year]['share_ev_calc'].values[0],
             'cagr': (self.results['total_demand'].iloc[-1] / self.results['total_demand'].iloc[0]) ** (1/len(self.years)) - 1
         }
         return summary
@@ -521,7 +524,7 @@ def main():
     parser = argparse.ArgumentParser(description='Copper Demand Forecast')
     parser.add_argument('--config', default='config.json', help='Config file path')
     parser.add_argument('--region', default='Global', help='Region: China, USA, Europe, Rest_of_World, Global')
-    parser.add_argument('--end-year', type=int, default=2045, help='End year for forecast')
+    parser.add_argument('--end-year', type=int, default=2035, help='End year for forecast')
     parser.add_argument('--scenario', default='baseline', help='Scenario: baseline, accelerated, delayed, substitution')
     parser.add_argument('--output-format', default='csv', choices=['csv', 'json'], help='Output format')
     parser.add_argument('--validate', type=bool, default=False, help='Run validation')
@@ -548,9 +551,9 @@ def main():
         print("\n=== FORECAST SUMMARY ===")
         print(f"Region: {summary['region']}")
         print(f"Scenario: {summary['scenario']}")
-        print(f"Total Demand {args.end_year}: {summary['total_demand_2045']:,.0f} tonnes")
-        print(f"Automotive Share {args.end_year}: {summary['auto_share_2045']:.1%}")
-        print(f"EV Demand Share {args.end_year}: {summary['ev_share_2045']:.1%}")
+        print(f"Total Demand {args.end_year}: {summary[f'total_demand_{args.end_year}']:,.0f} tonnes")
+        print(f"Automotive Share {args.end_year}: {summary[f'auto_share_{args.end_year}']:.1%}")
+        print(f"EV Demand Share {args.end_year}: {summary[f'ev_share_{args.end_year}']:.1%}")
         print(f"CAGR: {summary['cagr']:.2%}")
 
         return 0

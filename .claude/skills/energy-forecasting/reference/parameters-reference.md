@@ -87,9 +87,9 @@
 ./run_forecast.sh --region China --output csv
 ```
 
-**Long-duration battery, 2050:**
+**Long-duration battery, 2040:**
 ```bash
-./run_forecast.sh --region USA --end-year 2050 --battery-duration 8 --output both
+./run_forecast.sh --region USA --end-year 2040 --battery-duration 8 --output both
 ```
 
 **Global aggregation:**

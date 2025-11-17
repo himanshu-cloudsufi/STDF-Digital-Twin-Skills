@@ -5,9 +5,9 @@
   "expected_behavior": [
     "Identifies copper intensity coefficients: BEV (83 kg) vs ICE (23 kg)",
     "Calculates 3.6x ratio between BEV and ICE copper intensity",
-    "Shows automotive copper demand growth from 2020-2045",
+    "Shows automotive copper demand growth from 2020-2040",
     "Breaks down automotive demand into ICE vs BEV components",
-    "Shows BEV share increasing over time reaching 75-92% by 2045 depending on scenario",
+    "Shows BEV share increasing over time reaching 75-92% by 2040 depending on scenario",
     "Calculates EV demand as percentage of total copper consumption",
     "Explains that automotive segment grows from ~8% to ~19% of total demand due to EV transition"
   ],

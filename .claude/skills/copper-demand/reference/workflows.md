@@ -23,9 +23,9 @@ This guide provides step-by-step workflows for common copper demand forecasting 
   - [ ] Document assumptions and parameter choices
 
 - [ ] **Run Forecasts**
-  - [ ] Run baseline scenario: `python3 scripts/forecast.py --scenario baseline --region Global --end-year 2045`
-  - [ ] Run accelerated scenario: `python3 scripts/forecast.py --scenario accelerated --region Global --end-year 2045`
-  - [ ] Run delayed scenario: `python3 scripts/forecast.py --scenario delayed --region Global --end-year 2045`
+  - [ ] Run baseline scenario: `python3 scripts/forecast.py --scenario baseline --region Global --end-year 2040`
+  - [ ] Run accelerated scenario: `python3 scripts/forecast.py --scenario accelerated --region Global --end-year 2040`
+  - [ ] Run delayed scenario: `python3 scripts/forecast.py --scenario delayed --region Global --end-year 2040`
   - [ ] Verify all outputs generated successfully
 
 - [ ] **Validate Outputs**
@@ -35,7 +35,7 @@ This guide provides step-by-step workflows for common copper demand forecasting 
   - [ ] Verify growth rates within expected bounds
 
 - [ ] **Compare Results**
-  - [ ] Run comparison script: `python3 scripts/compare_scenarios.py output/copper_demand_Global_baseline_2045.csv output/copper_demand_Global_accelerated_2045.csv output/copper_demand_Global_delayed_2045.csv`
+  - [ ] Run comparison script: `python3 scripts/compare_scenarios.py output/copper_demand_Global_baseline_2040.csv output/copper_demand_Global_accelerated_2040.csv output/copper_demand_Global_delayed_2040.csv`
   - [ ] Analyze total demand differences (target: accelerated +25%, delayed -15% vs baseline)
   - [ ] Review automotive share evolution
   - [ ] Assess green copper (EV+Solar+Wind) share trends
@@ -47,16 +47,16 @@ This guide provides step-by-step workflows for common copper demand forecasting 
   - [ ] Identify inflection points and peak demand years
 
 - [ ] **Document Insights**
-  - [ ] Summarize demand range across scenarios (e.g., 25.5-37.5 Mt by 2045)
+  - [ ] Summarize demand range across scenarios (e.g., 25.5-37.5 Mt by 2040)
   - [ ] Highlight key sensitivities (EV adoption, renewable capacity)
   - [ ] Note supply implications and potential gaps
   - [ ] Document assumptions and caveats
 
 ### Expected Results
 
-- **Baseline 2045:** ~30 Mt total, 27% green copper share
-- **Accelerated 2045:** ~37.5 Mt total (+25%), 24% green copper share
-- **Delayed 2045:** ~25.5 Mt total (-15%), 30% green copper share
+- **Baseline 2040:** ~30 Mt total, 27% green copper share
+- **Accelerated 2040:** ~37.5 Mt total (+25%), 24% green copper share
+- **Delayed 2040:** ~25.5 Mt total (-15%), 30% green copper share
 
 ### Common Issues
 
@@ -83,11 +83,11 @@ This guide provides step-by-step workflows for common copper demand forecasting 
   - [ ] Note any regional data gaps or limitations
 
 - [ ] **Run Regional Forecasts**
-  - [ ] Run China: `python3 scripts/forecast.py --region China --scenario baseline --end-year 2045`
-  - [ ] Run USA: `python3 scripts/forecast.py --region USA --scenario baseline --end-year 2045`
-  - [ ] Run Europe: `python3 scripts/forecast.py --region Europe --scenario baseline --end-year 2045`
-  - [ ] Run Rest_of_World: `python3 scripts/forecast.py --region Rest_of_World --scenario baseline --end-year 2045`
-  - [ ] Run Global for comparison: `python3 scripts/forecast.py --region Global --scenario baseline --end-year 2045`
+  - [ ] Run China: `python3 scripts/forecast.py --region China --scenario baseline --end-year 2040`
+  - [ ] Run USA: `python3 scripts/forecast.py --region USA --scenario baseline --end-year 2040`
+  - [ ] Run Europe: `python3 scripts/forecast.py --region Europe --scenario baseline --end-year 2040`
+  - [ ] Run Rest_of_World: `python3 scripts/forecast.py --region Rest_of_World --scenario baseline --end-year 2040`
+  - [ ] Run Global for comparison: `python3 scripts/forecast.py --region Global --scenario baseline --end-year 2040`
 
 - [ ] **Validate Regional Outputs**
   - [ ] Run validation on each regional output
@@ -109,7 +109,7 @@ This guide provides step-by-step workflows for common copper demand forecasting 
   - [ ] Note regional policy and technology differences
 
 - [ ] **Document Regional Insights**
-  - [ ] Rank regions by 2045 demand
+  - [ ] Rank regions by 2040 demand
   - [ ] Calculate regional shares of global demand
   - [ ] Highlight fastest-growing regions
   - [ ] Note supply-demand balance implications by region
@@ -146,8 +146,8 @@ This guide provides step-by-step workflows for common copper demand forecasting 
   - [ ] Document trigger conditions (e.g., Cu/Al price ratio > 3.5)
 
 - [ ] **Run Baseline and Substitution Scenarios**
-  - [ ] Run baseline: `python3 scripts/forecast.py --scenario baseline --region Global --end-year 2045`
-  - [ ] Run substitution: `python3 scripts/forecast.py --scenario substitution --region Global --end-year 2045`
+  - [ ] Run baseline: `python3 scripts/forecast.py --scenario baseline --region Global --end-year 2040`
+  - [ ] Run substitution: `python3 scripts/forecast.py --scenario substitution --region Global --end-year 2040`
   - [ ] Verify both outputs generated
 
 - [ ] **Validate Outputs**
@@ -157,7 +157,7 @@ This guide provides step-by-step workflows for common copper demand forecasting 
   - [ ] Confirm progressive thrifting over time
 
 - [ ] **Compare Scenarios**
-  - [ ] Run comparison: `python3 scripts/compare_scenarios.py output/copper_demand_Global_baseline_2045.csv output/copper_demand_Global_substitution_2045.csv`
+  - [ ] Run comparison: `python3 scripts/compare_scenarios.py output/copper_demand_Global_baseline_2040.csv output/copper_demand_Global_substitution_2040.csv`
   - [ ] Calculate total demand difference (target: ~-7%)
   - [ ] Identify affected segments (construction, grid T&D)
   - [ ] Confirm protected segments (automotive BEV, wind, solar)
@@ -174,14 +174,14 @@ This guide provides step-by-step workflows for common copper demand forecasting 
   - [ ] **No Substitution:** BEV (conductivity requirements), Wind/Solar (efficiency requirements)
 
 - [ ] **Document Substitution Risks**
-  - [ ] Summarize total demand at risk (~2 Mt by 2045)
+  - [ ] Summarize total demand at risk (~2 Mt by 2040)
   - [ ] Note price thresholds for substitution
   - [ ] Highlight protected high-growth segments
   - [ ] Assess net impact on demand growth trajectory
 
 ### Expected Results
 
-- **Substitution 2045:** ~28 Mt total (-7% vs baseline)
+- **Substitution 2040:** ~28 Mt total (-7% vs baseline)
 - **Demand at Risk:** ~2 Mt displaced by aluminum
 - **Protected Demand:** BEV, wind, solar unchanged (~8 Mt green copper)
 - **Vulnerable Segments:** Construction, grid T&D see 15% intensity reduction
@@ -206,10 +206,10 @@ This guide provides step-by-step workflows for common copper demand forecasting 
 ### Checklist
 
 - [ ] **Run All Scenarios**
-  - [ ] Baseline: `python3 scripts/forecast.py --scenario baseline --region Global --end-year 2045`
-  - [ ] Accelerated: `python3 scripts/forecast.py --scenario accelerated --region Global --end-year 2045`
-  - [ ] Delayed: `python3 scripts/forecast.py --scenario delayed --region Global --end-year 2045`
-  - [ ] Substitution: `python3 scripts/forecast.py --scenario substitution --region Global --end-year 2045`
+  - [ ] Baseline: `python3 scripts/forecast.py --scenario baseline --region Global --end-year 2040`
+  - [ ] Accelerated: `python3 scripts/forecast.py --scenario accelerated --region Global --end-year 2040`
+  - [ ] Delayed: `python3 scripts/forecast.py --scenario delayed --region Global --end-year 2040`
+  - [ ] Substitution: `python3 scripts/forecast.py --scenario substitution --region Global --end-year 2040`
 
 - [ ] **Validate All Outputs**
   - [ ] Run validation on all four scenarios
@@ -218,7 +218,7 @@ This guide provides step-by-step workflows for common copper demand forecasting 
   - [ ] Review confidence tags consistency
 
 - [ ] **Generate Comparison Report**
-  - [ ] Run full comparison: `python3 scripts/compare_scenarios.py output/copper_demand_Global_baseline_2045.csv output/copper_demand_Global_accelerated_2045.csv output/copper_demand_Global_delayed_2045.csv output/copper_demand_Global_substitution_2045.csv`
+  - [ ] Run full comparison: `python3 scripts/compare_scenarios.py output/copper_demand_Global_baseline_2040.csv output/copper_demand_Global_accelerated_2040.csv output/copper_demand_Global_delayed_2040.csv output/copper_demand_Global_substitution_2040.csv`
   - [ ] Export to JSON if needed: `--format json`
 
 - [ ] **Analyze Demand Range**
@@ -228,14 +228,14 @@ This guide provides step-by-step workflows for common copper demand forecasting 
   - [ ] Note central tendency (baseline/substitution: 28-30 Mt)
 
 - [ ] **Compare Key Metrics**
-  - [ ] Total demand by scenario (2025, 2030, 2035, 2040, 2045)
+  - [ ] Total demand by scenario (2025, 2030, 2035, 2040, 2040)
   - [ ] Automotive share evolution
   - [ ] Green copper (EV+Solar+Wind) share trends
   - [ ] CAGR across scenarios (0.3%-1.2%)
 
 - [ ] **Identify Critical Uncertainties**
-  - [ ] EV adoption trajectory (55%-92% by 2045)
-  - [ ] Renewable capacity buildout (11-20 TW by 2045)
+  - [ ] EV adoption trajectory (55%-92% by 2040)
+  - [ ] Renewable capacity buildout (11-20 TW by 2040)
   - [ ] Electrification intensity (0.85x-1.25x multiplier)
   - [ ] Substitution risk (0%-7% demand loss)
 
@@ -253,7 +253,7 @@ This guide provides step-by-step workflows for common copper demand forecasting 
 
 ### Expected Comparison Matrix
 
-| Scenario | 2045 Demand | vs Baseline | CAGR | EV Adoption | Renewables | Green Cu % |
+| Scenario | 2040 Demand | vs Baseline | CAGR | EV Adoption | Renewables | Green Cu % |
 |----------|-------------|-------------|------|-------------|------------|------------|
 | Baseline | 30 Mt | - | 0.7% | 75% | 15 TW | 27% |
 | Accelerated | 37.5 Mt | +25% | 1.2% | 92% | 20 TW | 24% |
@@ -280,8 +280,8 @@ This guide provides step-by-step workflows for common copper demand forecasting 
 ### Checklist
 
 - [ ] **Identify Parameters to Test**
-  - [ ] EV adoption 2045 (vary ±10% from baseline)
-  - [ ] Renewable capacity 2045 (vary ±5 TW from baseline)
+  - [ ] EV adoption 2040 (vary ±10% from baseline)
+  - [ ] Renewable capacity 2040 (vary ±5 TW from baseline)
   - [ ] Demand multiplier (test 0.9x, 1.0x, 1.1x)
   - [ ] Copper intensity coefficients (test ±10%)
 
@@ -306,7 +306,7 @@ This guide provides step-by-step workflows for common copper demand forecasting 
   - [ ] Note non-linear relationships
   - [ ] Highlight threshold effects
 
-### Expected Sensitivities (Global 2045)
+### Expected Sensitivities (Global 2040)
 
 - **EV Adoption:** 10% change → ~2-3% demand change (moderate sensitivity)
 - **Renewable Capacity:** 5 TW change → ~5-7% demand change (high sensitivity)
@@ -354,7 +354,7 @@ Before finalizing analysis:
 python3 scripts/validate_scenario.py config.json [scenario_name]
 
 # Run forecast
-python3 scripts/forecast.py --scenario [scenario] --region [region] --end-year 2045 --output-format [csv|json]
+python3 scripts/forecast.py --scenario [scenario] --region [region] --end-year 2040 --output-format [csv|json]
 
 # Validate output
 python3 scripts/validate_output.py output/[filename]

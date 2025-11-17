@@ -76,9 +76,9 @@ Files saved to: `output/{Region}_{EndYear}.{format}`
 ./run_forecast.sh --region China --output csv
 ```
 
-**Example 2: USA 2050 (gas-first displacement)**
+**Example 2: USA 2040 (gas-first displacement)**
 ```bash
-./run_forecast.sh --region USA --end-year 2050 --output both
+./run_forecast.sh --region USA --end-year 2040 --output both
 ```
 
 **Example 3: Global aggregation with 8-hour battery**

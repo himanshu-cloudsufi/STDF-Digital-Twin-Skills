@@ -36,23 +36,35 @@ def validate_scenario(config_path, scenario_name):
     # Validate required parameters
     errors = []
 
-    # Check EV adoption
-    if 'ev_adoption_2045' not in scenario:
-        errors.append("Missing 'ev_adoption_2045' parameter")
-    else:
-        ev_adoption = scenario['ev_adoption_2045']
+    # Check EV adoption (look for year-specific key or default 2045 key)
+    ev_key = None
+    for key in scenario.keys():
+        if key.startswith('ev_adoption_'):
+            ev_key = key
+            break
+
+    if ev_key:
+        ev_adoption = scenario[ev_key]
         if not (0 <= ev_adoption <= 1):
             errors.append(f"EV adoption must be 0-1, got {ev_adoption}")
-
-    # Check renewable capacity
-    if 'renewable_capacity_2045_tw' not in scenario:
-        errors.append("Missing 'renewable_capacity_2045_tw' parameter")
     else:
-        renewable_tw = scenario['renewable_capacity_2045_tw']
+        errors.append("Missing EV adoption parameter (expected 'ev_adoption_YEAR')")
+
+    # Check renewable capacity (look for year-specific key or default 2045 key)
+    renewable_key = None
+    for key in scenario.keys():
+        if key.startswith('renewable_capacity_') and key.endswith('_tw'):
+            renewable_key = key
+            break
+
+    if renewable_key:
+        renewable_tw = scenario[renewable_key]
         if renewable_tw < 0:
             errors.append(f"Renewable capacity must be positive, got {renewable_tw}")
         if renewable_tw > 30:
             errors.append(f"Warning: Renewable capacity {renewable_tw} TW seems very high (>30 TW)")
+    else:
+        errors.append("Missing renewable capacity parameter (expected 'renewable_capacity_YEAR_tw')")
 
     # Check optional parameters
     if 'demand_multiplier' in scenario:
@@ -72,8 +84,12 @@ def validate_scenario(config_path, scenario_name):
 
     # Print validation summary
     print(f"✓ Scenario '{scenario_name}' validation passed")
-    print(f"  EV Adoption 2045: {scenario['ev_adoption_2045']:.1%}")
-    print(f"  Renewable Capacity 2045: {scenario['renewable_capacity_2045_tw']} TW")
+    if ev_key:
+        year = ev_key.split('_')[-1]
+        print(f"  EV Adoption {year}: {scenario[ev_key]:.1%}")
+    if renewable_key:
+        year = renewable_key.split('_')[-2]  # Get year from renewable_capacity_YEAR_tw
+        print(f"  Renewable Capacity {year}: {scenario[renewable_key]} TW")
     if 'demand_multiplier' in scenario:
         print(f"  Demand Multiplier: {scenario['demand_multiplier']:.2f}x")
     if 'coefficient_reduction' in scenario:

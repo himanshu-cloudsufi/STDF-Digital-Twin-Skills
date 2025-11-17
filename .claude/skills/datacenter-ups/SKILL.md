@@ -123,7 +123,7 @@ Pre-configured scenarios:
 
 ## Technical Details
 
-- **Horizon**: 10-15 years typical, extendable to 2040/2050
+- **Horizon**: 10-15 years typical, extendable to 2040
 - **Time Step**: Annual
 - **Primary Unit**: MWh/year (flows), MWh (stocks)
 - **Duration**: 4-hour default for UPS systems

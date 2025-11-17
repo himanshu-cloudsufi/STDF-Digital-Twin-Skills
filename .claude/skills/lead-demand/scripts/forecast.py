@@ -19,6 +19,7 @@ class LeadDemandForecast:
     Focuses on SLI (Starting-Lighting-Ignition) battery impact from vehicle electrification
     """
 
+
     def __init__(self, config_path, region='Global', scenario='baseline'):
         """Initialize with configuration"""
         with open(config_path, 'r') as f:
@@ -155,7 +156,7 @@ class LeadDemandForecast:
     def calculate_industrial_demand(self):
         """
         Calculate industrial battery lead demand
-        Uses aggregate data with historical trends
+        Uses aggregate data with historical trends and projections
         """
         industrial_data = self.real_data['industrial_batteries']
 

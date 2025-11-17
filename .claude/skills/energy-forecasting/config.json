@@ -4,8 +4,11 @@
   "description": "Cost-driven forecasting for Solar-Wind-Battery (SWB) energy systems and fossil fuel displacement",
 
   "default_parameters": {
-    "end_year": 2040,
+    "end_year": 2035,
     "smoothing_window": 3,
+    "standard_forecast_years": [2030, 2035],
+    "extended_forecast_year": 2040,
+    "max_forecast_year": 2040,
     "battery_duration_hours": 4,
     "battery_cycle_life": 5000,
     "battery_cycles_per_year": 250,

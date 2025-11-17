@@ -1,20 +1,20 @@
 {
   "name": "Basic Global Forecast",
   "skills": ["copper-demand"],
-  "query": "Forecast global copper demand through 2045 using the baseline scenario. Show me the breakdown by major segments and confidence levels.",
+  "query": "Forecast global copper demand through 2040 using the baseline scenario. Show me the breakdown by major segments and confidence levels.",
   "expected_behavior": [
     "Successfully loads the copper-demand skill and runs the forecast script",
-    "Generates forecast data from 2020-2045 with annual granularity",
+    "Generates forecast data from 2020-2040 with annual granularity",
     "Provides breakdown by all six major segments: Automotive, Grid Generation, Construction, Grid T&D, Industrial, Electronics, Other Uses",
     "Shows confidence levels for each segment (HIGH_BOTTOM_UP for automotive, MEDIUM_BOTTOM_UP for grid generation, LOW_ALLOCATED/LOW_RESIDUAL for others)",
-    "Reports total demand for 2045 around 30 million tonnes for baseline scenario",
+    "Reports total demand for 2040 around 30 million tonnes for baseline scenario",
     "Includes OEM vs replacement demand breakdown",
-    "Shows EV demand as percentage of total (should be 15-20% by 2045)"
+    "Shows EV demand as percentage of total (should be 15-20% by 2040)"
   ],
   "success_criteria": {
-    "total_demand_2045_range": [28000000, 32000000],
-    "ev_share_2045_range": [0.15, 0.20],
-    "automotive_share_2045_range": [0.17, 0.21],
+    "total_demand_2040_range": [28000000, 32000000],
+    "ev_share_2040_range": [0.15, 0.20],
+    "automotive_share_2040_range": [0.17, 0.21],
     "reconciliation_error_max": 0.001
   }
 }

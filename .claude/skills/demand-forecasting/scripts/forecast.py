@@ -253,8 +253,8 @@ def main():
     parser.add_argument(
         '--end-year',
         type=int,
-        default=2040,
-        help='Final forecast year (default: 2040)'
+        default=2035,
+        help='Final forecast year (default: 2035)'
     )
     parser.add_argument(
         '--ceiling',

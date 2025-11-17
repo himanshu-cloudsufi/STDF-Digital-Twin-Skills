@@ -4,11 +4,14 @@
   "description": "Datacenter UPS battery technology transition (VRLA → Li-ion)",
   "default_parameters": {
     "start_year": 2020,
-    "end_year": 2040,
+    "end_year": 2035,
     "tco_horizon_years": 15,
     "discount_rate": 0.08,
     "smoothing_window": 3,
-    "tipping_persistence_years": 3
+    "tipping_persistence_years": 3,
+    "standard_forecast_years": [2030, 2035],
+    "extended_forecast_year": 2040,
+    "max_forecast_year": 2040
   },
   "regions": ["China", "USA", "Europe", "Rest_of_World", "Global"],
   "output_formats": ["csv", "json", "plot"],

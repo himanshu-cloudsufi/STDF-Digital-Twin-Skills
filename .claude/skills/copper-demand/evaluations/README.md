@@ -30,10 +30,10 @@ For each evaluation:
 
 ```bash
 # For eval-1-basic-forecast.json
-claude "Forecast global copper demand through 2045 using the baseline scenario. Show me the breakdown by major segments and confidence levels."
+claude "Forecast global copper demand through 2040 using the baseline scenario. Show me the breakdown by major segments and confidence levels."
 
 # Verify:
-# - Total demand 2045 is between 28-32 million tonnes
+# - Total demand 2040 is between 28-32 million tonnes
 # - EV share is 15-20%
 # - Automotive share is 17-21%
 # - Reconciliation error < 0.1%

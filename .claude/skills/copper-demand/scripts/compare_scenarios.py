@@ -47,8 +47,21 @@ def compare_scenarios(filepaths, output_format='table'):
         print("Need at least 2 scenarios to compare")
         return 1
 
-    # Extract key years for comparison
-    comparison_years = [2025, 2030, 2035, 2040, 2045]
+    # Extract key years for comparison (use available years from data)
+    # Get all unique years across scenarios
+    all_years = set()
+    for data in scenarios.values():
+        all_years.update(data['year'].tolist())
+
+    # Select key milestone years for comparison (every 5 years, up to max available)
+    max_year = max(all_years)
+    min_year = min(all_years)
+    comparison_years = [y for y in range(min_year, max_year + 1, 5) if y in all_years]
+
+    # If we have fewer than 5 comparison years, add the max year
+    if len(comparison_years) < 5 and max_year not in comparison_years:
+        comparison_years.append(max_year)
+    comparison_years = sorted(comparison_years)
 
     # Build comparison data
     comparison = []

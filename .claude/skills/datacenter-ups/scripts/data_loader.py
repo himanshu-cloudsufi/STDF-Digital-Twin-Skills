@@ -311,8 +311,6 @@ class DatacenterUPSDataLoader:
             print(f"\nLi-ion Market Share:")
             print(f"  2020: {share.get(2020, 0)*100:.1f}%")
             print(f"  2024: {share.get(2024, 0)*100:.1f}%")
-            print(f"  2030: {share.get(2030, 0)*100:.1f}%")
-            print(f"  2040: {share.get(2040, 0)*100:.1f}%")
 
         if region in all_data['bess_costs_4h']:
             costs = all_data['bess_costs_4h'][region]

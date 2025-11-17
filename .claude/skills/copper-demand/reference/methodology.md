@@ -27,7 +27,7 @@ Where copper intensity varies by type:
 
 **EV Transition Modeling:**
 - Use scenario-specific EV adoption targets (baseline: 75%, accelerated: 92%, delayed: 55%)
-- Apply logistic curve interpolation between historical data and 2045 target
+- Apply logistic curve interpolation between historical data and 2040 target
 - Account for 3-4× copper intensity increase for BEVs vs ICE
 
 ### Grid Generation Segment (MEDIUM Confidence)
@@ -144,25 +144,25 @@ Bounded between 8% and 18% of total
 ## Scenario Application
 
 ### Baseline Scenario
-- EV adoption: 75% by 2045
-- Renewable capacity: 15 TW by 2045
+- EV adoption: 75% by 2040
+- Renewable capacity: 15 TW by 2040
 - Demand multiplier: 1.0×
 
 ### Accelerated Scenario
-- EV adoption: 92% by 2045
-- Renewable capacity: 20 TW by 2045
+- EV adoption: 92% by 2040
+- Renewable capacity: 20 TW by 2040
 - Demand multiplier: 1.25×
 - **Effect:** +25% higher total demand
 
 ### Delayed Scenario
-- EV adoption: 55% by 2045
-- Renewable capacity: 11 TW by 2045
+- EV adoption: 55% by 2040
+- Renewable capacity: 11 TW by 2040
 - Demand multiplier: 0.85×
 - **Effect:** -15% lower total demand
 
 ### Substitution Scenario
-- EV adoption: 75% by 2045 (baseline)
-- Renewable capacity: 15 TW by 2045 (baseline)
+- EV adoption: 75% by 2040 (baseline)
+- Renewable capacity: 15 TW by 2040 (baseline)
 - Coefficient reduction: 15% for construction and grid T&D
 - **Effect:** -7% total demand, vulnerable segments reduced
 

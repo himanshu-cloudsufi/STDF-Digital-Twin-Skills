@@ -134,10 +134,12 @@ Pre-configured scenarios:
 
 ## Technical Details
 
-- **Horizon**: 10-15 years (2024-2040), annual granularity
-- **Primary Unit**: Tonnes of refined lead per year
-- **Stock Unit**: Vehicle units, battery MWh
-- **Methodology**: Bottom-up installed-base accounting
+- **Historical Data**: 1998-2024 (varies by metric)
+- **Forecast Horizon**: Configurable (typically through 2040)
+- **Temporal Granularity**: Annual
+- **Primary Unit**: Tonnes of refined lead per year (kt)
+- **Stock Unit**: Vehicle units (millions), battery MWh
+- **Methodology**: Bottom-up installed-base accounting with trend projections
 - **Confidence**: HIGH for SLI (data complete), MEDIUM for industrial
 
 ## Electrification Impact

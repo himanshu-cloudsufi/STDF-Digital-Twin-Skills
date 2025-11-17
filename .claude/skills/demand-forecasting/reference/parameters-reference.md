@@ -50,17 +50,17 @@ Complete catalog of all parameters used in cost-driven demand forecasting, inclu
 
 **Usage**:
 ```bash
---end-year 2050
+--end-year 2040
 ```
 
 **Notes**:
 - Forecasts extend from last historical year to end_year
-- Longer horizons (>2050) have higher uncertainty
+- Longer horizons (>2040) have higher uncertainty
 - Cost curves and demand are extrapolated to this year
 
 **When to override**:
 - Short-term analysis: Use 2030 or 2035
-- Long-term scenarios: Use 2050 or 2060
+- Extended analysis: Use 2040 (maximum recommended)
 - Policy analysis: Match policy target year
 
 ---
@@ -336,9 +336,9 @@ Defined in `config.json` under `validation_rules`.
 ```
 Rationale: Near-term forecast with realistic ceiling for current infrastructure
 
-**Optimistic long-term scenario (2060):**
+**Optimistic long-term scenario (2040):**
 ```bash
---region Europe --end-year 2060 --ceiling 1.0 --output json
+--region Europe --end-year 2040 --ceiling 1.0 --output json
 ```
 Rationale: Full market transformation over extended horizon
 
@@ -362,8 +362,8 @@ Rationale: Strong policy support and rapid infrastructure buildout
 
 **Relationship**: Longer horizons allow lower k values to still reach ceiling
 
-- `ceiling=1.0, end_year=2040`: Requires k ≈ 0.3-0.5 to reach 100%
-- `ceiling=1.0, end_year=2060`: Can use k ≈ 0.15-0.3 (more gradual)
+- `ceiling=1.0, end_year=2035`: Requires k ≈ 0.4-0.6 to reach 100%
+- `ceiling=1.0, end_year=2040`: Can use k ≈ 0.3-0.5 (more gradual)
 - `ceiling=0.8, end_year=2040`: Lower ceiling reached with smaller k
 
 ### Ceiling vs PHEV Peak
@@ -397,7 +397,7 @@ Rationale: Strong policy support and rapid infrastructure buildout
 Before running a forecast, verify:
 
 - [ ] Region matches available data in Passenger_Cars.json
-- [ ] End year is reasonable (typically 2030-2050)
+- [ ] End year is reasonable (typically 2030-2040)
 - [ ] Ceiling reflects infrastructure reality (0.85-1.0)
 - [ ] Output format matches intended use (csv for Excel, json for analysis)
 - [ ] Advanced parameters in config.json are appropriate for region
