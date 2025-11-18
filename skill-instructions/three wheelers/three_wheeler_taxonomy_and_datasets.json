@@ -1,0 +1,431 @@
+{
+  "taxonomy": {
+    "market": "Three_Wheelers",
+    "products": {
+      "EV_3_Wheelers": {
+        "subproducts": []
+      },
+      "ICE_3_Wheelers": {
+        "subproducts": []
+      }
+    }
+  },
+  "datasets": {
+    "Three_Wheeler_Annual_Sales_China": {
+      "entity": "Three_Wheelers",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "market",
+          "category": "demand"
+        },
+        "description": "Total annual sales of three-wheelers in China (all powertrains, units per year)."
+      }
+    },
+    "Three_Wheeler_Annual_Sales_Europe": {
+      "entity": "Three_Wheelers",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "market",
+          "category": "demand"
+        },
+        "description": "Total annual sales of three-wheelers in Europe (all powertrains, units per year)."
+      }
+    },
+    "Three_Wheeler_Annual_Sales_Rest_of_World": {
+      "entity": "Three_Wheelers",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "market",
+          "category": "demand"
+        },
+        "description": "Total annual sales of three-wheelers in Rest of World (all powertrains, units per year)."
+      }
+    },
+    "Three_Wheeler_Annual_Sales_Global": {
+      "entity": "Three_Wheelers",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "market",
+          "category": "demand"
+        },
+        "description": "Total annual sales of three-wheelers globally (all powertrains, units per year). Used mainly as a reference against regional sums."
+      }
+    },
+    "Three_Wheeler_(EV)_Annual_Sales_China": {
+      "entity": "EV_3_Wheelers",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "demand"
+        },
+        "description": "Annual sales of EV three-wheelers in China (units per year)."
+      }
+    },
+    "Three_Wheeler_(EV)_Annual_Sales_Europe": {
+      "entity": "EV_3_Wheelers",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "demand"
+        },
+        "description": "Annual sales of EV three-wheelers in Europe (units per year)."
+      }
+    },
+    "Three_Wheeler_(EV)_Annual_Sales_Rest_of_World": {
+      "entity": "EV_3_Wheelers",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "demand"
+        },
+        "description": "Annual sales of EV three-wheelers in Rest of World (units per year)."
+      }
+    },
+    "Three_Wheeler_(EV)_Annual_Sales_Global": {
+      "entity": "EV_3_Wheelers",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "demand"
+        },
+        "description": "Annual sales of EV three-wheelers globally (units per year)."
+      }
+    },
+    "Three_Wheeler_(EV)_Median_Cost_China": {
+      "entity": "EV_3_Wheelers",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "cost"
+        },
+        "description": "Median transaction cost of EV three-wheelers in China (real terms, per vehicle)."
+      }
+    },
+    "Three_Wheeler_(EV)_Median_Cost_Europe": {
+      "entity": "EV_3_Wheelers",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "cost"
+        },
+        "description": "Median transaction cost of EV three-wheelers in Europe (real terms, per vehicle)."
+      }
+    },
+    "Three_Wheeler_(EV)_Median_Cost_Rest_of_World": {
+      "entity": "EV_3_Wheelers",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "cost"
+        },
+        "description": "Median transaction cost of EV three-wheelers in Rest of World (real terms, per vehicle)."
+      }
+    },
+    "EV_3_Wheeler_(Range-100_KM)_Lowest_Cost_China": {
+      "entity": "EV_3_Wheelers",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "cost"
+        },
+        "description": "Lowest available cost for a ~100 km range EV three-wheeler in China (real terms, per vehicle)."
+      }
+    },
+    "EV_3_Wheeler_(Range-100_KM)_Lowest_Cost_Europe": {
+      "entity": "EV_3_Wheelers",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "cost"
+        },
+        "description": "Lowest available cost for a ~100 km range EV three-wheeler in Europe (real terms, per vehicle)."
+      }
+    },
+    "EV_3_Wheeler_(Range-100_KM)_Lowest_Cost_Rest_of_World": {
+      "entity": "EV_3_Wheelers",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "cost"
+        },
+        "description": "Lowest available cost for a ~100 km range EV three-wheeler in Rest of World (real terms, per vehicle)."
+      }
+    },
+    "Three_Wheeler_(EV)_Total_Fleet_China": {
+      "entity": "EV_3_Wheelers",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "installed_base"
+        },
+        "description": "Total in-use EV three-wheeler fleet in China (stock, units)."
+      }
+    },
+    "Three_Wheeler_(EV)_Total_Fleet_Europe": {
+      "entity": "EV_3_Wheelers",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "installed_base"
+        },
+        "description": "Total in-use EV three-wheeler fleet in Europe (stock, units)."
+      }
+    },
+    "Three_Wheeler_(EV)_Total_Fleet_Rest_of_World": {
+      "entity": "EV_3_Wheelers",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "installed_base"
+        },
+        "description": "Total in-use EV three-wheeler fleet in Rest of World (stock, units)."
+      }
+    },
+    "Three_Wheeler_(EV)_Total_Fleet_Global": {
+      "entity": "EV_3_Wheelers",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "installed_base"
+        },
+        "description": "Total in-use EV three-wheeler fleet globally (stock, units)."
+      }
+    },
+    "Three_Wheeler_(ICE)_Annual_Sales_China": {
+      "entity": "ICE_3_Wheelers",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "demand"
+        },
+        "description": "Annual sales of ICE three-wheelers in China (units per year)."
+      }
+    },
+    "Three_Wheeler_(ICE)_Annual_Sales_Europe": {
+      "entity": "ICE_3_Wheelers",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "demand"
+        },
+        "description": "Annual sales of ICE three-wheelers in Europe (units per year)."
+      }
+    },
+    "Three_Wheeler_(ICE)_Annual_Sales_Rest_of_World": {
+      "entity": "ICE_3_Wheelers",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "demand"
+        },
+        "description": "Annual sales of ICE three-wheelers in Rest of World (units per year)."
+      }
+    },
+    "Three_Wheeler_(ICE)_Annual_Sales_Global": {
+      "entity": "ICE_3_Wheelers",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "demand"
+        },
+        "description": "Annual sales of ICE three-wheelers globally (units per year)."
+      }
+    },
+    "Three_Wheeler_(ICE)_Median_Cost_China": {
+      "entity": "ICE_3_Wheelers",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "cost"
+        },
+        "description": "Median transaction cost of ICE three-wheelers in China (real terms, per vehicle)."
+      }
+    },
+    "Three_Wheeler_(ICE)_Median_Cost_Europe": {
+      "entity": "ICE_3_Wheelers",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "cost"
+        },
+        "description": "Median transaction cost of ICE three-wheelers in Europe (real terms, per vehicle)."
+      }
+    },
+    "Three_Wheeler_(ICE)_Median_Cost_Rest_of_World": {
+      "entity": "ICE_3_Wheelers",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "cost"
+        },
+        "description": "Median transaction cost of ICE three-wheelers in Rest of World (real terms, per vehicle)."
+      }
+    },
+    "Three_Wheeler_(ICE)_Total_Fleet_China": {
+      "entity": "ICE_3_Wheelers",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "installed_base"
+        },
+        "description": "Total in-use ICE three-wheeler fleet in China (stock, units)."
+      }
+    },
+    "Three_Wheeler_(ICE)_Total_Fleet_Europe": {
+      "entity": "ICE_3_Wheelers",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "installed_base"
+        },
+        "description": "Total in-use ICE three-wheeler fleet in Europe (stock, units)."
+      }
+    },
+    "Three_Wheeler_(ICE)_Total_Fleet_Rest_of_World": {
+      "entity": "ICE_3_Wheelers",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "installed_base"
+        },
+        "description": "Total in-use ICE three-wheeler fleet in Rest of World (stock, units)."
+      }
+    },
+    "Three_Wheeler_(ICE)_Total_Fleet_Global": {
+      "entity": "ICE_3_Wheelers",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "installed_base"
+        },
+        "description": "Total in-use ICE three-wheeler fleet globally (stock, units)."
+      }
+    },
+    "Lead_Annual_Implied_Demand-Sales_3_wheelers_Global": {
+      "entity": "Lead",
+      "region": "Global",
+      "level_name": "commodity",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "commodity",
+          "category": "implied_demand"
+        },
+        "description": "Annual implied lead demand from batteries installed in new three-wheeler sales, globally."
+      }
+    },
+    "Lead_Annual_Implied_Demand-Vehicle_replacement_3_wheelers_Global": {
+      "entity": "Lead",
+      "region": "Global",
+      "level_name": "commodity",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "commodity",
+          "category": "implied_demand"
+        },
+        "description": "Annual implied lead demand from replacement batteries in the existing global three-wheeler fleet."
+      }
+    },
+    "Two_Wheeler_(EV)_Total_Fleet_China": {
+      "entity": "EV_2_Wheelers",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "installed_base"
+        },
+        "description": "Total in-use EV two-wheeler fleet in China (stock, units). Included here for reference / cross-market analysis."
+      }
+    }
+  }
+}

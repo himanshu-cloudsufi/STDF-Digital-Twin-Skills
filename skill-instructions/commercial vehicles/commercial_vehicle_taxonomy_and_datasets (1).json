@@ -1,0 +1,1920 @@
+{
+  "taxonomy": {
+    "market": "Commercial_Vehicles",
+    "products": {
+      "Commercial_Vehicles": {
+        "subproducts": []
+      },
+      "Commercial_Vehicles_(EV)": {
+        "subproducts": []
+      },
+      "Commercial_Vehicles_(ICE)": {
+        "subproducts": []
+      },
+      "Commercial_Vehicles_(NGV)": {
+        "subproducts": []
+      },
+      "Light_Duty_Commercial_Vehicles_(EV)": {
+        "subproducts": []
+      },
+      "Light_Duty_Commercial_Vehicles_(ICE)": {
+        "subproducts": []
+      },
+      "Light_Duty_Commercial_Vehicles_(NGV)": {
+        "subproducts": []
+      },
+      "Medium_Duty_Commercial_Vehicles_(EV)": {
+        "subproducts": []
+      },
+      "Medium_Duty_Commercial_Vehicles_(ICE)": {
+        "subproducts": []
+      },
+      "Medium_Duty_Commercial_Vehicles_(NGV)": {
+        "subproducts": []
+      },
+      "Heavy_Duty_Commercial_Vehicles_(EV)": {
+        "subproducts": []
+      },
+      "Heavy_Duty_Commercial_Vehicles_(ICE)": {
+        "subproducts": []
+      },
+      "Heavy_Duty_Commercial_Vehicles_(NGV)": {
+        "subproducts": []
+      }
+    }
+  },
+  "datasets": {
+    "Commercial_Vehicle_Annual_Sales_China": {
+      "entity": "Commercial_Vehicles",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "market",
+          "category": "demand"
+        },
+        "description": "Total annual sales of commercial vehicles in China (all powertrains, units per year)."
+      }
+    },
+    "Commercial_Vehicle_Annual_Sales_Europe": {
+      "entity": "Commercial_Vehicles",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "market",
+          "category": "demand"
+        },
+        "description": "Total annual sales of commercial vehicles in Europe (all powertrains, units per year)."
+      }
+    },
+    "Commercial_Vehicle_Annual_Sales_Global": {
+      "entity": "Commercial_Vehicles",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "market",
+          "category": "demand"
+        },
+        "description": "Total annual sales of commercial vehicles in Global (all powertrains, units per year)."
+      }
+    },
+    "Commercial_Vehicle_Annual_Sales_Rest_of_World": {
+      "entity": "Commercial_Vehicles",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "market",
+          "category": "demand"
+        },
+        "description": "Total annual sales of commercial vehicles in Rest_of_World (all powertrains, units per year)."
+      }
+    },
+    "Commercial_Vehicle_Annual_Sales_USA": {
+      "entity": "Commercial_Vehicles",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "market",
+          "category": "demand"
+        },
+        "description": "Total annual sales of commercial vehicles in USA (all powertrains, units per year)."
+      }
+    },
+    "Commercial_Vehicle_(EV)_Annual_Sales_China": {
+      "entity": "Commercial_Vehicles_(EV)",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "demand"
+        },
+        "description": "Annual sales of EV commercial vehicles in China (units per year)."
+      }
+    },
+    "Commercial_Vehicle_(EV)_Annual_Sales_Europe": {
+      "entity": "Commercial_Vehicles_(EV)",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "demand"
+        },
+        "description": "Annual sales of EV commercial vehicles in Europe (units per year)."
+      }
+    },
+    "Commercial_Vehicle_(EV)_Annual_Sales_Global": {
+      "entity": "Commercial_Vehicles_(EV)",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "demand"
+        },
+        "description": "Annual sales of EV commercial vehicles in Global (units per year)."
+      }
+    },
+    "Commercial_Vehicle_(EV)_Annual_Sales_Rest_of_World": {
+      "entity": "Commercial_Vehicles_(EV)",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "demand"
+        },
+        "description": "Annual sales of EV commercial vehicles in Rest_of_World (units per year)."
+      }
+    },
+    "Commercial_Vehicle_(EV)_Annual_Sales_USA": {
+      "entity": "Commercial_Vehicles_(EV)",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "demand"
+        },
+        "description": "Annual sales of EV commercial vehicles in USA (units per year)."
+      }
+    },
+    "Commercial_Vehicle_(EV)_Median_Cost_China": {
+      "entity": "Commercial_Vehicles_(EV)",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "cost"
+        },
+        "description": "Median transaction cost of EV commercial vehicles in China (USD per vehicle, real terms)."
+      }
+    },
+    "Commercial_Vehicle_(EV)_Median_Cost_Europe": {
+      "entity": "Commercial_Vehicles_(EV)",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "cost"
+        },
+        "description": "Median transaction cost of EV commercial vehicles in Europe (USD per vehicle, real terms)."
+      }
+    },
+    "Commercial_Vehicle_(EV)_Median_Cost_Rest_of_World": {
+      "entity": "Commercial_Vehicles_(EV)",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "cost"
+        },
+        "description": "Median transaction cost of EV commercial vehicles in Rest_of_World (USD per vehicle, real terms)."
+      }
+    },
+    "Commercial_Vehicle_(EV)_Median_Cost_USA": {
+      "entity": "Commercial_Vehicles_(EV)",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "cost"
+        },
+        "description": "Median transaction cost of EV commercial vehicles in USA (USD per vehicle, real terms)."
+      }
+    },
+    "Commercial_Vehicle_(EV)_Total_Fleet_China": {
+      "entity": "Commercial_Vehicles_(EV)",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "installed_base"
+        },
+        "description": "Total in-use EV commercial vehicle fleet in China (stock, units)."
+      }
+    },
+    "Commercial_Vehicle_(EV)_Total_Fleet_Europe": {
+      "entity": "Commercial_Vehicles_(EV)",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "installed_base"
+        },
+        "description": "Total in-use EV commercial vehicle fleet in Europe (stock, units)."
+      }
+    },
+    "Commercial_Vehicle_(EV)_Total_Fleet_Global": {
+      "entity": "Commercial_Vehicles_(EV)",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "installed_base"
+        },
+        "description": "Total in-use EV commercial vehicle fleet in Global (stock, units)."
+      }
+    },
+    "Commercial_Vehicle_(EV)_Total_Fleet_Rest_of_World": {
+      "entity": "Commercial_Vehicles_(EV)",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "installed_base"
+        },
+        "description": "Total in-use EV commercial vehicle fleet in Rest_of_World (stock, units)."
+      }
+    },
+    "Commercial_Vehicle_(EV)_Total_Fleet_USA": {
+      "entity": "Commercial_Vehicles_(EV)",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "installed_base"
+        },
+        "description": "Total in-use EV commercial vehicle fleet in USA (stock, units)."
+      }
+    },
+    "Commercial_Vehicle_(ICE)_Annual_Sales_China": {
+      "entity": "Commercial_Vehicles_(ICE)",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "demand"
+        },
+        "description": "Annual sales of ICE commercial vehicles in China (units per year)."
+      }
+    },
+    "Commercial_Vehicle_(ICE)_Annual_Sales_Europe": {
+      "entity": "Commercial_Vehicles_(ICE)",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "demand"
+        },
+        "description": "Annual sales of ICE commercial vehicles in Europe (units per year)."
+      }
+    },
+    "Commercial_Vehicle_(ICE)_Annual_Sales_Global": {
+      "entity": "Commercial_Vehicles_(ICE)",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "demand"
+        },
+        "description": "Annual sales of ICE commercial vehicles in Global (units per year)."
+      }
+    },
+    "Commercial_Vehicle_(ICE)_Annual_Sales_Rest_of_World": {
+      "entity": "Commercial_Vehicles_(ICE)",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "demand"
+        },
+        "description": "Annual sales of ICE commercial vehicles in Rest_of_World (units per year)."
+      }
+    },
+    "Commercial_Vehicle_(ICE)_Annual_Sales_USA": {
+      "entity": "Commercial_Vehicles_(ICE)",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "demand"
+        },
+        "description": "Annual sales of ICE commercial vehicles in USA (units per year)."
+      }
+    },
+    "Commercial_Vehicle_(ICE)_Total_Fleet_China": {
+      "entity": "Commercial_Vehicles_(ICE)",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "installed_base"
+        },
+        "description": "Total in-use ICE commercial vehicle fleet in China (stock, units)."
+      }
+    },
+    "Commercial_Vehicle_(ICE)_Total_Fleet_Europe": {
+      "entity": "Commercial_Vehicles_(ICE)",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "installed_base"
+        },
+        "description": "Total in-use ICE commercial vehicle fleet in Europe (stock, units)."
+      }
+    },
+    "Commercial_Vehicle_(ICE)_Total_Fleet_Global": {
+      "entity": "Commercial_Vehicles_(ICE)",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "installed_base"
+        },
+        "description": "Total in-use ICE commercial vehicle fleet in Global (stock, units)."
+      }
+    },
+    "Commercial_Vehicle_(ICE)_Total_Fleet_Rest_of_World": {
+      "entity": "Commercial_Vehicles_(ICE)",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "installed_base"
+        },
+        "description": "Total in-use ICE commercial vehicle fleet in Rest_of_World (stock, units)."
+      }
+    },
+    "Commercial_Vehicle_(ICE)_Total_Fleet_USA": {
+      "entity": "Commercial_Vehicles_(ICE)",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "installed_base"
+        },
+        "description": "Total in-use ICE commercial vehicle fleet in USA (stock, units)."
+      }
+    },
+    "Commercial_Vehicle_(NGV)_Annual_Sales_China": {
+      "entity": "Commercial_Vehicles_(NGV)",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "chimera",
+          "category": "demand"
+        },
+        "description": "Annual sales of NGV commercial vehicles in China (units per year)."
+      }
+    },
+    "Commercial_Vehicle_(NGV)_Annual_Sales_Europe": {
+      "entity": "Commercial_Vehicles_(NGV)",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "chimera",
+          "category": "demand"
+        },
+        "description": "Annual sales of NGV commercial vehicles in Europe (units per year)."
+      }
+    },
+    "Commercial_Vehicle_(NGV)_Annual_Sales_Global": {
+      "entity": "Commercial_Vehicles_(NGV)",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "chimera",
+          "category": "demand"
+        },
+        "description": "Annual sales of NGV commercial vehicles in Global (units per year)."
+      }
+    },
+    "Commercial_Vehicle_(NGV)_Annual_Sales_Rest_of_World": {
+      "entity": "Commercial_Vehicles_(NGV)",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "chimera",
+          "category": "demand"
+        },
+        "description": "Annual sales of NGV commercial vehicles in Rest_of_World (units per year)."
+      }
+    },
+    "Commercial_Vehicle_(NGV)_Annual_Sales_USA": {
+      "entity": "Commercial_Vehicles_(NGV)",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "chimera",
+          "category": "demand"
+        },
+        "description": "Annual sales of NGV commercial vehicles in USA (units per year)."
+      }
+    },
+    "Commercial_Vehicle_(NGV)_Total_Fleet_China": {
+      "entity": "Commercial_Vehicles_(NGV)",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "chimera",
+          "category": "installed_base"
+        },
+        "description": "Total in-use NGV commercial vehicle fleet in China (stock, units)."
+      }
+    },
+    "Commercial_Vehicle_(NGV)_Total_Fleet_Europe": {
+      "entity": "Commercial_Vehicles_(NGV)",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "chimera",
+          "category": "installed_base"
+        },
+        "description": "Total in-use NGV commercial vehicle fleet in Europe (stock, units)."
+      }
+    },
+    "Commercial_Vehicle_(NGV)_Total_Fleet_Global": {
+      "entity": "Commercial_Vehicles_(NGV)",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "chimera",
+          "category": "installed_base"
+        },
+        "description": "Total in-use NGV commercial vehicle fleet in Global (stock, units)."
+      }
+    },
+    "Commercial_Vehicle_(NGV)_Total_Fleet_Rest_of_World": {
+      "entity": "Commercial_Vehicles_(NGV)",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "chimera",
+          "category": "installed_base"
+        },
+        "description": "Total in-use NGV commercial vehicle fleet in Rest_of_World (stock, units)."
+      }
+    },
+    "Commercial_Vehicle_(NGV)_Total_Fleet_USA": {
+      "entity": "Commercial_Vehicles_(NGV)",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "chimera",
+          "category": "installed_base"
+        },
+        "description": "Total in-use NGV commercial vehicle fleet in USA (stock, units)."
+      }
+    },
+    "HCV_commercial_vehicle_(Range-400_KM)_Lowest_Cost_China": {
+      "entity": "Heavy_Duty_Commercial_Vehicles_(EV)",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "cost"
+        },
+        "description": "Lowest available cost for a heavy-duty EV commercial vehicle with ~400 km range in China (USD per vehicle, real terms)."
+      }
+    },
+    "HCV_commercial_vehicle_(Range-400_KM)_Lowest_Cost_Europe": {
+      "entity": "Heavy_Duty_Commercial_Vehicles_(EV)",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "cost"
+        },
+        "description": "Lowest available cost for a heavy-duty EV commercial vehicle with ~400 km range in Europe (USD per vehicle, real terms)."
+      }
+    },
+    "HCV_commercial_vehicle_(Range-400_KM)_Lowest_Cost_Rest_of_World": {
+      "entity": "Heavy_Duty_Commercial_Vehicles_(EV)",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "cost"
+        },
+        "description": "Lowest available cost for a heavy-duty EV commercial vehicle with ~400 km range in Rest_of_World (USD per vehicle, real terms)."
+      }
+    },
+    "HCV_commercial_vehicle_(Range-400_KM)_Lowest_Cost_USA": {
+      "entity": "Heavy_Duty_Commercial_Vehicles_(EV)",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "cost"
+        },
+        "description": "Lowest available cost for a heavy-duty EV commercial vehicle with ~400 km range in USA (USD per vehicle, real terms)."
+      }
+    },
+    "Heavy_Duty_Commercial_Vehicle_(EV)_Annual_Sales_China": {
+      "entity": "Heavy_Duty_Commercial_Vehicles_(EV)",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "demand"
+        },
+        "description": "Annual sales of heavy-duty EV commercial vehicles in China (units per year)."
+      }
+    },
+    "Heavy_Duty_Commercial_Vehicle_(EV)_Annual_Sales_Europe": {
+      "entity": "Heavy_Duty_Commercial_Vehicles_(EV)",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "demand"
+        },
+        "description": "Annual sales of heavy-duty EV commercial vehicles in Europe (units per year)."
+      }
+    },
+    "Heavy_Duty_Commercial_Vehicle_(EV)_Annual_Sales_Global": {
+      "entity": "Heavy_Duty_Commercial_Vehicles_(EV)",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "demand"
+        },
+        "description": "Annual sales of heavy-duty EV commercial vehicles in Global (units per year)."
+      }
+    },
+    "Heavy_Duty_Commercial_Vehicle_(EV)_Annual_Sales_Rest_of_World": {
+      "entity": "Heavy_Duty_Commercial_Vehicles_(EV)",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "demand"
+        },
+        "description": "Annual sales of heavy-duty EV commercial vehicles in Rest_of_World (units per year)."
+      }
+    },
+    "Heavy_Duty_Commercial_Vehicle_(EV)_Annual_Sales_USA": {
+      "entity": "Heavy_Duty_Commercial_Vehicles_(EV)",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "demand"
+        },
+        "description": "Annual sales of heavy-duty EV commercial vehicles in USA (units per year)."
+      }
+    },
+    "Heavy_Duty_Commercial_Vehicle_(EV)_Total_Fleet_China": {
+      "entity": "Heavy_Duty_Commercial_Vehicles_(EV)",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "installed_base"
+        },
+        "description": "Total in-use heavy-duty EV commercial vehicle fleet in China (stock, units)."
+      }
+    },
+    "Heavy_Duty_Commercial_Vehicle_(EV)_Total_Fleet_Europe": {
+      "entity": "Heavy_Duty_Commercial_Vehicles_(EV)",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "installed_base"
+        },
+        "description": "Total in-use heavy-duty EV commercial vehicle fleet in Europe (stock, units)."
+      }
+    },
+    "Heavy_Duty_Commercial_Vehicle_(EV)_Total_Fleet_Global": {
+      "entity": "Heavy_Duty_Commercial_Vehicles_(EV)",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "installed_base"
+        },
+        "description": "Total in-use heavy-duty EV commercial vehicle fleet in Global (stock, units)."
+      }
+    },
+    "Heavy_Duty_Commercial_Vehicle_(EV)_Total_Fleet_Rest_of_World": {
+      "entity": "Heavy_Duty_Commercial_Vehicles_(EV)",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "installed_base"
+        },
+        "description": "Total in-use heavy-duty EV commercial vehicle fleet in Rest_of_World (stock, units)."
+      }
+    },
+    "Heavy_Duty_Commercial_Vehicle_(EV)_Total_Fleet_USA": {
+      "entity": "Heavy_Duty_Commercial_Vehicles_(EV)",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "installed_base"
+        },
+        "description": "Total in-use heavy-duty EV commercial vehicle fleet in USA (stock, units)."
+      }
+    },
+    "Heavy_Duty_Commercial_Vehicle_(ICE)_Annual_Sales_China": {
+      "entity": "Heavy_Duty_Commercial_Vehicles_(ICE)",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "demand"
+        },
+        "description": "Annual sales of heavy-duty ICE commercial vehicles in China (units per year)."
+      }
+    },
+    "Heavy_Duty_Commercial_Vehicle_(ICE)_Annual_Sales_Europe": {
+      "entity": "Heavy_Duty_Commercial_Vehicles_(ICE)",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "demand"
+        },
+        "description": "Annual sales of heavy-duty ICE commercial vehicles in Europe (units per year)."
+      }
+    },
+    "Heavy_Duty_Commercial_Vehicle_(ICE)_Annual_Sales_Global": {
+      "entity": "Heavy_Duty_Commercial_Vehicles_(ICE)",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "demand"
+        },
+        "description": "Annual sales of heavy-duty ICE commercial vehicles in Global (units per year)."
+      }
+    },
+    "Heavy_Duty_Commercial_Vehicle_(ICE)_Annual_Sales_Rest_of_World": {
+      "entity": "Heavy_Duty_Commercial_Vehicles_(ICE)",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "demand"
+        },
+        "description": "Annual sales of heavy-duty ICE commercial vehicles in Rest_of_World (units per year)."
+      }
+    },
+    "Heavy_Duty_Commercial_Vehicle_(ICE)_Annual_Sales_USA": {
+      "entity": "Heavy_Duty_Commercial_Vehicles_(ICE)",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "demand"
+        },
+        "description": "Annual sales of heavy-duty ICE commercial vehicles in USA (units per year)."
+      }
+    },
+    "Heavy_Duty_Commercial_Vehicle_(ICE)_Price_China": {
+      "entity": "Heavy_Duty_Commercial_Vehicles_(ICE)",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "cost"
+        },
+        "description": "Typical purchase price of heavy-duty ICE commercial vehicles in China (USD per vehicle, real terms)."
+      }
+    },
+    "Heavy_Duty_Commercial_Vehicle_(ICE)_Price_Europe": {
+      "entity": "Heavy_Duty_Commercial_Vehicles_(ICE)",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "cost"
+        },
+        "description": "Typical purchase price of heavy-duty ICE commercial vehicles in Europe (USD per vehicle, real terms)."
+      }
+    },
+    "Heavy_Duty_Commercial_Vehicle_(ICE)_Price_Global": {
+      "entity": "Heavy_Duty_Commercial_Vehicles_(ICE)",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "cost"
+        },
+        "description": "Typical purchase price of heavy-duty ICE commercial vehicles in Global (USD per vehicle, real terms)."
+      }
+    },
+    "Heavy_Duty_Commercial_Vehicle_(ICE)_Price_Rest_of_World": {
+      "entity": "Heavy_Duty_Commercial_Vehicles_(ICE)",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "cost"
+        },
+        "description": "Typical purchase price of heavy-duty ICE commercial vehicles in Rest_of_World (USD per vehicle, real terms)."
+      }
+    },
+    "Heavy_Duty_Commercial_Vehicle_(ICE)_Price_USA": {
+      "entity": "Heavy_Duty_Commercial_Vehicles_(ICE)",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "cost"
+        },
+        "description": "Typical purchase price of heavy-duty ICE commercial vehicles in USA (USD per vehicle, real terms)."
+      }
+    },
+    "Heavy_Duty_Commercial_Vehicle_(ICE)_Total_Fleet_China": {
+      "entity": "Heavy_Duty_Commercial_Vehicles_(ICE)",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "installed_base"
+        },
+        "description": "Total in-use heavy-duty ICE commercial vehicle fleet in China (stock, units)."
+      }
+    },
+    "Heavy_Duty_Commercial_Vehicle_(ICE)_Total_Fleet_Europe": {
+      "entity": "Heavy_Duty_Commercial_Vehicles_(ICE)",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "installed_base"
+        },
+        "description": "Total in-use heavy-duty ICE commercial vehicle fleet in Europe (stock, units)."
+      }
+    },
+    "Heavy_Duty_Commercial_Vehicle_(ICE)_Total_Fleet_Global": {
+      "entity": "Heavy_Duty_Commercial_Vehicles_(ICE)",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "installed_base"
+        },
+        "description": "Total in-use heavy-duty ICE commercial vehicle fleet in Global (stock, units)."
+      }
+    },
+    "Heavy_Duty_Commercial_Vehicle_(ICE)_Total_Fleet_Rest_of_World": {
+      "entity": "Heavy_Duty_Commercial_Vehicles_(ICE)",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "installed_base"
+        },
+        "description": "Total in-use heavy-duty ICE commercial vehicle fleet in Rest_of_World (stock, units)."
+      }
+    },
+    "Heavy_Duty_Commercial_Vehicle_(ICE)_Total_Fleet_USA": {
+      "entity": "Heavy_Duty_Commercial_Vehicles_(ICE)",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "installed_base"
+        },
+        "description": "Total in-use heavy-duty ICE commercial vehicle fleet in USA (stock, units)."
+      }
+    },
+    "Heavy-duty_commercial_vehicles_(NGV)_Annual_Sales_China": {
+      "entity": "Heavy_Duty_Commercial_Vehicles_(NGV)",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "chimera",
+          "category": "demand"
+        },
+        "description": "Annual sales of heavy-duty NGV commercial vehicles in China (units per year)."
+      }
+    },
+    "Heavy-duty_commercial_vehicles_(NGV)_Annual_Sales_Europe": {
+      "entity": "Heavy_Duty_Commercial_Vehicles_(NGV)",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "chimera",
+          "category": "demand"
+        },
+        "description": "Annual sales of heavy-duty NGV commercial vehicles in Europe (units per year)."
+      }
+    },
+    "Heavy-duty_commercial_vehicles_(NGV)_Annual_Sales_Global": {
+      "entity": "Heavy_Duty_Commercial_Vehicles_(NGV)",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "chimera",
+          "category": "demand"
+        },
+        "description": "Annual sales of heavy-duty NGV commercial vehicles in Global (units per year)."
+      }
+    },
+    "Heavy-duty_commercial_vehicles_(NGV)_Annual_Sales_Rest_of_World": {
+      "entity": "Heavy_Duty_Commercial_Vehicles_(NGV)",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "chimera",
+          "category": "demand"
+        },
+        "description": "Annual sales of heavy-duty NGV commercial vehicles in Rest_of_World (units per year)."
+      }
+    },
+    "Heavy-duty_commercial_vehicles_(NGV)_Annual_Sales_USA": {
+      "entity": "Heavy_Duty_Commercial_Vehicles_(NGV)",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "chimera",
+          "category": "demand"
+        },
+        "description": "Annual sales of heavy-duty NGV commercial vehicles in USA (units per year)."
+      }
+    },
+    "LCV_commercial_vehicle_(Range-100_KM)_Lowest_Cost_China": {
+      "entity": "Light_Duty_Commercial_Vehicles_(EV)",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "cost"
+        },
+        "description": "Lowest available cost for a light-duty EV commercial vehicle with ~100 km range in China (USD per vehicle, real terms)."
+      }
+    },
+    "LCV_commercial_vehicle_(Range-100_KM)_Lowest_Cost_Europe": {
+      "entity": "Light_Duty_Commercial_Vehicles_(EV)",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "cost"
+        },
+        "description": "Lowest available cost for a light-duty EV commercial vehicle with ~100 km range in Europe (USD per vehicle, real terms)."
+      }
+    },
+    "LCV_commercial_vehicle_(Range-100_KM)_Lowest_Cost_Rest_of_World": {
+      "entity": "Light_Duty_Commercial_Vehicles_(EV)",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "cost"
+        },
+        "description": "Lowest available cost for a light-duty EV commercial vehicle with ~100 km range in Rest_of_World (USD per vehicle, real terms)."
+      }
+    },
+    "LCV_commercial_vehicle_(Range-100_KM)_Lowest_Cost_USA": {
+      "entity": "Light_Duty_Commercial_Vehicles_(EV)",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "cost"
+        },
+        "description": "Lowest available cost for a light-duty EV commercial vehicle with ~100 km range in USA (USD per vehicle, real terms)."
+      }
+    },
+    "Lead_Annual_Implied_Demand-Sales_Buses_Global": {
+      "entity": "Lead",
+      "region": "Global",
+      "level_name": "commodity",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "commodity",
+          "category": "implied_demand"
+        },
+        "description": "Annual implied lead demand (e.g., tonnes) from batteries installed in new bus sales globally."
+      }
+    },
+    "Lead_Annual_Implied_Demand-Sales_Commercial_vehicles_Global": {
+      "entity": "Lead",
+      "region": "Global",
+      "level_name": "commodity",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "commodity",
+          "category": "implied_demand"
+        },
+        "description": "Annual implied lead demand (e.g., tonnes) from batteries installed in new commercial vehicle sales globally."
+      }
+    },
+    "Lead_Annual_Implied_Demand-Vehicle_replacement_Commercial_Global": {
+      "entity": "Lead",
+      "region": "Global",
+      "level_name": "commodity",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "commodity",
+          "category": "implied_demand"
+        },
+        "description": "Annual implied lead demand (e.g., tonnes) from replacement batteries in the existing global commercial vehicle fleet."
+      }
+    },
+    "Light_Duty_Commercial_Vehicle_(EV)_Annual_Sales_China": {
+      "entity": "Light_Duty_Commercial_Vehicles_(EV)",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "demand"
+        },
+        "description": "Annual sales of light-duty EV commercial vehicles in China (units per year)."
+      }
+    },
+    "Light_Duty_Commercial_Vehicle_(EV)_Annual_Sales_Europe": {
+      "entity": "Light_Duty_Commercial_Vehicles_(EV)",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "demand"
+        },
+        "description": "Annual sales of light-duty EV commercial vehicles in Europe (units per year)."
+      }
+    },
+    "Light_Duty_Commercial_Vehicle_(EV)_Annual_Sales_Global": {
+      "entity": "Light_Duty_Commercial_Vehicles_(EV)",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "demand"
+        },
+        "description": "Annual sales of light-duty EV commercial vehicles in Global (units per year)."
+      }
+    },
+    "Light_Duty_Commercial_Vehicle_(EV)_Annual_Sales_Rest_of_World": {
+      "entity": "Light_Duty_Commercial_Vehicles_(EV)",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "demand"
+        },
+        "description": "Annual sales of light-duty EV commercial vehicles in Rest_of_World (units per year)."
+      }
+    },
+    "Light_Duty_Commercial_Vehicle_(EV)_Annual_Sales_USA": {
+      "entity": "Light_Duty_Commercial_Vehicles_(EV)",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "demand"
+        },
+        "description": "Annual sales of light-duty EV commercial vehicles in USA (units per year)."
+      }
+    },
+    "Light_Duty_Commercial_Vehicle_(EV)_Total_Fleet_China": {
+      "entity": "Light_Duty_Commercial_Vehicles_(EV)",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "installed_base"
+        },
+        "description": "Total in-use light-duty EV commercial vehicle fleet in China (stock, units)."
+      }
+    },
+    "Light_Duty_Commercial_Vehicle_(EV)_Total_Fleet_Europe": {
+      "entity": "Light_Duty_Commercial_Vehicles_(EV)",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "installed_base"
+        },
+        "description": "Total in-use light-duty EV commercial vehicle fleet in Europe (stock, units)."
+      }
+    },
+    "Light_Duty_Commercial_Vehicle_(EV)_Total_Fleet_Global": {
+      "entity": "Light_Duty_Commercial_Vehicles_(EV)",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "installed_base"
+        },
+        "description": "Total in-use light-duty EV commercial vehicle fleet in Global (stock, units)."
+      }
+    },
+    "Light_Duty_Commercial_Vehicle_(EV)_Total_Fleet_Rest_of_World": {
+      "entity": "Light_Duty_Commercial_Vehicles_(EV)",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "installed_base"
+        },
+        "description": "Total in-use light-duty EV commercial vehicle fleet in Rest_of_World (stock, units)."
+      }
+    },
+    "Light_Duty_Commercial_Vehicle_(EV)_Total_Fleet_USA": {
+      "entity": "Light_Duty_Commercial_Vehicles_(EV)",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "installed_base"
+        },
+        "description": "Total in-use light-duty EV commercial vehicle fleet in USA (stock, units)."
+      }
+    },
+    "Light_Duty_Commercial_Vehicle_(ICE)_Annual_Sales_China": {
+      "entity": "Light_Duty_Commercial_Vehicles_(ICE)",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "demand"
+        },
+        "description": "Annual sales of light-duty ICE commercial vehicles in China (units per year)."
+      }
+    },
+    "Light_Duty_Commercial_Vehicle_(ICE)_Annual_Sales_Europe": {
+      "entity": "Light_Duty_Commercial_Vehicles_(ICE)",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "demand"
+        },
+        "description": "Annual sales of light-duty ICE commercial vehicles in Europe (units per year)."
+      }
+    },
+    "Light_Duty_Commercial_Vehicle_(ICE)_Annual_Sales_Global": {
+      "entity": "Light_Duty_Commercial_Vehicles_(ICE)",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "demand"
+        },
+        "description": "Annual sales of light-duty ICE commercial vehicles in Global (units per year)."
+      }
+    },
+    "Light_Duty_Commercial_Vehicle_(ICE)_Annual_Sales_Rest_of_World": {
+      "entity": "Light_Duty_Commercial_Vehicles_(ICE)",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "demand"
+        },
+        "description": "Annual sales of light-duty ICE commercial vehicles in Rest_of_World (units per year)."
+      }
+    },
+    "Light_Duty_Commercial_Vehicle_(ICE)_Annual_Sales_USA": {
+      "entity": "Light_Duty_Commercial_Vehicles_(ICE)",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "demand"
+        },
+        "description": "Annual sales of light-duty ICE commercial vehicles in USA (units per year)."
+      }
+    },
+    "Light_Duty_Commercial_Vehicle_(ICE)_Price_China": {
+      "entity": "Light_Duty_Commercial_Vehicles_(ICE)",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "cost"
+        },
+        "description": "Typical purchase price of light-duty ICE commercial vehicles in China (USD per vehicle, real terms)."
+      }
+    },
+    "Light_Duty_Commercial_Vehicle_(ICE)_Price_Europe": {
+      "entity": "Light_Duty_Commercial_Vehicles_(ICE)",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "cost"
+        },
+        "description": "Typical purchase price of light-duty ICE commercial vehicles in Europe (USD per vehicle, real terms)."
+      }
+    },
+    "Light_Duty_Commercial_Vehicle_(ICE)_Price_Global": {
+      "entity": "Light_Duty_Commercial_Vehicles_(ICE)",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "cost"
+        },
+        "description": "Typical purchase price of light-duty ICE commercial vehicles in Global (USD per vehicle, real terms)."
+      }
+    },
+    "Light_Duty_Commercial_Vehicle_(ICE)_Price_Rest_of_World": {
+      "entity": "Light_Duty_Commercial_Vehicles_(ICE)",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "cost"
+        },
+        "description": "Typical purchase price of light-duty ICE commercial vehicles in Rest_of_World (USD per vehicle, real terms)."
+      }
+    },
+    "Light_Duty_Commercial_Vehicle_(ICE)_Price_USA": {
+      "entity": "Light_Duty_Commercial_Vehicles_(ICE)",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "cost"
+        },
+        "description": "Typical purchase price of light-duty ICE commercial vehicles in USA (USD per vehicle, real terms)."
+      }
+    },
+    "Light_Duty_Commercial_Vehicle_(ICE)_Total_Fleet_China": {
+      "entity": "Light_Duty_Commercial_Vehicles_(ICE)",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "installed_base"
+        },
+        "description": "Total in-use light-duty ICE commercial vehicle fleet in China (stock, units)."
+      }
+    },
+    "Light_Duty_Commercial_Vehicle_(ICE)_Total_Fleet_Europe": {
+      "entity": "Light_Duty_Commercial_Vehicles_(ICE)",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "installed_base"
+        },
+        "description": "Total in-use light-duty ICE commercial vehicle fleet in Europe (stock, units)."
+      }
+    },
+    "Light_Duty_Commercial_Vehicle_(ICE)_Total_Fleet_Global": {
+      "entity": "Light_Duty_Commercial_Vehicles_(ICE)",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "installed_base"
+        },
+        "description": "Total in-use light-duty ICE commercial vehicle fleet in Global (stock, units)."
+      }
+    },
+    "Light_Duty_Commercial_Vehicle_(ICE)_Total_Fleet_Rest_of_World": {
+      "entity": "Light_Duty_Commercial_Vehicles_(ICE)",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "installed_base"
+        },
+        "description": "Total in-use light-duty ICE commercial vehicle fleet in Rest_of_World (stock, units)."
+      }
+    },
+    "Light_Duty_Commercial_Vehicle_(ICE)_Total_Fleet_USA": {
+      "entity": "Light_Duty_Commercial_Vehicles_(ICE)",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "installed_base"
+        },
+        "description": "Total in-use light-duty ICE commercial vehicle fleet in USA (stock, units)."
+      }
+    },
+    "Light-duty_commercial_vehicles_(NGV)_Annual_Sales_China": {
+      "entity": "Light_Duty_Commercial_Vehicles_(NGV)",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "chimera",
+          "category": "demand"
+        },
+        "description": "Annual sales of light-duty NGV commercial vehicles in China (units per year)."
+      }
+    },
+    "Light-duty_commercial_vehicles_(NGV)_Annual_Sales_Europe": {
+      "entity": "Light_Duty_Commercial_Vehicles_(NGV)",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "chimera",
+          "category": "demand"
+        },
+        "description": "Annual sales of light-duty NGV commercial vehicles in Europe (units per year)."
+      }
+    },
+    "Light-duty_commercial_vehicles_(NGV)_Annual_Sales_Global": {
+      "entity": "Light_Duty_Commercial_Vehicles_(NGV)",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "chimera",
+          "category": "demand"
+        },
+        "description": "Annual sales of light-duty NGV commercial vehicles in Global (units per year)."
+      }
+    },
+    "Light-duty_commercial_vehicles_(NGV)_Annual_Sales_Rest_of_World": {
+      "entity": "Light_Duty_Commercial_Vehicles_(NGV)",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "chimera",
+          "category": "demand"
+        },
+        "description": "Annual sales of light-duty NGV commercial vehicles in Rest_of_World (units per year)."
+      }
+    },
+    "Light-duty_commercial_vehicles_(NGV)_Annual_Sales_USA": {
+      "entity": "Light_Duty_Commercial_Vehicles_(NGV)",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "chimera",
+          "category": "demand"
+        },
+        "description": "Annual sales of light-duty NGV commercial vehicles in USA (units per year)."
+      }
+    },
+    "MCV_commercial_vehicle_(Range-200_KM)_Lowest_Cost_China": {
+      "entity": "Medium_Duty_Commercial_Vehicles_(EV)",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "cost"
+        },
+        "description": "Lowest available cost for a medium-duty EV commercial vehicle with ~200 km range in China (USD per vehicle, real terms)."
+      }
+    },
+    "MCV_commercial_vehicle_(Range-200_KM)_Lowest_Cost_Europe": {
+      "entity": "Medium_Duty_Commercial_Vehicles_(EV)",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "cost"
+        },
+        "description": "Lowest available cost for a medium-duty EV commercial vehicle with ~200 km range in Europe (USD per vehicle, real terms)."
+      }
+    },
+    "MCV_commercial_vehicle_(Range-200_KM)_Lowest_Cost_Rest_of_World": {
+      "entity": "Medium_Duty_Commercial_Vehicles_(EV)",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "cost"
+        },
+        "description": "Lowest available cost for a medium-duty EV commercial vehicle with ~200 km range in Rest_of_World (USD per vehicle, real terms)."
+      }
+    },
+    "MCV_commercial_vehicle_(Range-200_KM)_Lowest_Cost_USA": {
+      "entity": "Medium_Duty_Commercial_Vehicles_(EV)",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "cost"
+        },
+        "description": "Lowest available cost for a medium-duty EV commercial vehicle with ~200 km range in USA (USD per vehicle, real terms)."
+      }
+    },
+    "Medium_Duty_Commercial_Vehicle_(EV)_Annual_Sales_China": {
+      "entity": "Medium_Duty_Commercial_Vehicles_(EV)",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "demand"
+        },
+        "description": "Annual sales of medium-duty EV commercial vehicles in China (units per year)."
+      }
+    },
+    "Medium_Duty_Commercial_Vehicle_(EV)_Annual_Sales_Europe": {
+      "entity": "Medium_Duty_Commercial_Vehicles_(EV)",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "demand"
+        },
+        "description": "Annual sales of medium-duty EV commercial vehicles in Europe (units per year)."
+      }
+    },
+    "Medium_Duty_Commercial_Vehicle_(EV)_Annual_Sales_Global": {
+      "entity": "Medium_Duty_Commercial_Vehicles_(EV)",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "demand"
+        },
+        "description": "Annual sales of medium-duty EV commercial vehicles in Global (units per year)."
+      }
+    },
+    "Medium_Duty_Commercial_Vehicle_(EV)_Annual_Sales_Rest_of_World": {
+      "entity": "Medium_Duty_Commercial_Vehicles_(EV)",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "demand"
+        },
+        "description": "Annual sales of medium-duty EV commercial vehicles in Rest_of_World (units per year)."
+      }
+    },
+    "Medium_Duty_Commercial_Vehicle_(EV)_Annual_Sales_USA": {
+      "entity": "Medium_Duty_Commercial_Vehicles_(EV)",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "demand"
+        },
+        "description": "Annual sales of medium-duty EV commercial vehicles in USA (units per year)."
+      }
+    },
+    "Medium_Duty_Commercial_Vehicle_(EV)_Total_Fleet_China": {
+      "entity": "Medium_Duty_Commercial_Vehicles_(EV)",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "installed_base"
+        },
+        "description": "Total in-use medium-duty EV commercial vehicle fleet in China (stock, units)."
+      }
+    },
+    "Medium_Duty_Commercial_Vehicle_(EV)_Total_Fleet_Europe": {
+      "entity": "Medium_Duty_Commercial_Vehicles_(EV)",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "installed_base"
+        },
+        "description": "Total in-use medium-duty EV commercial vehicle fleet in Europe (stock, units)."
+      }
+    },
+    "Medium_Duty_Commercial_Vehicle_(EV)_Total_Fleet_Global": {
+      "entity": "Medium_Duty_Commercial_Vehicles_(EV)",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "installed_base"
+        },
+        "description": "Total in-use medium-duty EV commercial vehicle fleet in Global (stock, units)."
+      }
+    },
+    "Medium_Duty_Commercial_Vehicle_(EV)_Total_Fleet_Rest_of_World": {
+      "entity": "Medium_Duty_Commercial_Vehicles_(EV)",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "installed_base"
+        },
+        "description": "Total in-use medium-duty EV commercial vehicle fleet in Rest_of_World (stock, units)."
+      }
+    },
+    "Medium_Duty_Commercial_Vehicle_(EV)_Total_Fleet_USA": {
+      "entity": "Medium_Duty_Commercial_Vehicles_(EV)",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "installed_base"
+        },
+        "description": "Total in-use medium-duty EV commercial vehicle fleet in USA (stock, units)."
+      }
+    },
+    "Medium_Duty_Commercial_Vehicle_(ICE)_Annual_Sales_China": {
+      "entity": "Medium_Duty_Commercial_Vehicles_(ICE)",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "demand"
+        },
+        "description": "Annual sales of medium-duty ICE commercial vehicles in China (units per year)."
+      }
+    },
+    "Medium_Duty_Commercial_Vehicle_(ICE)_Annual_Sales_Europe": {
+      "entity": "Medium_Duty_Commercial_Vehicles_(ICE)",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "demand"
+        },
+        "description": "Annual sales of medium-duty ICE commercial vehicles in Europe (units per year)."
+      }
+    },
+    "Medium_Duty_Commercial_Vehicle_(ICE)_Annual_Sales_Global": {
+      "entity": "Medium_Duty_Commercial_Vehicles_(ICE)",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "demand"
+        },
+        "description": "Annual sales of medium-duty ICE commercial vehicles in Global (units per year)."
+      }
+    },
+    "Medium_Duty_Commercial_Vehicle_(ICE)_Annual_Sales_Rest_of_World": {
+      "entity": "Medium_Duty_Commercial_Vehicles_(ICE)",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "demand"
+        },
+        "description": "Annual sales of medium-duty ICE commercial vehicles in Rest_of_World (units per year)."
+      }
+    },
+    "Medium_Duty_Commercial_Vehicle_(ICE)_Annual_Sales_USA": {
+      "entity": "Medium_Duty_Commercial_Vehicles_(ICE)",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "demand"
+        },
+        "description": "Annual sales of medium-duty ICE commercial vehicles in USA (units per year)."
+      }
+    },
+    "Medium_Duty_Commercial_Vehicle_(ICE)_Price_China": {
+      "entity": "Medium_Duty_Commercial_Vehicles_(ICE)",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "cost"
+        },
+        "description": "Typical purchase price of medium-duty ICE commercial vehicles in China (USD per vehicle, real terms)."
+      }
+    },
+    "Medium_Duty_Commercial_Vehicle_(ICE)_Price_Europe": {
+      "entity": "Medium_Duty_Commercial_Vehicles_(ICE)",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "cost"
+        },
+        "description": "Typical purchase price of medium-duty ICE commercial vehicles in Europe (USD per vehicle, real terms)."
+      }
+    },
+    "Medium_Duty_Commercial_Vehicle_(ICE)_Price_Global": {
+      "entity": "Medium_Duty_Commercial_Vehicles_(ICE)",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "cost"
+        },
+        "description": "Typical purchase price of medium-duty ICE commercial vehicles in Global (USD per vehicle, real terms)."
+      }
+    },
+    "Medium_Duty_Commercial_Vehicle_(ICE)_Price_Rest_of_World": {
+      "entity": "Medium_Duty_Commercial_Vehicles_(ICE)",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "cost"
+        },
+        "description": "Typical purchase price of medium-duty ICE commercial vehicles in Rest_of_World (USD per vehicle, real terms)."
+      }
+    },
+    "Medium_Duty_Commercial_Vehicle_(ICE)_Price_USA": {
+      "entity": "Medium_Duty_Commercial_Vehicles_(ICE)",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "cost"
+        },
+        "description": "Typical purchase price of medium-duty ICE commercial vehicles in USA (USD per vehicle, real terms)."
+      }
+    },
+    "Medium_Duty_Commercial_Vehicle_(ICE)_Total_Fleet_China": {
+      "entity": "Medium_Duty_Commercial_Vehicles_(ICE)",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "installed_base"
+        },
+        "description": "Total in-use medium-duty ICE commercial vehicle fleet in China (stock, units)."
+      }
+    },
+    "Medium_Duty_Commercial_Vehicle_(ICE)_Total_Fleet_Europe": {
+      "entity": "Medium_Duty_Commercial_Vehicles_(ICE)",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "installed_base"
+        },
+        "description": "Total in-use medium-duty ICE commercial vehicle fleet in Europe (stock, units)."
+      }
+    },
+    "Medium_Duty_Commercial_Vehicle_(ICE)_Total_Fleet_Global": {
+      "entity": "Medium_Duty_Commercial_Vehicles_(ICE)",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "installed_base"
+        },
+        "description": "Total in-use medium-duty ICE commercial vehicle fleet in Global (stock, units)."
+      }
+    },
+    "Medium_Duty_Commercial_Vehicle_(ICE)_Total_Fleet_Rest_of_World": {
+      "entity": "Medium_Duty_Commercial_Vehicles_(ICE)",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "installed_base"
+        },
+        "description": "Total in-use medium-duty ICE commercial vehicle fleet in Rest_of_World (stock, units)."
+      }
+    },
+    "Medium_Duty_Commercial_Vehicle_(ICE)_Total_Fleet_USA": {
+      "entity": "Medium_Duty_Commercial_Vehicles_(ICE)",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "installed_base"
+        },
+        "description": "Total in-use medium-duty ICE commercial vehicle fleet in USA (stock, units)."
+      }
+    },
+    "Medium-duty_commercial_vehicles_(NGV)_Annual_Sales_China": {
+      "entity": "Medium_Duty_Commercial_Vehicles_(NGV)",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "chimera",
+          "category": "demand"
+        },
+        "description": "Annual sales of medium-duty NGV commercial vehicles in China (units per year)."
+      }
+    },
+    "Medium-duty_commercial_vehicles_(NGV)_Annual_Sales_Europe": {
+      "entity": "Medium_Duty_Commercial_Vehicles_(NGV)",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "chimera",
+          "category": "demand"
+        },
+        "description": "Annual sales of medium-duty NGV commercial vehicles in Europe (units per year)."
+      }
+    },
+    "Medium-duty_commercial_vehicles_(NGV)_Annual_Sales_Global": {
+      "entity": "Medium_Duty_Commercial_Vehicles_(NGV)",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "chimera",
+          "category": "demand"
+        },
+        "description": "Annual sales of medium-duty NGV commercial vehicles in Global (units per year)."
+      }
+    },
+    "Medium-duty_commercial_vehicles_(NGV)_Annual_Sales_Rest_of_World": {
+      "entity": "Medium_Duty_Commercial_Vehicles_(NGV)",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "chimera",
+          "category": "demand"
+        },
+        "description": "Annual sales of medium-duty NGV commercial vehicles in Rest_of_World (units per year)."
+      }
+    },
+    "Medium-duty_commercial_vehicles_(NGV)_Annual_Sales_USA": {
+      "entity": "Medium_Duty_Commercial_Vehicles_(NGV)",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "chimera",
+          "category": "demand"
+        },
+        "description": "Annual sales of medium-duty NGV commercial vehicles in USA (units per year)."
+      }
+    }
+  }
+}

@@ -1,0 +1,509 @@
+{
+  "taxonomy": {
+    "market": "Two_Wheelers",
+    "products": {
+      "EV_2_Wheelers": {
+        "subproducts": []
+      },
+      "ICE_2_Wheelers": {
+        "subproducts": []
+      }
+    }
+  },
+  "datasets": {
+    "EV_2_Wheeler_(Range-100_KM)_Lowest_Cost_China": {
+      "entity": "EV_2_Wheelers",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "cost"
+        },
+        "description": "Lowest available cost for a ~100 km range EV two-wheeler in China (USD per vehicle, real terms)."
+      }
+    },
+    "EV_2_Wheeler_(Range-100_KM)_Lowest_Cost_Europe": {
+      "entity": "EV_2_Wheelers",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "cost"
+        },
+        "description": "Lowest available cost for a ~100 km range EV two-wheeler in Europe (USD per vehicle, real terms)."
+      }
+    },
+    "EV_2_Wheeler_(Range-100_KM)_Lowest_Cost_Rest_of_World": {
+      "entity": "EV_2_Wheelers",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "cost"
+        },
+        "description": "Lowest available cost for a ~100 km range EV two-wheeler in Rest of World (USD per vehicle, real terms)."
+      }
+    },
+    "EV_2_Wheeler_(Range-100_KM)_Lowest_Cost_USA": {
+      "entity": "EV_2_Wheelers",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "cost"
+        },
+        "description": "Lowest available cost for a ~100 km range EV two-wheeler in the USA (USD per vehicle, real terms)."
+      }
+    },
+    "Lead_Annual_Implied_Demand-Sales_2_wheelers_Global": {
+      "entity": "Lead",
+      "region": "Global",
+      "level_name": "commodity",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "commodity",
+          "category": "implied_demand"
+        },
+        "description": "Annual implied lead demand (e.g., tonnes) from batteries installed in new two-wheeler sales, globally."
+      }
+    },
+    "Lead_Annual_Implied_Demand-Vehicle_replacement_2_wheelers_Global": {
+      "entity": "Lead",
+      "region": "Global",
+      "level_name": "commodity",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "commodity",
+          "category": "implied_demand"
+        },
+        "description": "Annual implied lead demand (e.g., tonnes) from replacement batteries in the existing global two-wheeler fleet."
+      }
+    },
+    "Two_Wheeler_Annual_Sales_China": {
+      "entity": "Two_Wheelers",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "market",
+          "category": "demand"
+        },
+        "description": "Total annual sales of two-wheelers in China (all powertrains, units per year)."
+      }
+    },
+    "Two_Wheeler_Annual_Sales_Europe": {
+      "entity": "Two_Wheelers",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "market",
+          "category": "demand"
+        },
+        "description": "Total annual sales of two-wheelers in Europe (all powertrains, units per year)."
+      }
+    },
+    "Two_Wheeler_Annual_Sales_Global": {
+      "entity": "Two_Wheelers",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "market",
+          "category": "demand"
+        },
+        "description": "Total annual sales of two-wheelers globally (all powertrains, units per year)."
+      }
+    },
+    "Two_Wheeler_Annual_Sales_Rest_of_World": {
+      "entity": "Two_Wheelers",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "market",
+          "category": "demand"
+        },
+        "description": "Total annual sales of two-wheelers in Rest of World (all powertrains, units per year)."
+      }
+    },
+    "Two_Wheeler_Annual_Sales_USA": {
+      "entity": "Two_Wheelers",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "market",
+          "category": "demand"
+        },
+        "description": "Total annual sales of two-wheelers in the USA (all powertrains, units per year)."
+      }
+    },
+    "Two_Wheeler_(EV)_Annual_Sales_China": {
+      "entity": "EV_2_Wheelers",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "demand"
+        },
+        "description": "Annual sales of EV two-wheelers in China (units per year)."
+      }
+    },
+    "Two_Wheeler_(EV)_Annual_Sales_Europe": {
+      "entity": "EV_2_Wheelers",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "demand"
+        },
+        "description": "Annual sales of EV two-wheelers in Europe (units per year)."
+      }
+    },
+    "Two_Wheeler_(EV)_Annual_Sales_Global": {
+      "entity": "EV_2_Wheelers",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "demand"
+        },
+        "description": "Annual sales of EV two-wheelers globally (units per year)."
+      }
+    },
+    "Two_Wheeler_(EV)_Annual_Sales_Rest_of_World": {
+      "entity": "EV_2_Wheelers",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "demand"
+        },
+        "description": "Annual sales of EV two-wheelers in Rest of World (units per year)."
+      }
+    },
+    "Two_Wheeler_(EV)_Annual_Sales_USA": {
+      "entity": "EV_2_Wheelers",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "demand"
+        },
+        "description": "Annual sales of EV two-wheelers in the USA (units per year)."
+      }
+    },
+    "Two_Wheeler_(EV)_Median_Cost_China": {
+      "entity": "EV_2_Wheelers",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "cost"
+        },
+        "description": "Median transaction cost of EV two-wheelers in China (USD per vehicle, real terms)."
+      }
+    },
+    "Two_Wheeler_(EV)_Median_Cost_Europe": {
+      "entity": "EV_2_Wheelers",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "cost"
+        },
+        "description": "Median transaction cost of EV two-wheelers in Europe (USD per vehicle, real terms)."
+      }
+    },
+    "Two_Wheeler_(EV)_Median_Cost_Rest_of_World": {
+      "entity": "EV_2_Wheelers",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "cost"
+        },
+        "description": "Median transaction cost of EV two-wheelers in Rest of World (USD per vehicle, real terms)."
+      }
+    },
+    "Two_Wheeler_(EV)_Median_Cost_USA": {
+      "entity": "EV_2_Wheelers",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "cost"
+        },
+        "description": "Median transaction cost of EV two-wheelers in the USA (USD per vehicle, real terms)."
+      }
+    },
+    "Two_Wheeler_(EV)_Total_Fleet_Europe": {
+      "entity": "EV_2_Wheelers",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "installed_base"
+        },
+        "description": "Total in-use EV two-wheeler fleet in Europe (stock, units)."
+      }
+    },
+    "Two_Wheeler_(EV)_Total_Fleet_Global": {
+      "entity": "EV_2_Wheelers",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "installed_base"
+        },
+        "description": "Total in-use EV two-wheeler fleet globally (stock, units)."
+      }
+    },
+    "Two_Wheeler_(EV)_Total_Fleet_Rest_of_World": {
+      "entity": "EV_2_Wheelers",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "installed_base"
+        },
+        "description": "Total in-use EV two-wheeler fleet in Rest of World (stock, units)."
+      }
+    },
+    "Two_Wheeler_(EV)_Total_Fleet_USA": {
+      "entity": "EV_2_Wheelers",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "disruptor",
+          "category": "installed_base"
+        },
+        "description": "Total in-use EV two-wheeler fleet in the USA (stock, units)."
+      }
+    },
+    "Two_Wheeler_(ICE)_Annual_Sales_China": {
+      "entity": "ICE_2_Wheelers",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "demand"
+        },
+        "description": "Annual sales of ICE two-wheelers in China (units per year)."
+      }
+    },
+    "Two_Wheeler_(ICE)_Annual_Sales_Europe": {
+      "entity": "ICE_2_Wheelers",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "demand"
+        },
+        "description": "Annual sales of ICE two-wheelers in Europe (units per year)."
+      }
+    },
+    "Two_Wheeler_(ICE)_Annual_Sales_Global": {
+      "entity": "ICE_2_Wheelers",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "demand"
+        },
+        "description": "Annual sales of ICE two-wheelers globally (units per year)."
+      }
+    },
+    "Two_Wheeler_(ICE)_Annual_Sales_Rest_of_World": {
+      "entity": "ICE_2_Wheelers",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "demand"
+        },
+        "description": "Annual sales of ICE two-wheelers in Rest of World (units per year)."
+      }
+    },
+    "Two_Wheeler_(ICE)_Annual_Sales_USA": {
+      "entity": "ICE_2_Wheelers",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "demand"
+        },
+        "description": "Annual sales of ICE two-wheelers in the USA (units per year)."
+      }
+    },
+    "Two_Wheeler_(ICE)_Median_Cost_China": {
+      "entity": "ICE_2_Wheelers",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "cost"
+        },
+        "description": "Median transaction cost of ICE two-wheelers in China (USD per vehicle, real terms)."
+      }
+    },
+    "Two_Wheeler_(ICE)_Median_Cost_Europe": {
+      "entity": "ICE_2_Wheelers",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "cost"
+        },
+        "description": "Median transaction cost of ICE two-wheelers in Europe (USD per vehicle, real terms)."
+      }
+    },
+    "Two_Wheeler_(ICE)_Median_Cost_Rest_of_World": {
+      "entity": "ICE_2_Wheelers",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "cost"
+        },
+        "description": "Median transaction cost of ICE two-wheelers in Rest of World (USD per vehicle, real terms)."
+      }
+    },
+    "Two_Wheeler_(ICE)_Median_Cost_USA": {
+      "entity": "ICE_2_Wheelers",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "cost"
+        },
+        "description": "Median transaction cost of ICE two-wheelers in the USA (USD per vehicle, real terms)."
+      }
+    },
+    "Two_Wheeler_(ICE)_Total_Fleet_China": {
+      "entity": "ICE_2_Wheelers",
+      "region": "China",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "installed_base"
+        },
+        "description": "Total in-use ICE two-wheeler fleet in China (stock, units)."
+      }
+    },
+    "Two_Wheeler_(ICE)_Total_Fleet_Europe": {
+      "entity": "ICE_2_Wheelers",
+      "region": "Europe",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "installed_base"
+        },
+        "description": "Total in-use ICE two-wheeler fleet in Europe (stock, units)."
+      }
+    },
+    "Two_Wheeler_(ICE)_Total_Fleet_Global": {
+      "entity": "ICE_2_Wheelers",
+      "region": "Global",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "installed_base"
+        },
+        "description": "Total in-use ICE two-wheeler fleet globally (stock, units)."
+      }
+    },
+    "Two_Wheeler_(ICE)_Total_Fleet_Rest_of_World": {
+      "entity": "ICE_2_Wheelers",
+      "region": "Rest_of_World",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "installed_base"
+        },
+        "description": "Total in-use ICE two-wheeler fleet in Rest of World (stock, units)."
+      }
+    },
+    "Two_Wheeler_(ICE)_Total_Fleet_USA": {
+      "entity": "ICE_2_Wheelers",
+      "region": "USA",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "entity_type": "incumbent",
+          "category": "installed_base"
+        },
+        "description": "Total in-use ICE two-wheeler fleet in the USA (stock, units)."
+      }
+    }
+  }
+}
