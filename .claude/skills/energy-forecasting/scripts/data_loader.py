@@ -5,7 +5,9 @@ Loads cost, capacity, generation, and CF data from multiple JSON entity files
 
 import json
 import os
+import numpy as np
 from typing import Dict, List, Tuple, Optional
+from exceptions import DataNotFoundError, DataValidationError
 
 
 class DataLoader:
@@ -89,7 +91,20 @@ class DataLoader:
         if not dataset_name:
             raise ValueError(f"No LCOE dataset for {technology} in region {region}")
 
-        return self._get_curve_data(dataset_name, region)
+        years, lcoe_values = self._get_curve_data(dataset_name, region)
+
+        # Convert units to $/MWh if needed
+        # Check metadata for units field
+        if dataset_name in self.curves_data:
+            metadata = self.curves_data[dataset_name].get("metadata", {})
+            units = metadata.get("units", "").upper()
+
+            # Convert $/kWh to $/MWh (multiply by 1000)
+            # Note: Some datasets incorrectly label LCOE as "$/kW" when they mean "$/kWh"
+            if units in ["$/KWH", "USD/KWH", "$/KILOWATTHOUR", "$/KW", "USD/KW"]:
+                lcoe_values = [val * 1000.0 for val in lcoe_values]
+
+        return years, lcoe_values
 
     def get_capacity_data(self, technology: str, region: str) -> Tuple[List[int], List[float]]:
         """
@@ -115,7 +130,19 @@ class DataLoader:
         if not dataset_name:
             raise ValueError(f"No capacity dataset for {technology} in region {region}")
 
-        return self._get_curve_data(dataset_name, region)
+        years, capacity_values = self._get_curve_data(dataset_name, region)
+
+        # Convert units to GW if needed
+        # Check metadata for units field
+        if dataset_name in self.curves_data:
+            metadata = self.curves_data[dataset_name].get("metadata", {})
+            units = metadata.get("units", "").upper()
+
+            # Convert MW to GW
+            if units == "MW":
+                capacity_values = [val / 1000.0 for val in capacity_values]
+
+        return years, capacity_values
 
     def get_generation_data(self, technology: str, region: str) -> Tuple[List[int], List[float]]:
         """
@@ -190,7 +217,89 @@ class DataLoader:
         if not dataset_name:
             raise ValueError(f"No electricity demand dataset for region {region}")
 
-        return self._get_curve_data(dataset_name, region)
+        years, demand_values = self._get_curve_data(dataset_name, region)
+
+        # Convert units to GWh if needed
+        # Check metadata for units field
+        if dataset_name in self.curves_data:
+            metadata = self.curves_data[dataset_name].get("metadata", {})
+            units = metadata.get("units", "").upper()
+
+            # Convert TWh to GWh (multiply by 1000)
+            if units == "TWH":
+                demand_values = [val * 1000.0 for val in demand_values]
+
+        return years, demand_values
+
+    def get_battery_cost_data(self, region: str, duration: int = 4) -> Tuple[List[int], List[float]]:
+        """
+        Load battery cost data by duration and region
+
+        Args:
+            region: Region name
+            duration: Battery duration in hours (2, 4, or 8)
+
+        Returns:
+            Tuple of (years, costs) in $/kWh
+        """
+        # Map duration to dataset suffix
+        dataset_map = {
+            2: "Battery_Energy_Storage_System_(2-hour_Turnkey)_Cost",
+            4: "Battery_Energy_Storage_System_(4-hour_Turnkey)_Cost",
+            8: "Battery_Energy_Storage_System_(8-hour_Turnkey)_Cost"
+        }
+
+        if duration not in dataset_map:
+            raise ValueError(f"Invalid duration: {duration}. Must be 2, 4, or 8.")
+
+        dataset_name = dataset_map[duration]
+
+        # Load with fallback hierarchy: Regional → Global → Error
+        try:
+            years, costs = self._get_curve_data(dataset_name, region, fallback_to_global=False)
+        except (ValueError, KeyError):
+            if region != "Global":
+                try:
+                    years, costs = self._get_curve_data(dataset_name, "Global")
+                    print(f"  Note: Using Global battery cost data for {region}")
+                except (ValueError, KeyError):
+                    raise DataNotFoundError(f"Battery cost data not found for {region} or Global")
+            else:
+                raise DataNotFoundError(f"Battery cost data not found for {region}")
+
+        # Validate cost range ($/kWh should be 50-500)
+        costs_array = np.array(costs)
+        if np.any(costs_array < 10) or np.any(costs_array > 1000):
+            raise DataValidationError(f"Battery costs out of reasonable range: {costs_array}")
+
+        return years, costs
+
+    def get_coal_emissions(self, region: str) -> Tuple[List[int], List[float]]:
+        """
+        Load actual CO2 emissions from Coal.json
+
+        Args:
+            region: Region name
+
+        Returns:
+            Tuple of (years, emissions) in tonnes CO2
+        """
+        try:
+            with open(os.path.join(self.data_dir, "Coal.json")) as f:
+                data = json.load(f)
+
+            coal_data = data["Coal"]["Annual_CO2_Emission"]["regions"].get(region)
+            if not coal_data:
+                raise DataNotFoundError(f"Coal emissions not found for {region}")
+
+            years = coal_data["X"]
+            emissions = coal_data["Y"]  # In tonnes CO2
+
+            return years, emissions
+        except FileNotFoundError:
+            raise DataNotFoundError("Coal.json file not found")
+        except KeyError as e:
+            raise DataNotFoundError(f"Could not load coal emissions: {e}")
 
     def _get_curve_data(self, dataset_name: str, region: str, fallback_to_global: bool = True) -> Tuple[List[int], List[float]]:
         """

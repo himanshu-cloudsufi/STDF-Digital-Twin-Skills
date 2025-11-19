@@ -16,19 +16,21 @@ from data_loader import DataLoader
 from cost_analysis import CostAnalyzer
 from capacity_forecast import CapacityForecaster
 from displacement import DisplacementAnalyzer
+from emissions import EmissionsCalculator
 from utils import validate_energy_balance
 
 
 class EnergyForecastOrchestrator:
     """Main orchestrator for SWB energy forecasting"""
 
-    def __init__(self, end_year: int = 2040, battery_duration: int = 4):
+    def __init__(self, end_year: int = 2040, battery_duration: int = 4, scenario: str = "baseline"):
         """
-        Initialize orchestrator
+        Initialize orchestrator with scenario support
 
         Args:
             end_year: Final forecast year
             battery_duration: Battery duration in hours (2, 4, or 8)
+            scenario: Scenario name (baseline, accelerated, delayed)
         """
         # Load configuration
         config_path = os.path.join(
@@ -37,6 +39,13 @@ class EnergyForecastOrchestrator:
         )
         with open(config_path, 'r') as f:
             self.config = json.load(f)
+
+        # Validate scenario
+        if scenario not in self.config.get("scenarios", {}):
+            raise ValueError(f"Invalid scenario: {scenario}. Must be one of {list(self.config.get('scenarios', {}).keys())}")
+
+        self.scenario = scenario
+        self.scenario_config = self.config["scenarios"][scenario]
 
         # Update config with parameters
         self.config["default_parameters"]["end_year"] = end_year
@@ -47,6 +56,7 @@ class EnergyForecastOrchestrator:
         self.cost_analyzer = CostAnalyzer(self.config, self.data_loader)
         self.capacity_forecaster = CapacityForecaster(self.config, self.data_loader)
         self.displacement_analyzer = DisplacementAnalyzer(self.config, self.data_loader)
+        self.emissions_calculator = EmissionsCalculator(self.config, self.data_loader)
 
         self.end_year = end_year
 
@@ -62,6 +72,7 @@ class EnergyForecastOrchestrator:
         """
         print(f"\n{'='*60}")
         print(f"Forecasting {region} through {self.end_year}")
+        print(f"Scenario: {self.scenario}")
         print(f"{'='*60}")
 
         # Step 1: Cost Analysis
@@ -109,8 +120,8 @@ class EnergyForecastOrchestrator:
             region, years
         )
 
-        # Step 4: Get Total Electricity Demand
-        print("\n[4/5] Loading total electricity demand...")
+        # Step 4: Get Total Electricity Demand and Peak Load
+        print("\n[4/5] Loading total electricity demand and calculating peak load...")
         try:
             demand_years, total_demand = self.data_loader.get_electricity_demand(region)
             total_demand_forecast = np.interp(years, demand_years, total_demand)
@@ -118,6 +129,13 @@ class EnergyForecastOrchestrator:
             print(f"  Warning: Could not load demand, using SWB+fossil estimate: {e}")
             # Fallback: estimate total as SWB + historical fossil
             total_demand_forecast = total_swb_generation * 2.0  # Rough estimate
+
+        # Calculate peak load proxy
+        # Peak Load (GW) = Annual Demand (TWh) × 1000 / 8760 × Load Factor
+        load_factor = self.config["peak_load_factors"].get(region, 1.4)
+        peak_load_gw = (total_demand_forecast * 1000 / 8760) * load_factor
+        print(f"  - Peak load factor: {load_factor}x")
+        print(f"  - Peak load range: {peak_load_gw.min():.1f} - {peak_load_gw.max():.1f} GW")
 
         # Step 5: Displacement Sequencing
         print("\n[5/5] Sequencing fossil fuel displacement...")
@@ -138,6 +156,32 @@ class EnergyForecastOrchestrator:
 
         print(f"  - Displacement sequence: {self.displacement_analyzer.get_displacement_sequence(region)}")
         print(f"  - Key milestones: {displacement_timeline}")
+
+        # Step 6: Calculate Emissions
+        print("\n[6/6] Calculating emissions trajectory...")
+
+        # Extract individual technology generation
+        solar_generation = generation_forecasts.get("Solar_PV", (years, np.zeros_like(years)))[1]
+        wind_generation = total_swb_generation - solar_generation  # Approximation for wind
+
+        emissions_data = self.emissions_calculator.calculate_emissions_trajectory(
+            years,
+            coal_generation,
+            gas_generation,
+            solar_generation,
+            wind_generation
+        )
+
+        # Validate against actual emissions if available
+        total_coal_emissions = np.array(emissions_data["annual_emissions_mt"]["coal"])
+        emissions_validation = self.emissions_calculator.validate_against_actual(
+            region,
+            years,
+            total_coal_emissions
+        )
+
+        if emissions_validation:
+            emissions_data["validation"] = emissions_validation
 
         # Validation
         print("\n[Validation] Checking energy balance...")
@@ -164,9 +208,14 @@ class EnergyForecastOrchestrator:
             else:
                 tipping_points_serializable[key] = value
 
+        # Extract battery metrics from swb_results
+        battery_metrics = swb_results.get("battery_metrics")
+
         result = {
             "region": region,
             "end_year": self.end_year,
+            "scenario": self.scenario,
+            "scenario_config": self.scenario_config,
             "cost_analysis": {
                 "tipping_points": tipping_points_serializable,
                 "cost_forecasts": {k: {"years": v[0].tolist() if hasattr(v[0], 'tolist') else v[0],
@@ -175,6 +224,7 @@ class EnergyForecastOrchestrator:
             },
             "capacity_forecasts": {k: {"years": v[0].tolist(), "capacity_gw": v[1].tolist()}
                                    for k, v in capacity_forecasts.items()},
+            "battery_metrics": battery_metrics,
             "generation_forecasts": {
                 "years": years.tolist(),
                 "swb_total": total_swb_generation.tolist(),
@@ -182,9 +232,11 @@ class EnergyForecastOrchestrator:
                 "gas": gas_generation.tolist(),
                 "non_swb": non_swb_generation.tolist(),
                 "total_demand": total_demand_forecast.tolist(),
+                "peak_load_gw": peak_load_gw.tolist(),
                 "by_technology": {k: v[1].tolist() for k, v in generation_forecasts.items()}
             },
             "displacement_timeline": displacement_timeline,
+            "emissions_trajectory": emissions_data,
             "validation": {
                 "energy_balance_valid": is_valid,
                 "message": message
@@ -331,6 +383,12 @@ def main():
         help="Battery duration in hours (default: 4)"
     )
     parser.add_argument(
+        "--scenario",
+        choices=["baseline", "accelerated", "delayed"],
+        default="baseline",
+        help="Forecast scenario (default: baseline)"
+    )
+    parser.add_argument(
         "--output",
         choices=["csv", "json", "both"],
         default="csv",
@@ -342,7 +400,8 @@ def main():
     # Initialize orchestrator
     orchestrator = EnergyForecastOrchestrator(
         end_year=args.end_year,
-        battery_duration=args.battery_duration
+        battery_duration=args.battery_duration,
+        scenario=args.scenario
     )
 
     # Run forecast
@@ -359,7 +418,7 @@ def main():
     )
     os.makedirs(output_dir, exist_ok=True)
 
-    output_base = os.path.join(output_dir, f"{args.region}_{args.end_year}")
+    output_base = os.path.join(output_dir, f"{args.region}_{args.end_year}_{args.scenario}")
 
     if args.output in ["csv", "both"]:
         orchestrator.export_to_csv(result, f"{output_base}.csv", args.region)

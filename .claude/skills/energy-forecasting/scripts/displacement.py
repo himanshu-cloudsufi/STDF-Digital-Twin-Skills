@@ -31,6 +31,7 @@ class DisplacementAnalyzer:
     ) -> Tuple[np.ndarray, np.ndarray]:
         """
         Calculate non-SWB generation baseline (nuclear + hydro + other)
+        Multi-level fallback strategy due to missing datasets
 
         Args:
             region: Region name
@@ -39,22 +40,98 @@ class DisplacementAnalyzer:
         Returns:
             Tuple of (years, non_swb_generation_gwh)
         """
-        # Try to load historical nuclear + hydro generation
-        # If not available, estimate as residual from total - fossil - renewable
-
+        # Method 1: Try loading actual nuclear + hydro data
         try:
-            # Load total electricity generation
+            nuclear_years, nuclear_gen = self.data_loader.get_generation_data("Nuclear", region)
+            hydro_years, hydro_gen = self.data_loader.get_generation_data("Hydro", region)
+
+            # Interpolate to forecast years
+            nuclear_forecast = np.interp(years, nuclear_years, nuclear_gen)
+            hydro_forecast = np.interp(years, hydro_years, hydro_gen)
+
+            # Apply decline rate for nuclear retirement
+            decline_rate = self.config.get("non_swb_decline_rate", 0.01)  # 1% per year
+            base_year = years[0]
+            decline_factor = (1 - decline_rate) ** (years - base_year)
+
+            nuclear_forecast = nuclear_forecast * decline_factor
+            hydro_forecast = hydro_forecast  # Hydro assumed stable
+
+            non_swb_gen = nuclear_forecast + hydro_forecast
+
+            print(f"  INFO: Using actual nuclear + hydro data for non-SWB baseline")
+            return years, non_swb_gen
+
+        except Exception as e:
+            print(f"  WARNING: Could not load nuclear/hydro data: {e}")
+
+        # Method 2: Derive from total generation residual
+        try:
             total_years, total_gen = self.data_loader.get_electricity_demand(region)
 
-            # Estimate non-SWB as constant fraction of total (conservative assumption)
-            # Or use historical data if available
-            non_swb_gen = np.interp(years, total_years, total_gen) * 0.15  # Assume 15% baseline
+            # Get historical fossil + SWB generation
+            coal_years, coal_gen = self.data_loader.get_generation_data("Coal_Power", region)
+            gas_years, gas_gen = self.data_loader.get_generation_data("Natural_Gas_Power", region)
 
-            return years, non_swb_gen
+            # Get SWB generation (with fallback for missing data)
+            try:
+                solar_years, solar_gen = self.data_loader.get_generation_data("Solar_PV", region)
+            except:
+                solar_years, solar_gen = coal_years, np.zeros_like(coal_gen)
+
+            try:
+                wind_years, wind_gen = self.data_loader.get_generation_data("Onshore_Wind", region)
+            except:
+                wind_years, wind_gen = coal_years, np.zeros_like(coal_gen)
+
+            # Find common historical period
+            common_years = np.intersect1d(total_years, coal_years)
+            common_years = np.intersect1d(common_years, gas_years)
+
+            if len(common_years) > 0:
+                # Calculate residual for common period
+                total_hist = np.interp(common_years, total_years, total_gen)
+                coal_hist = np.interp(common_years, coal_years, coal_gen)
+                gas_hist = np.interp(common_years, gas_years, gas_gen)
+                solar_hist = np.interp(common_years, solar_years, solar_gen)
+                wind_hist = np.interp(common_years, wind_years, wind_gen)
+
+                non_swb_hist = total_hist - coal_hist - gas_hist - solar_hist - wind_hist
+                non_swb_hist = np.maximum(non_swb_hist, 0)  # Ensure non-negative
+
+                # Calculate average non-SWB percentage
+                non_swb_pct = np.mean(non_swb_hist / total_hist)
+
+                # Apply to forecast period
+                total_forecast = np.interp(years, total_years, total_gen)
+                non_swb_gen = total_forecast * non_swb_pct
+
+                print(f"  INFO: Derived non-SWB baseline from residual ({non_swb_pct*100:.1f}%)")
+                return years, non_swb_gen
+
         except Exception as e:
-            print(f"Warning: Could not calculate non-SWB baseline for {region}: {e}")
-            # Fallback: assume zero non-SWB (SWB + coal + gas = total)
-            return years, np.zeros_like(years)
+            print(f"  WARNING: Could not derive non-SWB from residual: {e}")
+
+        # Method 3: Regional percentage estimates (last resort)
+        baseline_pct = self.config.get("non_swb_baseline_percentages", {})
+        pct = baseline_pct.get(region, 0.20)
+
+        # Estimate total demand for forecast period
+        try:
+            total_years, total_gen = self.data_loader.get_electricity_demand(region)
+            total_forecast = np.interp(years, total_years, total_gen)
+        except:
+            # Ultimate fallback: use 2020 baseline × growth
+            total_2020 = 8000  # TWh (rough global estimate)
+            growth_rate = 0.02  # 2% per year
+            total_forecast = total_2020 * ((1 + growth_rate) ** (years - 2020))
+
+        non_swb_gen = total_forecast * pct
+
+        print(f"  WARNING: Using fallback non-SWB baseline ({pct*100:.0f}% of total demand)")
+        print(f"            No nuclear/hydro datasets available for {region}")
+
+        return years, non_swb_gen
 
     def get_displacement_sequence(self, region: str) -> str:
         """

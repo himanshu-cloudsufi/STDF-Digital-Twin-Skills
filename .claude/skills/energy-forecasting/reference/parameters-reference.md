@@ -7,6 +7,7 @@
 | `--region` | Required | - | China, USA, Europe, Rest_of_World, Global |
 | `--end-year` | Integer | 2040 | Final forecast year (2025-2100) |
 | `--battery-duration` | Integer | 4 | Battery duration: 2, 4, or 8 hours |
+| `--scenario` | String | baseline | Scenario: baseline, accelerated, delayed |
 | `--output` | String | csv | Output format: csv, json, or both |
 
 ## Configuration Parameters (config.json)
@@ -24,12 +25,105 @@
 | `battery_fixed_om` | 5.0 | Fixed O&M ($/MWh) |
 | `coal_reserve_floor` | 0.10 | Minimum coal capacity (10%) |
 | `gas_reserve_floor` | 0.15 | Minimum gas capacity (15%) |
-| `capacity_factor_improvement` | 0.003 | Annual CF improvement (0.3%) |
+| `capacity_factor_improvement` | 0.003 | **ADDITIVE** CF improvement (+0.3 pp/year) |
 | `energy_balance_tolerance` | 0.02 | Energy balance tolerance (2%) |
 | `csp_threshold` | 0.01 | CSP inclusion threshold (1% of solar) |
 | `max_yoy_growth` | 0.50 | Maximum year-over-year growth (50%) |
 | `min_capacity_factor` | 0.05 | Minimum CF (5%) |
 | `max_capacity_factor` | 0.70 | Maximum CF for renewables (70%) |
+
+### Scenarios
+
+| Scenario | Solar Decline | Wind Decline | Battery Decline | Displacement Speed | Description |
+|----------|---------------|--------------|-----------------|-------------------|-------------|
+| `baseline` | 8%/yr | 5%/yr | 10%/yr | 1.0× | Current policy trajectories |
+| `accelerated` | 12%/yr | 8%/yr | 15%/yr | 1.5× | Faster transition, strong policy support |
+| `delayed` | 5%/yr | 3%/yr | 7%/yr | 0.7× | Slower transition, incumbent advantages |
+
+### Battery Parameters
+
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `duration_hours` | 4 | Storage duration (hours) |
+| `cycle_life` | 5000 | Total lifetime cycles |
+| `cycles_per_year` | 250 | Annual charge/discharge cycles |
+| `round_trip_efficiency` | 0.88 | Round-trip efficiency (88%) |
+| `fixed_om_per_kwh_year` | 5.0 | Fixed O&M ($/kWh/year) |
+| `resilience_days` | 2 | Days of peak load for Option A sizing |
+
+### SWB Stack Cost Configuration
+
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `method` | option_a | option_a = MAX(Solar, Wind) + SCOE; option_b = weighted avg |
+| `weights.solar` | 0.4 | Weight for solar LCOE (Option B) |
+| `weights.wind` | 0.4 | Weight for wind LCOE (Option B) |
+| `weights.battery` | 0.2 | Weight for battery SCOE (Option B) |
+
+### Peak Load Factors
+
+| Region | Factor | Description |
+|--------|--------|-------------|
+| China | 1.4 | Peak = Average × 1.4 |
+| USA | 1.5 | Peak = Average × 1.5 |
+| Europe | 1.3 | Peak = Average × 1.3 |
+| Rest_of_World | 1.4 | Peak = Average × 1.4 |
+| Global | 1.4 | Peak = Average × 1.4 |
+
+### Carbon Pricing Parameters
+
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `enabled` | true | Enable carbon pricing in LCOE calculations |
+| `regional_base_prices_2020` ($/tCO2) | - | Starting carbon prices by region |
+| - China | 10 | $10/tCO2 in 2020 |
+| - USA | 0 | $0/tCO2 in 2020 (no federal price) |
+| - Europe | 30 | $30/tCO2 in 2020 (EU ETS) |
+| - Rest_of_World | 5 | $5/tCO2 in 2020 |
+| - Global | 15 | $15/tCO2 in 2020 (weighted average) |
+| `annual_growth_rate` | 0.05 | 5% annual increase in carbon price |
+| `scenario_multipliers` | - | Scenario-specific price adjustments |
+| - baseline | 1.0× | Standard carbon price trajectory |
+| - accelerated | 1.8× | Higher carbon prices |
+| - delayed | 0.5× | Lower carbon prices |
+| `price_floor_per_ton` | 0 | Minimum carbon price ($/tCO2) |
+| `price_ceiling_per_ton` | 300 | Maximum carbon price ($/tCO2) |
+
+### Emission Factors (kg CO2/MWh)
+
+| Technology | Emissions | Description |
+|------------|-----------|-------------|
+| `coal_kg_co2_per_mwh` | 1000 | Lifecycle emissions including upstream |
+| `gas_kg_co2_per_mwh` | 450 | Lifecycle emissions including upstream |
+| `solar_kg_co2_per_mwh` | 45 | Manufacturing + installation |
+| `wind_kg_co2_per_mwh` | 12 | Manufacturing + installation |
+| `nuclear_kg_co2_per_mwh` | 12 | Lifecycle including fuel production |
+| `hydro_kg_co2_per_mwh` | 24 | Reservoir emissions + construction |
+
+### Integration Costs
+
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `enabled` | true | Enable grid integration costs |
+| `base_cost_per_mwh` | 5 | Base integration cost ($/MWh) |
+| `penetration_exponent` | 2 | Penetration scaling exponent |
+| `max_additional_cost_per_mwh` | 30 | Maximum additional cost ($/MWh) |
+| `regional_multipliers` | - | Regional grid flexibility adjustments |
+| - China | 1.2 | 20% higher integration costs |
+| - USA | 0.9 | 10% lower (flexible grid) |
+| - Europe | 0.8 | 20% lower (advanced grid) |
+| - Rest_of_World | 1.3 | 30% higher (less flexible grids) |
+
+### Non-SWB Baseline Percentages
+
+| Region | Percentage | Description |
+|--------|------------|-------------|
+| China | 20% | Nuclear + hydro share of generation |
+| USA | 22% | Nuclear + hydro share of generation |
+| Europe | 28% | Nuclear + hydro share of generation |
+| Rest_of_World | 18% | Nuclear + hydro share of generation |
+| Global | 22% | Weighted average |
+| `non_swb_decline_rate` | 0.01 | 1% annual decline in nuclear capacity |
 
 ### Displacement Sequences
 

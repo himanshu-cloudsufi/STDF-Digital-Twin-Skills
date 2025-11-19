@@ -316,15 +316,27 @@ def test_cost_analysis_module():
 
     runner.test("calculate_scoe", test_scoe)
 
-    # Test calculate_swb_stack_cost
-    def test_swb_stack():
+    # Test calculate_swb_stack_cost (Option A - default)
+    def test_swb_stack_option_a():
         solar_lcoe = 50
         wind_lcoe = 40
         battery_scoe = 30
-        swb_cost = analyzer.calculate_swb_stack_cost(solar_lcoe, wind_lcoe, battery_scoe)
-        assert swb_cost == 80, f"SWB stack should be MAX(50,40)+30=80, got {swb_cost}"
+        swb_cost = analyzer.calculate_swb_stack_cost(solar_lcoe, wind_lcoe, battery_scoe, method="option_a")
+        assert swb_cost == 80, f"SWB stack (Option A) should be MAX(50,40)+30=80, got {swb_cost}"
 
-    runner.test("calculate_swb_stack_cost", test_swb_stack)
+    runner.test("calculate_swb_stack_cost (Option A)", test_swb_stack_option_a)
+
+    # Test calculate_swb_stack_cost (Option B - weighted average)
+    def test_swb_stack_option_b():
+        solar_lcoe = 50
+        wind_lcoe = 40
+        battery_scoe = 30
+        # With default weights (0.4, 0.4, 0.2): 50*0.4 + 40*0.4 + 30*0.2 = 20 + 16 + 6 = 42
+        swb_cost = analyzer.calculate_swb_stack_cost(solar_lcoe, wind_lcoe, battery_scoe, method="option_b")
+        expected = 50 * 0.4 + 40 * 0.4 + 30 * 0.2
+        assert abs(swb_cost - expected) < 0.1, f"SWB stack (Option B) should be {expected}, got {swb_cost}"
+
+    runner.test("calculate_swb_stack_cost (Option B)", test_swb_stack_option_b)
 
     # Test forecast_cost_curves
     def test_cost_forecasts():
@@ -422,6 +434,101 @@ def test_capacity_forecast_module():
         assert len(results["generation"]) > 0
 
     runner.test("forecast_swb_generation (China)", test_swb_generation)
+
+    # Test battery metrics calculation (Phase 3)
+    def test_battery_metrics():
+        years = np.array([2020, 2025, 2030, 2035, 2040])
+        battery_capacity_gwh = np.array([100, 200, 400, 800, 1600])
+
+        metrics = forecaster.calculate_battery_metrics(battery_capacity_gwh, years)
+
+        assert "years" in metrics, "Battery metrics should include years"
+        assert "energy_capacity_gwh" in metrics, "Battery metrics should include energy capacity"
+        assert "power_capacity_gw" in metrics, "Battery metrics should include power capacity"
+        assert "throughput_twh_per_year" in metrics, "Battery metrics should include throughput"
+        assert "cycles_per_year" in metrics, "Battery metrics should include cycles per year"
+        assert "duration_hours" in metrics, "Battery metrics should include duration"
+        assert "round_trip_efficiency" in metrics, "Battery metrics should include RTE"
+
+        # Validate power capacity calculation: Power (GW) = Energy (GWh) / Duration (hours)
+        duration = metrics["duration_hours"]
+        expected_power = battery_capacity_gwh / duration
+        assert np.allclose(metrics["power_capacity_gw"], expected_power.tolist()), \
+            "Power capacity should equal energy capacity divided by duration"
+
+    runner.test("calculate_battery_metrics (Phase 3)", test_battery_metrics)
+
+    # Test regional capacity factor fallback hierarchy (Phase 3)
+    def test_regional_cf_fallback():
+        years = np.array([2020, 2025, 2030])
+
+        # Test regional CF
+        china_solar_cf = forecaster.get_capacity_factor("Solar_PV", "China", years)
+        assert len(china_solar_cf) == len(years), "CF array length should match years"
+
+        # CFs can be in decimal (0.0-1.0) or percentage (0-100) format
+        # Check if values are in percentage format
+        if np.any(china_solar_cf > 1.0):
+            # Percentage format: should be between 5 and 70
+            assert all(5 <= cf <= 70 for cf in china_solar_cf), \
+                f"CFs (percentage) should be within bounds [5, 70]: {china_solar_cf}"
+        else:
+            # Decimal format: should be between 0.05 and 0.70
+            assert all(0.05 <= cf <= 0.70 for cf in china_solar_cf), \
+                f"CFs (decimal) should be within bounds [0.05, 0.70]: {china_solar_cf}"
+
+        # Test CF improvement (additive)
+        # CF should increase or stay constant over time
+        cf_diffs = np.diff(china_solar_cf)
+        # Allow small negative differences due to clamping
+        assert all(diff >= -0.01 for diff in cf_diffs), \
+            "CF should generally increase over time (additive improvement)"
+
+    runner.test("regional_capacity_factor_fallback (Phase 3)", test_regional_cf_fallback)
+
+    # Test battery sizing Option A (resilience days heuristic) (Phase 3)
+    def test_battery_sizing_option_a():
+        years = np.array([2020, 2025, 2030, 2035, 2040])
+        peak_load_gw = np.array([100, 120, 140, 160, 180])
+
+        battery_capacity = forecaster.calculate_battery_capacity_option_a(peak_load_gw, years)
+
+        # Formula: Energy_Capacity (GWh) = k_days × Peak_Load (GW) × 24 hours
+        k_days = config["battery_parameters"]["resilience_days"]
+        expected_capacity = k_days * peak_load_gw * 24
+
+        assert np.allclose(battery_capacity, expected_capacity), \
+            f"Battery capacity should follow resilience days formula"
+        assert all(cap > 0 for cap in battery_capacity), \
+            "Battery capacity should be positive"
+
+    runner.test("battery_sizing_option_a (Phase 3)", test_battery_sizing_option_a)
+
+    # Test wind mix handling (Phase 3)
+    def test_wind_mix_handling():
+        # Create test capacity forecasts with both onshore and offshore wind
+        test_years = np.array([2020, 2025, 2030])
+        test_capacities = {
+            "Onshore_Wind": (test_years, np.array([100, 150, 200])),
+            "Offshore_Wind": (test_years, np.array([20, 40, 60]))
+        }
+
+        generation = forecaster.convert_to_generation(test_capacities, "China")
+
+        # Should have both individual components and Wind_Total
+        assert "Onshore_Wind" in generation, "Should have onshore wind generation"
+        assert "Offshore_Wind" in generation, "Should have offshore wind generation"
+        assert "Wind_Total" in generation, "Should have combined wind total"
+
+        # Verify Wind_Total is sum of onshore and offshore
+        onshore_gen = generation["Onshore_Wind"][1]
+        offshore_gen = generation["Offshore_Wind"][1]
+        wind_total_gen = generation["Wind_Total"][1]
+
+        assert np.allclose(wind_total_gen, onshore_gen + offshore_gen), \
+            "Wind_Total should equal sum of onshore and offshore generation"
+
+    runner.test("wind_mix_handling (Phase 3)", test_wind_mix_handling)
 
     return runner.print_summary()
 
