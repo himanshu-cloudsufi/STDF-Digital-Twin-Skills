@@ -1,0 +1,74 @@
+{
+  "market": "Two_Wheelers",
+  "taxonomy": {
+    "EV_2_Wheelers": {
+      "subproducts": []
+    },
+    "ICE_2_Wheelers": {
+      "subproducts": []
+    }
+  },
+  "data": {
+    "Two_Wheelers": {
+      "demand": {
+        "China": "Two_Wheeler_Annual_Sales",
+        "Europe": "Two_Wheeler_Annual_Sales",
+        "Global": "Two_Wheeler_Annual_Sales",
+        "Rest_of_World": "Two_Wheeler_Annual_Sales",
+        "USA": "Two_Wheeler_Annual_Sales"
+      },
+      "entity_type": "market"
+    },
+    "EV_2_Wheelers": {
+      "cost": {
+        "China": "EV_2_Wheeler_(Range-100_KM)_Lowest_Cost",
+        "Europe": "EV_2_Wheeler_(Range-100_KM)_Lowest_Cost",
+        "Rest_of_World": "EV_2_Wheeler_(Range-100_KM)_Lowest_Cost",
+        "USA": "EV_2_Wheeler_(Range-100_KM)_Lowest_Cost"
+      },
+      "median_cost": {
+        "China": "Two_Wheeler_(EV)_Median_Cost",
+        "Europe": "Two_Wheeler_(EV)_Median_Cost",
+        "Rest_of_World": "Two_Wheeler_(EV)_Median_Cost",
+        "USA": "Two_Wheeler_(EV)_Median_Cost"
+      },
+      "demand": {
+        "China": "Two_Wheeler_(EV)_Annual_Sales",
+        "Europe": "Two_Wheeler_(EV)_Annual_Sales",
+        "Global": "Two_Wheeler_(EV)_Annual_Sales",
+        "Rest_of_World": "Two_Wheeler_(EV)_Annual_Sales",
+        "USA": "Two_Wheeler_(EV)_Annual_Sales"
+      },
+      "installed_base": {
+        "Europe": "Two_Wheeler_(EV)_Total_Fleet",
+        "Global": "Two_Wheeler_(EV)_Total_Fleet",
+        "Rest_of_World": "Two_Wheeler_(EV)_Total_Fleet",
+        "USA": "Two_Wheeler_(EV)_Total_Fleet"
+      },
+      "entity_type": "disruptor"
+    },
+    "ICE_2_Wheelers": {
+      "cost": {
+        "China": "Two_Wheeler_(ICE)_Median_Cost",
+        "Europe": "Two_Wheeler_(ICE)_Median_Cost",
+        "Rest_of_World": "Two_Wheeler_(ICE)_Median_Cost",
+        "USA": "Two_Wheeler_(ICE)_Median_Cost"
+      },
+      "demand": {
+        "China": "Two_Wheeler_(ICE)_Annual_Sales",
+        "Europe": "Two_Wheeler_(ICE)_Annual_Sales",
+        "Global": "Two_Wheeler_(ICE)_Annual_Sales",
+        "Rest_of_World": "Two_Wheeler_(ICE)_Annual_Sales",
+        "USA": "Two_Wheeler_(ICE)_Annual_Sales"
+      },
+      "installed_base": {
+        "China": "Two_Wheeler_(ICE)_Total_Fleet",
+        "Europe": "Two_Wheeler_(ICE)_Total_Fleet",
+        "Global": "Two_Wheeler_(ICE)_Total_Fleet",
+        "Rest_of_World": "Two_Wheeler_(ICE)_Total_Fleet",
+        "USA": "Two_Wheeler_(ICE)_Total_Fleet"
+      },
+      "entity_type": "incumbent"
+    }
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "test_name": "all_segments_china_forecast",
+  "description": "All segments (LCV, MCV, HCV) forecast for China through 2040 with aggregation",
+  "command": "python3 scripts/forecast.py --region China --all-segments --end-year 2040 --output csv",
+  "expected_outputs": [
+    "output/commercial_vehicle_China_2040.csv"
+  ],
+  "validation_checks": [
+    {
+      "check": "file_exists",
+      "file": "output/commercial_vehicle_China_2040.csv"
+    },
+    {
+      "check": "csv_columns",
+      "file": "output/commercial_vehicle_China_2040.csv",
+      "required_columns": ["Region", "Segment", "Year", "Market", "EV", "ICE", "NGV", "EV_Share", "ICE_Share", "NGV_Share"]
+    },
+    {
+      "check": "segments_present",
+      "file": "output/commercial_vehicle_China_2040.csv",
+      "expected_segments": ["LCV", "MCV", "HCV", "Total_CV"]
+    },
+    {
+      "check": "segment_aggregation",
+      "file": "output/commercial_vehicle_China_2040.csv",
+      "description": "Verify that LCV + MCV + HCV = Total_CV for each year",
+      "equation": "sum(LCV, MCV, HCV) ≈ Total_CV",
+      "tolerance": 0.02
+    },
+    {
+      "check": "non_negative_values",
+      "file": "output/commercial_vehicle_China_2040.csv",
+      "columns": ["Market", "EV", "ICE", "NGV"]
+    },
+    {
+      "check": "three_powertrain_sum_consistency",
+      "file": "output/commercial_vehicle_China_2040.csv",
+      "equation": "EV + ICE + NGV ≈ Market",
+      "tolerance": 0.02
+    },
+    {
+      "check": "ngv_decline",
+      "file": "output/commercial_vehicle_China_2040.csv",
+      "description": "NGV share should decline across all segments by 2040",
+      "segment": "Total_CV",
+      "column": "NGV_Share",
+      "year_2040_max": 0.03
+    }
+  ],
+  "expected_results": {
+    "all_segments_forecasted": true,
+    "aggregation_successful": true,
+    "total_cv_final_ev_share_min": 0.60,
+    "total_cv_final_ev_share_max": 0.92,
+    "note": "Total CV EV share is weighted average of segment-specific ceilings"
+  }
+}

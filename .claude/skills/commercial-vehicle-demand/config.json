@@ -1,0 +1,120 @@
+{
+  "skill_name": "commercial-vehicle-demand",
+  "version": "1.0.0",
+  "description": "Commercial vehicle demand forecasting with EV disruption analysis, NGV chimera modeling, and segment-level tipping point detection",
+  "default_parameters": {
+    "end_year": 2040,
+    "smoothing_window": 3,
+    "max_market_cagr": 0.05,
+    "logistic_k_bounds": [0.05, 1.5],
+    "logistic_t0_offset": [-5, 10],
+    "standard_forecast_years": [2030, 2035],
+    "extended_forecast_year": 2040,
+    "max_forecast_year": 2040
+  },
+  "segments": ["LCV", "MCV", "HCV"],
+  "regions": [
+    "China",
+    "USA",
+    "Europe",
+    "Rest_of_World",
+    "Global"
+  ],
+  "products": {
+    "market": "Commercial_Vehicles",
+    "disruptor": "Commercial_Vehicles_(EV)",
+    "incumbent": "Commercial_Vehicles_(ICE)",
+    "chimera": "Commercial_Vehicles_(NGV)"
+  },
+  "segment_names": {
+    "LCV": "Light_Duty_Commercial_Vehicles",
+    "MCV": "Medium_Duty_Commercial_Vehicles",
+    "HCV": "Heavy_Duty_Commercial_Vehicles"
+  },
+  "cost_series": {
+    "lcv_ev": "LCV_commercial_vehicle_(Range-100_KM)_Lowest_Cost",
+    "mcv_ev": "MCV_commercial_vehicle_(Range-200_KM)_Lowest_Cost",
+    "hcv_ev": "HCV_commercial_vehicle_(Range-400_KM)_Lowest_Cost",
+    "lcv_ice": "Light_Duty_Commercial_Vehicle_(ICE)_Price",
+    "mcv_ice": "Medium_Duty_Commercial_Vehicle_(ICE)_Price",
+    "hcv_ice": "Heavy_Duty_Commercial_Vehicle_(ICE)_Price"
+  },
+  "logistic_ceiling": {
+    "default": 0.9,
+    "LCV": 0.95,
+    "MCV": 0.85,
+    "HCV": 0.75
+  },
+  "ngv_parameters": {
+    "half_life_years": 6.0,
+    "peak_detection_window": 5,
+    "target_share_2040": 0.0,
+    "min_significant_share": 0.01,
+    "decline_start_mode": "max_peak_or_tipping"
+  },
+  "output_formats": [
+    "csv",
+    "json",
+    "plot"
+  ],
+  "data_sources": {
+    "curves": "Commercial_Vehicle.json",
+    "taxonomy": "commercial_vehicle_taxonomy_and_datasets.json",
+    "methodology": "commercial_vehicle_demand_instructions.md"
+  },
+  "fleet_tracking": {
+    "lcv_lifetime_years": 12.0,
+    "mcv_lifetime_years": 15.0,
+    "hcv_lifetime_years": 18.0,
+    "track_consistency": true
+  },
+  "validation_rules": {
+    "non_negative_demand": true,
+    "sum_consistency": true,
+    "three_powertrain_sum": true,
+    "segment_aggregation": true,
+    "market_cagr_cap": 0.05,
+    "share_bounds": [0.0, 1.0],
+    "ngv_decline_check": true
+  },
+  "scenarios": {
+    "baseline": {
+      "description": "Moderate EV adoption with NGV decline following cost parity dynamics",
+      "logistic_ceiling": {
+        "LCV": 0.95,
+        "MCV": 0.85,
+        "HCV": 0.75
+      },
+      "market_growth_factor": 1.0,
+      "ngv_half_life": 6.0
+    },
+    "accelerated_ev": {
+      "description": "Rapid EV adoption with policy support, faster NGV decline",
+      "logistic_ceiling": {
+        "LCV": 0.98,
+        "MCV": 0.90,
+        "HCV": 0.80
+      },
+      "market_growth_factor": 1.1,
+      "tipping_acceleration": -2,
+      "ngv_half_life": 5.0
+    },
+    "conservative": {
+      "description": "Slower EV adoption due to infrastructure constraints, NGV persists longer",
+      "logistic_ceiling": {
+        "LCV": 0.90,
+        "MCV": 0.75,
+        "HCV": 0.65
+      },
+      "market_growth_factor": 0.95,
+      "tipping_delay": 3,
+      "ngv_half_life": 7.0
+    }
+  },
+  "dependencies": [
+    "numpy",
+    "scipy",
+    "pandas",
+    "matplotlib"
+  ]
+}

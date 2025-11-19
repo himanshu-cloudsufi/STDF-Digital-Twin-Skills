@@ -1,0 +1,43 @@
+{
+  "test_name": "basic_china_forecast",
+  "description": "Basic forecast for China through 2040 with default parameters",
+  "command": "python3 scripts/forecast.py --region China --end-year 2040 --output csv",
+  "expected_outputs": [
+    "output/two_wheeler_China_2040.csv"
+  ],
+  "validation_checks": [
+    {
+      "check": "file_exists",
+      "file": "output/two_wheeler_China_2040.csv"
+    },
+    {
+      "check": "csv_columns",
+      "file": "output/two_wheeler_China_2040.csv",
+      "required_columns": ["Year", "Market", "EV", "ICE", "EV_Share", "ICE_Share", "EV_Cost", "ICE_Cost"]
+    },
+    {
+      "check": "non_negative_values",
+      "file": "output/two_wheeler_China_2040.csv",
+      "columns": ["Market", "EV", "ICE"]
+    },
+    {
+      "check": "sum_consistency",
+      "file": "output/two_wheeler_China_2040.csv",
+      "equation": "EV + ICE ≈ Market",
+      "tolerance": 0.01
+    },
+    {
+      "check": "share_bounds",
+      "file": "output/two_wheeler_China_2040.csv",
+      "columns": ["EV_Share", "ICE_Share"],
+      "min": 0,
+      "max": 100
+    }
+  ],
+  "expected_results": {
+    "tipping_point_detected": true,
+    "tipping_year_range": [2020, 2035],
+    "final_ev_share_min": 70.0,
+    "final_ev_share_max": 100.0
+  }
+}

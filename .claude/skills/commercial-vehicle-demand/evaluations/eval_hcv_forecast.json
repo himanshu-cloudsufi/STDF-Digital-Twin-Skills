@@ -1,0 +1,38 @@
+{
+  "test_name": "hcv_china_forecast",
+  "description": "Heavy Commercial Vehicle (HCV) forecast for China through 2040",
+  "command": "python3 scripts/forecast.py --region China --segment HCV --end-year 2040 --output csv",
+  "expected_outputs": [
+    "output/commercial_vehicle_China_2040.csv"
+  ],
+  "validation_checks": [
+    {
+      "check": "file_exists",
+      "file": "output/commercial_vehicle_China_2040.csv"
+    },
+    {
+      "check": "csv_columns",
+      "file": "output/commercial_vehicle_China_2040.csv",
+      "required_columns": ["Region", "Segment", "Year", "Market", "EV", "ICE", "NGV", "EV_Share", "ICE_Share", "NGV_Share"]
+    },
+    {
+      "check": "non_negative_values",
+      "file": "output/commercial_vehicle_China_2040.csv",
+      "columns": ["Market", "EV", "ICE", "NGV"]
+    },
+    {
+      "check": "three_powertrain_sum_consistency",
+      "file": "output/commercial_vehicle_China_2040.csv",
+      "equation": "EV + ICE + NGV ≈ Market",
+      "tolerance": 0.02
+    }
+  ],
+  "expected_results": {
+    "tipping_point_detected": true,
+    "segment": "HCV",
+    "logistic_ceiling": 0.75,
+    "final_ev_share_min": 0.50,
+    "final_ev_share_max": 0.78,
+    "note": "HCV has slower EV adoption due to range and weight constraints"
+  }
+}

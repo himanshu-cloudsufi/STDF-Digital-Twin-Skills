@@ -1,0 +1,270 @@
+{
+  "market": "Commercial_Vehicles",
+  "taxonomy": {
+    "EV_CV": {
+      "subproducts": []
+    },
+    "ICE_CV": {
+      "subproducts": []
+    },
+    "NGV_CV": {
+      "subproducts": []
+    }
+  },
+  "segments": ["LCV", "MCV", "HCV"],
+  "data": {
+    "Commercial_Vehicles": {
+      "demand": {
+        "China": "Annual_Sales",
+        "Europe": "Annual_Sales",
+        "USA": "Annual_Sales",
+        "Rest_of_World": "Annual_Sales",
+        "Global": "Annual_Sales"
+      },
+      "entity_type": "market"
+    },
+    "EV_CV": {
+      "demand": {
+        "China": "(EV)_Annual_Sales",
+        "Europe": "(EV)_Annual_Sales",
+        "USA": "(EV)_Annual_Sales",
+        "Rest_of_World": "(EV)_Annual_Sales",
+        "Global": "(EV)_Annual_Sales"
+      },
+      "installed_base": {
+        "China": "(EV)_Total_Fleet",
+        "Europe": "(EV)_Total_Fleet",
+        "USA": "(EV)_Total_Fleet",
+        "Rest_of_World": "(EV)_Total_Fleet",
+        "Global": "(EV)_Total_Fleet"
+      },
+      "entity_type": "disruptor"
+    },
+    "ICE_CV": {
+      "demand": {
+        "China": "(ICE)_Annual_Sales",
+        "Europe": "(ICE)_Annual_Sales",
+        "USA": "(ICE)_Annual_Sales",
+        "Rest_of_World": "(ICE)_Annual_Sales",
+        "Global": "(ICE)_Annual_Sales"
+      },
+      "installed_base": {
+        "China": "(ICE)_Total_Fleet",
+        "Europe": "(ICE)_Total_Fleet",
+        "USA": "(ICE)_Total_Fleet",
+        "Rest_of_World": "(ICE)_Total_Fleet",
+        "Global": "(ICE)_Total_Fleet"
+      },
+      "entity_type": "incumbent"
+    },
+    "NGV_CV": {
+      "demand": {
+        "China": "(NGV)_Annual_Sales",
+        "Europe": "(NGV)_Annual_Sales",
+        "USA": "(NGV)_Annual_Sales",
+        "Rest_of_World": "(NGV)_Annual_Sales",
+        "Global": "(NGV)_Annual_Sales"
+      },
+      "installed_base": {
+        "China": "(NGV)_Total_Fleet",
+        "Europe": "(NGV)_Total_Fleet",
+        "USA": "(NGV)_Total_Fleet",
+        "Rest_of_World": "(NGV)_Total_Fleet",
+        "Global": "(NGV)_Total_Fleet"
+      },
+      "entity_type": "chimera"
+    },
+    "LCV": {
+      "cost": {
+        "EV": {
+          "China": "LCV_commercial_vehicle_(Range-100_KM)_Lowest_Cost",
+          "Europe": "LCV_commercial_vehicle_(Range-100_KM)_Lowest_Cost",
+          "USA": "LCV_commercial_vehicle_(Range-100_KM)_Lowest_Cost",
+          "Rest_of_World": "LCV_commercial_vehicle_(Range-100_KM)_Lowest_Cost"
+        },
+        "ICE": {
+          "China": "Light_Duty_Commercial_Vehicle_(ICE)_Price",
+          "Europe": "Light_Duty_Commercial_Vehicle_(ICE)_Price",
+          "USA": "Light_Duty_Commercial_Vehicle_(ICE)_Price",
+          "Rest_of_World": "Light_Duty_Commercial_Vehicle_(ICE)_Price"
+        }
+      },
+      "demand": {
+        "Total": {
+          "China": "Light_Duty_Commercial_Vehicle_Annual_Sales",
+          "Europe": "Light_Duty_Commercial_Vehicle_Annual_Sales",
+          "USA": "Light_Duty_Commercial_Vehicle_Annual_Sales",
+          "Rest_of_World": "Light_Duty_Commercial_Vehicle_Annual_Sales"
+        },
+        "EV": {
+          "China": "Light_Duty_Commercial_Vehicle_(EV)_Annual_Sales",
+          "Europe": "Light_Duty_Commercial_Vehicle_(EV)_Annual_Sales",
+          "USA": "Light_Duty_Commercial_Vehicle_(EV)_Annual_Sales",
+          "Rest_of_World": "Light_Duty_Commercial_Vehicle_(EV)_Annual_Sales"
+        },
+        "ICE": {
+          "China": "Light_Duty_Commercial_Vehicle_(ICE)_Annual_Sales",
+          "Europe": "Light_Duty_Commercial_Vehicle_(ICE)_Annual_Sales",
+          "USA": "Light_Duty_Commercial_Vehicle_(ICE)_Annual_Sales",
+          "Rest_of_World": "Light_Duty_Commercial_Vehicle_(ICE)_Annual_Sales"
+        },
+        "NGV": {
+          "China": "Light-duty_commercial_vehicles_(NGV)_Annual_Sales",
+          "Europe": "Light-duty_commercial_vehicles_(NGV)_Annual_Sales",
+          "USA": "Light-duty_commercial_vehicles_(NGV)_Annual_Sales",
+          "Rest_of_World": "Light-duty_commercial_vehicles_(NGV)_Annual_Sales"
+        }
+      },
+      "installed_base": {
+        "EV": {
+          "China": "Light_Duty_Commercial_Vehicle_(EV)_Total_Fleet",
+          "Europe": "Light_Duty_Commercial_Vehicle_(EV)_Total_Fleet",
+          "USA": "Light_Duty_Commercial_Vehicle_(EV)_Total_Fleet",
+          "Rest_of_World": "Light_Duty_Commercial_Vehicle_(EV)_Total_Fleet"
+        },
+        "ICE": {
+          "China": "Light_Duty_Commercial_Vehicle_(ICE)_Total_Fleet",
+          "Europe": "Light_Duty_Commercial_Vehicle_(ICE)_Total_Fleet",
+          "USA": "Light_Duty_Commercial_Vehicle_(ICE)_Total_Fleet",
+          "Rest_of_World": "Light_Duty_Commercial_Vehicle_(ICE)_Total_Fleet"
+        },
+        "NGV": {
+          "China": "Light_Duty_Commercial_Vehicle_(NGV)_Total_Fleet",
+          "Europe": "Light_Duty_Commercial_Vehicle_(NGV)_Total_Fleet",
+          "USA": "Light_Duty_Commercial_Vehicle_(NGV)_Total_Fleet",
+          "Rest_of_World": "Light_Duty_Commercial_Vehicle_(NGV)_Total_Fleet"
+        }
+      },
+      "full_name": "Light_Duty_Commercial_Vehicles",
+      "entity_type": "segment"
+    },
+    "MCV": {
+      "cost": {
+        "EV": {
+          "China": "MCV_commercial_vehicle_(Range-200_KM)_Lowest_Cost",
+          "Europe": "MCV_commercial_vehicle_(Range-200_KM)_Lowest_Cost",
+          "USA": "MCV_commercial_vehicle_(Range-200_KM)_Lowest_Cost",
+          "Rest_of_World": "MCV_commercial_vehicle_(Range-200_KM)_Lowest_Cost"
+        },
+        "ICE": {
+          "China": "Medium_Duty_Commercial_Vehicle_(ICE)_Price",
+          "Europe": "Medium_Duty_Commercial_Vehicle_(ICE)_Price",
+          "USA": "Medium_Duty_Commercial_Vehicle_(ICE)_Price",
+          "Rest_of_World": "Medium_Duty_Commercial_Vehicle_(ICE)_Price"
+        }
+      },
+      "demand": {
+        "Total": {
+          "China": "Medium_Duty_Commercial_Vehicle_Annual_Sales",
+          "Europe": "Medium_Duty_Commercial_Vehicle_Annual_Sales",
+          "USA": "Medium_Duty_Commercial_Vehicle_Annual_Sales",
+          "Rest_of_World": "Medium_Duty_Commercial_Vehicle_Annual_Sales"
+        },
+        "EV": {
+          "China": "Medium_Duty_Commercial_Vehicle_(EV)_Annual_Sales",
+          "Europe": "Medium_Duty_Commercial_Vehicle_(EV)_Annual_Sales",
+          "USA": "Medium_Duty_Commercial_Vehicle_(EV)_Annual_Sales",
+          "Rest_of_World": "Medium_Duty_Commercial_Vehicle_(EV)_Annual_Sales"
+        },
+        "ICE": {
+          "China": "Medium_Duty_Commercial_Vehicle_(ICE)_Annual_Sales",
+          "Europe": "Medium_Duty_Commercial_Vehicle_(ICE)_Annual_Sales",
+          "USA": "Medium_Duty_Commercial_Vehicle_(ICE)_Annual_Sales",
+          "Rest_of_World": "Medium_Duty_Commercial_Vehicle_(ICE)_Annual_Sales"
+        },
+        "NGV": {
+          "China": "Medium-duty_commercial_vehicles_(NGV)_Annual_Sales",
+          "Europe": "Medium-duty_commercial_vehicles_(NGV)_Annual_Sales",
+          "USA": "Medium-duty_commercial_vehicles_(NGV)_Annual_Sales",
+          "Rest_of_World": "Medium-duty_commercial_vehicles_(NGV)_Annual_Sales"
+        }
+      },
+      "installed_base": {
+        "EV": {
+          "China": "Medium_Duty_Commercial_Vehicle_(EV)_Total_Fleet",
+          "Europe": "Medium_Duty_Commercial_Vehicle_(EV)_Total_Fleet",
+          "USA": "Medium_Duty_Commercial_Vehicle_(EV)_Total_Fleet",
+          "Rest_of_World": "Medium_Duty_Commercial_Vehicle_(EV)_Total_Fleet"
+        },
+        "ICE": {
+          "China": "Medium_Duty_Commercial_Vehicle_(ICE)_Total_Fleet",
+          "Europe": "Medium_Duty_Commercial_Vehicle_(ICE)_Total_Fleet",
+          "USA": "Medium_Duty_Commercial_Vehicle_(ICE)_Total_Fleet",
+          "Rest_of_World": "Medium_Duty_Commercial_Vehicle_(ICE)_Total_Fleet"
+        },
+        "NGV": {
+          "China": "Medium_Duty_Commercial_Vehicle_(NGV)_Total_Fleet",
+          "Europe": "Medium_Duty_Commercial_Vehicle_(NGV)_Total_Fleet",
+          "USA": "Medium_Duty_Commercial_Vehicle_(NGV)_Total_Fleet",
+          "Rest_of_World": "Medium_Duty_Commercial_Vehicle_(NGV)_Total_Fleet"
+        }
+      },
+      "full_name": "Medium_Duty_Commercial_Vehicles",
+      "entity_type": "segment"
+    },
+    "HCV": {
+      "cost": {
+        "EV": {
+          "China": "HCV_commercial_vehicle_(Range-400_KM)_Lowest_Cost",
+          "Europe": "HCV_commercial_vehicle_(Range-400_KM)_Lowest_Cost",
+          "USA": "HCV_commercial_vehicle_(Range-400_KM)_Lowest_Cost",
+          "Rest_of_World": "HCV_commercial_vehicle_(Range-400_KM)_Lowest_Cost"
+        },
+        "ICE": {
+          "China": "Heavy_Duty_Commercial_Vehicle_(ICE)_Price",
+          "Europe": "Heavy_Duty_Commercial_Vehicle_(ICE)_Price",
+          "USA": "Heavy_Duty_Commercial_Vehicle_(ICE)_Price",
+          "Rest_of_World": "Heavy_Duty_Commercial_Vehicle_(ICE)_Price"
+        }
+      },
+      "demand": {
+        "Total": {
+          "China": "Heavy_Duty_Commercial_Vehicle_Annual_Sales",
+          "Europe": "Heavy_Duty_Commercial_Vehicle_Annual_Sales",
+          "USA": "Heavy_Duty_Commercial_Vehicle_Annual_Sales",
+          "Rest_of_World": "Heavy_Duty_Commercial_Vehicle_Annual_Sales"
+        },
+        "EV": {
+          "China": "Heavy_Duty_Commercial_Vehicle_(EV)_Annual_Sales",
+          "Europe": "Heavy_Duty_Commercial_Vehicle_(EV)_Annual_Sales",
+          "USA": "Heavy_Duty_Commercial_Vehicle_(EV)_Annual_Sales",
+          "Rest_of_World": "Heavy_Duty_Commercial_Vehicle_(EV)_Annual_Sales"
+        },
+        "ICE": {
+          "China": "Heavy_Duty_Commercial_Vehicle_(ICE)_Annual_Sales",
+          "Europe": "Heavy_Duty_Commercial_Vehicle_(ICE)_Annual_Sales",
+          "USA": "Heavy_Duty_Commercial_Vehicle_(ICE)_Annual_Sales",
+          "Rest_of_World": "Heavy_Duty_Commercial_Vehicle_(ICE)_Annual_Sales"
+        },
+        "NGV": {
+          "China": "Heavy-duty_commercial_vehicles_(NGV)_Annual_Sales",
+          "Europe": "Heavy-duty_commercial_vehicles_(NGV)_Annual_Sales",
+          "USA": "Heavy-duty_commercial_vehicles_(NGV)_Annual_Sales",
+          "Rest_of_World": "Heavy-duty_commercial_vehicles_(NGV)_Annual_Sales"
+        }
+      },
+      "installed_base": {
+        "EV": {
+          "China": "Heavy_Duty_Commercial_Vehicle_(EV)_Total_Fleet",
+          "Europe": "Heavy_Duty_Commercial_Vehicle_(EV)_Total_Fleet",
+          "USA": "Heavy_Duty_Commercial_Vehicle_(EV)_Total_Fleet",
+          "Rest_of_World": "Heavy_Duty_Commercial_Vehicle_(EV)_Total_Fleet"
+        },
+        "ICE": {
+          "China": "Heavy_Duty_Commercial_Vehicle_(ICE)_Total_Fleet",
+          "Europe": "Heavy_Duty_Commercial_Vehicle_(ICE)_Total_Fleet",
+          "USA": "Heavy_Duty_Commercial_Vehicle_(ICE)_Total_Fleet",
+          "Rest_of_World": "Heavy_Duty_Commercial_Vehicle_(ICE)_Total_Fleet"
+        },
+        "NGV": {
+          "China": "Heavy_Duty_Commercial_Vehicle_(NGV)_Total_Fleet",
+          "Europe": "Heavy_Duty_Commercial_Vehicle_(NGV)_Total_Fleet",
+          "USA": "Heavy_Duty_Commercial_Vehicle_(NGV)_Total_Fleet",
+          "Rest_of_World": "Heavy_Duty_Commercial_Vehicle_(NGV)_Total_Fleet"
+        }
+      },
+      "full_name": "Heavy_Duty_Commercial_Vehicles",
+      "entity_type": "segment"
+    }
+  }
+}

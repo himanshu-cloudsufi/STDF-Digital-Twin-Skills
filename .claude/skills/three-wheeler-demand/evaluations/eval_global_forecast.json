@@ -1,0 +1,42 @@
+{
+  "test_name": "global_aggregation_forecast",
+  "description": "Global forecast with regional aggregation and full JSON output",
+  "command": "python3 scripts/forecast.py --region Global --end-year 2040 --output both",
+  "expected_outputs": [
+    "output/three_wheeler_Global_2040_global.csv",
+    "output/three_wheeler_China_2040.csv",
+    "output/three_wheeler_Europe_2040.csv",
+    "output/three_wheeler_Rest_of_World_2040.csv",
+    "output/three_wheeler_Global_2040.json"
+  ],
+  "validation_checks": [
+    {
+      "check": "all_files_exist",
+      "files": [
+        "output/three_wheeler_Global_2040_global.csv",
+        "output/three_wheeler_Global_2040.json"
+      ]
+    },
+    {
+      "check": "json_structure",
+      "file": "output/three_wheeler_Global_2040.json",
+      "required_keys": ["regional_results", "global_result"]
+    },
+    {
+      "check": "json_regional_keys",
+      "file": "output/three_wheeler_Global_2040.json",
+      "path": "regional_results",
+      "required_keys": ["China", "Europe", "Rest_of_World"]
+    },
+    {
+      "check": "global_aggregation",
+      "description": "Verify global totals equal sum of regional totals",
+      "tolerance": 0.01
+    }
+  ],
+  "expected_results": {
+    "regions_processed": 3,
+    "global_csv_generated": true,
+    "json_complete": true
+  }
+}
