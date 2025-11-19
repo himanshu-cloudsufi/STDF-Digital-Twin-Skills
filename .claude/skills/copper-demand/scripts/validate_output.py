@@ -152,7 +152,7 @@ def main():
     if len(sys.argv) < 2:
         print("Usage: python validate_output.py <output_file> [config_file]")
         print("\nExample:")
-        print("  python validate_output.py output/copper_demand_Global_baseline_2045.csv")
+        print("  python validate_output.py output/copper_demand_Global_baseline_2040.csv")
         print("  python validate_output.py output/forecast.json config.json")
         return 1
 

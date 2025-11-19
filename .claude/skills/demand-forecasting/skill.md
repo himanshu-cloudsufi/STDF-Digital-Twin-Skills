@@ -60,7 +60,7 @@ python3 scripts/forecast.py --region China --output csv
 
 **Example 2: Europe with 90% ceiling**
 ```bash
-python3 scripts/forecast.py --region Europe --ceiling 0.9 --end-year 2050 --output both
+python3 scripts/forecast.py --region Europe --ceiling 0.9 --end-year 2035 --output both
 ```
 
 **Example 3: Global analysis**

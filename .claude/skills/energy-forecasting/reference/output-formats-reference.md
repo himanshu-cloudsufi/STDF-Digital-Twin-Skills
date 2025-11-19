@@ -7,7 +7,7 @@ output/{Region}_{EndYear}.{format}
 
 Examples:
 - output/China_2040.csv
-- output/USA_2050.json
+- output/USA_2040.json
 - output/Global_2040.csv
 ```
 

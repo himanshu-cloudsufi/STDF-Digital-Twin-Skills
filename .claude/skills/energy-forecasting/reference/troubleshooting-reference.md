@@ -249,7 +249,7 @@ python3 scripts/data_loader.py
 **Cause:** Large forecast horizons (e.g., 2100) with many technologies.
 
 **Solutions:**
-- Reduce `--end-year` to 2050 or 2060
+- Reduce `--end-year` to 2030  or 2035
 - Remove CSP if not needed (set threshold to 1.0)
 - Run regional forecasts in parallel instead of Global
 

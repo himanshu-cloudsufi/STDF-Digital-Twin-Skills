@@ -203,8 +203,8 @@ def main():
     if len(sys.argv) < 3:
         print("Usage: python compare_scenarios.py <file1> <file2> [file3...] [--format table|json]")
         print("\nExample:")
-        print("  python compare_scenarios.py output/copper_demand_Global_baseline_2045.csv \\")
-        print("                              output/copper_demand_Global_accelerated_2045.csv")
+        print("  python compare_scenarios.py output/copper_demand_Global_baseline_2040.csv \\")
+        print("                              output/copper_demand_Global_accelerated_2040.csv")
         return 1
 
     # Parse arguments
