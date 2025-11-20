@@ -4,19 +4,14 @@ description: >
   Performs cost-driven demand forecasting for passenger vehicles (EV, PHEV, ICE) across global regions. Calculates cost parity tipping points and models market adoption using logistic growth curves. Use when user asks about passenger vehicle demand, EV adoption, electric vehicle forecasts, market penetration, sales projections, or questions like "when will EVs dominate", "what is EV adoption in China", "forecast passenger vehicle demand", "when does cost parity occur", "EV market share by 2040", "predict ICE decline", "PHEV adoption trajectory". Handles regions: China, USA, Europe, Rest_of_World, Global. Trigger keywords: forecast, predict, demand, adoption, penetration, market share, EV, electric vehicle, passenger vehicle, BEV, PHEV, ICE, tipping point, cost parity, China, USA, Europe, 2040. (project)
 ---
 
-# Cost-Driven Demand Forecasting (LEGACY)
-
-**Status:** This skill is superseded by **product-demand** for most use cases. Retained for backward compatibility.
-
-## When to Use This Skill
-
-Use for passenger vehicle demand forecasting (EV, PHEV, ICE) when:
-- Backward compatibility with legacy workflows is required
-- User explicitly requests this skill
-
-**Recommendation:** Use **product-demand** skill instead (same vehicles, broader capabilities).
+# Cost-Driven Demand Forecasting
 
 ## Quick Start
+
+**Prerequisites:**
+```bash
+pip install -r requirements.txt
+```
 
 ```bash
 # Single region
@@ -31,7 +26,7 @@ python3 scripts/forecast.py --region Global --end-year 2040 --output both
 | Parameter | Default | Description |
 |-----------|---------|-------------|
 | `--region` | Required | China, USA, Europe, Rest_of_World, Global |
-| `--end-year` | 2040 | Forecast horizon |
+| `--end-year` | 2035 | Forecast horizon |
 | `--ceiling` | 1.0 | Max EV adoption (0.0-1.0) |
 | `--output` | csv | csv, json, or both |
 
