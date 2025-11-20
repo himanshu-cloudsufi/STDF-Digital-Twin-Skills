@@ -1,0 +1,25 @@
+{
+  "skills": ["datacenter-ups"],
+  "query": "Validate mass balance for China datacenter UPS forecast through 2040. Verify that annual additions minus retirements equals the change in installed base for both VRLA and Li-ion, and check all validation rules",
+  "files": [],
+  "expected_behavior": [
+    "Step 1: Runs forecast for China with full validation enabled",
+    "Step 2: Uses validate_mass_balance.py to check installed base reconciliation",
+    "Step 3: Uses validate_output.py to check all output constraints",
+    "Step 4: Generates validation report with detailed checks",
+    "For VRLA: Validates IB(t) = IB(t-1) + Adds(t) - Retirements(t) for each year",
+    "For Li-ion: Validates IB(t) = IB(t-1) + Adds(t) - Retirements(t) for each year",
+    "Checks that VRLA retirements = VRLA_IB(t-1) / 5 years (5-year lifespan)",
+    "Checks that Li-ion retirements = Li_IB(t-1) / 12 years (12-year lifespan)",
+    "Validates that Total_Demand(t) = VRLA_Demand(t) + Li_Demand(t) within 5% tolerance",
+    "Checks non-negativity: All demands, installed bases, and shares ≥ 0",
+    "Validates share bounds: 0 ≤ VRLA_Share ≤ 100 and 0 ≤ Li_Share ≤ 100",
+    "Checks share sum: VRLA_Share + Li_Share ≈ 100% (within 1 pp tolerance)",
+    "Validates S-curve monotonicity: Li-ion share increases over time after tipping point",
+    "Checks installed base consistency: Sum of regional IB ≈ Global IB (if aggregating)",
+    "All mass balance checks pass with < 0.1% error tolerance",
+    "Reports any years with reconciliation warnings and provides diagnostics",
+    "Output confirms that stock-flow accounting is internally consistent",
+    "Validation catches any data quality issues or model implementation errors"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "skills": ["datacenter-ups"],
+  "query": "Analyze replacement demand dynamics for USA datacenter UPS from 2025-2040. Show the breakdown between new-build and replacement demand, and explain how the contestable VRLA market drives Li-ion adoption",
+  "files": [],
+  "expected_behavior": [
+    "Step 1: Runs forecast for USA with detailed demand decomposition",
+    "Step 2: Tracks installed base separately for VRLA and Li-ion",
+    "Step 3: Calculates retirement rates based on technology lifespans (VRLA: 5yr, Li-ion: 12yr)",
+    "Step 4: Identifies contestable market (VRLA reaching end-of-life that can switch to Li-ion)",
+    "Step 5: Decomposes total demand into new-build, VRLA replacement, and Li-ion replacement",
+    "Step 6: Uses extract_metrics.py to generate replacement breakdown analysis",
+    "Shows that 2025-2028 demand is ~70% new-build, ~30% replacement (VRLA only)",
+    "Post-tipping point (2029+): contestable VRLA market switches to Li-ion at replacement",
+    "By 2035: replacement demand is ~70-75% of total (installed base maturation)",
+    "2035 replacement split: ~60% Li-ion replacements, ~15% VRLA replacements (legacy holdouts)",
+    "Demonstrates that Li-ion installed base builds up slowly due to 12-year life (low retirement initially)",
+    "VRLA installed base peaks around 2027-2028, then declines as units convert to Li-ion at 5-year replacement",
+    "Contestable market is key mechanism: new datacenters choose Li-ion, VRLA switches at EOL",
+    "Shows 5-7 year transition lag from tipping point (2028) to high Li-ion share (2033-2035)",
+    "New-build demand grows steadily at datacenter growth rate (7-10% CAGR)",
+    "Total demand accelerates 2030-2035 as first wave of VRLA reaches replacement cycle",
+    "Output demonstrates importance of installed base accounting for technology transitions"
+  ]
+}

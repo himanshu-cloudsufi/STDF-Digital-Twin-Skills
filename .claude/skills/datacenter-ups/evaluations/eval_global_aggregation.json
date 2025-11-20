@@ -1,0 +1,24 @@
+{
+  "skills": ["datacenter-ups"],
+  "query": "Generate a global datacenter UPS forecast aggregating all regions (China, USA, Europe, Rest_of_World) through 2040. Show regional contributions and validate that global totals match the sum of regional demands",
+  "files": [],
+  "expected_behavior": [
+    "Step 1: Runs forecasts for China, USA, Europe, Rest_of_World individually",
+    "Step 2: Aggregates regional results to create global totals",
+    "Step 3: Validates mass balance at global level",
+    "Step 4: Generates both regional breakdowns and global summary",
+    "Creates separate CSV files for each region plus global aggregate",
+    "Generates JSON output containing regional_results and global_result sections",
+    "Global total demand equals sum of regional demands (within 1% tolerance)",
+    "Shows regional heterogeneity in tipping points: China ~2027, USA ~2028, Europe ~2029, RoW ~2030",
+    "Demonstrates that China dominates early Li-ion adoption (cost advantage)",
+    "USA and Europe follow with 1-2 year lag (moderate costs)",
+    "Rest_of_World has slowest transition (higher financing costs)",
+    "Global weighted average tipping point around 2028",
+    "By 2040: Global Li-ion share 80-85%, with regional variance 75-92%",
+    "Total global demand reaches ~40-50 GWh/year by 2040",
+    "China represents ~40% of global demand, USA ~25%, Europe ~20%, RoW ~15%",
+    "Validates no double-counting in regional aggregation",
+    "Shows installed base reconciliation at both regional and global levels"
+  ]
+}

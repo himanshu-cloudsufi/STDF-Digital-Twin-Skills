@@ -75,11 +75,11 @@ class DatacenterUPSForecast:
             if self.region in self.real_data['total_demand']:
                 self.hist_total_demand = self.real_data['total_demand'][self.region]
                 self.hist_vrla_demand = self.real_data['vrla_demand'].get(self.region, pd.Series())
-                self.hist_lithium_demand = self.real_data['lithium_demand'].get(self.region, pd.Series())
+                self.hist_lithium_demand = self.real_data['li_ion_demand'].get(self.region, pd.Series())
                 self.hist_growth_rates = self.real_data['growth_rates'].get(self.region, pd.Series())
 
-                # Get BESS costs for Li-ion proxy
-                self.bess_costs = self.real_data['bess_costs_4h'].get(self.region, pd.Series())
+                # Get Li-ion costs (4-hour configuration)
+                self.bess_costs = self.real_data['li_ion_costs_4h'].get(self.region, pd.Series())
 
                 print(f"✓ Data loaded for {self.region}, years {self.start_year} to {self.end_year}")
                 print(f"✓ Using scenario: {self.scenario_name}")

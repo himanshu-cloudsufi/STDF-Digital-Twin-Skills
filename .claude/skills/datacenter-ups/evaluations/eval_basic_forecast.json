@@ -1,0 +1,23 @@
+{
+  "skills": ["datacenter-ups"],
+  "query": "Generate a basic forecast for China datacenter UPS battery demand through 2035, showing VRLA to Li-ion transition",
+  "files": [],
+  "expected_behavior": [
+    "Step 1: Loads datacenter growth data for China",
+    "Step 2: Loads VRLA and Li-ion cost data (BESS proxy for Li-ion)",
+    "Step 3: Calculates TCO for both technologies over 15-year horizon",
+    "Step 4: Identifies tipping point year (when Li-ion TCO < VRLA TCO sustained)",
+    "Step 5: Generates S-curve adoption model based on tipping point",
+    "Step 6: Decomposes demand into new-build and replacement components",
+    "Step 7: Tracks installed base evolution for VRLA and Li-ion separately",
+    "Step 8: Validates mass balance (Adds - Retirements = ΔInstalled_Base)",
+    "Generates CSV output with columns: Year, Total_Demand, VRLA_Demand, Li_Demand, VRLA_Share, Li_Share, VRLA_IB, Li_IB",
+    "Generates JSON output with TCO analysis, tipping point year, and adoption curve parameters",
+    "Shows tipping point around 2027 for China",
+    "Demonstrates S-curve adoption reaching 75-85% Li-ion share by 2035",
+    "New-build demand grows 7-10% annually, replacement demand dominates post-2030",
+    "All demand values are non-negative",
+    "VRLA_Demand + Li_Demand ≈ Total_Demand (within 5% tolerance)",
+    "Li-ion share increases monotonically after tipping point"
+  ]
+}

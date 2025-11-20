@@ -1,0 +1,23 @@
+{
+  "skills": ["datacenter-ups"],
+  "query": "Perform detailed TCO analysis for USA datacenter UPS comparing VRLA and Li-ion economics through 2040. Show the cost breakdown and identify when Li-ion becomes economically superior",
+  "files": [],
+  "expected_behavior": [
+    "Step 1: Runs forecast for USA with detailed TCO tracking",
+    "Step 2: Calculates VRLA TCO including CapEx (~$220-240/kWh), OpEx ($18/kWh-yr), and replacement costs (5-year life)",
+    "Step 3: Calculates Li-ion TCO including declining CapEx (from BESS proxy), OpEx ($6/kWh-yr), and replacement costs (12-year life)",
+    "Step 4: Applies 8% discount rate to calculate present value of 15-year TCO",
+    "Step 5: Identifies crossover point where Li-ion TCO ≤ VRLA TCO for 3+ consecutive years",
+    "Step 6: Analyzes sensitivity to OpEx assumptions (VRLA higher O&M costs)",
+    "Uses tco_analysis.py script to generate comparative analysis",
+    "Generates output showing annual TCO values for both technologies",
+    "Shows TCO components breakdown: CapEx, PV(OpEx), Replacement costs",
+    "Identifies tipping point year (expected around 2028 for USA)",
+    "Demonstrates that OpEx advantage of Li-ion compensates for higher initial CapEx",
+    "Shows Li-ion TCO declining over time while VRLA stays relatively flat",
+    "Includes NPV calculations showing 15-year total ownership cost comparison",
+    "Output demonstrates that longer Li-ion lifespan (12y vs 5y) reduces replacement frequency",
+    "TCO parity occurs before price parity due to operational savings",
+    "All TCO values are positive and realistic (not extreme outliers)"
+  ]
+}

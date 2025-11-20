@@ -1,0 +1,23 @@
+{
+  "skills": ["datacenter-ups"],
+  "query": "Compare three scenarios for Europe datacenter UPS transition: baseline, accelerated Li-ion cost decline, and delayed adoption. Show how each affects the tipping point and 2035 market share",
+  "files": [],
+  "expected_behavior": [
+    "Step 1: Runs forecast for Europe baseline scenario (standard cost trajectories)",
+    "Step 2: Runs forecast for Europe accelerated scenario (faster Li-ion decline, -12% CAGR vs -8%)",
+    "Step 3: Runs forecast for Europe delayed scenario (slower Li-ion decline, -5% CAGR)",
+    "Step 4: Uses compare_scenarios.py to generate comparative analysis",
+    "Baseline shows tipping point around 2029, Li-ion share ~75-80% by 2035",
+    "Accelerated scenario shows earlier tipping (~2026), higher adoption ~88-92% by 2035",
+    "Delayed scenario shows later tipping (~2032), lower adoption ~60-70% by 2035",
+    "Generates comparison showing differential impact on tipping point year (±3 years range)",
+    "Shows adoption rate differences: steeper S-curve for accelerated, flatter for delayed",
+    "Demonstrates cost sensitivity: 4 pp change in CAGR → ~3 year shift in tipping",
+    "Creates comparative visualization showing three adoption curves",
+    "Report includes absolute differences in Li-ion market share by year",
+    "Shows that total market demand similar across scenarios (driven by datacenter growth)",
+    "Technology mix varies significantly: accelerated has 30 pp higher Li-ion share by 2035",
+    "Output demonstrates understanding that cost trajectories drive tipping point timing",
+    "All three scenarios show eventual Li-ion dominance, but timing and extent differ"
+  ]
+}

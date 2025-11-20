@@ -1,0 +1,25 @@
+{
+  "skills": ["datacenter-ups"],
+  "query": "Test sensitivity of datacenter UPS adoption to key parameters: discount rate (6% vs 8% vs 10%), Li-ion lifespan (10yr vs 12yr vs 15yr), and S-curve ceiling (90% vs 95% vs 99%). Show how each affects tipping point and final adoption for Global forecast",
+  "files": [],
+  "expected_behavior": [
+    "Step 1: Runs baseline forecast (8% discount, 12yr lifespan, 95% ceiling)",
+    "Step 2: Runs discount rate sensitivity (6% and 10% variants)",
+    "Step 3: Runs lifespan sensitivity (10yr and 15yr variants)",
+    "Step 4: Runs ceiling sensitivity (90% and 99% variants)",
+    "Step 5: Uses adoption_model.py to analyze parameter impacts",
+    "Step 6: Generates sensitivity analysis report with parameter sweep results",
+    "Discount rate sensitivity: Lower rate (6%) → earlier tipping by ~1-2 years (OpEx savings more valuable)",
+    "Discount rate sensitivity: Higher rate (10%) → later tipping by ~1-2 years (upfront costs matter more)",
+    "Lifespan sensitivity: Extended life (15yr) → TCO improves by ~15%, tipping advances ~2 years",
+    "Lifespan sensitivity: Shorter life (10yr) → TCO worsens, tipping delays ~1-2 years",
+    "Ceiling sensitivity: Higher ceiling (99%) → more complete transition, only 1% residual VRLA niche",
+    "Ceiling sensitivity: Lower ceiling (90%) → 10% permanent VRLA market (legacy, low-criticality sites)",
+    "Shows that tipping point most sensitive to cost trajectories, moderately to lifespan",
+    "Final adoption most sensitive to ceiling parameter and lifespan (replacement cycle effects)",
+    "Generates tornado chart or parameter sensitivity table",
+    "All sensitivity runs maintain mass balance and non-negativity constraints",
+    "Demonstrates that parameter uncertainty creates ±3 year range in tipping point estimates",
+    "Shows adoption range of 78-92% by 2040 across reasonable parameter bounds"
+  ]
+}

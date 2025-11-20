@@ -1,0 +1,109 @@
+{
+  "market": "Datacenter_UPS",
+  "taxonomy": {
+    "Batteries": {
+      "subproducts": [
+        "VRLA",
+        "Li_ion"
+      ]
+    }
+  },
+  "data": {
+    "Datacenter_UPS": {
+      "demand": {
+        "China": "Data_Center_Battery_Demand_Annual_Capacity_Demand_China",
+        "Europe": "Data_Center_Battery_Demand_Annual_Capacity_Demand_Europe",
+        "Global": "Data_Center_Battery_Demand_Annual_Capacity_Demand_Global",
+        "Rest_of_World": "Data_Center_Battery_Demand_Annual_Capacity_Demand_Rest_of_World",
+        "USA": "Data_Center_Battery_Demand_Annual_Capacity_Demand_USA"
+      },
+      "drivers": {
+        "China": "Datacenter_capacity_growth_projections_China",
+        "Europe": "Datacenter_capacity_growth_projections_Europe",
+        "Global": "Datacenter_capacity_growth_projections_Global",
+        "Rest_of_World": "Datacenter_capacity_growth_projections_Rest_of_World",
+        "USA": "Datacenter_capacity_growth_projections_USA"
+      },
+      "entity_type": "market"
+    },
+    "VRLA": {
+      "demand": {
+        "China": "Data_Center_Battery_Demand_(LAB)_Annual_Capacity_Demand_China",
+        "Europe": "Data_Center_Battery_Demand_(LAB)_Annual_Capacity_Demand_Europe",
+        "Global": "Data_Center_Battery_Demand_(LAB)_Annual_Capacity_Demand_Global",
+        "Rest_of_World": "Data_Center_Battery_Demand_(LAB)_Annual_Capacity_Demand_Rest_of_World",
+        "USA": "Data_Center_Battery_Demand_(LAB)_Annual_Capacity_Demand_USA"
+      },
+      "installed_base": {
+        "China": "Lead_acid_batteries_UPS_Datacenter_Installed_Base_China",
+        "Europe": "Lead_acid_batteries_UPS_Datacenter_Installed_Base_Europe",
+        "Global": "Lead_acid_batteries_UPS_Datacenter_Installed_Base_Global",
+        "Rest_of_World": "Lead_acid_batteries_UPS_Datacenter_Installed_Base_Rest_of_World",
+        "USA": "Lead_acid_batteries_UPS_Datacenter_Installed_Base_USA"
+      },
+      "lifetime": {
+        "Global": "Lead_acid_batteries_UPS_Datacenter_Replacement_cycle_Battery_Replacement_cycle_Global"
+      },
+      "cost": {
+        "Global": "VRLA_Battery_Cost_Global"
+      },
+      "entity_type": "incumbent",
+      "alias": ["Lead_Acid", "LAB"]
+    },
+    "Li_ion": {
+      "demand": {
+        "China": "Data_Center_Battery_Demand_(Li-Ion)_Annual_Capacity_Demand_China",
+        "Europe": "Data_Center_Battery_Demand_(Li-Ion)_Annual_Capacity_Demand_Europe",
+        "Global": "Data_Center_Battery_Demand_(Li-Ion)_Annual_Capacity_Demand_Global",
+        "Rest_of_World": "Data_Center_Battery_Demand_(Li-Ion)_Annual_Capacity_Demand_Rest_of_World",
+        "USA": "Data_Center_Battery_Demand_(Li-Ion)_Annual_Capacity_Demand_USA"
+      },
+      "cost": {
+        "4h_turnkey": {
+          "China": "Battery_Energy_Storage_System_(4-hour_Turnkey)_Cost_China",
+          "Europe": "Battery_Energy_Storage_System_(4-hour_Turnkey)_Cost_Europe",
+          "Global": "Battery_Energy_Storage_System_(4-hour_Turnkey)_Cost_Global",
+          "USA": "Battery_Energy_Storage_System_(4-hour_Turnkey)_Cost_USA"
+        },
+        "2h_turnkey": {
+          "China": "Battery_Energy_Storage_System_(2-hour_Turnkey)_Cost_China",
+          "Europe": "Battery_Energy_Storage_System_(2-hour_Turnkey)_Cost_Europe",
+          "Global": "Battery_Energy_Storage_System_(2-hour_Turnkey)_Cost_Global",
+          "USA": "Battery_Energy_Storage_System_(2-hour_Turnkey)_Cost_USA"
+        },
+        "power_basis": {
+          "Global": "Battery_Energy_Storage_System_Installed_Cost_Global"
+        }
+      },
+      "lifetime": {
+        "Global": "Li_ion_UPS_Replacement_cycle_Global"
+      },
+      "intensity": {
+        "Global": "Data_Center_UPS_Battery_(Li-Ion)_Average_Lithium_content_Global"
+      },
+      "entity_type": "disruptor",
+      "alias": ["Lithium_Ion", "LIB"]
+    }
+  },
+  "metadata": {
+    "units": {
+      "demand": "MWh/year",
+      "installed_base": "MWh",
+      "replacement_cycle": "years",
+      "cost_energy": "$/kWh",
+      "cost_power": "$/kW",
+      "lithium_content": "kg Li/kWh"
+    },
+    "regions": ["China", "Europe", "USA", "Rest_of_World", "Global"],
+    "description": "Datacenter UPS battery demand forecasting taxonomy and dataset mapping",
+    "notes": [
+      "VRLA (Valve-Regulated Lead-Acid) batteries are the incumbent technology",
+      "Li-ion batteries are the disruptor technology replacing VRLA",
+      "Cost datasets include both energy ($/kWh) and power ($/kW) basis metrics",
+      "BESS turnkey costs are used as proxies for Li-ion UPS CapEx",
+      "Dataset names match exactly with the source data files"
+    ],
+    "updated_at": "2025-11-19",
+    "version": "1.0"
+  }
+}
