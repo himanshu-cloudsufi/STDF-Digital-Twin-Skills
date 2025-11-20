@@ -1,0 +1,348 @@
+{
+  "market": "Artificial_Labour",
+  "taxonomy": {
+    "Artificial_Intelligence": {
+      "subproducts": [
+        "AI_Language_Models",
+        "AI_Code_Generation",
+        "AI_Reasoning",
+        "AI_Vision",
+        "AI_Multimodal"
+      ],
+      "description": "AI systems capable of performing cognitive tasks"
+    },
+    "Physical_Automation": {
+      "subproducts": [
+        "Industrial_Robot",
+        "Service_Robot",
+        "Humanoid_Robot"
+      ],
+      "description": "Physical robots performing manual tasks"
+    },
+    "Compute_Infrastructure": {
+      "subproducts": [
+        "GPU",
+        "AI_Accelerators"
+      ],
+      "description": "Hardware enabling AI computation"
+    }
+  },
+  "data": {
+    "Artificial_Intelligence": {
+      "capability": {
+        "Global": {
+          "language_understanding": "Artificial_Intelligence_MMLU_Accuracy",
+          "math_reasoning": "Artificial_Intelligence_GSM8K_Accuracy",
+          "code_generation": "Artificial_Intelligence_HumanEval_Accuracy",
+          "expert_reasoning": "Artificial_Intelligence_GPQA_Diamond_Accuracy",
+          "vision": "Artificial_Intelligence_ImageNet_Top5_Accuracy",
+          "multimodal": "Artificial_Intelligence_MMMU_Accuracy"
+        }
+      },
+      "cost": {
+        "Global": {
+          "inference": "Artificial_Intelligence_Inference_Cost",
+          "training": "Artificial_Intelligence_Training_Cost"
+        }
+      },
+      "scale": {
+        "Global": {
+          "training_data": "Artificial_Intelligence_Traning_Dataset_Size",
+          "model_parameters": "Artificial_Intelligence_Model_Parameters",
+          "compute": "Artificial_Intelligence_Training_Compute"
+        }
+      },
+      "adoption": {
+        "Global": {
+          "enterprise": "Artificial_Intelligence_Enterprise_Adoption",
+          "api_usage": "Artificial_Intelligence_API_Usage"
+        }
+      },
+      "entity_type": "disruptor"
+    },
+    "Industrial_Robot": {
+      "demand": {
+        "Global": "Industrial_Robot_Annual_Installation",
+        "China": "Industrial_Robot_Annual_Installation",
+        "USA": "Industrial_Robot_Annual_Installation",
+        "Europe": "Industrial_Robot_Annual_Installation",
+        "Asia_Pacific": "Industrial_Robot_Annual_Installation"
+      },
+      "installed_base": {
+        "Global": "Industrial_Robot_Operational_stock",
+        "China": "Industrial_Robot_Operational_stock",
+        "USA": "Industrial_Robot_Operational_stock",
+        "Europe": "Industrial_Robot_Operational_stock",
+        "Asia_Pacific": "Industrial_Robot_Operational_stock"
+      },
+      "demand_by_sector": {
+        "Automotive": "Industrial_Robot_Annual_Installation_(Automotive)",
+        "Electronics": "Industrial_Robot_Annual_Installation_(Electrical_Electronics)",
+        "Metal": "Industrial_Robot_Annual_Installation_(Metal_and_Machinery)",
+        "Plastics": "Industrial_Robot_Annual_Installation_(Plastics_and_Chemical_Products)",
+        "Food": "Industrial_Robot_Annual_Installation_(Food)",
+        "Other": "Industrial_Robot_Annual_Installation_(Others)"
+      },
+      "entity_type": "disruptor"
+    },
+    "Service_Robot": {
+      "demand": {
+        "Global": "Service_Robot_(Professional)_Annual_Installation"
+      },
+      "demand_by_sector": {
+        "Agriculture": "Service_Robot_(Professional)_Annual_Installation_(Agriculture)",
+        "Hospitality": "Service_Robot_(Professional)_Annual_Installation_(Hospitality)",
+        "Logistics": "Service_Robot_(Professional)_Annual_Installation_(Logistics)",
+        "Medical": "Service_Robot_(Professional)_Annual_Installation_(Medical)",
+        "Other": "Service_Robot_(Professional)_Annual_Installation_(Others)"
+      },
+      "entity_type": "disruptor"
+    },
+    "Humanoid_Robot": {
+      "market_size": {
+        "Global": "Humanoid_Robot_Market_Size"
+      },
+      "entity_type": "disruptor"
+    },
+    "GPU": {
+      "cost": {
+        "NVIDIA_V100": "GPU_NVIDIA_Tesla_V100_Price",
+        "NVIDIA_A100": "GPU_NVIDIA_A100_Tensor_Core_Price",
+        "NVIDIA_H100": "GPU_NVIDIA_H100_Tensor_Core_Price",
+        "AMD_MI210": "GPU_AMD_MI210_Price",
+        "AMD_MI250X": "GPU_AMD_MI250X_Price",
+        "AMD_MI300X": "GPU_AMD_MI300X_Price"
+      },
+      "entity_type": "enabler"
+    },
+    "Human_Labour": {
+      "cost": {
+        "Global": {
+          "description": "Human labor cost per task (incumbent)",
+          "service_unit": "USD per hour or USD per task",
+          "typical_ranges": {
+            "data_entry": "15-30 USD/hour",
+            "customer_service": "15-35 USD/hour",
+            "coding_junior": "40-80 USD/hour",
+            "coding_senior": "80-150 USD/hour",
+            "analysis": "50-100 USD/hour",
+            "assembly_manufacturing": "20-40 USD/hour",
+            "warehouse_picking": "15-25 USD/hour",
+            "inspection_qa": "20-35 USD/hour"
+          }
+        }
+      },
+      "entity_type": "incumbent"
+    }
+  },
+  "disruption_pairs": [
+    {
+      "disruptor": "Artificial_Intelligence",
+      "incumbent": "Human_Labour",
+      "use_cases": [
+        {
+          "task": "code_generation",
+          "disruptor_capability": "Artificial_Intelligence_HumanEval_Accuracy",
+          "incumbent_cost": "80-150 USD/hour",
+          "service_unit": "USD per line of code"
+        },
+        {
+          "task": "data_analysis",
+          "disruptor_capability": "Artificial_Intelligence_MMLU_Accuracy",
+          "incumbent_cost": "50-100 USD/hour",
+          "service_unit": "USD per analysis task"
+        },
+        {
+          "task": "customer_service",
+          "disruptor_capability": "Artificial_Intelligence_MMLU_Accuracy",
+          "incumbent_cost": "15-35 USD/hour",
+          "service_unit": "USD per interaction"
+        }
+      ]
+    },
+    {
+      "disruptor": "Industrial_Robot",
+      "incumbent": "Human_Labour",
+      "use_cases": [
+        {
+          "task": "assembly",
+          "disruptor_sector": "Automotive",
+          "incumbent_cost": "20-40 USD/hour",
+          "service_unit": "USD per unit assembled"
+        },
+        {
+          "task": "welding",
+          "disruptor_sector": "Metal",
+          "incumbent_cost": "25-45 USD/hour",
+          "service_unit": "USD per weld"
+        },
+        {
+          "task": "packaging",
+          "disruptor_sector": "Food",
+          "incumbent_cost": "15-25 USD/hour",
+          "service_unit": "USD per package"
+        }
+      ]
+    },
+    {
+      "disruptor": "Service_Robot",
+      "incumbent": "Human_Labour",
+      "use_cases": [
+        {
+          "task": "warehouse_picking",
+          "disruptor_sector": "Logistics",
+          "incumbent_cost": "15-25 USD/hour",
+          "service_unit": "USD per pick"
+        },
+        {
+          "task": "delivery",
+          "disruptor_sector": "Logistics",
+          "incumbent_cost": "20-35 USD/hour",
+          "service_unit": "USD per delivery"
+        },
+        {
+          "task": "surgery_assistance",
+          "disruptor_sector": "Medical",
+          "incumbent_cost": "50-100 USD/hour",
+          "service_unit": "USD per procedure"
+        }
+      ]
+    },
+    {
+      "disruptor": "Humanoid_Robot",
+      "incumbent": "Human_Labour",
+      "use_cases": [
+        {
+          "task": "general_purpose_labor",
+          "incumbent_cost": "15-30 USD/hour",
+          "service_unit": "USD per hour",
+          "note": "Emerging category - multiple use cases"
+        }
+      ]
+    }
+  ],
+  "convergence_products": [
+    {
+      "name": "AI_Powered_Industrial_Automation",
+      "components": ["Artificial_Intelligence", "Industrial_Robot"],
+      "capabilities": [
+        "Adaptive manufacturing",
+        "Visual inspection + reasoning",
+        "Predictive maintenance",
+        "Real-time optimization"
+      ],
+      "entity_type": "converged_disruptor"
+    },
+    {
+      "name": "Autonomous_Service_Robots",
+      "components": ["Artificial_Intelligence", "Service_Robot"],
+      "capabilities": [
+        "Navigation in dynamic environments",
+        "Natural language interaction",
+        "Task learning and adaptation",
+        "Human-robot collaboration"
+      ],
+      "entity_type": "converged_disruptor"
+    },
+    {
+      "name": "General_Purpose_Humanoids",
+      "components": ["Artificial_Intelligence", "Humanoid_Robot"],
+      "capabilities": [
+        "Multi-task capability",
+        "Human environment operation",
+        "Natural interaction",
+        "Continuous learning"
+      ],
+      "entity_type": "converged_disruptor"
+    },
+    {
+      "name": "AI_as_a_Service",
+      "components": ["Artificial_Intelligence", "GPU", "Cloud_Infrastructure"],
+      "capabilities": [
+        "On-demand AI compute",
+        "Zero marginal cost scaling",
+        "Continuous improvement",
+        "API-accessible intelligence"
+      ],
+      "entity_type": "converged_disruptor"
+    }
+  ],
+  "service_metrics": {
+    "AI": {
+      "primary": "USD per inference",
+      "secondary": ["USD per task", "USD per automation-hour"],
+      "calculation": "(GPU cost + energy + overhead) / throughput"
+    },
+    "Industrial_Robot": {
+      "primary": "USD per task",
+      "secondary": ["USD per unit output", "USD per hour"],
+      "calculation": "(CAPEX / lifetime hours + OPEX per hour) / tasks per hour"
+    },
+    "Service_Robot": {
+      "primary": "USD per task",
+      "secondary": ["USD per delivery", "USD per pick", "USD per hour"],
+      "calculation": "(CAPEX / lifetime hours + OPEX per hour) / tasks per hour"
+    },
+    "Humanoid_Robot": {
+      "primary": "USD per hour",
+      "secondary": ["USD per task"],
+      "calculation": "(CAPEX / lifetime hours + OPEX per hour)"
+    }
+  },
+  "regions": {
+    "Global": {
+      "coverage": "Worldwide aggregate",
+      "note": "Most AI benchmarks are Global only"
+    },
+    "China": {
+      "coverage": "People's Republic of China",
+      "note": "Leading in industrial robot adoption"
+    },
+    "USA": {
+      "coverage": "United States",
+      "note": "Leading in AI development"
+    },
+    "Europe": {
+      "coverage": "European Union + associated countries",
+      "note": "Strong in service robotics"
+    },
+    "Asia_Pacific": {
+      "coverage": "Asia-Pacific region excluding China",
+      "note": "Growing manufacturing automation"
+    },
+    "Rest_of_World": {
+      "coverage": "All other regions",
+      "note": "Emerging markets for automation"
+    }
+  },
+  "tipping_point_thresholds": {
+    "AI_capability": {
+      "human_level": "85-95% on benchmarks (MMLU, GSM8K, HumanEval)",
+      "superhuman": ">95% on benchmarks"
+    },
+    "cost_parity": {
+      "approaching": "Disruptor cost = 70-100% of incumbent cost",
+      "parity": "Disruptor cost = 50-70% of incumbent cost",
+      "tipping": "Disruptor cost < 50% of incumbent cost AND capability >= human-level"
+    },
+    "adoption_milestones": {
+      "early": "10% market share",
+      "mainstream": "50% market share",
+      "late": "80-90% market share"
+    }
+  },
+  "metadata": {
+    "version": "1.0",
+    "last_updated": "2024-11-20",
+    "description": "Taxonomy and dataset mapping for artificial labour analysis using Tony Seba disruption framework",
+    "framework": "Service-level cost-capability analysis with disruption timing",
+    "data_sources": [
+      "Epoch AI",
+      "Stanford AI Index",
+      "IFR (International Federation of Robotics)",
+      "ARK Invest",
+      "Goldman Sachs",
+      "Academic benchmarks (MMLU, GSM8K, HumanEval, etc.)"
+    ]
+  }
+}

@@ -1,0 +1,3898 @@
+{
+  "Artificial Intelligence": {
+    "Artificial_Intelligence_Traning_Dataset_Size": {
+      "metadata": {
+        "type": "adoption",
+        "units": "Token",
+        "source": "Epoch AI",
+        "category": "annual adoption",
+        "entity_type": "disruptor",
+        "description": "Across all domains of AI and ML, models are using more and more training data. In language modeling, datasets are growing at a rate of 3.7x per year. The largest models currently use datasets with tens of trillions of words."
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            "2011",
+            "2013",
+            "2015",
+            "2016",
+            "2017",
+            "2018",
+            "2019",
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024",
+            "2025"
+          ],
+          "Y": [
+            75000.0,
+            4100000.0,
+            38000000.0,
+            47000000.0,
+            400000000.0,
+            1800000000.0,
+            3300000000.0,
+            17000000000.0,
+            42000000000.0,
+            400000000000.0,
+            1400000000000.0,
+            6500000000000.0,
+            7500000000000.0
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_MMLU_Accuracy": {
+      "metadata": {
+        "type": "Performance Benchmark",
+        "units": "%",
+        "source": "Stanford",
+        "category": "Performance Benchmark",
+        "entity_type": "disruptor",
+        "description": "The Massive Multitask Language Understanding (MMLU) benchmark assesses model performance in zero-shot or fewshot scenarios across 57 subjects, including the humanities,STEM, and the social sciences (Figure 2.2.3). MMLU has emerged as a premier benchmark for assessing LLM capabilities: Many state-of-the-art models like GPT-4o, Claude 3.5, and Gemini 2.0 have been evaluated against MMLU. "
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            "2019",
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024"
+          ],
+          "Y": [
+            33.0,
+            55.0,
+            60.0,
+            75.0,
+            85.0,
+            92.3
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_GSM8K_Accuracy": {
+      "metadata": {
+        "type": "Performance Benchmark",
+        "units": "%",
+        "source": "Stanford",
+        "category": "Performance Benchmark",
+        "entity_type": "disruptor",
+        "description": "GSM8K, introduced by OpenAI in 2021, is a dataset containing approximately 8,000 diverse grade-school math word problems that challenges AI models to generate multistep solutions using arithmetic operations."
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            "2022",
+            "2023",
+            "2024"
+          ],
+          "Y": [
+            89.0,
+            92.0,
+            97.72
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_MATH_Word_Problem_Solving_Accuracy": {
+      "metadata": {
+        "type": "Performance Benchmark",
+        "units": "%",
+        "source": "Stanford",
+        "category": "Performance Benchmark",
+        "entity_type": "disruptor",
+        "description": "MATH is a dataset of 12,500 challenging, competitionlevel mathematics problems introduced by UC Berkeley and University of Chicago researchers in 2021. Human Baseline is 90%."
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            "2021",
+            "2022",
+            "2023",
+            "2024",
+            "2025"
+          ],
+          "Y": [
+            9.0,
+            50.0,
+            83.0,
+            90.0,
+            97.9
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_ARC-AGI_Accuracy": {
+      "metadata": {
+        "type": "Performance Benchmark",
+        "units": "%",
+        "source": "Stanford",
+        "category": "Performance Benchmark",
+        "entity_type": "disruptor",
+        "description": "ARC-AGI benchmark presents AI systems with a set of independent tasks. Each task includes demonstration or input pairs followed by one or more test or output scenarios . This benchmark emphasizes generalized learning ability: It is impossible for systems to prepare in advance, as each task introduces a unique logic. The tasks require no specialized world knowledge or language skills but instead draw on assumed prior knowledge, such as the concept of objects, basic topology, and elementary arithmetic\u2014concepts typically mastered by children at an early age."
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            "2019",
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024"
+          ],
+          "Y": [
+            1.0,
+            21.0,
+            25.0,
+            30.0,
+            34.0,
+            75.7
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_HumanEval_Accuracy": {
+      "metadata": {
+        "type": "Performance Benchmark",
+        "units": "%",
+        "source": "Stanford",
+        "category": "Performance Benchmark",
+        "entity_type": "disruptor",
+        "description": "HumanEval, a benchmark introduced by OpenAI researchers in 2021, evaluates the coding abilities of AI systems through 164 challenging, handwritten programming problem.The current leader in HumanEval performance is Claude 3.5 Sonnet (HPT), which achieved a score of 100% "
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            "2021",
+            "2022",
+            "2023",
+            "2024"
+          ],
+          "Y": [
+            32.0,
+            85.0,
+            94.0,
+            100.0
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Q-AR_Accuracy": {
+      "metadata": {
+        "type": "Performance Benchmark",
+        "units": "%",
+        "source": "Stanford",
+        "category": "Performance Benchmark",
+        "entity_type": "disruptor",
+        "description": "Introduced in 2019 by researchers from the University of Washington and the Allen Institute for AI, the Visual Commonsense Reasoning (VCR) challenge tests the commonsense visual reasoning abilities of AI systems. In this challenge, AI systems not only answer questions based on images but also reason about the logic behind their answers (Figure 2.3.1). Performance in VCR is measured using the Q->AR score, which evaluates the machine\u2019s ability to both select the correct answer to a question (Q->A) and choose the appropriate rationale behind that answer (Q->R)."
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            "2018",
+            "2019",
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024"
+          ],
+          "Y": [
+            15.0,
+            67.0,
+            70.0,
+            72.0,
+            75.0,
+            81.0,
+            85.0
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Training_Compute": {
+      "metadata": {
+        "type": "adoption",
+        "units": "FLOP",
+        "source": "Epoch AI",
+        "category": "annual adoption",
+        "entity_type": "disruptor",
+        "description": "Since 2010, the training compute used to create AI models has been growing at a rate of 4.4x per year. Most of this growth comes from increased spending, although improvements in hardware have also played a role."
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            "Oct 2016",
+            "Jul-2017",
+            "Nov-2019",
+            "Dec-2021",
+            "Nov-2022",
+            "Sep-2023",
+            "Dec-2023"
+          ],
+          "Y": [
+            4.36e+20,
+            8.43e+20,
+            5.93e+22,
+            6.31e+23,
+            2.58e+24,
+            3.76e+24,
+            5e+25
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Training_Power_Draw": {
+      "metadata": {
+        "type": "adoption",
+        "units": "Watt",
+        "source": "Epoch AI",
+        "category": "annual adoption",
+        "entity_type": "disruptor",
+        "description": "Training frontier models requires a large and growing amount of power for GPUs, servers, cooling and other equipment. This is driven by an increase in GPU count; power draw per GPU is also growing"
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            "Sep 2014",
+            "Dec 2015",
+            "Feb 2016",
+            "Oct 2016",
+            "Jul-2017",
+            "Sep-2018",
+            "Nov-2019",
+            "Jun-2020",
+            "Dec-2021",
+            "Apr-2022",
+            "Sep-2023",
+            "Dec-2023",
+            "Jul-2024",
+            "Apr-2025"
+          ],
+          "Y": [
+            2100.0,
+            8500.0,
+            17000.0,
+            38000.0,
+            31000.0,
+            120000.0,
+            170000.0,
+            460000.0,
+            1800000.0,
+            2100000.0,
+            11000000.0,
+            19000000.0,
+            23000000.0,
+            44000000.0
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Energy_Efficiency_(ML_Hardware)": {
+      "metadata": {
+        "type": "Energy Efficiency",
+        "units": "Flops/watt",
+        "source": "Epoch AI",
+        "category": "Energy Efficiency",
+        "entity_type": "disruptor",
+        "description": "Leading ML hardware becomes 40% more energy-efficient each year.The upcoming Blackwell series of processors may be even more efficient, depending on their power consumption."
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            "2016",
+            "2017",
+            "2018",
+            "2020",
+            "2021",
+            "2024"
+          ],
+          "Y": [
+            74800000000.0,
+            161000000000.0,
+            559000000000.0,
+            789000000000.0,
+            1620000000000.0,
+            2500000000000.0
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Max_GPU_Computational_Performance_Per_Dollar": {
+      "metadata": {
+        "type": "Performance Benchmark",
+        "units": "Flops/s/$",
+        "source": "Epoch AI",
+        "category": "Performance Benchmark",
+        "entity_type": "disruptor",
+        "description": "Hardware computational performance shown in floating-point operations per second (FLOP/s) per US dollar, adjusted for inflation.FLOP/s values refer to 32-bit (full) precision. Data is expressed in constant 2024 US$. Inflation adjustment is based on the US Consumer Price Index (CPI).This measures computing power per dollar\u2014specifically, how many calculations per second you get for each inflation-adjusted dollar when buying a GPU."
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            "2008",
+            "2010",
+            "2013",
+            "2014",
+            "2016",
+            "2017",
+            "2020",
+            "2022"
+          ],
+          "Y": [
+            657610000.0,
+            2200000000.0,
+            4760000000.0,
+            6850000000.0,
+            11330000000.0,
+            12670000000.0,
+            35150000000.0,
+            48190000000.0
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Number_of_Models_by_Hardware_(NVIDIA_A100)": {
+      "metadata": {
+        "type": "adoption",
+        "units": "Model Count",
+        "source": "Epoch AI",
+        "category": "annual adoption",
+        "entity_type": "disruptor",
+        "description": "Number of Model by ML Hardware"
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            "2021",
+            "2022",
+            "2023",
+            "2024",
+            "2025"
+          ],
+          "Y": [
+            11.0,
+            36.0,
+            69.0,
+            81.0,
+            85.0
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Number_of_Models_by_Hardware_(NVIDIA_V100)": {
+      "metadata": {
+        "type": "adoption",
+        "units": "Model Count",
+        "source": "Epoch AI",
+        "category": "annual adoption",
+        "entity_type": "disruptor",
+        "description": "Number of Model by ML Hardware"
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            "2018",
+            "2019",
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024",
+            "2025"
+          ],
+          "Y": [
+            5.0,
+            16.0,
+            29.0,
+            52.0,
+            58.0,
+            67.0,
+            68.0,
+            68.0
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Number_of_Models_by_Hardware_(NVIDIA_TPU_v3)": {
+      "metadata": {
+        "type": "adoption",
+        "units": "Model Count",
+        "source": "Epoch AI",
+        "category": "annual adoption",
+        "entity_type": "disruptor",
+        "description": "Number of Model by ML Hardware"
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            "2019",
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024",
+            "2025"
+          ],
+          "Y": [
+            10.0,
+            22.0,
+            35.0,
+            42.0,
+            43.0,
+            44.0,
+            44.0
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Number_of_Models_by_Hardware_(NVIDIA_TPU_v4)": {
+      "metadata": {
+        "type": "adoption",
+        "units": "Model Count",
+        "source": "Epoch AI",
+        "category": "annual adoption",
+        "entity_type": "disruptor",
+        "description": "Number of Model by ML Hardware"
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            "2022",
+            "2023",
+            "2024",
+            "2025"
+          ],
+          "Y": [
+            13.0,
+            19.0,
+            26.0,
+            26.0
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Number_of_Models_by_Hardware_(NVIDIA_H100)": {
+      "metadata": {
+        "type": "adoption",
+        "units": "Model Count",
+        "source": "Epoch AI",
+        "category": "annual adoption",
+        "entity_type": "disruptor",
+        "description": "Number of Model by ML Hardware"
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            "Jan-2024",
+            "Mar-2024",
+            "May-2024",
+            "Jul-2024",
+            "Sep-2024",
+            "Nov-2024",
+            "Jan-2025",
+            "Mar-2025",
+            "May-2025",
+            "Jul-2025",
+            "Sep-2025"
+          ],
+          "Y": [
+            1.0,
+            2.0,
+            5.0,
+            6.0,
+            9.0,
+            16.0,
+            18.0,
+            20.0,
+            22.0,
+            22.0,
+            24.0
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Amortized_hardware_and_energy_cost_for_Training": {
+      "metadata": {
+        "type": "cost",
+        "units": "$",
+        "source": "Epoch AI",
+        "category": "cost",
+        "entity_type": "disruptor",
+        "description": "Amortized hardware cost plus energy cost for the final training run of frontier models. The selected models are among the top 10 most compute-intensive for their time. Amortized hardware costs are the product of training chip-hours and a depreciated hardware cost, with 23% overhead added for cluster-level networking."
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            "Oct 2016",
+            "Jul-2017",
+            "Nov-2019",
+            "Dec-2021",
+            "Nov-2022",
+            "Sep-2023",
+            "Dec-2023"
+          ],
+          "Y": [
+            12600.0,
+            17200.0,
+            126000.0,
+            617000.0,
+            4630000.0,
+            10300000.0,
+            29800000.0
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Inference_Price_(GPT-3.5)": {
+      "metadata": {
+        "type": "cost",
+        "units": "$ Per Million Token",
+        "source": "Stanford",
+        "category": "cost",
+        "entity_type": "disruptor",
+        "description": "Inference costs refer to the expense of querying a trained model, and they are typically measured in USD per million tokens. Data on AI token pricing comes from both Artificial Analysis and Epoch AI\u2019s proprietary database on API pricing. The reported price is a 3:1 weighted average of input and output token price"
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            "Jan-2023",
+            "Mar-2023",
+            "Jan-2024",
+            "Apr-2024",
+            "May-2024",
+            "Oct-2024"
+          ],
+          "Y": [
+            13.0,
+            3.0,
+            0.9,
+            0.6,
+            0.2,
+            0.08
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Inference_Price_(GPT-4)": {
+      "metadata": {
+        "type": "cost",
+        "units": "$ Per Million Token",
+        "source": "Stanford",
+        "category": "cost",
+        "entity_type": "disruptor",
+        "description": "Inference costs refer to the expense of querying a trained model, and they are typically measured in USD per million tokens. Data on AI token pricing comes from both Artificial Analysis and Epoch AI\u2019s proprietary database on API pricing. The reported price is a 3:1 weighted average of input and output token price"
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            "Apr-2023",
+            "Jun-2023",
+            "Jan-2024",
+            "Apr-2024",
+            "Jun-2024",
+            "Jul-2024",
+            "Aug-2024"
+          ],
+          "Y": [
+            15.0,
+            6.0,
+            0.9,
+            0.6,
+            0.4,
+            0.2,
+            0.1
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Cloud_Compute_Cost_for_Training": {
+      "metadata": {
+        "type": "cost",
+        "units": "$",
+        "source": "Epoch AI",
+        "category": "cost",
+        "entity_type": "disruptor",
+        "description": "Estimated cloud compute costs for the final training run of frontier models. The selected models are among the top 10 most compute-intensive for their time. The costs are the product of the number of training chip-hours and a historical cloud rental price."
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            "Oct 2016",
+            "Jul-2017",
+            "Nov-2019",
+            "Dec-2021",
+            "Nov-2022",
+            "Sep-2023",
+            "Dec-2023"
+          ],
+          "Y": [
+            20300.0,
+            33400.0,
+            380000.0,
+            3500000.0,
+            8490000.0,
+            25800000.0,
+            191000000.0
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Training_Cost": {
+      "metadata": {
+        "type": "Cost",
+        "units": "$",
+        "source": "Stanford",
+        "category": "Cost",
+        "entity_type": "disruptor",
+        "description": "costs associated with training AI models"
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            "2017",
+            "2019",
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024"
+          ],
+          "Y": [
+            670.0,
+            160000.0,
+            4000000.0,
+            6000000.0,
+            12000000.0,
+            79000000.0,
+            192000000.0
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_How_Long_a_Task_AI_Can_Handle_Reliably_(50%_Success)": {
+      "metadata": {
+        "type": "Capability",
+        "units": "seconds",
+        "source": "METR.org",
+        "category": "Capability",
+        "entity_type": "disruptor",
+        "description": "The length of tasks (measured by how long they take human professionals) that generalist frontier model agents can complete autonomously with 50% reliability has been doubling approximately every 7 months for the last 6 years. Extrapolating this trend predicts that, in under a decade, we will see AI agents that can independently complete a large fraction of software tasks that currently take humans days or weeks."
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            "2019",
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024",
+            "2025"
+          ],
+          "Y": [
+            2.0,
+            9.0,
+            23.0,
+            36.0,
+            540.0,
+            2340.0,
+            8220.0
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_How_Long_a_Task_AI_Can_Handle_Reliably_(80%_Success)": {
+      "metadata": {
+        "type": "Capability",
+        "units": "seconds",
+        "source": "METR.org",
+        "category": "Capability",
+        "entity_type": "disruptor",
+        "description": "The length of tasks (measured by how long they take human professionals) that generalist frontier model agents can complete autonomously with 80% reliability has been doubling approximately every 7 months for the last 6 years. Extrapolating this trend predicts that, in under a decade, we will see AI agents that can independently complete a large fraction of software tasks that currently take humans days or weeks."
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024",
+            "2025"
+          ],
+          "Y": [
+            2.0,
+            4.0,
+            10.0,
+            60.0,
+            360.0,
+            1560.0
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_How_Long_a_Task_AI_Can_Handle_Reliably_(50%_Success)_For_HCAST_+_Re-Bench_Tasks": {
+      "metadata": {
+        "type": "Capability",
+        "units": "seconds",
+        "source": "METR.org",
+        "category": "Capability",
+        "entity_type": "disruptor",
+        "description": "The length of HCAST+RE tasks (measured by how long they take human professionals) that generalist frontier model agents can complete autonomously with 50% reliability has been doubling approximately every 7 months for the last 6 years. HCAST: Human-Calibrated Autonomy Software Tasks"
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            "2019",
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024",
+            "2025"
+          ],
+          "Y": [
+            3.0,
+            8.0,
+            15.0,
+            60.0,
+            240.0,
+            600.0,
+            1800.0
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_How_Long_a_Task_AI_Can_Handle_Reliably_(50%_Success)__For_SWE-Bench_Verified_Tasks": {
+      "metadata": {
+        "type": "Capability",
+        "units": "seconds",
+        "source": "METR.org",
+        "category": "Capability",
+        "entity_type": "disruptor",
+        "description": "The length of SWE Bemch Verified tasks (measured by how long they take human professionals) that generalist frontier model agents can complete autonomously with 50% reliability has been doubling approximately every 7 months for the last 6 years."
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            "2023",
+            "2024",
+            "2025"
+          ],
+          "Y": [
+            4.0,
+            60.0,
+            2700.0
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Annual_Tokens_Consumed": {
+      "metadata": {
+        "type": "Adoption Rate",
+        "units": "Trillions",
+        "source": "(McKinsey,Epoch AI projections,Stanford AI Index 2024.)",
+        "category": "annual adoption",
+        "entity_type": "disruptor",
+        "description": "Total number of AI model tokens processed (input + output) across all tasks over a year, representing overall annual compute usage driven by AI applications."
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            "2018",
+            "2019",
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024",
+            "2025"
+          ],
+          "Y": [
+            0.0,
+            0.0,
+            0.01,
+            0.1,
+            3.0,
+            75.0,
+            3000.0,
+            18000.0
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Normalized_Headcount_Software_Developer_Early_Career_1_(Age_22-25)": {
+      "metadata": {
+        "type": "Labor Impact",
+        "units": "Employment Change",
+        "source": "Stanford",
+        "category": "Labor Impact",
+        "entity_type": "disruptor",
+        "description": "AI Impact on Software developer at career stage 1 for individuals aged 22-25, with data normalized to 1 in October 2022"
+      },
+      "regions": {
+        "USA": {
+          "X": [
+            "Apr-2021",
+            "Jul-2021",
+            "Oct-2021",
+            "Jan-2022",
+            "Apr-2022",
+            "Jul-2022",
+            "Oct-2022",
+            "Jan-2023",
+            "Apr-2023",
+            "Jul-2023",
+            "Oct-2023",
+            "Jan-2024",
+            "Apr-2024",
+            "Jul-2024",
+            "Oct-2024",
+            "Apr-2025",
+            "Sep-2025"
+          ],
+          "Y": [
+            0.91,
+            0.94,
+            1.0,
+            0.98,
+            0.99,
+            1.0,
+            1.0,
+            0.95,
+            0.93,
+            0.87,
+            0.87,
+            0.87,
+            0.88,
+            0.85,
+            0.82,
+            0.8,
+            0.83
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Normalized_Headcount_Software_Developer_Early_Career_2_(Age_26-30)": {
+      "metadata": {
+        "type": "Labor Impact",
+        "units": "Employment Change",
+        "source": "Stanford",
+        "category": "Labor Impact",
+        "entity_type": "disruptor",
+        "description": "AI Impact on Software developer at career stage 2 for individuals aged 26-30, with data normalized to 1 in October 2022"
+      },
+      "regions": {
+        "USA": {
+          "X": [
+            "Apr-2021",
+            "Jul-2021",
+            "Oct-2021",
+            "Jan-2022",
+            "Apr-2022",
+            "Jul-2022",
+            "Oct-2022",
+            "Jan-2023",
+            "Apr-2023",
+            "Jul-2023",
+            "Oct-2023",
+            "Jan-2024",
+            "Apr-2024",
+            "Jul-2024",
+            "Oct-2024",
+            "Apr-2025",
+            "Sep-2025"
+          ],
+          "Y": [
+            0.88,
+            0.92,
+            0.97,
+            0.99,
+            1.0,
+            1.0,
+            1.0,
+            0.99,
+            0.98,
+            0.97,
+            0.96,
+            0.96,
+            0.95,
+            0.95,
+            0.94,
+            0.94,
+            0.93
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Normalized_Headcount_Software_Developer_Developing_Career_Stage_(Age_31-34)": {
+      "metadata": {
+        "type": "Labor Impact",
+        "units": "Employment Change",
+        "source": "Stanford",
+        "category": "Labor Impact",
+        "entity_type": "disruptor",
+        "description": "AI Impact on Software developer at developing career stage for individuals aged 31-34, with data normalized to 1 in October 2022"
+      },
+      "regions": {
+        "USA": {
+          "X": [
+            "Apr-2021",
+            "Jul-2021",
+            "Oct-2021",
+            "Jan-2022",
+            "Apr-2022",
+            "Jul-2022",
+            "Oct-2022",
+            "Jan-2023",
+            "Apr-2023",
+            "Jul-2023",
+            "Oct-2023",
+            "Jan-2024",
+            "Apr-2024",
+            "Jul-2024",
+            "Oct-2024",
+            "Apr-2025",
+            "Sep-2025"
+          ],
+          "Y": [
+            0.85,
+            0.9,
+            0.95,
+            0.98,
+            1.0,
+            1.01,
+            1.0,
+            1.03,
+            1.06,
+            1.07,
+            1.08,
+            1.08,
+            1.07,
+            1.07,
+            1.06,
+            1.06,
+            1.06
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Normalized_Headcount_Software_Developer_Mid_Career_1_(Age_35-40)": {
+      "metadata": {
+        "type": "Labor Impact",
+        "units": "Employment Change",
+        "source": "Stanford",
+        "category": "Labor Impact",
+        "entity_type": "disruptor",
+        "description": "AI Impact on Software developer at Mid career stage 1 for individuals aged 35-40, with data normalized to 1 in October 2022"
+      },
+      "regions": {
+        "USA": {
+          "X": [
+            "Apr-2021",
+            "Jul-2021",
+            "Oct-2021",
+            "Jan-2022",
+            "Apr-2022",
+            "Jul-2022",
+            "Oct-2022",
+            "Jan-2023",
+            "Apr-2023",
+            "Jul-2023",
+            "Oct-2023",
+            "Jan-2024",
+            "Apr-2024",
+            "Jul-2024",
+            "Oct-2024",
+            "Apr-2025",
+            "Sep-2025"
+          ],
+          "Y": [
+            0.89,
+            0.92,
+            0.97,
+            0.99,
+            1.0,
+            1.01,
+            1.0,
+            1.02,
+            1.03,
+            1.04,
+            1.05,
+            1.05,
+            1.05,
+            1.06,
+            1.06,
+            1.07,
+            1.09
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Normalized_Headcount_Software_Developer_Mid_Career_2_(Age_41-49)": {
+      "metadata": {
+        "type": "Labor Impact",
+        "units": "Employment Change",
+        "source": "Stanford",
+        "category": "Labor Impact",
+        "entity_type": "disruptor",
+        "description": "AI Impact on Software developer at Mid career stage 2 for individuals aged 41-49, with data normalized to 1 in October 2022"
+      },
+      "regions": {
+        "USA": {
+          "X": [
+            "Apr-2021",
+            "Jul-2021",
+            "Oct-2021",
+            "Jan-2022",
+            "Apr-2022",
+            "Jul-2022",
+            "Oct-2022",
+            "Jan-2023",
+            "Apr-2023",
+            "Jul-2023",
+            "Oct-2023",
+            "Jan-2024",
+            "Apr-2024",
+            "Jul-2024",
+            "Oct-2024",
+            "Apr-2025",
+            "Sep-2025"
+          ],
+          "Y": [
+            0.87,
+            0.91,
+            0.96,
+            0.99,
+            1.01,
+            1.01,
+            1.0,
+            1.02,
+            1.03,
+            1.04,
+            1.05,
+            1.07,
+            1.09,
+            1.1,
+            1.11,
+            1.11,
+            1.13
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Normalized_Headcount_Software_Developer_Senior_Career_Stage_(Age_50+)": {
+      "metadata": {
+        "type": "Labor Impact",
+        "units": "Employment Change",
+        "source": "Stanford",
+        "category": "Labor Impact",
+        "entity_type": "disruptor",
+        "description": "AI Impact on Software developer at Senior career stage for individuals aged 50+, with data normalized to 1 in October 2022"
+      },
+      "regions": {
+        "USA": {
+          "X": [
+            "Apr-2021",
+            "Jul-2021",
+            "Oct-2021",
+            "Jan-2022",
+            "Apr-2022",
+            "Jul-2022",
+            "Oct-2022",
+            "Jan-2023",
+            "Apr-2023",
+            "Jul-2023",
+            "Oct-2023",
+            "Jan-2024",
+            "Apr-2024",
+            "Jul-2024",
+            "Oct-2024",
+            "Apr-2025",
+            "Sep-2025"
+          ],
+          "Y": [
+            0.88,
+            0.91,
+            0.96,
+            0.99,
+            1.0,
+            1.01,
+            1.0,
+            1.02,
+            1.03,
+            1.04,
+            1.05,
+            1.06,
+            1.07,
+            1.06,
+            1.07,
+            1.04,
+            1.06
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Normalized_Headcount_Customer_Service_Early_Career_1_(Age_22-25)": {
+      "metadata": {
+        "type": "Labor Impact",
+        "units": "Employment Change",
+        "source": "Stanford",
+        "category": "Labor Impact",
+        "entity_type": "disruptor",
+        "description": "AI Impact on Customer Service Jobs at career stage 1 for individuals aged 22-25, with data normalized to 1 in October 2022"
+      },
+      "regions": {
+        "USA": {
+          "X": [
+            "Apr-2021",
+            "Jul-2021",
+            "Oct-2021",
+            "Jan-2022",
+            "Apr-2022",
+            "Jul-2022",
+            "Oct-2022",
+            "Jan-2023",
+            "Apr-2023",
+            "Jul-2023",
+            "Oct-2023",
+            "Jan-2024",
+            "Apr-2024",
+            "Jul-2024",
+            "Oct-2024",
+            "Apr-2025",
+            "Sep-2025"
+          ],
+          "Y": [
+            0.91,
+            0.89,
+            0.97,
+            0.98,
+            0.99,
+            1.0,
+            1.0,
+            0.98,
+            0.96,
+            0.95,
+            0.96,
+            0.94,
+            0.93,
+            0.92,
+            0.91,
+            0.89,
+            0.87
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Normalized_Headcount_Customer_Service_Early_Career_2_(Age_26-30)": {
+      "metadata": {
+        "type": "Labor Impact",
+        "units": "Employment Change",
+        "source": "Stanford",
+        "category": "Labor Impact",
+        "entity_type": "disruptor",
+        "description": "AI Impact on Customer Service Job at career stage 2 for individuals aged 26-30, with data normalized to 1 in October 2022"
+      },
+      "regions": {
+        "USA": {
+          "X": [
+            "Apr-2021",
+            "Jul-2021",
+            "Oct-2021",
+            "Jan-2022",
+            "Apr-2022",
+            "Jul-2022",
+            "Oct-2022",
+            "Jan-2023",
+            "Apr-2023",
+            "Jul-2023",
+            "Oct-2023",
+            "Jan-2024",
+            "Apr-2024",
+            "Jul-2024",
+            "Oct-2024",
+            "Apr-2025",
+            "Sep-2025"
+          ],
+          "Y": [
+            0.91,
+            0.9,
+            0.95,
+            0.97,
+            0.98,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            0.99,
+            1.0,
+            0.99,
+            0.99,
+            0.98,
+            0.97,
+            0.95,
+            0.94
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Normalized_Headcount_Customer_Service_Developing_Career_Stage_(Age_31-34)": {
+      "metadata": {
+        "type": "Labor Impact",
+        "units": "Employment Change",
+        "source": "Stanford",
+        "category": "Labor Impact",
+        "entity_type": "disruptor",
+        "description": "AI Impact on Customer Service Job at developing career stage for individuals aged 31-34, with data normalized to 1 in October 2022"
+      },
+      "regions": {
+        "USA": {
+          "X": [
+            "Apr-2021",
+            "Jul-2021",
+            "Oct-2021",
+            "Jan-2022",
+            "Apr-2022",
+            "Jul-2022",
+            "Oct-2022",
+            "Jan-2023",
+            "Apr-2023",
+            "Jul-2023",
+            "Oct-2023",
+            "Jan-2024",
+            "Apr-2024",
+            "Jul-2024",
+            "Oct-2024",
+            "Apr-2025",
+            "Sep-2025"
+          ],
+          "Y": [
+            0.87,
+            0.86,
+            0.92,
+            0.96,
+            0.98,
+            1.0,
+            1.0,
+            1.02,
+            1.04,
+            1.06,
+            1.07,
+            1.08,
+            1.07,
+            1.06,
+            1.05,
+            1.05,
+            1.04
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Normalized_Headcount_Customer_Service_Mid_Career_1_(Age_35-40)": {
+      "metadata": {
+        "type": "Labor Impact",
+        "units": "Employment Change",
+        "source": "Stanford",
+        "category": "Labor Impact",
+        "entity_type": "disruptor",
+        "description": "AI Impact on Customer Service Job at Mid career stage 1 for individuals aged 35-40, with data normalized to 1 in October 2022"
+      },
+      "regions": {
+        "USA": {
+          "X": [
+            "Apr-2021",
+            "Jul-2021",
+            "Oct-2021",
+            "Jan-2022",
+            "Apr-2022",
+            "Jul-2022",
+            "Oct-2022",
+            "Jan-2023",
+            "Apr-2023",
+            "Jul-2023",
+            "Oct-2023",
+            "Jan-2024",
+            "Apr-2024",
+            "Jul-2024",
+            "Oct-2024",
+            "Apr-2025",
+            "Sep-2025"
+          ],
+          "Y": [
+            0.86,
+            0.88,
+            0.94,
+            0.97,
+            0.99,
+            1.0,
+            1.0,
+            1.02,
+            1.04,
+            1.05,
+            1.07,
+            1.08,
+            1.08,
+            1.09,
+            1.1,
+            1.11,
+            1.11
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Normalized_Headcount_Customer_Service_Mid_Career_2_(Age_41-49)": {
+      "metadata": {
+        "type": "Labor Impact",
+        "units": "Employment Change",
+        "source": "Stanford",
+        "category": "Labor Impact",
+        "entity_type": "disruptor",
+        "description": "AI Impact on Customer Service Job at Mid career stage 2 for individuals aged 41-49, with data normalized to 1 in October 2022"
+      },
+      "regions": {
+        "USA": {
+          "X": [
+            "Apr-2021",
+            "Jul-2021",
+            "Oct-2021",
+            "Jan-2022",
+            "Apr-2022",
+            "Jul-2022",
+            "Oct-2022",
+            "Jan-2023",
+            "Apr-2023",
+            "Jul-2023",
+            "Oct-2023",
+            "Jan-2024",
+            "Apr-2024",
+            "Jul-2024",
+            "Oct-2024",
+            "Apr-2025",
+            "Sep-2025"
+          ],
+          "Y": [
+            0.88,
+            0.89,
+            0.95,
+            0.97,
+            0.99,
+            1.0,
+            1.0,
+            1.01,
+            1.03,
+            1.04,
+            1.06,
+            1.06,
+            1.06,
+            1.07,
+            1.07,
+            1.06,
+            1.07
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Normalized_Headcount_Customer_Service_Senior_Career_Stage_(Age_50+)": {
+      "metadata": {
+        "type": "Labor Impact",
+        "units": "Employment Change",
+        "source": "Stanford",
+        "category": "Labor Impact",
+        "entity_type": "disruptor",
+        "description": "AI Impact on Customer Service Job at Senior career stage for individuals aged 50+, with data normalized to 1 in October 2022"
+      },
+      "regions": {
+        "USA": {
+          "X": [
+            "Apr-2021",
+            "Jul-2021",
+            "Oct-2021",
+            "Jan-2022",
+            "Apr-2022",
+            "Jul-2022",
+            "Oct-2022",
+            "Jan-2023",
+            "Apr-2023",
+            "Jul-2023",
+            "Oct-2023",
+            "Jan-2024",
+            "Apr-2024",
+            "Jul-2024",
+            "Oct-2024",
+            "Apr-2025",
+            "Sep-2025"
+          ],
+          "Y": [
+            0.85,
+            0.87,
+            0.93,
+            0.96,
+            0.98,
+            1.0,
+            1.0,
+            1.02,
+            1.02,
+            1.03,
+            1.03,
+            1.03,
+            1.02,
+            1.02,
+            1.03,
+            1.03,
+            1.03
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Normalized_Headcount_Marketing_and_Sales_Manager_Early_Career_1_(Age_22-25)": {
+      "metadata": {
+        "type": "Labor Impact",
+        "units": "Employment Change",
+        "source": "Stanford",
+        "category": "Labor Impact",
+        "entity_type": "disruptor",
+        "description": "AI Impact on Marketing and Sales Manager Jobs at career stage 1 for individuals aged 22-25, with data normalized to 1 in October 2022"
+      },
+      "regions": {
+        "USA": {
+          "X": [
+            "Apr 2021",
+            "Jul 2021",
+            "Oct 2021",
+            "Jan 2022",
+            "Apr 2022",
+            "Jul 2022",
+            "Oct 2022",
+            "Jan 2023",
+            "Apr 2023",
+            "Jul 2023",
+            "Oct 2023",
+            "Jan 2024",
+            "Apr 2024",
+            "Jul 2024",
+            "Oct 2024",
+            "Jan 2025",
+            "Apr 2025",
+            "Oct 2025"
+          ],
+          "Y": [
+            0.85,
+            0.88,
+            0.93,
+            0.97,
+            0.99,
+            1.0,
+            1.0,
+            0.93,
+            0.92,
+            0.9,
+            0.88,
+            0.91,
+            0.94,
+            0.96,
+            0.97,
+            0.98,
+            0.97,
+            0.96
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Normalized_Headcount_Marketing_and_Sales_Manager_Early_Career_2_(Age_26-30)": {
+      "metadata": {
+        "type": "Labor Impact",
+        "units": "Employment Change",
+        "source": "Stanford",
+        "category": "Labor Impact",
+        "entity_type": "disruptor",
+        "description": "AI Impact on Marketing and Sales Managers at career stage 2 for individuals aged 26-30, with data normalized to 1 in October 2022"
+      },
+      "regions": {
+        "USA": {
+          "X": [
+            "Apr 2021",
+            "Jul 2021",
+            "Oct 2021",
+            "Jan 2022",
+            "Apr 2022",
+            "Jul 2022",
+            "Oct 2022",
+            "Jan 2023",
+            "Apr 2023",
+            "Jul 2023",
+            "Oct 2023",
+            "Jan 2024",
+            "Apr 2024",
+            "Jul 2024",
+            "Oct 2024",
+            "Jan 2025",
+            "Apr 2025",
+            "Oct 2025"
+          ],
+          "Y": [
+            0.86,
+            0.89,
+            0.94,
+            0.98,
+            0.99,
+            1.0,
+            1.0,
+            0.97,
+            0.97,
+            0.97,
+            0.96,
+            0.97,
+            0.98,
+            0.98,
+            0.98,
+            0.98,
+            0.98,
+            0.97
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Normalized_Headcount_Marketing_and_Sales_Manager_Developing_Career_Stage_(Age_31-34)": {
+      "metadata": {
+        "type": "Labor Impact",
+        "units": "Employment Change",
+        "source": "Stanford",
+        "category": "Labor Impact",
+        "entity_type": "disruptor",
+        "description": "AI Impact on Marketing and Sales Managers at developing career stage for individuals aged 31-34, with data normalized to 1 in October 2022"
+      },
+      "regions": {
+        "USA": {
+          "X": [
+            "Apr 2021",
+            "Jul 2021",
+            "Oct 2021",
+            "Jan 2022",
+            "Apr 2022",
+            "Jul 2022",
+            "Oct 2022",
+            "Jan 2023",
+            "Apr 2023",
+            "Jul 2023",
+            "Oct 2023",
+            "Jan 2024",
+            "Apr 2024",
+            "Jul 2024",
+            "Oct 2024",
+            "Jan 2025",
+            "Apr 2025",
+            "Oct 2025"
+          ],
+          "Y": [
+            0.85,
+            0.89,
+            0.94,
+            0.97,
+            0.99,
+            1.0,
+            1.0,
+            1.01,
+            1.01,
+            1.01,
+            1.0,
+            1.01,
+            1.01,
+            1.03,
+            1.02,
+            1.01,
+            1.01,
+            1.0
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Normalized_Headcount_Marketing_and_Sales_Manager_Mid_Career_1_(Age_35-40)": {
+      "metadata": {
+        "type": "Labor Impact",
+        "units": "Employment Change",
+        "source": "Stanford",
+        "category": "Labor Impact",
+        "entity_type": "disruptor",
+        "description": "AI Impact on Marketing and Sales Managers at Mid career stage 1 for individuals aged 35-40, with data normalized to 1 in October 2022"
+      },
+      "regions": {
+        "USA": {
+          "X": [
+            "Apr 2021",
+            "Jul 2021",
+            "Oct 2021",
+            "Jan 2022",
+            "Apr 2022",
+            "Jul 2022",
+            "Oct 2022",
+            "Jan 2023",
+            "Apr 2023",
+            "Jul 2023",
+            "Oct 2023",
+            "Jan 2024",
+            "Apr 2024",
+            "Jul 2024",
+            "Oct 2024",
+            "Jan 2025",
+            "Apr 2025",
+            "Oct 2025"
+          ],
+          "Y": [
+            0.87,
+            0.9,
+            0.95,
+            0.98,
+            1.0,
+            1.0,
+            1.0,
+            1.02,
+            1.03,
+            1.04,
+            1.05,
+            1.06,
+            1.07,
+            1.08,
+            1.09,
+            1.09,
+            1.08,
+            1.09
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Normalized_Headcount_Marketing_and_Sales_Manager_Mid_Career_2_(Age_41-49)": {
+      "metadata": {
+        "type": "Labor Impact",
+        "units": "Employment Change",
+        "source": "Stanford",
+        "category": "Labor Impact",
+        "entity_type": "disruptor",
+        "description": "AI Impact on Marketing and Sales Managers at Mid career stage 2 for individuals aged 41-49, with data normalized to 1 in October 2022"
+      },
+      "regions": {
+        "USA": {
+          "X": [
+            "Apr 2021",
+            "Jul 2021",
+            "Oct 2021",
+            "Jan 2022",
+            "Apr 2022",
+            "Jul 2022",
+            "Oct 2022",
+            "Jan 2023",
+            "Apr 2023",
+            "Jul 2023",
+            "Oct 2023",
+            "Jan 2024",
+            "Apr 2024",
+            "Jul 2024",
+            "Oct 2024",
+            "Jan 2025",
+            "Apr 2025",
+            "Oct 2025"
+          ],
+          "Y": [
+            0.87,
+            0.9,
+            0.95,
+            0.98,
+            0.99,
+            1.0,
+            1.0,
+            1.01,
+            1.03,
+            1.04,
+            1.05,
+            1.06,
+            1.07,
+            1.08,
+            1.09,
+            1.09,
+            1.09,
+            1.09
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Normalized_Headcount_Marketing_and_Sales_Manager_Senior_Career_Stage_(Age_50+)": {
+      "metadata": {
+        "type": "Labor Impact",
+        "units": "Employment Change",
+        "source": "Stanford",
+        "category": "Labor Impact",
+        "entity_type": "disruptor",
+        "description": "AI Impact on Marketing and Sales Managers at Senior career stage for individuals aged 50+, with data normalized to 1 in October 2022"
+      },
+      "regions": {
+        "USA": {
+          "X": [
+            "Apr 2021",
+            "Jul 2021",
+            "Oct 2021",
+            "Jan 2022",
+            "Apr 2022",
+            "Jul 2022",
+            "Oct 2022",
+            "Jan 2023",
+            "Apr 2023",
+            "Jul 2023",
+            "Oct 2023",
+            "Jan 2024",
+            "Apr 2024",
+            "Jul 2024",
+            "Oct 2024",
+            "Jan 2025",
+            "Apr 2025",
+            "Oct 2025"
+          ],
+          "Y": [
+            0.86,
+            0.89,
+            0.94,
+            0.97,
+            0.99,
+            1.0,
+            1.0,
+            1.01,
+            1.03,
+            1.04,
+            1.05,
+            1.06,
+            1.07,
+            1.08,
+            1.07,
+            1.07,
+            1.07,
+            1.08
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Normalized_Headcount_Service_Clerk_Early_Career_1_(Age_22-25)": {
+      "metadata": {
+        "type": "Labor Impact",
+        "units": "Employment Change",
+        "source": "Stanford",
+        "category": "Labor Impact",
+        "entity_type": "disruptor",
+        "description": "AI Impact on Service Clerk Jobs at career stage 1 for individuals aged 22-25, with data normalized to 1 in October 2022"
+      },
+      "regions": {
+        "USA": {
+          "X": [
+            "Jan 2021",
+            "May 2021",
+            "Sep 2021",
+            "Jan 2022",
+            "May 2022",
+            "Sep 2022",
+            "Oct 2022",
+            "Jan 2023",
+            "May 2023",
+            "Sep 2023",
+            "Jan 2024",
+            "May 2024",
+            "Sep 2024",
+            "Jan 2025",
+            "May 2025",
+            "Sep 2025"
+          ],
+          "Y": [
+            0.88,
+            0.87,
+            0.95,
+            0.96,
+            0.98,
+            0.99,
+            1.0,
+            0.96,
+            0.95,
+            0.94,
+            0.93,
+            0.93,
+            0.93,
+            0.92,
+            0.92,
+            0.91
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Normalized_Headcount_Service_Clerk_Early_Career_2_(Age_26-30)": {
+      "metadata": {
+        "type": "Labor Impact",
+        "units": "Employment Change",
+        "source": "Stanford",
+        "category": "Labor Impact",
+        "entity_type": "disruptor",
+        "description": "AI Impact on Service Clerks at career stage 2 for individuals aged 26-30, with data normalized to 1 in October 2022"
+      },
+      "regions": {
+        "USA": {
+          "X": [
+            "Jan 2021",
+            "May 2021",
+            "Sep 2021",
+            "Jan 2022",
+            "May 2022",
+            "Sep 2022",
+            "Oct 2022",
+            "Jan 2023",
+            "May 2023",
+            "Sep 2023",
+            "Jan 2024",
+            "May 2024",
+            "Sep 2024",
+            "Jan 2025",
+            "May 2025",
+            "Sep 2025"
+          ],
+          "Y": [
+            0.9,
+            0.88,
+            0.96,
+            0.97,
+            0.98,
+            0.99,
+            1.0,
+            0.99,
+            0.99,
+            0.98,
+            0.98,
+            0.98,
+            0.98,
+            0.97,
+            0.97,
+            0.97
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Normalized_Headcount_Service_Clerk_Developing_Career_Stage_(Age_31-34)": {
+      "metadata": {
+        "type": "Labor Impact",
+        "units": "Employment Change",
+        "source": "Stanford",
+        "category": "Labor Impact",
+        "entity_type": "disruptor",
+        "description": "AI Impact on Service Clerks at developing career stage for individuals aged 31-34, with data normalized to 1 in October 2022"
+      },
+      "regions": {
+        "USA": {
+          "X": [
+            "Jan 2021",
+            "May 2021",
+            "Sep 2021",
+            "Jan 2022",
+            "May 2022",
+            "Sep 2022",
+            "Oct 2022",
+            "Jan 2023",
+            "May 2023",
+            "Sep 2023",
+            "Jan 2024",
+            "May 2024",
+            "Sep 2024",
+            "Jan 2025",
+            "May 2025",
+            "Sep 2025"
+          ],
+          "Y": [
+            0.85,
+            0.86,
+            0.93,
+            0.97,
+            0.99,
+            0.99,
+            1.0,
+            1.06,
+            1.07,
+            1.07,
+            1.07,
+            1.08,
+            1.08,
+            1.07,
+            1.06,
+            1.06
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Normalized_Headcount_Service_Clerk_Mid_Career_1_(Age_35-40)": {
+      "metadata": {
+        "type": "Labor Impact",
+        "units": "Employment Change",
+        "source": "Stanford",
+        "category": "Labor Impact",
+        "entity_type": "disruptor",
+        "description": "AI Impact on Service Clerks at Mid career stage 1 for individuals aged 35-40, with data normalized to 1 in October 2022"
+      },
+      "regions": {
+        "USA": {
+          "X": [
+            "Jan 2021",
+            "May 2021",
+            "Sep 2021",
+            "Jan 2022",
+            "May 2022",
+            "Sep 2022",
+            "Oct 2022",
+            "Jan 2023",
+            "May 2023",
+            "Sep 2023",
+            "Jan 2024",
+            "May 2024",
+            "Sep 2024",
+            "Jan 2025",
+            "May 2025",
+            "Sep 2025"
+          ],
+          "Y": [
+            0.86,
+            0.88,
+            0.93,
+            0.97,
+            0.99,
+            0.99,
+            1.0,
+            1.07,
+            1.08,
+            1.1,
+            1.09,
+            1.1,
+            1.11,
+            1.11,
+            1.12,
+            1.13
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Normalized_Headcount_Service_Clerk_Mid_Career_2_(Age_41-49)": {
+      "metadata": {
+        "type": "Labor Impact",
+        "units": "Employment Change",
+        "source": "Stanford",
+        "category": "Labor Impact",
+        "entity_type": "disruptor",
+        "description": "AI Impact on Service Clerks at Mid career stage 2 for individuals aged 41-49, with data normalized to 1 in October 2022"
+      },
+      "regions": {
+        "USA": {
+          "X": [
+            "Jan 2021",
+            "May 2021",
+            "Sep 2021",
+            "Jan 2022",
+            "May 2022",
+            "Sep 2022",
+            "Oct 2022",
+            "Jan 2023",
+            "May 2023",
+            "Sep 2023",
+            "Jan 2024",
+            "May 2024",
+            "Sep 2024",
+            "Jan 2025",
+            "May 2025",
+            "Sep 2025"
+          ],
+          "Y": [
+            0.88,
+            0.9,
+            0.93,
+            0.97,
+            0.99,
+            0.99,
+            1.0,
+            1.06,
+            1.07,
+            1.07,
+            1.07,
+            1.08,
+            1.08,
+            1.09,
+            1.09,
+            1.09
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Normalized_Headcount_Service_Clerk_Senior_Career_Stage_(Age_50+)": {
+      "metadata": {
+        "type": "Labor Impact",
+        "units": "Employment Change",
+        "source": "Stanford",
+        "category": "Labor Impact",
+        "entity_type": "disruptor",
+        "description": "AI Impact on Service Clerks at Senior career stage for individuals aged 50+, with data normalized to 1 in October 2022"
+      },
+      "regions": {
+        "USA": {
+          "X": [
+            "Jan 2021",
+            "May 2021",
+            "Sep 2021",
+            "Jan 2022",
+            "May 2022",
+            "Sep 2022",
+            "Oct 2022",
+            "Jan 2023",
+            "May 2023",
+            "Sep 2023",
+            "Jan 2024",
+            "May 2024",
+            "Sep 2024",
+            "Jan 2025",
+            "May 2025",
+            "Sep 2025"
+          ],
+          "Y": [
+            0.88,
+            0.9,
+            0.93,
+            0.97,
+            0.99,
+            0.99,
+            1.0,
+            1.04,
+            1.04,
+            1.04,
+            1.04,
+            1.04,
+            1.05,
+            1.04,
+            1.04,
+            1.05
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Normalized_Headcount_Stock_Clerk_Early_Career_1_(Age_22-25)": {
+      "metadata": {
+        "type": "Labor Impact",
+        "units": "Employment Change",
+        "source": "Stanford",
+        "category": "Labor Impact",
+        "entity_type": "disruptor",
+        "description": "AI Impact on Stock Clerk Jobs at career stage 1 for individuals aged 22-25, with data normalized to 1 in October 2022"
+      },
+      "regions": {
+        "USA": {
+          "X": [
+            "Apr 2021",
+            "Oct 2021",
+            "Apr 2022",
+            "Oct 2022",
+            "Apr 2023",
+            "Oct 2023",
+            "Apr 2024",
+            "Oct 2024",
+            "Apr 2025",
+            "Oct 2025"
+          ],
+          "Y": [
+            0.83,
+            0.89,
+            0.96,
+            1.0,
+            1.02,
+            1.03,
+            1.07,
+            1.08,
+            1.06,
+            1.08
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Normalized_Headcount_Stock_Clerk_Early_Career_2_(Age_26-30)": {
+      "metadata": {
+        "type": "Labor Impact",
+        "units": "Employment Change",
+        "source": "Stanford",
+        "category": "Labor Impact",
+        "entity_type": "disruptor",
+        "description": "AI Impact on Stock Clerks at career stage 2 for individuals aged 26-30, with data normalized to 1 in October 2022"
+      },
+      "regions": {
+        "USA": {
+          "X": [
+            "Apr 2021",
+            "Oct 2021",
+            "Apr 2022",
+            "Oct 2022",
+            "Apr 2023",
+            "Oct 2023",
+            "Apr 2024",
+            "Oct 2024",
+            "Apr 2025",
+            "Oct 2025"
+          ],
+          "Y": [
+            0.86,
+            0.92,
+            0.97,
+            1.0,
+            0.98,
+            0.97,
+            1.03,
+            1.04,
+            1.05,
+            1.01
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Normalized_Headcount_Stock_Clerk_Developing_Career_Stage_(Age_31-34)": {
+      "metadata": {
+        "type": "Labor Impact",
+        "units": "Employment Change",
+        "source": "Stanford",
+        "category": "Labor Impact",
+        "entity_type": "disruptor",
+        "description": "AI Impact on Stock Clerks at developing career stage for individuals aged 31-34, with data normalized to 1 in October 2022"
+      },
+      "regions": {
+        "USA": {
+          "X": [
+            "Apr 2021",
+            "Oct 2021",
+            "Apr 2022",
+            "Oct 2022",
+            "Apr 2023",
+            "Oct 2023",
+            "Apr 2024",
+            "Oct 2024",
+            "Apr 2025",
+            "Oct 2025"
+          ],
+          "Y": [
+            0.85,
+            0.91,
+            0.97,
+            1.0,
+            1.04,
+            1.06,
+            1.07,
+            1.11,
+            1.1,
+            1.1
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Normalized_Headcount_Stock_Clerk_Mid_Career_1_(Age_35-40)": {
+      "metadata": {
+        "type": "Labor Impact",
+        "units": "Employment Change",
+        "source": "Stanford",
+        "category": "Labor Impact",
+        "entity_type": "disruptor",
+        "description": "AI Impact on Stock Clerks at Mid career stage 1 for individuals aged 35-40, with data normalized to 1 in October 2022"
+      },
+      "regions": {
+        "USA": {
+          "X": [
+            "Apr 2021",
+            "Oct 2021",
+            "Apr 2022",
+            "Oct 2022",
+            "Apr 2023",
+            "Oct 2023",
+            "Apr 2024",
+            "Oct 2024",
+            "Apr 2025",
+            "Oct 2025"
+          ],
+          "Y": [
+            0.85,
+            0.91,
+            0.98,
+            1.0,
+            0.98,
+            1.01,
+            1.06,
+            1.1,
+            1.12,
+            1.11
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Normalized_Headcount_Stock_Clerk_Mid_Career_2_(Age_41-49)": {
+      "metadata": {
+        "type": "Labor Impact",
+        "units": "Employment Change",
+        "source": "Stanford",
+        "category": "Labor Impact",
+        "entity_type": "disruptor",
+        "description": "AI Impact on Stock Clerks at Mid career stage 2 for individuals aged 41-49, with data normalized to 1 in October 2022"
+      },
+      "regions": {
+        "USA": {
+          "X": [
+            "Apr 2021",
+            "Oct 2021",
+            "Apr 2022",
+            "Oct 2022",
+            "Apr 2023",
+            "Oct 2023",
+            "Apr 2024",
+            "Oct 2024",
+            "Apr 2025",
+            "Oct 2025"
+          ],
+          "Y": [
+            0.86,
+            0.93,
+            0.98,
+            1.0,
+            1.03,
+            1.05,
+            1.07,
+            1.07,
+            1.09,
+            1.08
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Normalized_Headcount_Stock_Clerk_Senior_Career_Stage_(Age_50+)": {
+      "metadata": {
+        "type": "Labor Impact",
+        "units": "Employment Change",
+        "source": "Stanford",
+        "category": "Labor Impact",
+        "entity_type": "disruptor",
+        "description": "AI Impact on Stock Clerks at Senior career stage for individuals aged 50+, with data normalized to 1 in October 2022"
+      },
+      "regions": {
+        "USA": {
+          "X": [
+            "Apr 2021",
+            "Oct 2021",
+            "Apr 2022",
+            "Oct 2022",
+            "Apr 2023",
+            "Oct 2023",
+            "Apr 2024",
+            "Oct 2024",
+            "Apr 2025",
+            "Oct 2025"
+          ],
+          "Y": [
+            0.85,
+            0.93,
+            0.99,
+            1.0,
+            1.03,
+            1.04,
+            1.05,
+            1.05,
+            1.05,
+            1.02
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Normalized_Headcount_Heath_Aides_Early_Career_1_(Age_22-25)": {
+      "metadata": {
+        "type": "Labor Impact",
+        "units": "Employment Change",
+        "source": "Stanford",
+        "category": "Labor Impact",
+        "entity_type": "disruptor",
+        "description": "AI Impact on Health Aides Jobs at career stage 1 for individuals aged 22-25, with data normalized to 1 in October 2022"
+      },
+      "regions": {
+        "USA": {
+          "X": [
+            "Apr 2021",
+            "Oct 2021",
+            "Apr 2022",
+            "Oct 2022",
+            "Apr 2023",
+            "Oct 2023",
+            "Apr 2024",
+            "Oct 2024",
+            "Apr 2025",
+            "Oct 2025"
+          ],
+          "Y": [
+            0.93,
+            0.95,
+            0.94,
+            1.0,
+            1.04,
+            1.08,
+            1.14,
+            1.18,
+            1.21,
+            1.2
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Normalized_Headcount_Heath_Aides_Early_Career_2_(Age_26-30)": {
+      "metadata": {
+        "type": "Labor Impact",
+        "units": "Employment Change",
+        "source": "Stanford",
+        "category": "Labor Impact",
+        "entity_type": "disruptor",
+        "description": "AI Impact on Health Aides Jobs at career stage 2 for individuals aged 26-30, with data normalized to 1 in October 2022"
+      },
+      "regions": {
+        "USA": {
+          "X": [
+            "Apr 2021",
+            "Oct 2021",
+            "Apr 2022",
+            "Oct 2022",
+            "Apr 2023",
+            "Oct 2023",
+            "Apr 2024",
+            "Oct 2024",
+            "Apr 2025",
+            "Oct 2025"
+          ],
+          "Y": [
+            1.0,
+            0.95,
+            0.98,
+            1.0,
+            1.03,
+            1.02,
+            1.06,
+            1.07,
+            1.1,
+            1.11
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Normalized_Headcount_Heath_Aides_Developing_Career_Stage_(Age_31-34)": {
+      "metadata": {
+        "type": "Labor Impact",
+        "units": "Employment Change",
+        "source": "Stanford",
+        "category": "Labor Impact",
+        "entity_type": "disruptor",
+        "description": "AI Impact on Health Aides Jobs at developing career stage for individuals aged 31-34, with data normalized to 1 in October 2022"
+      },
+      "regions": {
+        "USA": {
+          "X": [
+            "Apr 2021",
+            "Oct 2021",
+            "Apr 2022",
+            "Oct 2022",
+            "Apr 2023",
+            "Oct 2023",
+            "Apr 2024",
+            "Oct 2024",
+            "Apr 2025",
+            "Oct 2025"
+          ],
+          "Y": [
+            0.93,
+            0.96,
+            0.95,
+            1.0,
+            1.03,
+            1.06,
+            1.07,
+            1.08,
+            1.07,
+            1.06
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Normalized_Headcount_Heath_Aides_Mid_Career_1_(Age_35-40)": {
+      "metadata": {
+        "type": "Labor Impact",
+        "units": "Employment Change",
+        "source": "Stanford",
+        "category": "Labor Impact",
+        "entity_type": "disruptor",
+        "description": "AI Impact on Health Aides Jobs at Mid career stage 1 for individuals aged 35-40, with data normalized to 1 in October 2022"
+      },
+      "regions": {
+        "USA": {
+          "X": [
+            "Apr 2021",
+            "Oct 2021",
+            "Apr 2022",
+            "Oct 2022",
+            "Apr 2023",
+            "Oct 2023",
+            "Apr 2024",
+            "Oct 2024",
+            "Apr 2025",
+            "Oct 2025"
+          ],
+          "Y": [
+            0.93,
+            0.92,
+            0.95,
+            1.0,
+            1.03,
+            1.06,
+            1.08,
+            1.16,
+            1.13,
+            1.17
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Normalized_Headcount_Heath_Aides_Mid_Career_2_(Age_41-49)": {
+      "metadata": {
+        "type": "Labor Impact",
+        "units": "Employment Change",
+        "source": "Stanford",
+        "category": "Labor Impact",
+        "entity_type": "disruptor",
+        "description": "AI Impact on Health Aides Jobs at Mid career stage 2 for individuals aged 41-49, with data normalized to 1 in October 2022"
+      },
+      "regions": {
+        "USA": {
+          "X": [
+            "Apr 2021",
+            "Oct 2021",
+            "Apr 2022",
+            "Oct 2022",
+            "Apr 2023",
+            "Oct 2023",
+            "Apr 2024",
+            "Oct 2024",
+            "Apr 2025",
+            "Oct 2025"
+          ],
+          "Y": [
+            0.9,
+            0.93,
+            0.97,
+            1.0,
+            1.03,
+            1.06,
+            1.07,
+            1.1,
+            1.11,
+            1.12
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Normalized_Headcount_Heath_Aides_Senior_Career_Stage_(Age_50+)": {
+      "metadata": {
+        "type": "Labor Impact",
+        "units": "Employment Change",
+        "source": "Stanford",
+        "category": "Labor Impact",
+        "entity_type": "disruptor",
+        "description": "AI Impact on Health Aides Jobs at Senior career stage for individuals aged 50+, with data normalized to 1 in October 2022"
+      },
+      "regions": {
+        "USA": {
+          "X": [
+            "Apr 2021",
+            "Oct 2021",
+            "Apr 2022",
+            "Oct 2022",
+            "Apr 2023",
+            "Oct 2023",
+            "Apr 2024",
+            "Oct 2024",
+            "Apr 2025",
+            "Oct 2025"
+          ],
+          "Y": [
+            0.89,
+            0.92,
+            0.96,
+            1.0,
+            1.04,
+            1.08,
+            1.06,
+            1.08,
+            1.06,
+            1.08
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Normalized_Headcount_First-Line_Production_Supervisors_Early_Career_1_(Age_22-25)": {
+      "metadata": {
+        "type": "Labor Impact",
+        "units": "Employment Change",
+        "source": "Stanford",
+        "category": "Labor Impact",
+        "entity_type": "disruptor",
+        "description": "AI Impact on First Line Production Supervisors at career stage 1 for individuals aged 22-25, with data normalized to 1 in October 2022"
+      },
+      "regions": {
+        "USA": {
+          "X": [
+            "Apr 2021",
+            "Jul 2021",
+            "Oct 2021",
+            "Jan 2022",
+            "Apr 2022",
+            "Jul 2022",
+            "Oct 2022",
+            "Jan 2023",
+            "Apr 2023",
+            "Jul 2023",
+            "Oct 2023",
+            "Jan 2024",
+            "Apr 2024",
+            "Jul 2024",
+            "Oct 2024",
+            "Jan 2025",
+            "Apr 2025",
+            "Jul 2025",
+            "Oct 2025"
+          ],
+          "Y": [
+            0.82,
+            0.85,
+            0.87,
+            0.89,
+            0.9,
+            0.97,
+            1.0,
+            1.02,
+            0.99,
+            1.04,
+            1.06,
+            1.05,
+            1.04,
+            1.07,
+            1.08,
+            1.08,
+            1.08,
+            1.07,
+            1.09
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Normalized_Headcount_First-Line_Production_Supervisors_Early_Career_2_(Age_26-30)": {
+      "metadata": {
+        "type": "Labor Impact",
+        "units": "Employment Change",
+        "source": "Stanford",
+        "category": "Labor Impact",
+        "entity_type": "disruptor",
+        "description": "AI Impact on First Line Production Supervisors at career stage 2 for individuals aged 26-30, with data normalized to 1 in October 2022"
+      },
+      "regions": {
+        "USA": {
+          "X": [
+            "Apr 2021",
+            "Jul 2021",
+            "Oct 2021",
+            "Jan 2022",
+            "Apr 2022",
+            "Jul 2022",
+            "Oct 2022",
+            "Jan 2023",
+            "Apr 2023",
+            "Jul 2023",
+            "Oct 2023",
+            "Jan 2024",
+            "Apr 2024",
+            "Jul 2024",
+            "Oct 2024",
+            "Jan 2025",
+            "Apr 2025",
+            "Jul 2025",
+            "Oct 2025"
+          ],
+          "Y": [
+            0.87,
+            0.89,
+            0.92,
+            0.96,
+            0.98,
+            0.99,
+            1.0,
+            1.01,
+            1.0,
+            1.05,
+            1.06,
+            1.05,
+            1.05,
+            1.06,
+            1.07,
+            1.07,
+            1.07,
+            1.07,
+            1.06
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Normalized_Headcount_First-Line_Production_Supervisors_Developing_Career_Stage_(Age_31-34)": {
+      "metadata": {
+        "type": "Labor Impact",
+        "units": "Employment Change",
+        "source": "Stanford",
+        "category": "Labor Impact",
+        "entity_type": "disruptor",
+        "description": "AI Impact on First Line Production Supervisors at developing career stage for individuals aged 31-34, with data normalized to 1 in October 2022"
+      },
+      "regions": {
+        "USA": {
+          "X": [
+            "Apr 2021",
+            "Jul 2021",
+            "Oct 2021",
+            "Jan 2022",
+            "Apr 2022",
+            "Jul 2022",
+            "Oct 2022",
+            "Jan 2023",
+            "Apr 2023",
+            "Jul 2023",
+            "Oct 2023",
+            "Jan 2024",
+            "Apr 2024",
+            "Jul 2024",
+            "Oct 2024",
+            "Jan 2025",
+            "Apr 2025",
+            "Jul 2025",
+            "Oct 2025"
+          ],
+          "Y": [
+            0.84,
+            0.88,
+            0.9,
+            0.94,
+            0.95,
+            0.97,
+            1.0,
+            1.01,
+            1.03,
+            1.06,
+            1.06,
+            1.07,
+            1.05,
+            1.06,
+            1.07,
+            1.09,
+            1.07,
+            1.06,
+            1.07
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Normalized_Headcount_First-Line_Production_Supervisors_Mid_Career_1_(Age_35-40)": {
+      "metadata": {
+        "type": "Labor Impact",
+        "units": "Employment Change",
+        "source": "Stanford",
+        "category": "Labor Impact",
+        "entity_type": "disruptor",
+        "description": "AI Impact on First Line Production Supervisors at Mid career stage 1 for individuals aged 35-40, with data normalized to 1 in October 2022"
+      },
+      "regions": {
+        "USA": {
+          "X": [
+            "Apr 2021",
+            "Jul 2021",
+            "Oct 2021",
+            "Jan 2022",
+            "Apr 2022",
+            "Jul 2022",
+            "Oct 2022",
+            "Jan 2023",
+            "Apr 2023",
+            "Jul 2023",
+            "Oct 2023",
+            "Jan 2024",
+            "Apr 2024",
+            "Jul 2024",
+            "Oct 2024",
+            "Jan 2025",
+            "Apr 2025",
+            "Jul 2025",
+            "Oct 2025"
+          ],
+          "Y": [
+            0.87,
+            0.9,
+            0.93,
+            0.95,
+            0.96,
+            0.98,
+            1.0,
+            1.03,
+            1.06,
+            1.09,
+            1.11,
+            1.12,
+            1.12,
+            1.14,
+            1.14,
+            1.16,
+            1.16,
+            1.15,
+            1.16
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Normalized_Headcount_First-Line_Production_Supervisors_Mid_Career_2_(Age_41-49)": {
+      "metadata": {
+        "type": "Labor Impact",
+        "units": "Employment Change",
+        "source": "Stanford",
+        "category": "Labor Impact",
+        "entity_type": "disruptor",
+        "description": "AI Impact on First Line Production Supervisors at Mid career stage 2 for individuals aged 41-49, with data normalized to 1 in October 2022"
+      },
+      "regions": {
+        "USA": {
+          "X": [
+            "Apr 2021",
+            "Jul 2021",
+            "Oct 2021",
+            "Jan 2022",
+            "Apr 2022",
+            "Jul 2022",
+            "Oct 2022",
+            "Jan 2023",
+            "Apr 2023",
+            "Jul 2023",
+            "Oct 2023",
+            "Jan 2024",
+            "Apr 2024",
+            "Jul 2024",
+            "Oct 2024",
+            "Jan 2025",
+            "Apr 2025",
+            "Jul 2025",
+            "Oct 2025"
+          ],
+          "Y": [
+            0.88,
+            0.9,
+            0.93,
+            0.95,
+            0.96,
+            0.98,
+            1.0,
+            1.03,
+            1.06,
+            1.09,
+            1.11,
+            1.12,
+            1.12,
+            1.14,
+            1.13,
+            1.17,
+            1.16,
+            1.16,
+            1.17
+          ]
+        }
+      }
+    },
+    "Artificial_Intelligence_Normalized_Headcount_First-Line_Production_Supervisors_Senior_Career_Stage_(Age_50+)": {
+      "metadata": {
+        "type": "Labor Impact",
+        "units": "Employment Change",
+        "source": "Stanford",
+        "category": "Labor Impact",
+        "entity_type": "disruptor",
+        "description": "AI Impact on First Line Production Supervisors at Senior career stage for individuals aged 50+, with data normalized to 1 in October 2022"
+      },
+      "regions": {
+        "USA": {
+          "X": [
+            "Apr 2021",
+            "Jul 2021",
+            "Oct 2021",
+            "Jan 2022",
+            "Apr 2022",
+            "Jul 2022",
+            "Oct 2022",
+            "Jan 2023",
+            "Apr 2023",
+            "Jul 2023",
+            "Oct 2023",
+            "Jan 2024",
+            "Apr 2024",
+            "Jul 2024",
+            "Oct 2024",
+            "Jan 2025",
+            "Apr 2025",
+            "Jul 2025",
+            "Oct 2025"
+          ],
+          "Y": [
+            0.86,
+            0.89,
+            0.92,
+            0.95,
+            0.96,
+            0.99,
+            1.0,
+            1.03,
+            1.07,
+            1.09,
+            1.1,
+            1.09,
+            1.08,
+            1.09,
+            1.09,
+            1.1,
+            1.1,
+            1.1,
+            1.12
+          ]
+        }
+      }
+    }
+  },
+  "Industrial Robot": {
+    "Industrial_Robot_Annual_Installation": {
+      "metadata": {
+        "type": "adoption",
+        "units": "Robots/Year",
+        "source": "IFR",
+        "category": "annual adoption",
+        "entity_type": "disruptor",
+        "description": "Asia is the world\u2019s largest industrial robot market. In 2024, 401,665 units were installed,up 5% year over year. 74% of all newly deployed robots were installed in Asia (2023:70%). From 2019 to 2024, annual robot installations grew by 10% on average each year.Three of the top five markets for industrial robots are in Asia: China is by far the largest market. More than every other robot (54%) installed worldwide in 2024 ended up in China: Installations were up 7% to 295,045 units. "
+      },
+      "regions": {
+        "Asia and Australia": {
+          "X": [
+            "2014",
+            "2015",
+            "2016",
+            "2017",
+            "2018",
+            "2019",
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024"
+          ],
+          "Y": [
+            134000.0,
+            161000.0,
+            200000.0,
+            280000.0,
+            284000.0,
+            255000.0,
+            274000.0,
+            385000.0,
+            404000.0,
+            382000.0,
+            402000.0
+          ]
+        },
+        "Europe": {
+          "X": [
+            "2014",
+            "2015",
+            "2016",
+            "2017",
+            "2018",
+            "2019",
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024"
+          ],
+          "Y": [
+            46000.0,
+            50000.0,
+            56000.0,
+            67000.0,
+            76000.0,
+            74000.0,
+            66000.0,
+            82000.0,
+            85000.0,
+            92000.0,
+            85000.0
+          ]
+        },
+        "USA": {
+          "X": [
+            "2014",
+            "2015",
+            "2016",
+            "2017",
+            "2018",
+            "2019",
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024"
+          ],
+          "Y": [
+            33000.0,
+            38000.0,
+            41000.0,
+            46000.0,
+            55000.0,
+            47000.0,
+            39000.0,
+            52000.0,
+            36000.0,
+            55000.0,
+            50000.0
+          ]
+        },
+        "Global": {
+          "X": [
+            "2014",
+            "2015",
+            "2016",
+            "2017",
+            "2018",
+            "2019",
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024"
+          ],
+          "Y": [
+            221000.0,
+            254000.0,
+            304000.0,
+            400000.0,
+            423000.0,
+            387000.0,
+            390000.0,
+            526000.0,
+            553000.0,
+            541000.0,
+            542000.0
+          ]
+        },
+        "China": {
+          "X": [
+            "2017",
+            "2018",
+            "2019",
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024"
+          ],
+          "Y": [
+            137900.0,
+            154032.0,
+            140492.0,
+            168377.0,
+            243300.0,
+            290258.0,
+            276288.0,
+            295045.0
+          ]
+        },
+        "Rest of World": {
+          "X": [
+            "2017",
+            "2018",
+            "2019",
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024"
+          ],
+          "Y": [
+            149100.0,
+            137968.0,
+            125508.0,
+            116623.0,
+            148700.0,
+            141742.0,
+            117712.0,
+            111955.0
+          ]
+        }
+      }
+    },
+    "Industrial_Robot_Operational_stock": {
+      "metadata": {
+        "type": "adoption",
+        "units": "Robots",
+        "source": "AIPRM via IFR.org",
+        "category": "cumulative adoption",
+        "entity_type": "disruptor",
+        "description": "Operational Stock of Industrial Robots."
+      },
+      "regions": {
+        "China": {
+          "X": [
+            "2016",
+            "2017",
+            "2018",
+            "2019",
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024"
+          ],
+          "Y": [
+            350000.0,
+            500000.0,
+            650000.0,
+            790000.0,
+            960000.0,
+            1230000.0,
+            1500000.0,
+            1760000.0,
+            2055045.0
+          ]
+        },
+        "Europe": {
+          "X": [
+            "2014",
+            "2015",
+            "2016",
+            "2017",
+            "2018",
+            "2019",
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024"
+          ],
+          "Y": [
+            410000.0,
+            430000.0,
+            460000.0,
+            500000.0,
+            540000.0,
+            580000.0,
+            610000.0,
+            680000.0,
+            730000.0,
+            780000.0,
+            790000.0
+          ]
+        },
+        "USA": {
+          "X": [
+            "2016",
+            "2017",
+            "2018",
+            "2019",
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024"
+          ],
+          "Y": [
+            250000.0,
+            260000.0,
+            290000.0,
+            300000.0,
+            310000.0,
+            340000.0,
+            370000.0,
+            380000.0,
+            390000.0
+          ]
+        },
+        "Global": {
+          "X": [
+            "2012",
+            "2013",
+            "2014",
+            "2015",
+            "2016",
+            "2017",
+            "2018",
+            "2019",
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024"
+          ],
+          "Y": [
+            1235000.0,
+            1332000.0,
+            1472000.0,
+            1632000.0,
+            1838000.0,
+            2125000.0,
+            2441000.0,
+            2737000.0,
+            3027000.0,
+            3479000.0,
+            3904000.0,
+            4282000.0,
+            4664000.0
+          ]
+        },
+        "Rest of World": {
+          "X": [
+            "2017",
+            "2018",
+            "2019",
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024"
+          ],
+          "Y": [
+            865000.0,
+            961000.0,
+            1067000.0,
+            1147000.0,
+            1229000.0,
+            1304000.0,
+            1362000.0,
+            1428955.0
+          ]
+        }
+      }
+    },
+    "Industrial_Robot_Annual_Installation_(Automotive)": {
+      "metadata": {
+        "type": "adoption",
+        "units": "Robots/Year",
+        "source": "IFR",
+        "category": "annual adoption",
+        "entity_type": "disruptor",
+        "description": "Annual Installations/Sales of Industrialrobots in Automotive Sector"
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            "2017",
+            "2018",
+            "2019",
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024"
+          ],
+          "Y": [
+            123000.0,
+            126000.0,
+            105000.0,
+            80000.0,
+            117303.0,
+            136112.0,
+            135461.0,
+            126088.0
+          ]
+        }
+      }
+    },
+    "Industrial_Robot_Annual_Installation_(Electrical/Electronics)": {
+      "metadata": {
+        "type": "adoption",
+        "units": "Robots/Year",
+        "source": "IFR",
+        "category": "annual adoption",
+        "entity_type": "disruptor",
+        "description": "Annual Installations/Sales of Industrialrobots in Electronics/Electrical Sector"
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            "2017",
+            "2018",
+            "2019",
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024"
+          ],
+          "Y": [
+            122000.0,
+            105000.0,
+            88000.0,
+            109000.0,
+            142637.0,
+            156920.0,
+            125804.0,
+            128899.0
+          ]
+        }
+      }
+    },
+    "Industrial_Robot_Annual_Installation_(Metal_and_Machinery)": {
+      "metadata": {
+        "type": "adoption",
+        "units": "Robots/Year",
+        "source": "IFR",
+        "category": "annual adoption",
+        "entity_type": "disruptor",
+        "description": "Annual Installations/Sales of Industrialrobots in Metal and Machinery Sector"
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            "2017",
+            "2018",
+            "2019",
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024"
+          ],
+          "Y": [
+            44000.0,
+            44000.0,
+            46000.0,
+            41000.0,
+            68385.0,
+            66115.0,
+            76831.0,
+            88777.0
+          ]
+        }
+      }
+    },
+    "Industrial_Robot_Annual_Installation_(Plastic_and_Chemical_Products)": {
+      "metadata": {
+        "type": "adoption",
+        "units": "Robots/Year",
+        "source": "IFR",
+        "category": "annual adoption",
+        "entity_type": "disruptor",
+        "description": "Annual Installations/Sales of Industrialrobots in Plastic and Chemical Products Sector"
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            "2017",
+            "2018",
+            "2019",
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024"
+          ],
+          "Y": [
+            21000.0,
+            20000.0,
+            18000.0,
+            19000.0,
+            25025.0,
+            23540.0,
+            22402.0,
+            26491.0
+          ]
+        }
+      }
+    },
+    "Industrial_Robot_Annual_Installation_(Food_Industry)": {
+      "metadata": {
+        "type": "adoption",
+        "units": "Robots/Year",
+        "source": "IFR",
+        "category": "annual adoption",
+        "entity_type": "disruptor",
+        "description": "Annual Installations/Sales of Industrialrobots in Food Industry"
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            "2017",
+            "2018",
+            "2019",
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024"
+          ],
+          "Y": [
+            9000.0,
+            12000.0,
+            11000.0,
+            12000.0,
+            15381.0,
+            15107.0,
+            14685.0,
+            20792.0
+          ]
+        }
+      }
+    },
+    "Industrial_Robot_Price_Per_New_Installed_Robot_(Food_Industry)": {
+      "metadata": {
+        "type": "cost",
+        "units": "$",
+        "source": "Statista",
+        "category": "cost",
+        "entity_type": "disruptor",
+        "description": "Price Per New Installed Industry Robot in Food Industry"
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            "2016",
+            "2017",
+            "2018",
+            "2019",
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024"
+          ],
+          "Y": [
+            25000.0,
+            40000.0,
+            55000.0,
+            70000.0,
+            65000.0,
+            60000.0,
+            68000.0,
+            72000.0,
+            68000.0
+          ]
+        }
+      }
+    },
+    "Industrial_Robot_Price_Per_New_Installed_Robot_(Automative_Industry)": {
+      "metadata": {
+        "type": "cost",
+        "units": "$",
+        "source": "Statista",
+        "category": "cost",
+        "entity_type": "disruptor",
+        "description": "Price Per New Installed Industry Robot in Automotive Industry"
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            "2016",
+            "2017",
+            "2018",
+            "2019",
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024"
+          ],
+          "Y": [
+            60000.0,
+            95000.0,
+            125000.0,
+            128000.0,
+            122000.0,
+            112000.0,
+            135000.0,
+            160000.0,
+            90000.0
+          ]
+        }
+      }
+    },
+    "Industrial_Robot_Price_Per_New_Installed_Robot_(Chemical_Industry)": {
+      "metadata": {
+        "type": "cost",
+        "units": "$",
+        "source": "Statista",
+        "category": "cost",
+        "entity_type": "disruptor",
+        "description": "Price Per New Installed Industry Robot in Chemical Industry"
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            "2016",
+            "2017",
+            "2018",
+            "2019",
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024"
+          ],
+          "Y": [
+            35000.0,
+            65000.0,
+            98000.0,
+            100000.0,
+            90000.0,
+            88000.0,
+            102000.0,
+            98000.0,
+            75000.0
+          ]
+        }
+      }
+    },
+    "Industrial_Robot_Price_Per_New_Installed_Robot_(Electric/Electronic_Industry)": {
+      "metadata": {
+        "type": "cost",
+        "units": "$",
+        "source": "Statista",
+        "category": "cost",
+        "entity_type": "disruptor",
+        "description": "Price Per New Installed Industry Robot in Electronics/Electrical Industry"
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            "2016",
+            "2017",
+            "2018",
+            "2019",
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024"
+          ],
+          "Y": [
+            35000.0,
+            55000.0,
+            75000.0,
+            72000.0,
+            68000.0,
+            70000.0,
+            92000.0,
+            88000.0,
+            60000.0
+          ]
+        }
+      }
+    },
+    "Industrial_Robot_Price_Per_New_Installed_Robot_(Metal_Industry)": {
+      "metadata": {
+        "type": "cost",
+        "units": "$",
+        "source": "Statista",
+        "category": "cost",
+        "entity_type": "disruptor",
+        "description": "Price Per New Installed Industry Robot in Metal Industry"
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            "2016",
+            "2017",
+            "2018",
+            "2019",
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024"
+          ],
+          "Y": [
+            35000.0,
+            55000.0,
+            75000.0,
+            80000.0,
+            79000.0,
+            79000.0,
+            102000.0,
+            100000.0,
+            75000.0
+          ]
+        }
+      }
+    }
+  },
+  "Service Robot (Professional)": {
+    "Service_Robot_(Professional)_Annual_Installation": {
+      "metadata": {
+        "type": "adoption",
+        "units": "Robots/Year",
+        "source": "IFR",
+        "category": "annual adoption",
+        "entity_type": "disruptor",
+        "description": "Annual Installations/Sales of Professional Service robots"
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            "2017",
+            "2018",
+            "2019",
+            "2020",
+            "2021",
+            "2022",
+            "2023"
+          ],
+          "Y": [
+            84000.0,
+            107000.0,
+            112000.0,
+            78000.0,
+            121000.0,
+            158000.0,
+            205000.0
+          ]
+        }
+      }
+    },
+    "Service_Robot_(Professional)_Annual_Installation_(Agriculture)": {
+      "metadata": {
+        "type": "adoption",
+        "units": "Robots/Year",
+        "source": "IFR",
+        "category": "annual adoption",
+        "entity_type": "disruptor",
+        "description": "Agriculture category includes robots used for tasks such as plowing, seeding, harvesting, weeding, fertilizing, and pesticide spraying\u2014both indoors (e.g. greenhouses) and outdoors (e.g. fields and vineyards). It also covers robots for milking, as well as those used in other livestock activities like feeding and barn cleaning."
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            "2021",
+            "2022",
+            "2023"
+          ],
+          "Y": [
+            7000.0,
+            8000.0,
+            20000.0
+          ]
+        }
+      }
+    },
+    "Service_Robot_(Professional)_Annual_Installation_(Hospitality)": {
+      "metadata": {
+        "type": "adoption",
+        "units": "Robots/Year",
+        "source": "IFR",
+        "category": "annual adoption",
+        "entity_type": "disruptor",
+        "description": "Hospitality category includes robots that prepare and serve food or drinks, as well as those that provide information, guidance, or remote presence in customer-facing environments like hotels, restaurants, and museums."
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            "2021",
+            "2022",
+            "2023"
+          ],
+          "Y": [
+            11000.0,
+            25000.0,
+            54000.0
+          ]
+        }
+      }
+    },
+    "Service_Robot_(Professional)_Annual_Installation_(Medical_and_health_care)": {
+      "metadata": {
+        "type": "adoption",
+        "units": "Robots/Year",
+        "source": "IFR",
+        "category": "annual adoption",
+        "entity_type": "disruptor",
+        "description": "Medical and health care category includes robots used in clinical and care settings for diagnostics, surgery, rehabilitation, and non-invasive therapy. It also includes hospital support robots, wearable exoskeletons, and telepresence robots used specifically in healthcare."
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            "2021",
+            "2022",
+            "2023"
+          ],
+          "Y": [
+            10000.0,
+            9000.0,
+            6000.0
+          ]
+        }
+      }
+    },
+    "Service_Robot_(Professional)_Annual_Installation_(Professional_cleaning)": {
+      "metadata": {
+        "type": "adoption",
+        "units": "Robots/Year",
+        "source": "IFR",
+        "category": "annual adoption",
+        "entity_type": "disruptor",
+        "description": "Professional cleaning category includes robots designed to clean floors, windows, walls, tanks, pipes, and vehicle hulls in professional environments. This category also includes disinfection robots and others used for specialized or large-scale cleaning tasks."
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            "2021",
+            "2022",
+            "2023"
+          ],
+          "Y": [
+            6000.0,
+            7000.0,
+            12000.0
+          ]
+        }
+      }
+    },
+    "Service_Robot_(Professional)_Annual_Installation_(Transportation_and_logistics)": {
+      "metadata": {
+        "type": "adoption",
+        "units": "Robots/Year",
+        "source": "IFR",
+        "category": "annual adoption",
+        "entity_type": "disruptor",
+        "description": "Transportation and logistics category includes robots that transport goods and manage inventory in both indoor and outdoor environments. These robots are used in places such as warehouses, hospitals, hotels, and public streets, and they support activities like deliveries, stock counting, and restocking."
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            "2021",
+            "2022",
+            "2023"
+          ],
+          "Y": [
+            60000.0,
+            86000.0,
+            113000.0
+          ]
+        }
+      }
+    }
+  },
+  "Humanoid Robot": {
+    "Humanoid_Robot_Market_Size": {
+      "metadata": {
+        "type": "adoption",
+        "units": "USD Billion",
+        "source": "researchandmarkets",
+        "category": "annual adoption",
+        "entity_type": "disruptor",
+        "description": "Annual Installations/Sales of Industrialrobots in Food Industry"
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            "2021",
+            "2022",
+            "2023",
+            "2024",
+            "2025"
+          ],
+          "Y": [
+            1.53,
+            1.46,
+            1.8,
+            2.02,
+            2.92
+          ]
+        }
+      }
+    }
+  },
+  "GPU": {
+    "GPU_NVIDIA_Tesla_V100_Price": {
+      "metadata": {
+        "type": "Cost",
+        "units": "USD",
+        "source": "Database",
+        "category": "Cost",
+        "entity_type": "disruptor",
+        "description": "Market price trend for the NVIDIA Tesla V100 GPU"
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            "2018",
+            "2019",
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024",
+            "2025"
+          ],
+          "Y": [
+            10000.0,
+            9500.0,
+            8500.0,
+            7500.0,
+            6500.0,
+            5500.0,
+            4500.0,
+            3500.0
+          ]
+        }
+      }
+    },
+    "GPU_NVIDIA_A100_Tensor_Core_Price": {
+      "metadata": {
+        "type": "Cost",
+        "units": "USD",
+        "source": "Database",
+        "category": "Cost",
+        "entity_type": "disruptor",
+        "description": "Market price trend for the NVIDIA A100 Tensor Core GPU"
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024",
+            "2025"
+          ],
+          "Y": [
+            10000.0,
+            13500.0,
+            11000.0,
+            10000.0,
+            9500.0,
+            11750.0
+          ]
+        }
+      }
+    },
+    "GPU_NVIDIA_H100_Tensor_Core_Price": {
+      "metadata": {
+        "type": "Cost",
+        "units": "USD",
+        "source": "Database",
+        "category": "Cost",
+        "entity_type": "disruptor",
+        "description": "Market price trend for the NVIDIA H100 Tensor Core GPU"
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            "2022",
+            "2023",
+            "2024",
+            "2025"
+          ],
+          "Y": [
+            27500.0,
+            35000.0,
+            30000.0,
+            27500.0
+          ]
+        }
+      }
+    },
+    "GPU_NVIDIA_Tesla_V100_Cloud_On-Demand_Price": {
+      "metadata": {
+        "type": "Cost",
+        "units": "USD/Hour",
+        "source": "Database",
+        "category": "Cost",
+        "entity_type": "disruptor",
+        "description": "Hourly cloud on-demand pricing for Tesla V100 GPUs across cloud providers"
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            "2018",
+            "2019",
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024",
+            "2025"
+          ],
+          "Y": [
+            3.06,
+            3.5,
+            3.5,
+            3.5,
+            3.0,
+            2.5,
+            2.5,
+            2.5
+          ]
+        }
+      }
+    },
+    "GPU_NVIDIA_A100_Tensor_Core_Cloud_On-Demand_Price": {
+      "metadata": {
+        "type": "Cost",
+        "units": "USD/Hour",
+        "source": "Database",
+        "category": "Cost",
+        "entity_type": "disruptor",
+        "description": "Hourly cloud on-demand pricing for A100 Tensor Core GPUs across cloud providers"
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            "2020",
+            "2021",
+            "2022",
+            "2023",
+            "2024",
+            "2025"
+          ],
+          "Y": [
+            4.1,
+            4.0,
+            3.5,
+            3.0,
+            2.5,
+            2.0
+          ]
+        }
+      }
+    },
+    "GPU_NVIDIA_H100_Tensor_Core_Cloud_On-Demand_Price": {
+      "metadata": {
+        "type": "Cost",
+        "units": "USD/Hour",
+        "source": "Database",
+        "category": "Cost",
+        "entity_type": "disruptor",
+        "description": "Hourly cloud on-demand pricing for H100 Tensor Core GPUs across cloud providers"
+      },
+      "regions": {
+        "Global": {
+          "X": [
+            "2022",
+            "2023",
+            "2024",
+            "2025"
+          ],
+          "Y": [
+            12.0,
+            8.0,
+            7.5,
+            7.0
+          ]
+        }
+      }
+    }
+  }
+}
