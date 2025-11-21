@@ -63,7 +63,7 @@ cost(t) = exp(log_cost(t))
 
 Where:
 - `CAGR_log` is computed from historical log(cost) series
-- Extrapolation continues until `end_year` (default 2040)
+- Extrapolation continues until `end_year` (default 2030)
 
 ### Intersection Detection Logic
 
@@ -93,7 +93,7 @@ Where:
 
 **Linear Extrapolation with Robust Slope**
 - Use Theil-Sen or median regression for long-term slope
-- Extrapolate to end_year (default 2040)
+- Extrapolate to end_year (default 2030)
 - More robust than ordinary least squares
 
 Mathematical formula:

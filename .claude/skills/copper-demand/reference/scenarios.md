@@ -157,16 +157,16 @@ Scenarios model different pathways for the green energy transition and their imp
 
 ```bash
 # Baseline (default)
-python3 scripts/forecast.py --scenario baseline --region Global --end-year 2040
+python3 scripts/forecast.py --scenario baseline --region Global --end-year 2030
 
 # Accelerated
-python3 scripts/forecast.py --scenario accelerated --region Global --end-year 2040
+python3 scripts/forecast.py --scenario accelerated --region Global --end-year 2030
 
 # Delayed
-python3 scripts/forecast.py --scenario delayed --region Global --end-year 2040
+python3 scripts/forecast.py --scenario delayed --region Global --end-year 2030
 
 # Substitution
-python3 scripts/forecast.py --scenario substitution --region Global --end-year 2040
+python3 scripts/forecast.py --scenario substitution --region Global --end-year 2030
 ```
 
 ### Comparing Scenarios
@@ -226,8 +226,8 @@ To create custom scenarios, modify `config.json`:
   "scenarios": {
     "custom_scenario": {
       "description": "Your scenario description",
-      "ev_adoption_2040": 0.80,
-      "renewable_capacity_2040_tw": 18,
+      "ev_adoption_2035": 0.80,
+      "renewable_capacity_2035_tw": 18,
       "demand_multiplier": 1.15,
       "coefficient_reduction": 0.10  // optional
     }

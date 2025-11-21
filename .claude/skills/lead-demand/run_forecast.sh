@@ -6,7 +6,7 @@ SKILL_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "$SKILL_DIR"
 
 # Default parameters
-END_YEAR=${END_YEAR:-2040}
+END_YEAR=${END_YEAR:-2030}
 SCENARIO=${SCENARIO:-baseline}
 OUTPUT_FORMAT=${OUTPUT_FORMAT:-csv}
 VALIDATE=${VALIDATE:-false}

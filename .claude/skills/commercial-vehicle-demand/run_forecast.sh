@@ -7,7 +7,7 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # Default parameters
 REGION="${1:-China}"
 SEGMENT="${2:-all}"  # Options: LCV, MCV, HCV, or 'all'
-END_YEAR="${3:-2040}"
+END_YEAR="${3:-2030}"
 OUTPUT_FORMAT="${4:-csv}"
 
 # Build command
@@ -31,9 +31,9 @@ echo ""
 eval $CMD
 
 # Usage examples:
-# ./run_forecast.sh China all 2040 csv         # All segments, China
+# ./run_forecast.sh China all 2030 csv         # All segments, China
 # ./run_forecast.sh USA LCV 2035 json          # LCV segment only, USA
-# ./run_forecast.sh Europe MCV 2040 both       # MCV segment, Europe
+# ./run_forecast.sh Europe MCV 2030 both       # MCV segment, Europe
 
 # Make script executable:
 # chmod +x run_forecast.sh

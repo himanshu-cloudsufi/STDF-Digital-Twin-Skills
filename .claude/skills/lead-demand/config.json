@@ -4,17 +4,30 @@
   "description": "Lead demand forecasting with bottom-up installed-base accounting",
   "default_parameters": {
     "start_year": 2020,
-    "end_year": 2040,
+    "end_year": 2030,
     "smoothing_window": 3,
     "validation_enabled": true,
     "scenario": "baseline",
     "vehicle_data_scenario": "standard",
-    "standard_forecast_years": [2030, 2035],
-    "extended_forecast_year": 2040,
-    "max_forecast_year": 2040
+    "standard_forecast_years": [
+      2030,
+      2035
+    ],
+    "extended_forecast_year": 2035,
+    "max_forecast_year": 2035
   },
-  "regions": ["China", "USA", "Europe", "Rest_of_World", "Global"],
-  "output_formats": ["csv", "json", "plot"],
+  "regions": [
+    "China",
+    "USA",
+    "Europe",
+    "Rest_of_World",
+    "Global"
+  ],
+  "output_formats": [
+    "csv",
+    "json",
+    "plot"
+  ],
   "data_sources": {
     "vehicle_sales": "vehicle_sales_by_powertrain.json",
     "vehicle_fleet": "vehicle_fleet_by_powertrain.json",
@@ -96,26 +109,26 @@
   "scenarios": {
     "baseline": {
       "description": "Moderate EV adoption, standard replacement cycles",
-      "ev_adoption_2040": 0.50,
-      "battery_life_improvement": 1.0
+      "battery_life_improvement": 1.0,
+      "ev_adoption_2035": 0.5
     },
     "accelerated_ev": {
       "description": "Faster electrification, reduced lead demand",
-      "ev_adoption_2040": 0.75,
       "battery_life_improvement": 1.0,
-      "demand_multiplier": 0.85
+      "demand_multiplier": 0.85,
+      "ev_adoption_2035": 0.75
     },
     "extended_lifecycles": {
       "description": "Longer battery life, reduced replacement",
-      "ev_adoption_2040": 0.50,
       "battery_life_improvement": 1.25,
-      "demand_multiplier": 0.90
+      "demand_multiplier": 0.9,
+      "ev_adoption_2035": 0.5
     },
     "high_growth": {
       "description": "Increased vehicle sales, higher total demand",
-      "ev_adoption_2040": 0.50,
       "battery_life_improvement": 1.0,
-      "sales_growth_multiplier": 1.20
+      "sales_growth_multiplier": 1.2,
+      "ev_adoption_2035": 0.5
     }
   },
   "econometric_parameters": {

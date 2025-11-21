@@ -15,7 +15,7 @@ class DemandForecaster:
 
     def __init__(
         self,
-        end_year: int = 2040,
+        end_year: int = 2030,
         logistic_ceiling: float = 0.9,
         max_market_cagr: float = 0.05
     ):
@@ -264,7 +264,7 @@ def run_demand_forecast(
     data_loader,
     region: str,
     tipping_point: Optional[int],
-    end_year: int = 2040,
+    end_year: int = 2030,
     logistic_ceiling: float = 0.9,
     track_fleet: bool = False
 ) -> Dict[str, any]:
@@ -364,5 +364,5 @@ if __name__ == "__main__":
     print("  ")
     print("  config = VehicleConfig('two_wheeler')")
     print("  loader = DataLoader(config)")
-    print("  cost_result = run_cost_analysis(loader, 'China', end_year=2040)")
+    print("  cost_result = run_cost_analysis(loader, 'China', end_year=2030)")
     print("  demand_result = run_demand_forecast(loader, 'China', cost_result['tipping_point'])")

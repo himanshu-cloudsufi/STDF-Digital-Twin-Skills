@@ -280,7 +280,7 @@ The data loader performs these checks:
 ### Step 4: Test
 
 ```bash
-python3 scripts/forecast.py --region MyRegion --end-year 2040 --output csv
+python3 scripts/forecast.py --region MyRegion --end-year 2030 --output csv
 ```
 
 ## Data Sources and Collection
@@ -383,5 +383,5 @@ python3 scripts/forecast.py --region MyRegion --end-year 2040 --output csv
 
 Then run:
 ```bash
-python3 scripts/forecast.py --region China --end-year 2040 --output csv
+python3 scripts/forecast.py --region China --end-year 2030 --output csv
 ```

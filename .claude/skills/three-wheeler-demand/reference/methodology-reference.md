@@ -245,7 +245,7 @@ where regions = {China, Europe, Rest_of_World}
 - **High Confidence**: China, Rest_of_World/India markets (extensive historical data)
 - **Medium Confidence**: Europe (moderate data coverage, emerging market)
 - **Lower Confidence**: Regional aggregations (varied data quality)
-- **Forecast Uncertainty**: Increases with time horizon (±10% by 2030, ±20% by 2040)
+- **Forecast Uncertainty**: Increases with time horizon (±10% by 2030, ±15% by 2030, ±20% by 2035)
 
 ## 10. Model Limitations
 

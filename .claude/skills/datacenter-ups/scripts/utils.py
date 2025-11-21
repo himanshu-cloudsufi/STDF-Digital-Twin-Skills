@@ -339,13 +339,13 @@ def create_summary_table(results: pd.DataFrame, key_years: Optional[List[int]] =
 
     Args:
         results: Full results DataFrame
-        key_years: List of years to include (default: 2025, 2030, 2035, 2040)
+        key_years: List of years to include (default: 2025, 2030, 2035)
 
     Returns:
         Summary DataFrame
     """
     if key_years is None:
-        key_years = [2025, 2030, 2035, 2040]
+        key_years = [2025, 2030, 2035]
 
     # Filter to key years
     available_years = [year for year in key_years if year in results['year'].values]

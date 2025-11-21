@@ -23,7 +23,7 @@ from utils import validate_energy_balance
 class EnergyForecastOrchestrator:
     """Main orchestrator for SWB energy forecasting"""
 
-    def __init__(self, end_year: int = 2040, battery_duration: int = 4, scenario: str = "baseline"):
+    def __init__(self, end_year: int = 2030, battery_duration: int = 4, scenario: str = "baseline"):
         """
         Initialize orchestrator with scenario support
 

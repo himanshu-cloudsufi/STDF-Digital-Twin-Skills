@@ -1,7 +1,7 @@
 ---
 name: demand-forecasting
 description: >
-  Performs cost-driven demand forecasting for passenger vehicles (EV, PHEV, ICE) across global regions. Calculates cost parity tipping points and models market adoption using logistic growth curves. Use when user asks about passenger vehicle demand, EV adoption, electric vehicle forecasts, market penetration, sales projections, or questions like "when will EVs dominate", "what is EV adoption in China", "forecast passenger vehicle demand", "when does cost parity occur", "EV market share by 2040", "predict ICE decline", "PHEV adoption trajectory". Handles regions: China, USA, Europe, Rest_of_World, Global. Trigger keywords: forecast, predict, demand, adoption, penetration, market share, EV, electric vehicle, passenger vehicle, BEV, PHEV, ICE, tipping point, cost parity, China, USA, Europe, 2040. (project)
+  Performs cost-driven demand forecasting for passenger vehicles (EV, PHEV, ICE) across global regions. Calculates cost parity tipping points and models market adoption using logistic growth curves. Use when user asks about passenger vehicle demand, EV adoption, electric vehicle forecasts, market penetration, sales projections, or questions like "when will EVs dominate", "what is EV adoption in China", "forecast passenger vehicle demand", "when does cost parity occur", "EV market share by 2035", "predict ICE decline", "PHEV adoption trajectory". Handles regions: China, USA, Europe, Rest_of_World, Global. Trigger keywords: forecast, predict, demand, adoption, penetration, market share, EV, electric vehicle, passenger vehicle, BEV, PHEV, ICE, tipping point, cost parity, China, USA, Europe, 2040. (project)
 ---
 
 # Cost-Driven Demand Forecasting
@@ -15,10 +15,10 @@ pip install -r requirements.txt
 
 ```bash
 # Single region
-python3 scripts/forecast.py --region China --end-year 2040 --output csv
+python3 scripts/forecast.py --region China --end-year 2030 --output csv
 
 # Global (all regions + aggregation)
-python3 scripts/forecast.py --region Global --end-year 2040 --output both
+python3 scripts/forecast.py --region Global --end-year 2030 --output both
 ```
 
 ## Parameters

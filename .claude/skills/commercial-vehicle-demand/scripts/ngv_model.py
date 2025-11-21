@@ -20,7 +20,7 @@ class NGVModel:
     - Detects historical peak in NGV sales/share
     - Allows growth up to peak during historical period
     - Applies exponential decline after max(peak_year, tipping_point)
-    - Targets near-zero share by 2040
+    - Targets near-zero share by 2035
     - Handles cases where NGV never had significant presence
     """
 
@@ -33,12 +33,12 @@ class NGVModel:
         """
         self.half_life_years = config.get('half_life_years', 6.0)
         self.peak_detection_window = config.get('peak_detection_window', 5)
-        self.target_share_2040 = config.get('target_share_2040', 0.0)
+        self.target_share_2035 = config.get('target_share_2035', config.get('target_share_2040', 0.0))  # Backward compat
         self.min_significant_share = config.get('min_significant_share', 0.01)
         self.decline_start_mode = config.get('decline_start_mode', 'max_peak_or_tipping')
 
         logger.info(f"NGV Model initialized: half_life={self.half_life_years}yr, "
-                   f"target_2040={self.target_share_2040}")
+                   f"target_2035={self.target_share_2035}")
 
     def detect_peak(self,
                     historical_years: np.ndarray,
@@ -195,9 +195,9 @@ class NGVModel:
                 decay_factor = np.exp(-np.log(2) * years_since_decline / self.half_life_years)
                 share = peak_share * decay_factor
 
-                # Apply 2040 target constraint
-                if year >= 2040:
-                    share = min(share, self.target_share_2040)
+                # Apply 2035 target constraint
+                if year >= 2035:
+                    share = min(share, self.target_share_2035)
 
             ngv_sales[i] = share * market
 
@@ -209,11 +209,11 @@ class NGVModel:
             'peak_info': peak_info,
             'decline_start_year': int(decline_start_year),
             'half_life_years': self.half_life_years,
-            'final_share_2040': float(ngv_sales[-1] / all_market[-1]) if all_market[-1] > 0 else 0
+            'final_share_end': float(ngv_sales[-1] / all_market[-1]) if all_market[-1] > 0 else 0
         }
 
-        logger.info(f"NGV forecast complete: final 2040 share = "
-                   f"{metadata['final_share_2040']:.2%}")
+        logger.info(f"NGV forecast complete: final year share = "
+                   f"{metadata['final_share_end']:.2%}")
 
         return forecast_ngv, metadata
 
@@ -255,12 +255,12 @@ class NGVModel:
             if late_avg > early_avg * 1.1:  # Allow 10% tolerance
                 issues.append("increasing_trend_detected")
 
-        # Check 2040 target
-        if 2040 in forecast_years:
-            idx_2040 = np.where(forecast_years == 2040)[0][0]
-            share_2040 = shares[idx_2040]
-            if share_2040 > self.target_share_2040 + 0.01:  # Allow 1% tolerance
-                issues.append(f"2040_share_exceeds_target: {share_2040:.2%}")
+        # Check 2035 target
+        if 2035 in forecast_years:
+            idx_2035 = np.where(forecast_years == 2035)[0][0]
+            share_2035 = shares[idx_2035]
+            if share_2035 > self.target_share_2035 + 0.01:  # Allow 1% tolerance
+                issues.append(f"2035_share_exceeds_target: {share_2035:.2%}")
 
         return {
             'valid': len(issues) == 0,

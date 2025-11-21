@@ -162,7 +162,7 @@ class CostAnalyzer:
 def run_cost_analysis(
     data_loader,
     region: str,
-    end_year: int = 2040
+    end_year: int = 2030
 ) -> Dict[str, any]:
     """
     Run complete cost analysis for a region
@@ -220,7 +220,7 @@ if __name__ == "__main__":
     print("Testing Cost Analysis...")
 
     loader = DataLoader()
-    result = run_cost_analysis(loader, "China", end_year=2040)
+    result = run_cost_analysis(loader, "China", end_year=2030)
 
     print(f"\nTipping Point: {result['tipping_point']}")
     print(f"EV CAGR: {result['ev_cagr']:.2%}")

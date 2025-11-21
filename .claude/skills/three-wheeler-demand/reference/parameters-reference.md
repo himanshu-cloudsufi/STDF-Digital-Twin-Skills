@@ -7,9 +7,9 @@
 #### `end_year`
 - **Type**: Integer
 - **Default**: 2040
-- **Range**: 2025-2040
+- **Range**: 2025-2035
 - **Description**: Final year of forecast horizon
-- **Usage**: `--end-year 2040`
+- **Usage**: `--end-year 2030`
 
 #### `logistic_ceiling`
 - **Type**: Float
@@ -223,7 +223,7 @@ result = orchestrator.forecast_region("China")
 ### High Sensitivity Parameters
 - `logistic_ceiling`: ±10% → ±8% final EV share
 - `tipping_point`: ±2 years → ±5% share in 2030
-- `max_market_cagr`: ±2% → ±15% market size by 2040
+- `max_market_cagr`: ±2% → ±15% market size by 2035
 
 ### Medium Sensitivity Parameters
 - `logistic_k_bounds`: Affects adoption speed (±10% mid-period share)

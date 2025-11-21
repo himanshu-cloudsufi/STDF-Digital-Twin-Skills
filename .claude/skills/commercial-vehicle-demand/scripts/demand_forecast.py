@@ -19,7 +19,7 @@ class DemandForecaster:
 
     def __init__(
         self,
-        end_year: int = 2040,
+        end_year: int = 2030,
         logistic_ceiling: float = 0.9,
         max_market_cagr: float = 0.05,
         ngv_config: Optional[Dict] = None
@@ -330,7 +330,7 @@ def run_demand_forecast_segment(
     region: str,
     segment: str,
     tipping_point: Optional[int],
-    end_year: int = 2040,
+    end_year: int = 2030,
     logistic_ceiling: float = 0.9,
     track_fleet: bool = False,
     fleet_lifetime: float = 15.0,
@@ -461,7 +461,7 @@ if __name__ == "__main__":
             region,
             segment,
             tipping_point,
-            end_year=2040,
+            end_year=2030,
             logistic_ceiling=0.95,
             track_fleet=True,
             fleet_lifetime=12.0

@@ -8,7 +8,7 @@
 ```
 three_wheeler_{Region}_{EndYear}.csv
 ```
-Example: `three_wheeler_China_2040.csv`
+Example: `three_wheeler_China_2030.csv`
 
 **Global:**
 ```
@@ -152,7 +152,7 @@ three_wheeler_{Region}_{EndYear}.json
     "parameters": {
       "tipping_point": 2026,
       "logistic_ceiling": 0.9,
-      "end_year": 2040
+      "end_year": 2030
     }
   }
 }
@@ -166,12 +166,12 @@ When forecasting with `--region Global`, the output includes:
 
 **CSV Files:**
 - `three_wheeler_Global_2040_global.csv` - Aggregated global totals
-- `three_wheeler_China_2040.csv` - China regional forecast
-- `three_wheeler_Europe_2040.csv` - Europe regional forecast
-- `three_wheeler_Rest_of_World_2040.csv` - Rest_of_World regional forecast
+- `three_wheeler_China_2030.csv` - China regional forecast
+- `three_wheeler_Europe_2030.csv` - Europe regional forecast
+- `three_wheeler_Rest_of_World_2030.csv` - Rest_of_World regional forecast
 
 **JSON File:**
-- `three_wheeler_Global_2040.json` - Contains all regional forecasts + global
+- `three_wheeler_Global_2030.json` - Contains all regional forecasts + global
 
 ### Global JSON Schema
 
@@ -217,11 +217,11 @@ import pandas as pd
 import json
 
 # Read CSV
-df = pd.read_csv('output/three_wheeler_China_2040.csv')
+df = pd.read_csv('output/three_wheeler_China_2030.csv')
 print(df[['Year', 'Market', 'EV', 'ICE']])
 
 # Read JSON
-with open('output/three_wheeler_China_2040.json', 'r') as f:
+with open('output/three_wheeler_China_2030.json', 'r') as f:
     result = json.load(f)
     tipping = result['cost_analysis']['tipping_point']
     print(f"Tipping point: {tipping}")
@@ -239,12 +239,12 @@ with open('output/three_wheeler_China_2040.json', 'r') as f:
 
 ```r
 # Read CSV
-df <- read.csv('output/three_wheeler_China_2040.csv')
+df <- read.csv('output/three_wheeler_China_2030.csv')
 head(df)
 
 # Read JSON
 library(jsonlite)
-result <- fromJSON('output/three_wheeler_China_2040.json')
+result <- fromJSON('output/three_wheeler_China_2030.json')
 tipping <- result$cost_analysis$tipping_point
 ```
 
@@ -252,12 +252,12 @@ tipping <- result$cost_analysis$tipping_point
 
 ```
 .claude/skills/three-wheeler-demand/output/
-├── three_wheeler_China_2040.csv
-├── three_wheeler_China_2040.json
-├── three_wheeler_Europe_2040.csv
-├── three_wheeler_Rest_of_World_2040.csv
+├── three_wheeler_China_2030.csv
+├── three_wheeler_China_2030.json
+├── three_wheeler_Europe_2030.csv
+├── three_wheeler_Rest_of_World_2030.csv
 ├── three_wheeler_Global_2040_global.csv
-└── three_wheeler_Global_2040.json
+└── three_wheeler_Global_2030.json
 ```
 
 ## Notes

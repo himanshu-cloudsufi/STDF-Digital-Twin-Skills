@@ -242,7 +242,7 @@ class CostAnalyzer:
 def run_cost_analysis(
     data_loader,
     region: str,
-    end_year: int = 2040,
+    end_year: int = 2030,
     include_sensitivity: bool = False,
     vehicle_type: str = "light vehicle"
 ) -> Dict[str, any]:
@@ -319,4 +319,4 @@ if __name__ == "__main__":
     print("  from common.cost_analysis import run_cost_analysis")
     print("  from common.data_loader import DataLoader")
     print("  loader = DataLoader(vehicle_config)")
-    print("  result = run_cost_analysis(loader, 'China', end_year=2040)")
+    print("  result = run_cost_analysis(loader, 'China', end_year=2030)")

@@ -8,7 +8,7 @@ set -e
 # Default values
 VEHICLE_TYPE=${1:-"two_wheeler"}
 REGION=${2:-"China"}
-END_YEAR=${3:-2040}
+END_YEAR=${3:-2030}
 OUTPUT_FORMAT=${4:-"csv"}
 
 # Get script directory

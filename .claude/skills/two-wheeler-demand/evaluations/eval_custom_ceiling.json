@@ -1,19 +1,19 @@
 {
   "test_name": "custom_ceiling_scenario",
   "description": "Test forecast with custom EV adoption ceiling (75%)",
-  "command": "python3 scripts/forecast.py --region China --end-year 2040 --ceiling 0.75 --output csv",
+  "command": "python3 scripts/forecast.py --region China --end-year 2030 --ceiling 0.75 --output csv",
   "expected_outputs": [
-    "output/two_wheeler_China_2040.csv"
+    "output/two_wheeler_China_2030.csv"
   ],
   "validation_checks": [
     {
       "check": "file_exists",
-      "file": "output/two_wheeler_China_2040.csv"
+      "file": "output/two_wheeler_China_2030.csv"
     },
     {
       "check": "max_ev_share",
       "description": "EV share should not exceed 75%",
-      "file": "output/two_wheeler_China_2040.csv",
+      "file": "output/two_wheeler_China_2030.csv",
       "column": "EV_Share",
       "max_value": 75.0,
       "tolerance": 1.0
@@ -21,9 +21,12 @@
     {
       "check": "ceiling_respected",
       "description": "Final EV share should be close to ceiling",
-      "file": "output/two_wheeler_China_2040.csv",
+      "file": "output/two_wheeler_China_2030.csv",
       "column": "EV_Share",
-      "expected_final_range": [73.0, 76.0]
+      "expected_final_range": [
+        73.0,
+        76.0
+      ]
     }
   ],
   "expected_results": {

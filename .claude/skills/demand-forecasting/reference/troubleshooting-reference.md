@@ -500,7 +500,7 @@ python3 -c "
 from scripts.data_loader import DataLoader
 from scripts.cost_analysis import run_cost_analysis
 loader = DataLoader()
-result = run_cost_analysis(loader, 'China', end_year=2040)
+result = run_cost_analysis(loader, 'China', end_year=2030)
 print(f'Tipping point: {result[\"tipping_point\"]}')
 print(f'EV CAGR: {result[\"ev_cagr\"]:.2%}')
 print(f'ICE CAGR: {result[\"ice_cagr\"]:.2%}')
@@ -515,8 +515,8 @@ from scripts.data_loader import DataLoader
 from scripts.cost_analysis import run_cost_analysis
 from scripts.demand_forecast import run_demand_forecast
 loader = DataLoader()
-cost_result = run_cost_analysis(loader, 'China', end_year=2040)
-demand_result = run_demand_forecast(loader, 'China', cost_result['tipping_point'], end_year=2040)
+cost_result = run_cost_analysis(loader, 'China', end_year=2030)
+demand_result = run_demand_forecast(loader, 'China', cost_result['tipping_point'], end_year=2030)
 print(f'Validation: {demand_result[\"validation\"][\"is_valid\"]}')
 print(f'Message: {demand_result[\"validation\"][\"message\"]}')
 "
@@ -532,7 +532,7 @@ When seeking help, provide:
 
 1. **Command used**:
    ```bash
-   python3 scripts/forecast.py --region China --end-year 2040 --ceiling 0.9
+   python3 scripts/forecast.py --region China --end-year 2030 --ceiling 0.9
    ```
 
 2. **Full error message**:

@@ -111,7 +111,7 @@ Nested dictionary with regional, segment, and forecast data
       },
       "decline_start_year": 2028,
       "half_life_years": 6.0,
-      "final_share_2040": 0.012
+      "final_share_2035": 0.012
     },
     "validation": {
       "is_valid": true,
@@ -153,14 +153,14 @@ python3 scripts/forecast.py --region China --all-segments --output both
 ```
 
 Output:
-- `output/commercial_vehicle_China_2040.csv`
-- `output/commercial_vehicle_China_2040.json`
+- `output/commercial_vehicle_China_2030.csv`
+- `output/commercial_vehicle_China_2030.json`
 
 ### Load CSV in Python
 ```python
 import pandas as pd
 
-df = pd.read_csv('output/commercial_vehicle_China_2040.csv')
+df = pd.read_csv('output/commercial_vehicle_China_2030.csv')
 
 # Filter for single segment
 lcv_data = df[df['Segment'] == 'LCV']
@@ -181,7 +181,7 @@ plt.show()
 ```python
 import json
 
-with open('output/commercial_vehicle_China_2040.json', 'r') as f:
+with open('output/commercial_vehicle_China_2030.json', 'r') as f:
     data = json.load(f)
 
 # Access segment results

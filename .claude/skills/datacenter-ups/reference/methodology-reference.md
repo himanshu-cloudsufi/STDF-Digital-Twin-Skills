@@ -32,7 +32,7 @@ Market Forecast → Technology Split → Installed Base → Market Decomposition
 - **Economic Rationality**: Adoption driven by Total Cost of Ownership (TCO) advantage
 - **Technology Dynamics**: VRLA (incumbent, 5-year life) vs Li-ion (disruptor, 12-year life)
 - **Regional Independence**: Each region computed separately; Global = sum of regions
-- **Time Horizon**: 2020-2040 (configurable), annual time steps
+- **Time Horizon**: 2020-2030 (extended: 2035, configurable), annual time steps
 - **Primary Units**: GWh/year (demand flows), GWh (installed base stocks), $/kWh (costs)
 
 ---

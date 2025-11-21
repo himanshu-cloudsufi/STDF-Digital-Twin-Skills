@@ -1,6 +1,8 @@
 {
-  "skills": ["datacenter-ups"],
-  "query": "Analyze replacement demand dynamics for USA datacenter UPS from 2025-2040. Show the breakdown between new-build and replacement demand, and explain how the contestable VRLA market drives Li-ion adoption",
+  "skills": [
+    "datacenter-ups"
+  ],
+  "query": "Analyze replacement demand dynamics for USA datacenter UPS from 2025-2030. Show the breakdown between new-build and replacement demand, and explain how the contestable VRLA market drives Li-ion adoption",
   "files": [],
   "expected_behavior": [
     "Step 1: Runs forecast for USA with detailed demand decomposition",

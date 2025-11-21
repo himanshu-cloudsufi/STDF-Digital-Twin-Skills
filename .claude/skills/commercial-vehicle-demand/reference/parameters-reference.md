@@ -28,7 +28,7 @@
 |-----------|---------|-------|-------------|
 | half_life_years | 6.0 | 4.0-8.0 | Years for NGV share to halve |
 | peak_detection_window | 5 | 3-7 | Smoothing window for peak detection |
-| target_share_2040 | 0.0 | 0.0-0.05 | Maximum NGV share by 2040 |
+| target_share_2035 | 0.0 | 0.0-0.05 | Maximum NGV share by 2035 |
 | min_significant_share | 0.01 | 0.005-0.02 | Threshold for NGV presence |
 
 **Sensitivity**: ±1 year half-life → ±15-20% change in 2030 NGV share

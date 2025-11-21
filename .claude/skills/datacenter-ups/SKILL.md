@@ -48,7 +48,7 @@ The skill forecasts battery demand for datacenter backup power systems across tw
 skill datacenter-ups
 
 # With custom parameters
-skill datacenter-ups --end-year 2040 --region China
+skill datacenter-ups --end-year 2030 --region China
 
 # Generate TCO comparison
 skill datacenter-ups --analyze-tco --output-format csv
@@ -142,12 +142,12 @@ Using grid-scale BESS costs as UPS proxy:
 
 ### Example 1: Single Region TCO Analysis (China)
 
-**Objective:** Forecast datacenter UPS battery demand in China through 2040 and identify Li-ion tipping point
+**Objective:** Forecast datacenter UPS battery demand in China through 2030 (extended: 2035) and identify Li-ion tipping point
 
 **Command:**
 ```bash
 cd .claude/skills/datacenter-ups
-python3 scripts/forecast.py --region China --end-year 2040 --output both
+python3 scripts/forecast.py --region China --end-year 2030 --output both
 ```
 
 **Process:**
@@ -169,8 +169,8 @@ python3 scripts/forecast.py --region China --end-year 2040 --output both
    - 2040 result: 85% Li-ion share, 15% residual VRLA
 
 **Output:**
-- `output/datacenter_ups_China_2040.csv` - Annual demand (MWh) by technology
-- `output/datacenter_ups_China_2040.json` - Full TCO analysis, tipping point, adoption curve
+- `output/datacenter_ups_China_2030.csv` - Annual demand (MWh) by technology
+- `output/datacenter_ups_China_2030.json` - Full TCO analysis, tipping point, adoption curve
 
 **Key Insights:**
 - China's tipping point occurs ~2027 due to rapid Li-ion cost decline
@@ -186,10 +186,10 @@ python3 scripts/forecast.py --region China --end-year 2040 --output both
 **Command:**
 ```bash
 # Baseline scenario
-python3 scripts/forecast.py --region USA --scenario baseline --end-year 2040 --output csv
+python3 scripts/forecast.py --region USA --scenario baseline --end-year 2030 --output csv
 
 # Accelerated scenario (faster Li-ion decline)
-python3 scripts/forecast.py --region USA --scenario accelerated --end-year 2040 --output csv
+python3 scripts/forecast.py --region USA --scenario accelerated --end-year 2030 --output csv
 
 # Compare outputs
 python3 scripts/compare_scenarios.py output/datacenter_ups_USA_baseline_2040.csv \
@@ -197,8 +197,8 @@ python3 scripts/compare_scenarios.py output/datacenter_ups_USA_baseline_2040.csv
 ```
 
 **Process:**
-1. **Baseline:** Tipping point ~2028, 80% Li-ion by 2040
-2. **Accelerated:** Tipping point ~2025, 92% Li-ion by 2040
+1. **Baseline:** Tipping point ~2028, 80% Li-ion by 2035
+2. **Accelerated:** Tipping point ~2025, 92% Li-ion by 2035
 3. **Differential:** 3-year earlier tipping → 12 pp higher adoption
 
 **Key Insights:**
@@ -215,7 +215,7 @@ python3 scripts/compare_scenarios.py output/datacenter_ups_USA_baseline_2040.csv
 **Command:**
 ```bash
 # Global forecast (aggregates all regions)
-python3 scripts/forecast.py --region Global --end-year 2040 --output both
+python3 scripts/forecast.py --region Global --end-year 2030 --output both
 
 # Sensitivity: Lower discount rate (6% vs 8%)
 python3 scripts/forecast.py --region Global --discount-rate 0.06 --output csv
@@ -349,7 +349,7 @@ python3 scripts/forecast.py --region Global --li-ion-lifespan 15 --output csv
 ```bash
 # Run forecasts for each region
 for region in China USA Europe; do
-  python3 scripts/forecast.py --region $region --end-year 2040 --output csv
+  python3 scripts/forecast.py --region $region --end-year 2030 --output csv
 done
 
 # Extract key metrics
@@ -403,10 +403,10 @@ python3 scripts/compare_tipping.py output/datacenter_ups_Global_*.csv
 **Approach:**
 ```bash
 # Run with detailed output flag
-python3 scripts/forecast.py --region USA --end-year 2040 --detailed-output --output json
+python3 scripts/forecast.py --region USA --end-year 2030 --detailed-output --output json
 
 # Extract replacement breakdown
-python3 scripts/extract_demand.py --results output/datacenter_ups_USA_2040.json \
+python3 scripts/extract_demand.py --results output/datacenter_ups_USA_2030.json \
                                    --year 2035 \
                                    --breakdown new_build,replacement \
                                    --output output/demand_breakdown_2035.csv

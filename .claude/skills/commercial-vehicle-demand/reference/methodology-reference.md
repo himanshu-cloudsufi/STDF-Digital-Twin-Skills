@@ -108,9 +108,9 @@ For each segment S:
         decay = exp(-log(2) * years_since / half_life)
         NGV_share[t] = peak_share * decay
 
-  5. Apply 2040 constraint:
-     if t >= 2040:
-        NGV_share[t] = min(NGV_share[t], target_2040)  // typically 0%
+  5. Apply 2035 constraint:
+     if t >= 2035:
+        NGV_share[t] = min(NGV_share[t], target_2035)  // typically 0%
 
   6. Convert to absolute:
      NGV[S,t] = NGV_share[t] * Market[S,t]
@@ -119,7 +119,7 @@ For each segment S:
 ### Key Parameters
 - Half-life: 6 years (default)
 - Peak detection window: 5 years (smoothing)
-- Target 2040 share: 0% (near-zero)
+- Target 2035 share: 0% (near-zero)
 - Min significant share: 1%
 
 ### Rationale
@@ -127,7 +127,7 @@ NGV acts as a bridge technology:
 - Policy-driven adoption (subsidies, clean air mandates)
 - Peaks as infrastructure builds out
 - Declines as EV TCO becomes competitive
-- Near-zero by 2040 due to EV dominance
+- Near-zero by 2035 due to EV dominance
 
 ## 5. ICE Residual Calculation
 
@@ -209,7 +209,7 @@ For all powertrains P:
 
 ### NGV Decline
 ```
-assert: NGV_share[2040] near zero
+assert: NGV_share[2035] near zero
 assert: NGV declining after peak/tipping
 ```
 
@@ -219,7 +219,7 @@ assert: NGV declining after peak/tipping
 1. **Segment Ceilings**: ±5% impacts final EV share by ±3-5%
 2. **Tipping Point**: ±2 years shifts adoption curve by 1-3 years
 3. **NGV Half-Life**: ±1 year changes 2030 NGV share by ±15-20%
-4. **Market Growth Rate**: ±1% CAGR changes 2040 market size by ±8-12%
+4. **Market Growth Rate**: ±1% CAGR changes 2030 market size by ±8-12%
 
 ### Robustness
 - Theil-Sen regression robust to outliers

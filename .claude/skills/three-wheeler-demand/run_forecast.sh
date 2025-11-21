@@ -6,7 +6,7 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Default parameters
 REGION="${1:-China}"
-END_YEAR="${2:-2040}"
+END_YEAR="${2:-2030}"
 OUTPUT_FORMAT="${3:-csv}"
 
 # Run the forecast

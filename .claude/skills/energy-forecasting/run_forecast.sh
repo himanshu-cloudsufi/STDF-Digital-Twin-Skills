@@ -42,7 +42,7 @@ ${GREEN}Examples:${NC}
     ./run_forecast.sh --region China --scenario baseline --output csv
 
     # USA accelerated transition (gas-first displacement)
-    ./run_forecast.sh --region USA --end-year 2040 --scenario accelerated --output both
+    ./run_forecast.sh --region USA --end-year 2030 --scenario accelerated --output both
 
     # Europe delayed scenario with 8-hour battery
     ./run_forecast.sh --region Europe --battery-duration 8 --scenario delayed --output json

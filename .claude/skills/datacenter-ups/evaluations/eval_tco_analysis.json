@@ -1,6 +1,8 @@
 {
-  "skills": ["datacenter-ups"],
-  "query": "Perform detailed TCO analysis for USA datacenter UPS comparing VRLA and Li-ion economics through 2040. Show the cost breakdown and identify when Li-ion becomes economically superior",
+  "skills": [
+    "datacenter-ups"
+  ],
+  "query": "Perform detailed TCO analysis for USA datacenter UPS comparing VRLA and Li-ion economics through 2030. Show the cost breakdown and identify when Li-ion becomes economically superior",
   "files": [],
   "expected_behavior": [
     "Step 1: Runs forecast for USA with detailed TCO tracking",

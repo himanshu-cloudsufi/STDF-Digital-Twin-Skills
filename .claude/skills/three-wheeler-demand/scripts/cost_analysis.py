@@ -239,7 +239,7 @@ class CostAnalyzer:
 def run_cost_analysis(
     data_loader,
     region: str,
-    end_year: int = 2040,
+    end_year: int = 2030,
     include_sensitivity: bool = False
 ) -> Dict[str, any]:
     """
@@ -314,7 +314,7 @@ if __name__ == "__main__":
 
     try:
         loader = DataLoader()
-        result = run_cost_analysis(loader, "China", end_year=2040, include_sensitivity=True)
+        result = run_cost_analysis(loader, "China", end_year=2030, include_sensitivity=True)
 
         print(f"\n{'='*60}")
         print(f"Cost Analysis for China")

@@ -3,15 +3,24 @@
   "version": "1.0.0",
   "description": "Two-wheeler demand forecasting with EV disruption analysis and tipping point detection",
   "default_parameters": {
-    "end_year": 2040,
+    "end_year": 2030,
     "logistic_ceiling": 0.9,
     "smoothing_window": 3,
     "max_market_cagr": 0.05,
-    "logistic_k_bounds": [0.05, 1.5],
-    "logistic_t0_offset": [-5, 10],
-    "standard_forecast_years": [2030, 2035],
-    "extended_forecast_year": 2040,
-    "max_forecast_year": 2040
+    "logistic_k_bounds": [
+      0.05,
+      1.5
+    ],
+    "logistic_t0_offset": [
+      -5,
+      10
+    ],
+    "standard_forecast_years": [
+      2030,
+      2035
+    ],
+    "extended_forecast_year": 2035,
+    "max_forecast_year": 2035
   },
   "regions": [
     "China",
@@ -48,7 +57,10 @@
     "non_negative_demand": true,
     "sum_consistency": true,
     "market_cagr_cap": 0.05,
-    "share_bounds": [0.0, 1.0]
+    "share_bounds": [
+      0.0,
+      1.0
+    ]
   },
   "scenarios": {
     "baseline": {

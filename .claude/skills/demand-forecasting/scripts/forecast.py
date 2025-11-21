@@ -23,7 +23,7 @@ class ForecastOrchestrator:
 
     def __init__(
         self,
-        end_year: int = 2040,
+        end_year: int = 2030,
         logistic_ceiling: float = 1.0,
         data_dir: Optional[str] = None
     ):

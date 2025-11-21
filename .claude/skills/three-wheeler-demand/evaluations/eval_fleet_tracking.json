@@ -1,35 +1,43 @@
 {
   "test_name": "fleet_tracking_forecast",
   "description": "Forecast with fleet evolution tracking enabled",
-  "command": "python3 scripts/forecast.py --region China --end-year 2040 --track-fleet --output csv",
+  "command": "python3 scripts/forecast.py --region China --end-year 2030 --track-fleet --output csv",
   "expected_outputs": [
-    "output/three_wheeler_China_2040.csv"
+    "output/three_wheeler_China_2030.csv"
   ],
   "validation_checks": [
     {
       "check": "file_exists",
-      "file": "output/three_wheeler_China_2040.csv"
+      "file": "output/three_wheeler_China_2030.csv"
     },
     {
       "check": "csv_columns",
-      "file": "output/three_wheeler_China_2040.csv",
-      "required_columns": ["Year", "Market", "EV", "ICE", "EV_Fleet", "ICE_Fleet", "Total_Fleet"]
+      "file": "output/three_wheeler_China_2030.csv",
+      "required_columns": [
+        "Year",
+        "Market",
+        "EV",
+        "ICE",
+        "EV_Fleet",
+        "ICE_Fleet",
+        "Total_Fleet"
+      ]
     },
     {
       "check": "fleet_consistency",
       "description": "Fleet values should be cumulative and increase with sales",
-      "file": "output/three_wheeler_China_2040.csv"
+      "file": "output/three_wheeler_China_2030.csv"
     },
     {
       "check": "fleet_monotonic_increase",
       "description": "EV fleet should increase monotonically (or stay constant)",
-      "file": "output/three_wheeler_China_2040.csv",
+      "file": "output/three_wheeler_China_2030.csv",
       "column": "EV_Fleet"
     },
     {
       "check": "total_fleet_sum",
       "description": "Total_Fleet should equal EV_Fleet + ICE_Fleet",
-      "file": "output/three_wheeler_China_2040.csv",
+      "file": "output/three_wheeler_China_2030.csv",
       "tolerance": 0.01
     }
   ],

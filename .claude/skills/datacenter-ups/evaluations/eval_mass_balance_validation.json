@@ -1,6 +1,8 @@
 {
-  "skills": ["datacenter-ups"],
-  "query": "Validate mass balance for China datacenter UPS forecast through 2040. Verify that annual additions minus retirements equals the change in installed base for both VRLA and Li-ion, and check all validation rules",
+  "skills": [
+    "datacenter-ups"
+  ],
+  "query": "Validate mass balance for China datacenter UPS forecast through 2030. Verify that annual additions minus retirements equals the change in installed base for both VRLA and Li-ion, and check all validation rules",
   "files": [],
   "expected_behavior": [
     "Step 1: Runs forecast for China with full validation enabled",

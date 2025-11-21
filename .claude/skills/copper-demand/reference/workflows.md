@@ -23,9 +23,9 @@ This guide provides step-by-step workflows for common copper demand forecasting 
   - [ ] Document assumptions and parameter choices
 
 - [ ] **Run Forecasts**
-  - [ ] Run baseline scenario: `python3 scripts/forecast.py --scenario baseline --region Global --end-year 2040`
-  - [ ] Run accelerated scenario: `python3 scripts/forecast.py --scenario accelerated --region Global --end-year 2040`
-  - [ ] Run delayed scenario: `python3 scripts/forecast.py --scenario delayed --region Global --end-year 2040`
+  - [ ] Run baseline scenario: `python3 scripts/forecast.py --scenario baseline --region Global --end-year 2030`
+  - [ ] Run accelerated scenario: `python3 scripts/forecast.py --scenario accelerated --region Global --end-year 2030`
+  - [ ] Run delayed scenario: `python3 scripts/forecast.py --scenario delayed --region Global --end-year 2030`
   - [ ] Verify all outputs generated successfully
 
 - [ ] **Validate Outputs**
@@ -47,7 +47,7 @@ This guide provides step-by-step workflows for common copper demand forecasting 
   - [ ] Identify inflection points and peak demand years
 
 - [ ] **Document Insights**
-  - [ ] Summarize demand range across scenarios (e.g., 25.5-37.5 Mt by 2040)
+  - [ ] Summarize demand range across scenarios (e.g., 25.5-37.5 Mt by 2035)
   - [ ] Highlight key sensitivities (EV adoption, renewable capacity)
   - [ ] Note supply implications and potential gaps
   - [ ] Document assumptions and caveats
@@ -83,11 +83,11 @@ This guide provides step-by-step workflows for common copper demand forecasting 
   - [ ] Note any regional data gaps or limitations
 
 - [ ] **Run Regional Forecasts**
-  - [ ] Run China: `python3 scripts/forecast.py --region China --scenario baseline --end-year 2040`
-  - [ ] Run USA: `python3 scripts/forecast.py --region USA --scenario baseline --end-year 2040`
-  - [ ] Run Europe: `python3 scripts/forecast.py --region Europe --scenario baseline --end-year 2040`
-  - [ ] Run Rest_of_World: `python3 scripts/forecast.py --region Rest_of_World --scenario baseline --end-year 2040`
-  - [ ] Run Global for comparison: `python3 scripts/forecast.py --region Global --scenario baseline --end-year 2040`
+  - [ ] Run China: `python3 scripts/forecast.py --region China --scenario baseline --end-year 2030`
+  - [ ] Run USA: `python3 scripts/forecast.py --region USA --scenario baseline --end-year 2030`
+  - [ ] Run Europe: `python3 scripts/forecast.py --region Europe --scenario baseline --end-year 2030`
+  - [ ] Run Rest_of_World: `python3 scripts/forecast.py --region Rest_of_World --scenario baseline --end-year 2030`
+  - [ ] Run Global for comparison: `python3 scripts/forecast.py --region Global --scenario baseline --end-year 2030`
 
 - [ ] **Validate Regional Outputs**
   - [ ] Run validation on each regional output
@@ -109,7 +109,7 @@ This guide provides step-by-step workflows for common copper demand forecasting 
   - [ ] Note regional policy and technology differences
 
 - [ ] **Document Regional Insights**
-  - [ ] Rank regions by 2040 demand
+  - [ ] Rank regions by 2035 demand
   - [ ] Calculate regional shares of global demand
   - [ ] Highlight fastest-growing regions
   - [ ] Note supply-demand balance implications by region
@@ -146,8 +146,8 @@ This guide provides step-by-step workflows for common copper demand forecasting 
   - [ ] Document trigger conditions (e.g., Cu/Al price ratio > 3.5)
 
 - [ ] **Run Baseline and Substitution Scenarios**
-  - [ ] Run baseline: `python3 scripts/forecast.py --scenario baseline --region Global --end-year 2040`
-  - [ ] Run substitution: `python3 scripts/forecast.py --scenario substitution --region Global --end-year 2040`
+  - [ ] Run baseline: `python3 scripts/forecast.py --scenario baseline --region Global --end-year 2030`
+  - [ ] Run substitution: `python3 scripts/forecast.py --scenario substitution --region Global --end-year 2030`
   - [ ] Verify both outputs generated
 
 - [ ] **Validate Outputs**
@@ -174,7 +174,7 @@ This guide provides step-by-step workflows for common copper demand forecasting 
   - [ ] **No Substitution:** BEV (conductivity requirements), Wind/Solar (efficiency requirements)
 
 - [ ] **Document Substitution Risks**
-  - [ ] Summarize total demand at risk (~2 Mt by 2040)
+  - [ ] Summarize total demand at risk (~2 Mt by 2035)
   - [ ] Note price thresholds for substitution
   - [ ] Highlight protected high-growth segments
   - [ ] Assess net impact on demand growth trajectory
@@ -206,10 +206,10 @@ This guide provides step-by-step workflows for common copper demand forecasting 
 ### Checklist
 
 - [ ] **Run All Scenarios**
-  - [ ] Baseline: `python3 scripts/forecast.py --scenario baseline --region Global --end-year 2040`
-  - [ ] Accelerated: `python3 scripts/forecast.py --scenario accelerated --region Global --end-year 2040`
-  - [ ] Delayed: `python3 scripts/forecast.py --scenario delayed --region Global --end-year 2040`
-  - [ ] Substitution: `python3 scripts/forecast.py --scenario substitution --region Global --end-year 2040`
+  - [ ] Baseline: `python3 scripts/forecast.py --scenario baseline --region Global --end-year 2030`
+  - [ ] Accelerated: `python3 scripts/forecast.py --scenario accelerated --region Global --end-year 2030`
+  - [ ] Delayed: `python3 scripts/forecast.py --scenario delayed --region Global --end-year 2030`
+  - [ ] Substitution: `python3 scripts/forecast.py --scenario substitution --region Global --end-year 2030`
 
 - [ ] **Validate All Outputs**
   - [ ] Run validation on all four scenarios
@@ -234,8 +234,8 @@ This guide provides step-by-step workflows for common copper demand forecasting 
   - [ ] CAGR across scenarios (0.3%-1.2%)
 
 - [ ] **Identify Critical Uncertainties**
-  - [ ] EV adoption trajectory (55%-92% by 2040)
-  - [ ] Renewable capacity buildout (11-20 TW by 2040)
+  - [ ] EV adoption trajectory (55%-92% by 2035)
+  - [ ] Renewable capacity buildout (11-20 TW by 2035)
   - [ ] Electrification intensity (0.85x-1.25x multiplier)
   - [ ] Substitution risk (0%-7% demand loss)
 
@@ -354,7 +354,7 @@ Before finalizing analysis:
 python3 scripts/validate_scenario.py config.json [scenario_name]
 
 # Run forecast
-python3 scripts/forecast.py --scenario [scenario] --region [region] --end-year 2040 --output-format [csv|json]
+python3 scripts/forecast.py --scenario [scenario] --region [region] --end-year 2030 --output-format [csv|json]
 
 # Validate output
 python3 scripts/validate_output.py output/[filename]

@@ -23,7 +23,7 @@ class ForecastOrchestrator:
 
     def __init__(
         self,
-        end_year: int = 2040,
+        end_year: int = 2030,
         logistic_ceiling: float = 0.9,
         data_dir: Optional[str] = None,
         track_fleet: bool = False
@@ -282,8 +282,8 @@ def main():
     parser.add_argument(
         '--end-year',
         type=int,
-        default=2040,
-        help='Final forecast year (default: 2040)'
+        default=2030,
+        help='Final forecast year (default: 2030)'
     )
     parser.add_argument(
         '--ceiling',

@@ -13,8 +13,8 @@
       2030,
       2035
     ],
-    "extended_forecast_year": 2040,
-    "max_forecast_year": 2040
+    "extended_forecast_year": 2035,
+    "max_forecast_year": 2035
   },
   "regions": [
     "China",
@@ -88,8 +88,8 @@
   },
   "oem_replacement_splits": {
     "construction_oem_pct": 0.65,
-    "grid_td_oem_pct": 0.70,
-    "industrial_oem_pct": 0.60
+    "grid_td_oem_pct": 0.7,
+    "industrial_oem_pct": 0.6
   },
   "lifespans": {
     "component_replacement_years": {
@@ -140,19 +140,17 @@
   },
   "scenarios": {
     "baseline": {
-      "description": "70-80% EV adoption, 12-15 TW renewables by 2040",
+      "description": "70-80% EV adoption, 12-15 TW renewables by 2030",
       "ev_adoption_2030": 0.45,
-      "ev_adoption_2035": 0.60,
-      "ev_adoption_2040": 0.75,
+      "ev_adoption_2035": 0.75,
       "renewable_capacity_2030_tw": 8,
       "renewable_capacity_2035_tw": 11,
       "renewable_capacity_2040_tw": 15
     },
     "accelerated": {
       "description": "90%+ EV, 20+ TW renewables",
-      "ev_adoption_2030": 0.60,
-      "ev_adoption_2035": 0.80,
-      "ev_adoption_2040": 0.92,
+      "ev_adoption_2030": 0.6,
+      "ev_adoption_2035": 0.92,
       "renewable_capacity_2030_tw": 12,
       "renewable_capacity_2035_tw": 16,
       "renewable_capacity_2040_tw": 20,
@@ -160,9 +158,8 @@
     },
     "delayed": {
       "description": "50-60% EV, 10-12 TW renewables",
-      "ev_adoption_2030": 0.30,
-      "ev_adoption_2035": 0.42,
-      "ev_adoption_2040": 0.55,
+      "ev_adoption_2030": 0.3,
+      "ev_adoption_2035": 0.55,
       "renewable_capacity_2030_tw": 6,
       "renewable_capacity_2035_tw": 8,
       "renewable_capacity_2040_tw": 11,
@@ -171,8 +168,7 @@
     "substitution": {
       "description": "Base transition with aluminum substitution risk",
       "ev_adoption_2030": 0.45,
-      "ev_adoption_2035": 0.60,
-      "ev_adoption_2040": 0.75,
+      "ev_adoption_2035": 0.75,
       "renewable_capacity_2030_tw": 8,
       "renewable_capacity_2035_tw": 11,
       "renewable_capacity_2040_tw": 15,

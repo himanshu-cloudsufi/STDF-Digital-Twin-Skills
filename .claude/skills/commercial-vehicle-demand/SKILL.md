@@ -27,16 +27,16 @@ Use for commercial vehicle demand forecasting when:
 
 ```bash
 # Single segment forecast
-python3 scripts/forecast.py --region China --segment LCV --end-year 2040 --output csv
+python3 scripts/forecast.py --region China --segment LCV --end-year 2030 --output csv
 
 # All segments with aggregation
-python3 scripts/forecast.py --region USA --all-segments --end-year 2040 --output both
+python3 scripts/forecast.py --region USA --all-segments --end-year 2030 --output both
 
 # With fleet tracking
 python3 scripts/forecast.py --region Europe --segment MCV --track-fleet --output json
 
 # Using shell script
-./run_forecast.sh China all 2040 csv         # All segments
+./run_forecast.sh China all 2030 csv         # All segments
 ./run_forecast.sh USA LCV 2035 json          # Single segment
 ```
 
@@ -78,7 +78,7 @@ Files saved to: `output/{Region}_{Segment}_{EndYear}.{format}`
 ```bash
 python3 scripts/forecast.py --region China --segment LCV --output csv
 ```
-Result: LCV-specific tipping point (~2027), 95% EV adoption ceiling by 2040
+Result: LCV-specific tipping point (~2027), 95% EV adoption ceiling by 2035
 
 **Example 2: USA all segments with fleet tracking**
 ```bash

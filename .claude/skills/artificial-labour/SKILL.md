@@ -162,7 +162,7 @@ milestones = analysis.forecast_adoption_milestones(
     'Industrial Robot',
     'Industrial_Robot_Annual_Installation',
     milestones=[0.1, 0.5, 0.8],
-    end_year=2040
+    end_year=2030
 )
 ```
 
@@ -234,7 +234,7 @@ Always consider 3 scenarios:
 - Conservative growth (20-30% CAGR)
 - Slower cost decline (20-30% CAGR)
 - Regulatory drag, infrastructure delays
-- Adoption: 10% by 2029, 50% by 2035, 80% by 2040+
+- Adoption: 10% by 2029, 50% by 2033, 80% by 2035
 
 ## Output Formats
 

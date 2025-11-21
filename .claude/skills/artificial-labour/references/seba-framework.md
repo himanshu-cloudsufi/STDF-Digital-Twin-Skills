@@ -113,7 +113,7 @@ Always analyze 3 scenarios:
 - Slower improvement (benchmarks reach 95% by 2030+)
 - Conservative cost decline (20-30% CAGR)
 - Regulatory drag, slow infrastructure
-- Adoption: 10% by 2029, 50% by 2035, 80% by 2040+
+- Adoption: 10% by 2029, 50% by 2033, 80% by 2035
 
 ## Convergence Effects
 

@@ -480,7 +480,7 @@
         "parameters": {
           "tipping_point": 2025,
           "logistic_ceiling": 0.9,
-          "end_year": 2040
+          "end_year": 2030
         }
       }
     },
@@ -879,7 +879,7 @@
         "parameters": {
           "tipping_point": 2020,
           "logistic_ceiling": 0.9,
-          "end_year": 2040
+          "end_year": 2030
         }
       }
     },
@@ -1331,7 +1331,7 @@
         "parameters": {
           "tipping_point": 2019,
           "logistic_ceiling": 0.9,
-          "end_year": 2040
+          "end_year": 2030
         }
       }
     }

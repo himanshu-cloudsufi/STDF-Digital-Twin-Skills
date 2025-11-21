@@ -14,7 +14,7 @@ class DemandForecaster:
 
     def __init__(
         self,
-        end_year: int = 2040,
+        end_year: int = 2030,
         logistic_ceiling: float = 0.9,
         max_market_cagr: float = 0.05
     ):
@@ -263,7 +263,7 @@ def run_demand_forecast(
     data_loader,
     region: str,
     tipping_point: Optional[int],
-    end_year: int = 2040,
+    end_year: int = 2030,
     logistic_ceiling: float = 0.9,
     track_fleet: bool = False
 ) -> Dict[str, any]:
@@ -358,7 +358,7 @@ if __name__ == "__main__":
         loader = DataLoader()
 
         # Run cost analysis first to get tipping point
-        cost_result = run_cost_analysis(loader, "China", end_year=2040)
+        cost_result = run_cost_analysis(loader, "China", end_year=2030)
         tipping_point = cost_result['tipping_point']
 
         print(f"\n{'='*60}")
@@ -368,7 +368,7 @@ if __name__ == "__main__":
         # Run demand forecast
         demand_result = run_demand_forecast(
             loader, "China", tipping_point,
-            end_year=2040, logistic_ceiling=0.9, track_fleet=True
+            end_year=2030, logistic_ceiling=0.9, track_fleet=True
         )
 
         print(f"\nValidation: {demand_result['validation']['message']}")

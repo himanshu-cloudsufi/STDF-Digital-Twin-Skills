@@ -1,7 +1,7 @@
 ---
 name: energy-forecasting
 description: >
-  Performs cost-driven capacity and generation forecasting for Solar-Wind-Battery (SWB) energy systems and their displacement of fossil fuels (coal, gas). Calculates SWB stack cost parity, models capacity growth using YoY averaging, and sequences coal/gas displacement. Use when user asks about renewable energy capacity, solar/wind forecasts, battery storage, SWB adoption, electricity generation, fossil fuel displacement, or questions like "when will solar reach cost parity", "forecast wind capacity", "when will coal be displaced", "SWB generation by 2040", "battery storage growth", "renewable energy disruption". Handles regions: China, USA, Europe, Rest_of_World, Global. Trigger keywords: solar, wind, battery, SWB, renewable, clean energy, electricity, generation, capacity, coal, gas, displacement, LCOE, cost parity, energy transformation, disruption. (project)
+  Performs cost-driven capacity and generation forecasting for Solar-Wind-Battery (SWB) energy systems and their displacement of fossil fuels (coal, gas). Calculates SWB stack cost parity, models capacity growth using YoY averaging, and sequences coal/gas displacement. Use when user asks about renewable energy capacity, solar/wind forecasts, battery storage, SWB adoption, electricity generation, fossil fuel displacement, or questions like "when will solar reach cost parity", "forecast wind capacity", "when will coal be displaced", "SWB generation by 2035", "battery storage growth", "renewable energy disruption". Handles regions: China, USA, Europe, Rest_of_World, Global. Trigger keywords: solar, wind, battery, SWB, renewable, clean energy, electricity, generation, capacity, coal, gas, displacement, LCOE, cost parity, energy transformation, disruption. (project)
 ---
 
 # Energy Forecasting (Solar-Wind-Battery)
@@ -22,13 +22,13 @@ Use for energy generation and capacity forecasting when:
 
 ```bash
 # Single region forecast (baseline scenario)
-./run_forecast.sh --region China --end-year 2040 --scenario baseline --output csv
+./run_forecast.sh --region China --end-year 2030 --scenario baseline --output csv
 
 # Accelerated transition scenario
-./run_forecast.sh --region USA --end-year 2040 --scenario accelerated --output both
+./run_forecast.sh --region USA --end-year 2030 --scenario accelerated --output both
 
 # Global (all regions + aggregation)
-./run_forecast.sh --region Global --end-year 2040 --scenario baseline --output both
+./run_forecast.sh --region Global --end-year 2030 --scenario baseline --output both
 
 # Custom battery parameters with delayed scenario
 ./run_forecast.sh --region Europe --battery-duration 8 --scenario delayed --output json
@@ -98,7 +98,7 @@ Files saved to: `output/{Region}_{EndYear}_{Scenario}.{format}`
 
 **Example 2: USA accelerated transition (gas-first displacement)**
 ```bash
-./run_forecast.sh --region USA --end-year 2040 --scenario accelerated --output both
+./run_forecast.sh --region USA --end-year 2030 --scenario accelerated --output both
 ```
 
 **Example 3: Europe delayed scenario with 8-hour battery**

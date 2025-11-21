@@ -183,7 +183,7 @@ def run_cost_analysis_segment(
     data_loader,
     region: str,
     segment: str,
-    end_year: int = 2040
+    end_year: int = 2030
 ) -> Dict[str, any]:
     """
     Run cost analysis for a specific segment in a region
@@ -240,7 +240,7 @@ def run_cost_analysis(
     data_loader,
     region: str,
     segments: List[str] = None,
-    end_year: int = 2040
+    end_year: int = 2030
 ) -> Dict[str, Dict[str, any]]:
     """
     Run complete cost analysis for all segments in a region
@@ -285,7 +285,7 @@ if __name__ == "__main__":
 
     try:
         loader = DataLoader()
-        results = run_cost_analysis(loader, "China", end_year=2040)
+        results = run_cost_analysis(loader, "China", end_year=2030)
 
         print(f"\n{'='*60}")
         print(f"Cost Analysis for China - All Segments")

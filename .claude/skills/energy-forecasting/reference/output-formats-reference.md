@@ -42,7 +42,7 @@ Year,SWB_Generation,Coal_Generation,Gas_Generation,Non_SWB_Generation,Total_Dema
 ```json
 {
   "region": "China",
-  "end_year": 2040,
+  "end_year": 2030,
   "scenario": "baseline",
   "scenario_config": {
     "description": "Current policy trajectories and cost trends",
@@ -238,7 +238,7 @@ When forecasting Global region, JSON includes:
 ```json
 {
   "region": "Global",
-  "end_year": 2040,
+  "end_year": 2030,
   "generation_forecasts": {
     "years": [...],
     "swb_total": [...],

@@ -18,7 +18,7 @@ Forecasts refined copper consumption using a two-tier hybrid methodology that co
 
 **Basic forecast:**
 ```bash
-python3 scripts/forecast.py --scenario baseline --region Global --end-year 2040
+python3 scripts/forecast.py --scenario baseline --region Global --end-year 2030
 ```
 
 **Compare scenarios:**

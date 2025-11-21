@@ -35,20 +35,20 @@ This skill provides a single, unified framework for forecasting light vehicle ma
 cd .claude/skills/light-vehicle-demand
 
 # Two-wheeler forecast for China
-python3 scripts/forecast.py --vehicle-type two_wheeler --region China --end-year 2040
+python3 scripts/forecast.py --vehicle-type two_wheeler --region China --end-year 2030
 
 # Three-wheeler forecast for Rest_of_World
-python3 scripts/forecast.py --vehicle-type three_wheeler --region Rest_of_World --end-year 2040
+python3 scripts/forecast.py --vehicle-type three_wheeler --region Rest_of_World --end-year 2030
 
 # Global forecast (all regions)
-python3 scripts/forecast.py --vehicle-type two_wheeler --region Global --end-year 2040
+python3 scripts/forecast.py --vehicle-type two_wheeler --region Global --end-year 2030
 ```
 
 ### Using Shell Wrapper
 
 ```bash
 # Format: ./run_forecast.sh <vehicle_type> <region> <end_year> [output_format]
-./run_forecast.sh two_wheeler China 2040 csv
+./run_forecast.sh two_wheeler China 2030 csv
 ./run_forecast.sh three_wheeler Europe 2035 both
 ```
 
@@ -58,7 +58,7 @@ python3 scripts/forecast.py --vehicle-type two_wheeler --region Global --end-yea
 |-----------|----------|---------|-------------|
 | `--vehicle-type` | Yes | two_wheeler, three_wheeler | Vehicle type to forecast |
 | `--region` | Yes | See below | Region name or "Global" |
-| `--end-year` | No (default: 2040) | Year | Forecast horizon |
+| `--end-year` | No (default: 2030) | Year | Forecast horizon |
 | `--ceiling` | No (default: 0.9) | 0.0-1.0 | Max EV adoption share |
 | `--output` | No (default: csv) | csv, json, both | Output format |
 | `--output-dir` | No (auto) | Path | Output directory |
@@ -170,14 +170,14 @@ Includes:
 python3 scripts/forecast.py \
   --vehicle-type two_wheeler \
   --region China \
-  --end-year 2040 \
+  --end-year 2030 \
   --track-fleet \
   --output both
 ```
 
 **Output:**
-- `output/two_wheeler/two_wheeler_China_2040.csv`
-- `output/two_wheeler/two_wheeler_China_2040.json`
+- `output/two_wheeler/two_wheeler_China_2030.csv`
+- `output/two_wheeler/two_wheeler_China_2030.json`
 
 ### Example 2: Three-Wheeler Global Forecast
 
@@ -202,7 +202,7 @@ python3 scripts/forecast.py \
 python3 scripts/forecast.py \
   --vehicle-type two_wheeler \
   --region USA \
-  --end-year 2040 \
+  --end-year 2030 \
   --ceiling 0.75 \
   --output csv
 ```
@@ -263,7 +263,7 @@ python3 scripts/forecast.py --help
 ## Technical Details
 
 - **Historical Data**: 2010-2024 (varies by metric and region)
-- **Forecast Horizon**: Configurable (typically 2020-2040)
+- **Forecast Horizon**: Configurable (typically 2020-2030 (extended: 2035))
 - **Temporal Granularity**: Annual
 - **Primary Unit**: Units per year (vehicles)
 - **Methodology**: Cost-driven disruption with logistic adoption

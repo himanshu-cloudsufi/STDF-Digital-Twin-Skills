@@ -183,12 +183,12 @@
 
 **Long-duration battery, 2040:**
 ```bash
-./run_forecast.sh --region USA --end-year 2040 --battery-duration 8 --output both
+./run_forecast.sh --region USA --end-year 2030 --battery-duration 8 --output both
 ```
 
 **Global aggregation:**
 ```bash
-./run_forecast.sh --region Global --end-year 2040 --output json
+./run_forecast.sh --region Global --end-year 2030 --output json
 ```
 
 ## Modifying Parameters

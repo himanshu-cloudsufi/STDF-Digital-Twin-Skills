@@ -2,28 +2,29 @@
   "skill_name": "energy-forecasting",
   "version": "2.0.0",
   "description": "Production-ready SWB energy forecasting with scenarios, emissions, and carbon pricing",
-
   "default_parameters": {
     "end_year": 2035,
     "smoothing_window": 3,
-    "standard_forecast_years": [2030, 2035],
-    "extended_forecast_year": 2040,
-    "max_forecast_year": 2040,
+    "standard_forecast_years": [
+      2030,
+      2035
+    ],
+    "extended_forecast_year": 2035,
+    "max_forecast_year": 2035,
     "battery_duration_hours": 4,
     "battery_cycle_life": 5000,
     "battery_cycles_per_year": 250,
     "battery_rte": 0.88,
     "battery_fixed_om": 5.0,
-    "coal_reserve_floor": 0.10,
+    "coal_reserve_floor": 0.1,
     "gas_reserve_floor": 0.15,
     "capacity_factor_improvement": 0.003,
     "energy_balance_tolerance": 0.02,
     "csp_threshold": 0.01,
-    "max_yoy_growth": 0.50,
+    "max_yoy_growth": 0.5,
     "min_capacity_factor": 0.05,
-    "max_capacity_factor": 0.70
+    "max_capacity_factor": 0.7
   },
-
   "battery_parameters": {
     "duration_hours": 4,
     "cycle_life": 5000,
@@ -32,7 +33,6 @@
     "fixed_om_per_kwh_year": 5.0,
     "resilience_days": 2
   },
-
   "swb_stack_cost": {
     "method": "option_a",
     "description": "option_a = MAX(Solar, Wind) + SCOE; option_b = weighted average",
@@ -42,14 +42,12 @@
       "battery": 0.2
     }
   },
-
   "displacement_sequence": {
     "China": "coal_first",
     "USA": "gas_first",
     "Europe": "coal_first",
     "Rest_of_World": "coal_first"
   },
-
   "swb_components": [
     "Solar_PV",
     "Onshore_Wind",
@@ -57,18 +55,15 @@
     "Battery_Storage",
     "CSP"
   ],
-
   "incumbent_technologies": [
     "Coal_Power",
     "Natural_Gas_Power"
   ],
-
   "non_swb_technologies": [
     "Nuclear",
     "Hydro",
     "Other_Renewables"
   ],
-
   "regions": [
     "China",
     "USA",
@@ -76,13 +71,12 @@
     "Rest_of_World",
     "Global"
   ],
-
   "scenarios": {
     "baseline": {
       "description": "Current policy trajectories and cost trends",
       "solar_cost_decline_rate": 0.08,
       "wind_cost_decline_rate": 0.05,
-      "battery_cost_decline_rate": 0.10,
+      "battery_cost_decline_rate": 0.1,
       "coal_cost_change": 0.01,
       "gas_cost_change": 0.02,
       "displacement_speed": 1.0
@@ -101,12 +95,11 @@
       "solar_cost_decline_rate": 0.05,
       "wind_cost_decline_rate": 0.03,
       "battery_cost_decline_rate": 0.07,
-      "coal_cost_change": 0.00,
+      "coal_cost_change": 0.0,
       "gas_cost_change": 0.01,
       "displacement_speed": 0.7
     }
   },
-
   "carbon_pricing": {
     "enabled": true,
     "regional_base_prices_2020": {
@@ -125,7 +118,6 @@
     "price_floor_per_ton": 0,
     "price_ceiling_per_ton": 300
   },
-
   "emission_factors": {
     "coal_kg_co2_per_mwh": 1000,
     "gas_kg_co2_per_mwh": 450,
@@ -135,7 +127,6 @@
     "hydro_kg_co2_per_mwh": 24,
     "description": "Lifecycle emissions including manufacturing"
   },
-
   "integration_costs": {
     "enabled": true,
     "base_cost_per_mwh": 5,
@@ -149,7 +140,6 @@
       "Global": 1.0
     }
   },
-
   "peak_load_factors": {
     "China": 1.4,
     "USA": 1.5,
@@ -157,7 +147,6 @@
     "Rest_of_World": 1.4,
     "Global": 1.4
   },
-
   "capacity_factors": {
     "regional": {
       "China": {
@@ -165,7 +154,7 @@
         "Onshore_Wind": 0.24,
         "Offshore_Wind": 0.42,
         "Coal_Power": 0.55,
-        "Natural_Gas_Power": 0.40,
+        "Natural_Gas_Power": 0.4,
         "CSP": 0.25,
         "Nuclear": 0.85,
         "Hydro": 0.45
@@ -173,8 +162,8 @@
       "USA": {
         "Solar_PV": 0.18,
         "Onshore_Wind": 0.35,
-        "Offshore_Wind": 0.40,
-        "Coal_Power": 0.50,
+        "Offshore_Wind": 0.4,
+        "Coal_Power": 0.5,
         "Natural_Gas_Power": 0.45,
         "CSP": 0.28,
         "Nuclear": 0.85,
@@ -194,8 +183,8 @@
         "Solar_PV": 0.16,
         "Onshore_Wind": 0.28,
         "Offshore_Wind": 0.42,
-        "Coal_Power": 0.50,
-        "Natural_Gas_Power": 0.40,
+        "Coal_Power": 0.5,
+        "Natural_Gas_Power": 0.4,
         "CSP": 0.25,
         "Nuclear": 0.85,
         "Hydro": 0.45
@@ -204,8 +193,8 @@
         "Solar_PV": 0.15,
         "Onshore_Wind": 0.27,
         "Offshore_Wind": 0.43,
-        "Coal_Power": 0.50,
-        "Natural_Gas_Power": 0.40,
+        "Coal_Power": 0.5,
+        "Natural_Gas_Power": 0.4,
         "CSP": 0.25,
         "Nuclear": 0.85,
         "Hydro": 0.45
@@ -216,8 +205,8 @@
       "CSP": 0.25,
       "Onshore_Wind": 0.27,
       "Offshore_Wind": 0.43,
-      "Coal_Power": 0.50,
-      "Natural_Gas_Power": 0.40,
+      "Coal_Power": 0.5,
+      "Natural_Gas_Power": 0.4,
       "Nuclear": 0.85,
       "Hydro": 0.45
     },
@@ -228,7 +217,6 @@
       "default"
     ]
   },
-
   "battery_duration_options": {
     "2": {
       "dataset_suffix": "2_Hour",
@@ -243,7 +231,6 @@
       "description": "8-hour duration battery storage"
     }
   },
-
   "lcoe_fallback_multipliers": {
     "Coal_Power": {
       "China": 1.0,
@@ -258,7 +245,6 @@
       "Rest_of_World": 1.2
     }
   },
-
   "fallback_lcoe_values": {
     "coal": {
       "baselines_2020": {
@@ -270,7 +256,7 @@
       },
       "annual_change_rates": {
         "China": 0.015,
-        "USA": 0.020,
+        "USA": 0.02,
         "Europe": 0.025,
         "Rest_of_World": 0.015,
         "Global": 0.018
@@ -285,7 +271,7 @@
         "Global": 80
       },
       "annual_change_rates": {
-        "China": 0.010,
+        "China": 0.01,
         "USA": 0.012,
         "Europe": 0.015,
         "Rest_of_World": 0.012,
@@ -293,39 +279,37 @@
       }
     }
   },
-
   "non_swb_baseline_percentages": {
-    "China": 0.20,
+    "China": 0.2,
     "USA": 0.22,
     "Europe": 0.28,
     "Rest_of_World": 0.18,
     "Global": 0.22
   },
-
   "non_swb_decline_rate": 0.01,
-
   "validation_rules": {
     "energy_balance_tolerance": 0.02,
     "non_negativity": true,
     "smooth_transitions": true,
-    "max_yoy_jump": 0.50,
+    "max_yoy_jump": 0.5,
     "reserve_floors_enforced": true,
     "capacity_factor_bounds": true
   },
-
   "output_options": {
-    "formats": ["csv", "json", "both"],
+    "formats": [
+      "csv",
+      "json",
+      "both"
+    ],
     "default_format": "csv",
     "output_directory": "output"
   },
-
   "data_files": {
     "taxonomy": "data/swb_taxonomy_and_datasets.json",
     "energy_generation": "data/Energy_Generation.json",
     "energy_storage": "data/Energy_Storage.json",
     "electricity": "data/Electricity.json"
   },
-
   "methodology": {
     "cost_analysis": "LCOE + SCOE calculation",
     "tipping_detection": "SWB stack cost vs min(Coal_LCOE, Gas_LCOE)",
@@ -334,7 +318,6 @@
     "displacement_logic": "Sequenced coal-first or gas-first",
     "validation": "Energy balance + non-negativity + reserve floors"
   },
-
   "notes": {
     "terminology": "See CLAUDE.md for preferred terminology (transformation not transition, stellar energy not renewable)",
     "independence": "This skill is fully self-contained with no cross-skill dependencies",

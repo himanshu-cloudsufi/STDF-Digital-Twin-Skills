@@ -315,7 +315,7 @@ python3 scripts/sensitivity_analysis.py --region China --scenario baseline \
 ## Technical Details
 
 - **Historical Data**: 1998-2024 (varies by metric)
-- **Forecast Horizon**: Configurable (typically through 2040)
+- **Forecast Horizon**: Configurable (typically through 2030 (extended: 2035))
 - **Temporal Granularity**: Annual
 - **Primary Unit**: Tonnes of refined lead per year (kt)
 - **Stock Unit**: Vehicle units (millions), battery MWh

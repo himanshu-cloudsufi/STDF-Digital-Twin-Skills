@@ -17,7 +17,7 @@ This skill implements cost-driven demand forecasting for two-wheeler markets, fo
 The skill forecasts two-wheeler demand across:
 - **Market Segments**: Total two-wheeler market, EV two-wheelers, ICE two-wheelers
 - **Regions**: China, USA, Europe, Rest_of_World, Global (aggregated)
-- **Time Horizon**: Configurable (typically 2020-2040)
+- **Time Horizon**: Configurable (typically 2020-2030 (extended: 2035))
 
 ## Key Features
 
@@ -51,20 +51,20 @@ The skill forecasts two-wheeler demand across:
 ```bash
 # Single region forecast
 cd .claude/skills/two-wheeler-demand
-python3 scripts/forecast.py --region China --end-year 2040 --output csv
+python3 scripts/forecast.py --region China --end-year 2030 --output csv
 
 # Global forecast (all regions + aggregation)
-python3 scripts/forecast.py --region Global --end-year 2040 --output both
+python3 scripts/forecast.py --region Global --end-year 2030 --output both
 
 # With fleet tracking
-python3 scripts/forecast.py --region China --end-year 2040 --track-fleet --output csv
+python3 scripts/forecast.py --region China --end-year 2030 --track-fleet --output csv
 ```
 
 ### Using the Shell Wrapper
 
 ```bash
 # Quick run (region, end year, output format)
-./run_forecast.sh China 2040 csv
+./run_forecast.sh China 2030 csv
 ```
 
 ### Parameters
@@ -182,7 +182,7 @@ Pre-configured scenarios in `config.json`:
 
 **Command:**
 ```bash
-python3 scripts/forecast.py --region China --end-year 2040 --output csv
+python3 scripts/forecast.py --region China --end-year 2030 --output csv
 ```
 
 **Process:**
@@ -191,13 +191,13 @@ python3 scripts/forecast.py --region China --end-year 2040 --output csv
 3. Fit EV S-curve → 32% (2020) to 90% (2040)
 4. Calculate ICE residual → 17M (2020) to 3M (2040)
 
-**Output:** `output/two_wheeler_China_2040.csv`
+**Output:** `output/two_wheeler_China_2030.csv`
 
 ### Example 2: Global Comparison
 
 **Command:**
 ```bash
-python3 scripts/forecast.py --region Global --end-year 2040 --output both
+python3 scripts/forecast.py --region Global --end-year 2030 --output both
 ```
 
 **Process:**
@@ -207,17 +207,17 @@ python3 scripts/forecast.py --region Global --end-year 2040 --output both
 
 **Output:**
 - `output/two_wheeler_Global_2040_global.csv`
-- `output/two_wheeler_China_2040.csv`
-- `output/two_wheeler_USA_2040.csv`
-- `output/two_wheeler_Europe_2040.csv`
-- `output/two_wheeler_Rest_of_World_2040.csv`
-- `output/two_wheeler_Global_2040.json`
+- `output/two_wheeler_China_2030.csv`
+- `output/two_wheeler_USA_2030.csv`
+- `output/two_wheeler_Europe_2030.csv`
+- `output/two_wheeler_Rest_of_World_2030.csv`
+- `output/two_wheeler_Global_2030.json`
 
 ### Example 3: Fleet Evolution Analysis
 
 **Command:**
 ```bash
-python3 scripts/forecast.py --region China --end-year 2040 --track-fleet --output csv
+python3 scripts/forecast.py --region China --end-year 2030 --track-fleet --output csv
 ```
 
 **Additional Output:**
@@ -267,7 +267,7 @@ python3 scripts/forecast.py --region China --ceiling 0.90 --output csv
 ## Technical Details
 
 - **Historical Data**: 2010-2024 (varies by metric and region)
-- **Forecast Horizon**: Configurable (typically through 2040)
+- **Forecast Horizon**: Configurable (typically through 2030 (extended: 2035))
 - **Temporal Granularity**: Annual
 - **Primary Unit**: Units per year (vehicles)
 - **Methodology**: Cost-driven disruption with logistic adoption

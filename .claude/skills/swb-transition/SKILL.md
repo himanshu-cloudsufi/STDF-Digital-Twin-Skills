@@ -57,7 +57,7 @@ The skill forecasts the energy transition across:
 skill swb-transition
 
 # With custom parameters
-skill swb-transition --end-year 2040 --region China --sequence coal-first
+skill swb-transition --end-year 2030 --region China --sequence coal-first
 
 # Generate cost comparison
 skill swb-transition --analyze-lcoe --output-format csv
@@ -127,7 +127,7 @@ Pre-configured scenarios:
 - **Baseline**: Current policy trajectories
 - **Accelerated**: Faster cost declines, early coal phase-out
 - **Delayed**: Slower transition, gas bridge extended
-- **High Renewable**: 80%+ renewable by 2040
+- **High Renewable**: 80%+ renewable by 2035
 - **Carbon Pricing**: Explicit carbon cost on fossils
 
 ## Regional Considerations

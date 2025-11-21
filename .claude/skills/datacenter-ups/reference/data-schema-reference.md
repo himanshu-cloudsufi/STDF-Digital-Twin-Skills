@@ -158,7 +158,7 @@ Data files are stored in JSON format in the `data/` directory, with standardized
 - **Entity**: Datacenter_UPS (market driver)
 - **Type**: assumption_or_input
 - **Units**: Decimal (0.077 = 7.7% growth)
-- **Time Range**: 2025-2040 (projections)
+- **Time Range**: 2025-2035 (projections)
 - **Usage**: Drive total market demand growth
 - **Typical Values**:
   - China: 0.10-0.12 (10-12%)

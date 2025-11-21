@@ -29,7 +29,7 @@ class CostAnalyzer:
             "rte": config["default_parameters"]["battery_rte"],
             "fixed_om": config["default_parameters"]["battery_fixed_om"]
         }
-        self.end_year = config["default_parameters"].get("end_year", 2040)
+        self.end_year = config["default_parameters"].get("end_year", 2030)
 
     def calculate_scoe(
         self,

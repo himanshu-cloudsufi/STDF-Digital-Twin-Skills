@@ -164,7 +164,7 @@ class CopperDemandForecast:
                         last_total = last_ice + last_bev
 
                         # Project using scenario EV adoption target
-                        target_ev_share = self.scenario.get(f'ev_adoption_{self.end_year}', self.scenario.get('ev_adoption_2040', 0.75))
+                        target_ev_share = self.scenario.get(f'ev_adoption_{self.end_year}', self.scenario.get('ev_adoption_2035', 0.75))
                         years_to_target = self.end_year - last_year
                         years_from_last = year - last_year
 
@@ -254,8 +254,8 @@ class CopperDemandForecast:
                     last_value = wind_series.iloc[-1]
                     # Accelerated growth for renewables in accelerated scenario
                     target_key = f'renewable_capacity_{self.end_year}_tw'
-                    if target_key in self.scenario or 'renewable_capacity_2040_tw' in self.scenario:
-                        target_tw = self.scenario.get(target_key, self.scenario.get('renewable_capacity_2040_tw', 15))
+                    if target_key in self.scenario or 'renewable_capacity_2035_tw' in self.scenario:
+                        target_tw = self.scenario.get(target_key, self.scenario.get('renewable_capacity_2035_tw', 15))
                         growth_factor = target_tw / 15.0  # Baseline is 15 TW
                         new_wind_onshore = 50 * growth_factor + (year_idx * 5 * growth_factor)
                     else:
@@ -268,8 +268,8 @@ class CopperDemandForecast:
                 elif year > solar_series.index.max():
                     # Project using scenario
                     target_key = f'renewable_capacity_{self.end_year}_tw'
-                    if target_key in self.scenario or 'renewable_capacity_2040_tw' in self.scenario:
-                        target_tw = self.scenario.get(target_key, self.scenario.get('renewable_capacity_2040_tw', 15))
+                    if target_key in self.scenario or 'renewable_capacity_2035_tw' in self.scenario:
+                        target_tw = self.scenario.get(target_key, self.scenario.get('renewable_capacity_2035_tw', 15))
                         growth_factor = target_tw / 15.0
                         new_solar = 100 * growth_factor + (year_idx * 10 * growth_factor)
                     else:
@@ -282,8 +282,8 @@ class CopperDemandForecast:
             # If no real data, use scenario-based projections
             if new_wind_onshore == 0 and new_solar == 0:
                 target_key = f'renewable_capacity_{self.end_year}_tw'
-                if target_key in self.scenario or 'renewable_capacity_2040_tw' in self.scenario:
-                    target_tw = self.scenario.get(target_key, self.scenario.get('renewable_capacity_2040_tw', 15))
+                if target_key in self.scenario or 'renewable_capacity_2035_tw' in self.scenario:
+                    target_tw = self.scenario.get(target_key, self.scenario.get('renewable_capacity_2035_tw', 15))
                     growth_factor = target_tw / 15.0
                     new_wind_onshore = 50 * growth_factor + (year_idx * 5 * growth_factor)
                     new_solar = 100 * growth_factor + (year_idx * 10 * growth_factor)

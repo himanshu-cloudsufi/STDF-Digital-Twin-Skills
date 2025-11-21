@@ -6,14 +6,23 @@
     "end_year": 2035,
     "logistic_ceiling": 1.0,
     "smoothing_window": 3,
-    "standard_forecast_years": [2030, 2035],
-    "extended_forecast_year": 2040,
-    "max_forecast_year": 2040,
+    "standard_forecast_years": [
+      2030,
+      2035
+    ],
+    "extended_forecast_year": 2035,
+    "max_forecast_year": 2035,
     "max_market_cagr": 0.05,
     "phev_peak_share": 0.15,
     "phev_decay_half_life": 3.0,
-    "logistic_k_bounds": [0.05, 1.5],
-    "logistic_t0_offset": [-5, 10]
+    "logistic_k_bounds": [
+      0.05,
+      1.5
+    ],
+    "logistic_t0_offset": [
+      -5,
+      10
+    ]
   },
   "regions": [
     "China",
@@ -43,7 +52,10 @@
     "non_negative_demand": true,
     "sum_consistency": true,
     "market_cagr_cap": 0.05,
-    "share_bounds": [0.0, 1.0]
+    "share_bounds": [
+      0.0,
+      1.0
+    ]
   },
   "dependencies": [
     "numpy",

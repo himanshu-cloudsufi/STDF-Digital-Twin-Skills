@@ -5,7 +5,7 @@ Forecasts commercial vehicle demand (LCV, MCV, HCV) with EV disruption analysis,
 NGV chimera modeling, segment-level tipping point detection, and logistic adoption curves.
 
 Usage:
-    python3 scripts/forecast.py --region China --segment LCV --end-year 2040 --output csv
+    python3 scripts/forecast.py --region China --segment LCV --end-year 2030 --output csv
     python3 scripts/forecast.py --region USA --all-segments --track-fleet
 """
 

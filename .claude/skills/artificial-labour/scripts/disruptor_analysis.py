@@ -125,7 +125,7 @@ class DisruptorAnalysis:
         dataset: str,
         region: str = 'Global',
         milestones: List[float] = [0.1, 0.5, 0.8],
-        end_year: float = 2040
+        end_year: float = 2030
     ) -> Dict:
         """
         Forecast when adoption reaches key milestones (10%, 50%, 80%)

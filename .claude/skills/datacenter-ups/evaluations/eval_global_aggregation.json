@@ -1,6 +1,8 @@
 {
-  "skills": ["datacenter-ups"],
-  "query": "Generate a global datacenter UPS forecast aggregating all regions (China, USA, Europe, Rest_of_World) through 2040. Show regional contributions and validate that global totals match the sum of regional demands",
+  "skills": [
+    "datacenter-ups"
+  ],
+  "query": "Generate a global datacenter UPS forecast aggregating all regions (China, USA, Europe, Rest_of_World) through 2030. Show regional contributions and validate that global totals match the sum of regional demands",
   "files": [],
   "expected_behavior": [
     "Step 1: Runs forecasts for China, USA, Europe, Rest_of_World individually",

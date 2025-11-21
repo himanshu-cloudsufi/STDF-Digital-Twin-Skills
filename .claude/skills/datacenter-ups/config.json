@@ -9,12 +9,25 @@
     "discount_rate": 0.08,
     "smoothing_window": 3,
     "tipping_persistence_years": 3,
-    "standard_forecast_years": [2030, 2035],
-    "extended_forecast_year": 2040,
-    "max_forecast_year": 2040
+    "standard_forecast_years": [
+      2030,
+      2035
+    ],
+    "extended_forecast_year": 2035,
+    "max_forecast_year": 2035
   },
-  "regions": ["China", "USA", "Europe", "Rest_of_World", "Global"],
-  "output_formats": ["csv", "json", "plot"],
+  "regions": [
+    "China",
+    "USA",
+    "Europe",
+    "Rest_of_World",
+    "Global"
+  ],
+  "output_formats": [
+    "csv",
+    "json",
+    "plot"
+  ],
   "data_sources": {
     "vrla_demand": "datacenter_battery_demand_lab.json",
     "lithium_demand": "datacenter_battery_demand_li_ion.json",
@@ -55,10 +68,22 @@
     "cost_sensitivity_s": 0.002,
     "calibration_method": "least_squares",
     "bounds": {
-      "L": [0.90, 0.99],
-      "t0": [2020, 2040],
-      "k0": [0.1, 2.0],
-      "s": [0.0, 0.01]
+      "L": [
+        0.9,
+        0.99
+      ],
+      "t0": [
+        2020,
+        2040
+      ],
+      "k0": [
+        0.1,
+        2.0
+      ],
+      "s": [
+        0.0,
+        0.01
+      ]
     }
   },
   "market_decomposition": {
@@ -82,8 +107,8 @@
     "method": "log_cagr",
     "historical_window_years": 5,
     "smoothing_years": 3,
-    "cap_annual_decline": 0.30,
-    "floor_cost_ratio": 0.20
+    "cap_annual_decline": 0.3,
+    "floor_cost_ratio": 0.2
   },
   "tipping_point_detection": {
     "metric": "tco_difference",

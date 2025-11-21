@@ -157,7 +157,7 @@ year,region,scenario,total_demand_gwh,vrla_demand_gwh,lithium_demand_gwh,vrla_sh
     "scenario": "baseline",
     "parameters": {
       "start_year": 2020,
-      "end_year": 2040,
+      "end_year": 2030,
       "tco_horizon": 15,
       "discount_rate": 0.08,
       "vrla_lifespan": 5,
@@ -506,7 +506,7 @@ year,vrla_demand_gwh,lithium_demand_gwh,lithium_share_pct
 
 **Region**: China
 **Scenario**: Baseline
-**Forecast Period**: 2025-2040
+**Forecast Period**: 2025-2035
 
 ## Key Findings
 

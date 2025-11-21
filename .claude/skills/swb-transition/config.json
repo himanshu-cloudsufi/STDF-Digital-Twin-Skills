@@ -8,12 +8,25 @@
     "battery_duration_hours": 4,
     "cost_forecast_method": "log_cagr",
     "smoothing_window": 3,
-    "standard_forecast_years": [2030, 2035],
-    "extended_forecast_year": 2040,
-    "max_forecast_year": 2040
+    "standard_forecast_years": [
+      2030,
+      2035
+    ],
+    "extended_forecast_year": 2035,
+    "max_forecast_year": 2035
   },
-  "regions": ["China", "USA", "Europe", "Rest_of_World", "Global"],
-  "output_formats": ["csv", "json", "plot"],
+  "regions": [
+    "China",
+    "USA",
+    "Europe",
+    "Rest_of_World",
+    "Global"
+  ],
+  "output_formats": [
+    "csv",
+    "json",
+    "plot"
+  ],
   "data_sources": {
     "solar_lcoe": "Energy_Generation.json",
     "wind_lcoe": "Energy_Generation.json",
@@ -34,46 +47,46 @@
   "reserve_floors": {
     "description": "Minimum shares of peak load for system reliability (scenario-specific)",
     "baseline": {
-      "coal_minimum_share": 0.10,
+      "coal_minimum_share": 0.1,
       "gas_minimum_share": 0.15
     },
     "accelerated": {
       "coal_minimum_share": 0.05,
-      "gas_minimum_share": 0.10
+      "gas_minimum_share": 0.1
     },
     "delayed": {
       "coal_minimum_share": 0.15,
-      "gas_minimum_share": 0.20
+      "gas_minimum_share": 0.2
     }
   },
   "swb_generation_mix": {
     "description": "Target mix of solar and wind generation in SWB system",
-    "solar_share": 0.60,
+    "solar_share": 0.6,
     "onshore_wind_share": 0.32,
     "offshore_wind_share": 0.08
   },
   "capacity_factors": {
     "solar": {
-      "base": 0.20,
+      "base": 0.2,
       "improvement_per_year": 0.003,
-      "max": 0.30
+      "max": 0.3
     },
     "onshore_wind": {
-      "base": 0.30,
+      "base": 0.3,
       "improvement_per_year": 0.003,
-      "max": 0.40
+      "max": 0.4
     },
     "offshore_wind": {
-      "base": 0.40,
+      "base": 0.4,
       "improvement_per_year": 0.004,
       "max": 0.55
     },
     "coal": {
-      "typical": 0.60,
+      "typical": 0.6,
       "variation": "regional"
     },
     "gas": {
-      "typical": 0.40,
+      "typical": 0.4,
       "variation": "regional"
     }
   },
@@ -101,9 +114,9 @@
     "method": "log_cagr",
     "historical_window_years": 5,
     "smoothing_years": 3,
-    "cap_annual_decline": 0.30,
-    "floor_cost_ratio": 0.20,
-    "solar_learning_rate": 0.20,
+    "cap_annual_decline": 0.3,
+    "floor_cost_ratio": 0.2,
+    "solar_learning_rate": 0.2,
     "wind_learning_rate": 0.15,
     "battery_learning_rate": 0.18
   },
@@ -118,7 +131,7 @@
       "description": "Current cost trajectories and policies",
       "solar_cost_decline_rate": 0.08,
       "wind_cost_decline_rate": 0.05,
-      "battery_cost_decline_rate": 0.10,
+      "battery_cost_decline_rate": 0.1,
       "coal_cost_change": 0.01,
       "gas_cost_change": 0.02,
       "displacement_speed": 1.0

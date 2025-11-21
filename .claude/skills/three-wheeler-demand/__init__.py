@@ -5,7 +5,7 @@ Forecasts three-wheeler demand with EV disruption analysis, tipping point detect
 and logistic adoption curves.
 
 Usage:
-    python3 scripts/forecast.py --region China --end-year 2040 --output csv
+    python3 scripts/forecast.py --region China --end-year 2030 --output csv
 """
 
 __version__ = "1.0.0"
