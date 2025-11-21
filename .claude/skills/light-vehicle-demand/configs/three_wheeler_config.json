@@ -1,0 +1,75 @@
+{
+  "skill_name": "three-wheeler-demand",
+  "version": "1.0.0",
+  "description": "Three-wheeler demand forecasting with EV disruption analysis and tipping point detection",
+  "default_parameters": {
+    "end_year": 2040,
+    "logistic_ceiling": 0.9,
+    "smoothing_window": 3,
+    "max_market_cagr": 0.05,
+    "logistic_k_bounds": [0.05, 1.5],
+    "logistic_t0_offset": [-5, 10],
+    "standard_forecast_years": [2030, 2035],
+    "extended_forecast_year": 2040,
+    "max_forecast_year": 2040
+  },
+  "regions": [
+    "China",
+    "Europe",
+    "Rest_of_World",
+    "Global"
+  ],
+  "products": {
+    "market": "Three_Wheelers",
+    "disruptor": "EV_3_Wheelers",
+    "incumbent": "ICE_3_Wheelers"
+  },
+  "cost_series": {
+    "ev_primary": "EV_3_Wheeler_(Range-100_KM)_Lowest_Cost",
+    "ev_secondary": "Three_Wheeler_(EV)_Median_Cost",
+    "ice": "Three_Wheeler_(ICE)_Median_Cost"
+  },
+  "output_formats": [
+    "csv",
+    "json"
+  ],
+  "data_sources": {
+    "curves": "Three_Wheeler.json",
+    "taxonomy": "three_wheeler_taxonomy_and_datasets.json",
+    "methodology": "three_wheeler_demand_instructions.md"
+  },
+  "fleet_tracking": {
+    "three_wheeler_lifetime_years": 10.0,
+    "track_consistency": true
+  },
+  "validation_rules": {
+    "non_negative_demand": true,
+    "sum_consistency": true,
+    "market_cagr_cap": 0.05,
+    "share_bounds": [0.0, 1.0]
+  },
+  "scenarios": {
+    "baseline": {
+      "description": "Moderate EV adoption following cost parity dynamics",
+      "logistic_ceiling": 0.9,
+      "market_growth_factor": 1.0
+    },
+    "accelerated_ev": {
+      "description": "Rapid EV adoption with policy support",
+      "logistic_ceiling": 0.95,
+      "market_growth_factor": 1.1,
+      "tipping_acceleration": -2
+    },
+    "conservative": {
+      "description": "Slower EV adoption due to infrastructure constraints",
+      "logistic_ceiling": 0.75,
+      "market_growth_factor": 0.95,
+      "tipping_delay": 3
+    }
+  },
+  "dependencies": [
+    "numpy",
+    "scipy",
+    "pandas"
+  ]
+}

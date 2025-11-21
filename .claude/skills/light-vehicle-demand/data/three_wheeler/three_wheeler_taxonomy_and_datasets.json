@@ -1,0 +1,76 @@
+{
+  "market": "Three_Wheelers",
+  "taxonomy": {
+    "EV_3_Wheelers": {
+      "subproducts": []
+    },
+    "ICE_3_Wheelers": {
+      "subproducts": []
+    }
+  },
+  "data": {
+    "EV_3_Wheelers": {
+      "cost": {
+        "China": "EV_3_Wheeler_(Range-100_KM)_Lowest_Cost",
+        "Europe": "EV_3_Wheeler_(Range-100_KM)_Lowest_Cost",
+        "Rest_of_World": "EV_3_Wheeler_(Range-100_KM)_Lowest_Cost"
+      },
+      "cost_secondary": {
+        "China": "(EV)_Median_Cost",
+        "Europe": "(EV)_Median_Cost",
+        "Rest_of_World": "(EV)_Median_Cost"
+      },
+      "demand": {
+        "China": "(EV)_Annual_Sales",
+        "Europe": "(EV)_Annual_Sales",
+        "Rest_of_World": "(EV)_Annual_Sales",
+        "Global": "(EV)_Annual_Sales"
+      },
+      "installed_base": {
+        "China": "(EV)_Total_Fleet",
+        "Europe": "(EV)_Total_Fleet",
+        "Rest_of_World": "(EV)_Total_Fleet",
+        "Global": "(EV)_Total_Fleet"
+      },
+      "entity_type": "disruptor"
+    },
+    "ICE_3_Wheelers": {
+      "cost": {
+        "China": "(ICE)_Median_Cost",
+        "Europe": "(ICE)_Median_Cost",
+        "Rest_of_World": "(ICE)_Median_Cost"
+      },
+      "demand": {
+        "China": "(ICE)_Annual_Sales",
+        "Europe": "(ICE)_Annual_Sales",
+        "Rest_of_World": "(ICE)_Annual_Sales",
+        "Global": "(ICE)_Annual_Sales"
+      },
+      "installed_base": {
+        "China": "(ICE)_Total_Fleet",
+        "Europe": "(ICE)_Total_Fleet",
+        "Rest_of_World": "(ICE)_Total_Fleet",
+        "Global": "(ICE)_Total_Fleet"
+      },
+      "entity_type": "incumbent"
+    },
+    "Three_Wheelers": {
+      "demand": {
+        "China": "Annual_Sales",
+        "Europe": "Annual_Sales",
+        "Rest_of_World": "Annual_Sales",
+        "Global": "Annual_Sales"
+      },
+      "entity_type": "market"
+    },
+    "Lead": {
+      "implied_demand": {
+        "Global": {
+          "sales": "Lead_Annual_Implied_Demand-Sales_3_wheelers",
+          "replacement": "Lead_Annual_Implied_Demand-Vehicle_replacement_3_wheelers"
+        }
+      },
+      "entity_type": "commodity"
+    }
+  }
+}
