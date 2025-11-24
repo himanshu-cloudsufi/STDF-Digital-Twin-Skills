@@ -271,6 +271,109 @@ python3 scripts/forecast.py --help
 - **Memory**: Requires ~100MB RAM
 
 
+## Taxonomy and Dataset Mapping
+
+### Overview
+This skill supports two distinct light vehicle markets, each with its own taxonomy and dataset structure.
+
+---
+
+### Two-Wheeler Market
+
+**Market Definition**
+- **Market:** `Two_Wheelers`
+- **Total Market Demand:** `Two_Wheeler_Annual_Sales` (by region)
+
+**Disruptor Technology**
+- **EV Two-Wheelers**
+  - Entity Type: `disruptor`
+  - Primary Cost: `EV_2_Wheeler_(Range-100_KM)_Lowest_Cost` (by region)
+  - Median Cost: `Two_Wheeler_(EV)_Median_Cost` (by region)
+  - Demand Dataset: `Two_Wheeler_(EV)_Annual_Sales` (by region)
+  - Installed Base: `Two_Wheeler_(EV)_Total_Fleet` (by region, except China)
+
+**Incumbent Technology**
+- **ICE Two-Wheelers**
+  - Entity Type: `incumbent`
+  - Cost: `Two_Wheeler_(ICE)_Median_Cost` (by region)
+  - Demand Dataset: `Two_Wheeler_(ICE)_Annual_Sales` (by region)
+  - Installed Base: `Two_Wheeler_(ICE)_Total_Fleet` (by region)
+
+**Available Regions:** China, USA, Europe, Rest_of_World, Global
+
+**Fleet Lifetime:** 11 years
+
+**Dataset Files:**
+- `data/two_wheeler/Two_Wheeler.json` - Sales, cost, and fleet data
+- `data/two_wheeler/two_wheeler_taxonomy_and_datasets.json` - Taxonomy mapping
+
+---
+
+### Three-Wheeler Market
+
+**Market Definition**
+- **Market:** `Three_Wheelers`
+- **Total Market Demand:** `Annual_Sales` (by region)
+
+**Disruptor Technology**
+- **EV Three-Wheelers**
+  - Entity Type: `disruptor`
+  - Primary Cost: `EV_3_Wheeler_(Range-100_KM)_Lowest_Cost` (by region)
+  - Secondary Cost: `(EV)_Median_Cost` (by region)
+  - Demand Dataset: `(EV)_Annual_Sales` (by region)
+  - Installed Base: `(EV)_Total_Fleet` (by region)
+
+**Incumbent Technology**
+- **ICE Three-Wheelers**
+  - Entity Type: `incumbent`
+  - Cost: `(ICE)_Median_Cost` (by region)
+  - Demand Dataset: `(ICE)_Annual_Sales` (by region)
+  - Installed Base: `(ICE)_Total_Fleet` (by region)
+
+**Commodity Impact Tracking**
+- **Lead (Battery Material)**
+  - Entity Type: `commodity`
+  - Implied Demand (Global):
+    - Sales: `Lead_Annual_Implied_Demand-Sales_3_wheelers`
+    - Replacement: `Lead_Annual_Implied_Demand-Vehicle_replacement_3_wheelers`
+
+**Available Regions:** China, Europe, Rest_of_World, Global
+
+**Note:** USA is excluded as the three-wheeler market is minimal in North America.
+
+**Fleet Lifetime:** 10 years (shorter due to commercial use intensity)
+
+**Dataset Files:**
+- `data/three_wheeler/Three_Wheeler.json` - Sales, cost, and fleet data
+- `data/three_wheeler/three_wheeler_taxonomy_and_datasets.json` - Taxonomy mapping
+
+---
+
+### Key Differences Summary
+
+| Feature | Two-Wheeler | Three-Wheeler |
+|---------|-------------|---------------|
+| **Market Dataset** | `Two_Wheeler_Annual_Sales` | `Annual_Sales` |
+| **EV Cost (Primary)** | `EV_2_Wheeler_(Range-100_KM)_Lowest_Cost` | `EV_3_Wheeler_(Range-100_KM)_Lowest_Cost` |
+| **Fleet Lifetime** | 11 years | 10 years |
+| **USA Region** | ✓ Supported | ✗ Not supported |
+| **EV Fleet Data (China)** | ✗ Not available | ✓ Available |
+| **Lead Tracking** | ✗ Not included | ✓ Included |
+| **Use Case** | Personal/commuter | Commercial/delivery |
+
+### Configuration Files
+
+Each vehicle type has its own configuration:
+- `configs/two_wheeler_config.json` - Two-wheeler specific parameters
+- `configs/three_wheeler_config.json` - Three-wheeler specific parameters
+
+These configs include:
+- Default adoption ceilings
+- Fleet lifetime settings
+- Regional availability
+- Cost smoothing parameters
+- Logistic curve fitting parameters
+
 ## Related Skills
 
 - **demand-forecasting**: General demand forecasting framework
