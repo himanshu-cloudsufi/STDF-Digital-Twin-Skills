@@ -267,6 +267,132 @@ Always consider 3 scenarios:
 }
 ```
 
+## Taxonomy and Dataset Mapping
+
+### Market Definition
+- **Market:** `Artificial_Labour` (AI and robotics disrupting human labor)
+
+### Disruptor Technologies
+
+**Artificial Intelligence**
+- Entity Type: `disruptor`
+- Subproducts: `AI_Language_Models`, `AI_Code_Generation`, `AI_Reasoning`, `AI_Vision`, `AI_Multimodal`
+- Capability Metrics (Global):
+  - Language Understanding: `Artificial_Intelligence_MMLU_Accuracy`
+  - Math Reasoning: `Artificial_Intelligence_GSM8K_Accuracy`
+  - Code Generation: `Artificial_Intelligence_HumanEval_Accuracy`
+  - Expert Reasoning: `Artificial_Intelligence_GPQA_Diamond_Accuracy`
+  - Vision: `Artificial_Intelligence_ImageNet_Top5_Accuracy`
+  - Multimodal: `Artificial_Intelligence_MMMU_Accuracy`
+- Cost Metrics (Global):
+  - Inference: `Artificial_Intelligence_Inference_Cost`
+  - Training: `Artificial_Intelligence_Training_Cost`
+- Scale Metrics (Global):
+  - Training Data: `Artificial_Intelligence_Traning_Dataset_Size`
+  - Model Parameters: `Artificial_Intelligence_Model_Parameters`
+  - Training Compute: `Artificial_Intelligence_Training_Compute`
+- Adoption (Global):
+  - Enterprise: `Artificial_Intelligence_Enterprise_Adoption`
+  - API Usage: `Artificial_Intelligence_API_Usage`
+
+**Industrial Robots**
+- Entity Type: `disruptor`
+- Demand: `Industrial_Robot_Annual_Installation` (by region)
+- Installed Base: `Industrial_Robot_Operational_stock` (by region)
+- Demand by Sector:
+  - Automotive: `Industrial_Robot_Annual_Installation_(Automotive)`
+  - Electronics: `Industrial_Robot_Annual_Installation_(Electrical_Electronics)`
+  - Metal: `Industrial_Robot_Annual_Installation_(Metal_and_Machinery)`
+  - Plastics: `Industrial_Robot_Annual_Installation_(Plastics_and_Chemical_Products)`
+  - Food: `Industrial_Robot_Annual_Installation_(Food)`
+  - Other: `Industrial_Robot_Annual_Installation_(Others)`
+
+**Service Robots (Professional)**
+- Entity Type: `disruptor`
+- Demand: `Service_Robot_(Professional)_Annual_Installation` (Global)
+- Demand by Sector:
+  - Agriculture: `Service_Robot_(Professional)_Annual_Installation_(Agriculture)`
+  - Hospitality: `Service_Robot_(Professional)_Annual_Installation_(Hospitality)`
+  - Logistics: `Service_Robot_(Professional)_Annual_Installation_(Logistics)`
+  - Medical: `Service_Robot_(Professional)_Annual_Installation_(Medical)`
+  - Other: `Service_Robot_(Professional)_Annual_Installation_(Others)`
+
+**Humanoid Robots**
+- Entity Type: `disruptor`
+- Market Size: `Humanoid_Robot_Market_Size` (Global)
+
+### Enabling Infrastructure
+
+**GPU (Graphics Processing Units)**
+- Entity Type: `enabler`
+- Cost Datasets:
+  - NVIDIA V100: `GPU_NVIDIA_Tesla_V100_Price`
+  - NVIDIA A100: `GPU_NVIDIA_A100_Tensor_Core_Price`
+  - NVIDIA H100: `GPU_NVIDIA_H100_Tensor_Core_Price`
+  - AMD MI210: `GPU_AMD_MI210_Price`
+  - AMD MI250X: `GPU_AMD_MI250X_Price`
+  - AMD MI300X: `GPU_AMD_MI300X_Price`
+
+### Incumbent Technology
+
+**Human Labour**
+- Entity Type: `incumbent`
+- Service Unit: USD per hour or USD per task
+- Typical Cost Ranges (Global):
+  - Data Entry: $15-30/hour
+  - Customer Service: $15-35/hour
+  - Junior Coding: $40-80/hour
+  - Senior Coding: $80-150/hour
+  - Analysis: $50-100/hour
+  - Assembly/Manufacturing: $20-40/hour
+  - Warehouse Picking: $15-25/hour
+  - Inspection/QA: $20-35/hour
+
+### Converged Disruptor Products
+
+**AI-Powered Industrial Automation**
+- Components: Artificial_Intelligence + Industrial_Robot
+- Entity Type: `converged_disruptor`
+- Capabilities: Adaptive manufacturing, visual inspection + reasoning, predictive maintenance, real-time optimization
+
+**Autonomous Service Robots**
+- Components: Artificial_Intelligence + Service_Robot
+- Entity Type: `converged_disruptor`
+- Capabilities: Navigation in dynamic environments, natural language interaction, task learning, human-robot collaboration
+
+**General Purpose Humanoids**
+- Components: Artificial_Intelligence + Humanoid_Robot
+- Entity Type: `converged_disruptor`
+- Capabilities: Multi-task capability, human environment operation, natural interaction, continuous learning
+
+**AI as a Service**
+- Components: Artificial_Intelligence + GPU + Cloud_Infrastructure
+- Entity Type: `converged_disruptor`
+- Capabilities: On-demand AI compute, zero marginal cost scaling, continuous improvement, API-accessible intelligence
+
+### Available Regions
+- **Global:** Worldwide aggregate (most AI benchmarks)
+- **China:** Leading in industrial robot adoption
+- **USA:** Leading in AI development
+- **Europe:** Strong in service robotics
+- **Asia_Pacific:** Asia-Pacific region excluding China
+- **Rest_of_World:** Emerging markets
+
+### Available Dataset Files
+- `AL_JSON.json` - Comprehensive artificial labour data including AI benchmarks, robot installations, GPU costs, and adoption metrics
+- `artificial_labour_taxonomy_and_datasets.json` - Taxonomy mapping (this section)
+
+### Service Cost Metrics
+- **AI:** USD per inference (primary), USD per task (secondary)
+- **Industrial Robot:** USD per task (primary), USD per unit output (secondary)
+- **Service Robot:** USD per task (primary), USD per delivery/pick (secondary)
+- **Humanoid Robot:** USD per hour (primary)
+
+### Tipping Point Thresholds
+- **AI Capability:** Human-level = 85-95% on benchmarks, Superhuman = >95%
+- **Cost Parity:** Approaching = 70-100% of incumbent, Parity = 50-70%, Tipping = <50% AND capability ≥ human-level
+- **Adoption Milestones:** Early = 10%, Mainstream = 50%, Late = 80-90%
+
 ## Reference Documentation
 
 - [references/data-schema.md](references/data-schema.md) - Complete AL_JSON.json structure and query patterns

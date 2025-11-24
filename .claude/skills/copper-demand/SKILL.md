@@ -144,6 +144,144 @@ Historical data from:
 - **Smoothing**: 3-year rolling window for noise reduction
 - **Guards**: Growth rate limits (max +50% YoY, min -30% YoY), non-negativity
 
+## Taxonomy and Dataset Mapping
+
+### Commodity Definition
+- **Commodity:** `Copper` (refined copper metal)
+- **Primary Unit:** Tonnes (kt) per year
+- **Methodology:** Hybrid Bottom-Up + Top-Down Framework
+
+### Tier 1: Bottom-Up Segments (High Confidence)
+
+**Automotive - Passenger Cars**
+- Entity Type: `market`
+- Tier: `TIER_1_BOTTOM_UP`
+- Powertrains: ICE, HEV, PHEV, BEV
+- ICE Sales: `Passenger_Vehicle_(ICE)_Annual_Sales` (by region)
+- BEV Sales: `Passenger_Vehicle_(BEV)_Annual_Sales` (Global)
+- PHEV Sales: `Passenger_Vehicle_(PHEV)_Annual_Sales` (Global)
+- ICE Fleet: `Passenger_Vehicle_(ICE)_Total_Fleet` (Global)
+- BEV Fleet: `Passenger_Vehicle_(BEV)_Total_Fleet` (Global)
+- PHEV Fleet: `Passenger_Vehicle_(PHEV)_Total_Fleet` (Global)
+- Copper Intensity: ICE 20-25kg, HEV 30-40kg, PHEV 55-65kg, BEV 80-90kg
+
+**Automotive - Commercial Vehicles**
+- Entity Type: `market`
+- Tier: `TIER_1_BOTTOM_UP`
+- Powertrains: ICE, EV, NGV
+- ICE Sales: `Commercial_Vehicle_(ICE)_Annual_Sales` (Global)
+- EV Sales: `Commercial_Vehicle_(EV)_Annual_Sales` (Global)
+- NGV Sales: `Commercial_Vehicle_(NGV)_Annual_Sales` (Global)
+- ICE Fleet: `Commercial_Vehicle_(ICE)_Total_Fleet` (Global)
+- EV Fleet: `Commercial_Vehicle_(EV)_Total_Fleet` (Global)
+- NGV Fleet: `Commercial_Vehicle_(NGV)_Total_Fleet` (Global)
+- Copper Intensity: ICE 30-40kg, EV 110-130kg, NGV 35-42kg
+
+**Automotive - Two-Wheelers**
+- Entity Type: `market`
+- Tier: `TIER_1_BOTTOM_UP`
+- Powertrains: ICE, EV
+- ICE Sales: `Two_Wheeler_(ICE)_Annual_Sales` (Global)
+- EV Sales: `Two_Wheeler_(EV)_Annual_Sales` (Global)
+- ICE Fleet: `Two_Wheeler_(ICE)_Total_Fleet` (Global)
+- EV Fleet: `Two_Wheeler_(EV)_Total_Fleet` (Global)
+- Copper Intensity: ICE 2-4kg, EV 3-5kg
+
+**Automotive - Three-Wheelers**
+- Entity Type: `market`
+- Tier: `TIER_1_BOTTOM_UP`
+- Powertrains: ICE, EV
+- ICE Sales: `Three_Wheeler_(ICE)_Annual_Sales` (Global)
+- EV Sales: `Three_Wheeler_(EV)_Annual_Sales` (Global)
+- ICE Fleet: `Three_Wheeler_(ICE)_Total_Fleet` (Global)
+- EV Fleet: `Three_Wheeler_(EV)_Total_Fleet` (Global)
+- Copper Intensity: ICE 3-5kg, EV 4-6kg
+
+**Grid Generation (Renewables & Fossil)**
+- Entity Type: `segment`
+- Tier: `TIER_1_BOTTOM_UP`
+- Technologies: Wind_Onshore, Wind_Offshore, Solar_PV, Natural_Gas, Coal
+- Onshore Wind Capacity: `Onshore_Wind_Installed_Capacity` (Global, cumulative)
+- Offshore Wind Capacity: `Offshore_Wind_Installed_Capacity` (Global, cumulative)
+- Solar Capacity: `Solar_Installed_Capacity` (Global, cumulative)
+- Coal Capacity: `Coal_Installed_Capacity` (Global, cumulative)
+- Gas Capacity: `Natural_Gas_Installed_Capacity` (Global, cumulative)
+- Copper Intensity: Onshore Wind 4-10 t/MW, Offshore Wind 8-12 t/MW, Solar 4-6 t/MW, Coal/Gas 0.8-1.2 t/MW
+- **Note:** New capacity derived by differencing cumulative data
+
+### Tier 2: Top-Down Segments (Low-Medium Confidence)
+
+**Construction & Buildings**
+- Entity Type: `segment`
+- Tier: `TIER_2_TOP_DOWN`
+- Method: Share allocation (48% of Electrical share)
+- **Note:** No bottom-up driver data available
+
+**Grid T&D and Transformers**
+- Entity Type: `segment`
+- Tier: `TIER_2_TOP_DOWN`
+- Method: Residual from Electrical share (35%) minus generation-linked
+- **Note:** No transmission/distribution line-km data available
+
+**Industrial Machinery**
+- Entity Type: `segment`
+- Tier: `TIER_2_TOP_DOWN`
+- Method: Share allocation (17% of Electrical share)
+- **Note:** No motor/HVAC installation data available
+
+**Electronics and Appliances**
+- Entity Type: `segment`
+- Tier: `TIER_2_TOP_DOWN`
+- Method: Fixed share (11% of total)
+- **Note:** No device sales data available
+
+**Other Uses**
+- Entity Type: `segment`
+- Tier: `TIER_2_TOP_DOWN`
+- Method: Bounded residual (8-18% of total with 5-year smoothing)
+- Includes: Alloys, ammunition, architectural, chemicals
+
+### Copper Consumption and Validation
+
+**Total Copper Consumption**
+- Primary Anchor: `Annual_Consumption` (by region)
+- Regions: Global, China, USA, Europe, Rest_of_World
+- Price: `Price` (Global)
+- Recycling Rate: `Annual_Recycling_Rate` (Global)
+
+**Segment Validation Shares**
+- Transportation Share: `Demand_Transportation_Percentage` (Global)
+- Electrical Share: `Electrical_Demand_Percentage` (Global)
+- EV Share: `EV_Demand_Percentage` (Global)
+- Solar Share: `Solar_Demand_Percentage` (Global)
+- Wind Share: `Wind_Turbines_Percentage` (Global)
+
+### Drivers and Proxies
+
+**Electricity Production** (proxy for GDP/IPI)
+- Global: `Electricity_Annual_Production`
+- Used for: Growth proxy for Tier 2 segments
+
+### Available Regions
+- **Global:** Primary anchor
+- **China, USA, Europe, Rest_of_World:** Regional validation
+
+### Available Dataset Files
+- `Copper.json` - Copper consumption, prices, segment shares
+- `Passenger_Cars.json` - Passenger vehicle sales and fleet
+- `Commercial_Vehicle.json` - Commercial vehicle sales and fleet
+- `Two_Wheeler.json` - Two-wheeler sales and fleet
+- `Three_Wheeler.json` - Three-wheeler sales and fleet
+- `Energy_Generation.json` - Power generation installed capacity
+- `copper_taxonomy_and_datasets.json`
+
+### Methodology Notes
+- **Reconciliation:** All segments forced to sum exactly to total consumption (±0.1%)
+- **Validation:** Tier 1 segments validated against share datasets
+- **Adjustment Strategy:** Only Tier 2 segments adjusted; Tier 1 bottom-up values preserved
+- **Data Quality:** 3-year rolling median for Tier 1, 5-year for Tier 2
+- **Growth Guards:** Max +50% YoY, min -30% YoY
+
 ## References
 
 Methodology based on:

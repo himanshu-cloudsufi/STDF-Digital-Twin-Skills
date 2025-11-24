@@ -273,6 +273,38 @@ python3 scripts/forecast.py --region China --ceiling 0.90 --output csv
 - **Methodology**: Cost-driven disruption with logistic adoption
 - **Confidence**: HIGH for China (data complete), MEDIUM for other regions
 
+## Taxonomy and Dataset Mapping
+
+### Market Definition
+- **Market:** `Two_Wheelers`
+- **Total Market Demand:** `Two_Wheeler_Annual_Sales` (by region)
+
+### Disruptor Technology
+
+**EV Two-Wheelers**
+- Entity Type: `disruptor`
+- Primary Cost: `EV_2_Wheeler_(Range-100_KM)_Lowest_Cost` (by region)
+- Median Cost: `Two_Wheeler_(EV)_Median_Cost` (by region)
+- Demand Dataset: `Two_Wheeler_(EV)_Annual_Sales` (by region)
+- Installed Base: `Two_Wheeler_(EV)_Total_Fleet` (by region, except China)
+
+### Incumbent Technology
+
+**ICE Two-Wheelers**
+- Entity Type: `incumbent`
+- Cost: `Two_Wheeler_(ICE)_Median_Cost` (by region)
+- Demand Dataset: `Two_Wheeler_(ICE)_Annual_Sales` (by region)
+- Installed Base: `Two_Wheeler_(ICE)_Total_Fleet` (by region)
+
+### Available Regions
+All datasets support: `China`, `USA`, `Europe`, `Rest_of_World`, `Global`
+
+**Note:** EV installed base data not available for China.
+
+### Available Dataset Files
+- `Two_Wheeler.json` - Historical sales, cost, and fleet data for EV and ICE two-wheelers
+- `two_wheeler_taxonomy_and_datasets.json` - Taxonomy mapping (this section)
+
 ## Reference Documentation
 
 - [reference/methodology-reference.md](reference/methodology-reference.md) - Detailed algorithms and equations

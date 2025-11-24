@@ -1,0 +1,227 @@
+{
+  "commodity": "Copper",
+  "methodology": "Hybrid Bottom-Up + Top-Down Framework",
+  "taxonomy": {
+    "Passenger_Cars": {
+      "powertrains": ["ICE", "HEV", "PHEV", "BEV"],
+      "entity_type": "market",
+      "tier": "TIER_1_BOTTOM_UP"
+    },
+    "Commercial_Vehicles": {
+      "powertrains": ["ICE", "EV", "NGV"],
+      "entity_type": "market",
+      "tier": "TIER_1_BOTTOM_UP"
+    },
+    "Two_Wheelers": {
+      "powertrains": ["ICE", "EV"],
+      "entity_type": "market",
+      "tier": "TIER_1_BOTTOM_UP"
+    },
+    "Three_Wheelers": {
+      "powertrains": ["ICE", "EV"],
+      "entity_type": "market",
+      "tier": "TIER_1_BOTTOM_UP"
+    },
+    "Grid_Generation": {
+      "technologies": ["Wind_Onshore", "Wind_Offshore", "Solar_PV", "Natural_Gas", "Coal"],
+      "entity_type": "segment",
+      "tier": "TIER_1_BOTTOM_UP"
+    },
+    "Construction_Buildings": {
+      "entity_type": "segment",
+      "tier": "TIER_2_TOP_DOWN"
+    },
+    "Grid_T&D_and_Transformers": {
+      "entity_type": "segment",
+      "tier": "TIER_2_TOP_DOWN"
+    },
+    "Industrial_Machinery": {
+      "entity_type": "segment",
+      "tier": "TIER_2_TOP_DOWN"
+    },
+    "Electronics_and_Appliances": {
+      "entity_type": "segment",
+      "tier": "TIER_2_TOP_DOWN"
+    },
+    "Other_Uses": {
+      "entity_type": "segment",
+      "tier": "TIER_2_TOP_DOWN"
+    }
+  },
+  "data": {
+    "Copper": {
+      "consumption": {
+        "Global": "Annual_Consumption",
+        "China": "Annual_Consumption",
+        "USA": "Annual_Consumption",
+        "Europe": "Annual_Consumption",
+        "Rest_of_World": "Annual_Consumption"
+      },
+      "price": {
+        "Global": "Price"
+      },
+      "recycling_rate": {
+        "Global": "Annual_Recycling_Rate"
+      },
+      "entity_type": "commodity"
+    },
+    "Copper_Segments": {
+      "transportation_share": {
+        "Global": "Demand_Transportation_Percentage"
+      },
+      "electrical_share": {
+        "Global": "Electrical_Demand_Percentage"
+      },
+      "ev_share": {
+        "Global": "EV_Demand_Percentage"
+      },
+      "solar_share": {
+        "Global": "Solar_Demand_Percentage"
+      },
+      "wind_share": {
+        "Global": "Wind_Turbines_Percentage"
+      },
+      "entity_type": "segment_shares"
+    },
+    "Passenger_Cars": {
+      "sales_ice": {
+        "Global": "Passenger_Vehicle_(ICE)_Annual_Sales",
+        "China": "Passenger_Vehicle_(ICE)_Annual_Sales",
+        "USA": "Passenger_Vehicle_(ICE)_Annual_Sales",
+        "Europe": "Passenger_Vehicle_(ICE)_Annual_Sales",
+        "Rest_of_World": "Passenger_Vehicle_(ICE)_Annual_Sales"
+      },
+      "sales_bev": {
+        "Global": "Passenger_Vehicle_(BEV)_Annual_Sales"
+      },
+      "sales_phev": {
+        "Global": "Passenger_Vehicle_(PHEV)_Annual_Sales"
+      },
+      "fleet_ice": {
+        "Global": "Passenger_Vehicle_(ICE)_Total_Fleet"
+      },
+      "fleet_bev": {
+        "Global": "Passenger_Vehicle_(BEV)_Total_Fleet"
+      },
+      "fleet_phev": {
+        "Global": "Passenger_Vehicle_(PHEV)_Total_Fleet"
+      },
+      "entity_type": "market"
+    },
+    "Commercial_Vehicles": {
+      "sales_ice": {
+        "Global": "Commercial_Vehicle_(ICE)_Annual_Sales"
+      },
+      "sales_ev": {
+        "Global": "Commercial_Vehicle_(EV)_Annual_Sales"
+      },
+      "sales_ngv": {
+        "Global": "Commercial_Vehicle_(NGV)_Annual_Sales"
+      },
+      "fleet_ice": {
+        "Global": "Commercial_Vehicle_(ICE)_Total_Fleet"
+      },
+      "fleet_ev": {
+        "Global": "Commercial_Vehicle_(EV)_Total_Fleet"
+      },
+      "fleet_ngv": {
+        "Global": "Commercial_Vehicle_(NGV)_Total_Fleet"
+      },
+      "entity_type": "market"
+    },
+    "Two_Wheelers": {
+      "sales_ice": {
+        "Global": "Two_Wheeler_(ICE)_Annual_Sales"
+      },
+      "sales_ev": {
+        "Global": "Two_Wheeler_(EV)_Annual_Sales"
+      },
+      "fleet_ice": {
+        "Global": "Two_Wheeler_(ICE)_Total_Fleet"
+      },
+      "fleet_ev": {
+        "Global": "Two_Wheeler_(EV)_Total_Fleet"
+      },
+      "entity_type": "market"
+    },
+    "Three_Wheelers": {
+      "sales_ice": {
+        "Global": "Three_Wheeler_(ICE)_Annual_Sales"
+      },
+      "sales_ev": {
+        "Global": "Three_Wheeler_(EV)_Annual_Sales"
+      },
+      "fleet_ice": {
+        "Global": "Three_Wheeler_(ICE)_Total_Fleet"
+      },
+      "fleet_ev": {
+        "Global": "Three_Wheeler_(EV)_Total_Fleet"
+      },
+      "entity_type": "market"
+    },
+    "Grid_Generation": {
+      "wind_onshore_capacity": {
+        "Global": "Onshore_Wind_Installed_Capacity"
+      },
+      "wind_offshore_capacity": {
+        "Global": "Offshore_Wind_Installed_Capacity"
+      },
+      "solar_capacity": {
+        "Global": "Solar_Installed_Capacity"
+      },
+      "coal_capacity": {
+        "Global": "Coal_Installed_Capacity"
+      },
+      "gas_capacity": {
+        "Global": "Natural_Gas_Installed_Capacity"
+      },
+      "entity_type": "segment"
+    },
+    "Electricity_System": {
+      "production": {
+        "Global": "Electricity_Annual_Production"
+      },
+      "entity_type": "driver"
+    }
+  },
+  "copper_intensity": {
+    "Passenger_Cars": {
+      "ICE": "20-25 kg",
+      "HEV": "30-40 kg",
+      "PHEV": "55-65 kg",
+      "BEV": "80-90 kg"
+    },
+    "Commercial_Vehicles": {
+      "ICE": "30-40 kg",
+      "EV": "110-130 kg",
+      "NGV": "35-42 kg"
+    },
+    "Two_Wheelers": {
+      "ICE": "2-4 kg",
+      "EV": "3-5 kg"
+    },
+    "Three_Wheelers": {
+      "ICE": "3-5 kg",
+      "EV": "4-6 kg"
+    },
+    "Wind_Onshore": "4-10 tonnes/MW",
+    "Wind_Offshore": "8-12 tonnes/MW",
+    "Solar_PV": "4-6 tonnes/MW",
+    "Natural_Gas": "0.8-1.2 tonnes/MW",
+    "Coal": "0.8-1.2 tonnes/MW"
+  },
+  "regions": ["China", "USA", "Europe", "Rest_of_World", "Global"],
+  "metadata": {
+    "version": "2.0_standardized",
+    "last_updated": "2024-11-24",
+    "description": "Standardized copper demand taxonomy aligned with other skills",
+    "data_files": [
+      "Copper.json",
+      "Passenger_Cars.json",
+      "Commercial_Vehicle.json",
+      "Two_Wheeler.json",
+      "Three_Wheeler.json",
+      "Energy_Generation.json"
+    ]
+  }
+}

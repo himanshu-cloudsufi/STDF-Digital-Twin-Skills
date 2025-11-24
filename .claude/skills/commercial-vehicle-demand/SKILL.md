@@ -1,7 +1,7 @@
 ---
 name: commercial-vehicle-demand
 description: >
-  Performs segment-level demand forecasting for commercial vehicles (LCV, MCV, HCV) with EV disruption analysis, tipping point detection, and NGV chimera modeling across global regions. Calculates cost parity per segment and models differentiated EV adoption with segment-specific ceilings. Use when user asks about commercial vehicle demand, truck forecasts, CV electrification, LCV/MCV/HCV adoption, fleet tracking, or questions like "forecast commercial vehicle demand", "when will trucks electrify", "LCV vs HCV adoption rates", "NGV decline trajectory", "commercial vehicle fleet evolution", "segment-level tipping points". Handles segments: LCV (light duty), MCV (medium duty), HCV (heavy duty). Regions: China, USA, Europe, Rest_of_World, Global. Trigger keywords: forecast, commercial vehicle, CV, truck, LCV, MCV, HCV, light duty, medium duty, heavy duty, NGV, natural gas, segment, tipping point, fleet tracking, electrification, China, USA, Europe, 2040. (project)
+  Performs segment-level demand forecasting for commercial vehicles (LCV, MCV, HCV) with EV disruption analysis, tipping point detection, and NGV chimera modeling across global regions. Calculates cost parity per segment and models differentiated EV adoption with segment-specific ceilings. Use when user asks about commercial vehicle demand, truck forecasts, CV electrification, LCV/MCV/HCV adoption, fleet tracking, or questions like "forecast commercial vehicle demand", "when will trucks electrify", "LCV vs HCV adoption rates", "NGV decline trajectory", "commercial vehicle fleet evolution", "segment-level tipping points". Handles segments: LCV (light duty), MCV (medium duty), HCV (heavy duty). Regions: China, USA, Europe, Rest_of_World, Global. Trigger keywords: forecast, commercial vehicle, CV, truck, LCV, MCV, HCV, light duty, medium duty, heavy duty, NGV, natural gas, segment, tipping point, fleet tracking, electrification, China, USA, Europe. (project)
 ---
 
 # Commercial Vehicle Demand Forecasting
@@ -47,7 +47,7 @@ python3 scripts/forecast.py --region Europe --segment MCV --track-fleet --output
 | `--region` | Required | China, USA, Europe, Rest_of_World |
 | `--segment` | all | LCV, MCV, or HCV (omit for all segments) |
 | `--all-segments` | false | Flag to forecast all segments |
-| `--end-year` | 2040 | Forecast horizon |
+| `--end-year` | 2035 | Forecast horizon |
 | `--output` | csv | csv, json, or both |
 | `--output-dir` | ./output | Output directory path |
 | `--track-fleet` | false | Enable fleet evolution tracking |
@@ -91,6 +91,80 @@ Result: Differentiated adoption across LCV/MCV/HCV + aggregated Total CV + fleet
 python3 scripts/forecast.py --region Europe --segment MCV --ngv-half-life 5.0 --output json
 ```
 Result: Faster NGV decline (5-year half-life) for medium duty trucks
+
+## Taxonomy and Dataset Mapping
+
+### Market Definition
+- **Market:** `Commercial_Vehicles`
+- **Total Market Demand:** `Annual_Sales` (by region)
+- **Segments:** `LCV` (Light Duty), `MCV` (Medium Duty), `HCV` (Heavy Duty)
+
+### Technology Types
+
+**EV Commercial Vehicles**
+- Entity Type: `disruptor`
+- Demand Dataset: `(EV)_Annual_Sales` (by region)
+- Installed Base: `(EV)_Total_Fleet` (by region)
+
+**ICE Commercial Vehicles**
+- Entity Type: `incumbent`
+- Demand Dataset: `(ICE)_Annual_Sales` (by region)
+- Installed Base: `(ICE)_Total_Fleet` (by region)
+
+**NGV Commercial Vehicles (Natural Gas)**
+- Entity Type: `chimera` (transitional technology)
+- Demand Dataset: `(NGV)_Annual_Sales` (by region)
+- Installed Base: `(NGV)_Total_Fleet` (by region)
+
+### Segment-Specific Datasets
+
+**LCV (Light Duty Commercial Vehicles)**
+- Full Name: `Light_Duty_Commercial_Vehicles`
+- EV Cost: `LCV_commercial_vehicle_(Range-100_KM)_Lowest_Cost` (by region)
+- ICE Cost: `Light_Duty_Commercial_Vehicle_(ICE)_Price` (by region)
+- Total Market: `Light_Duty_Commercial_Vehicle_Annual_Sales` (by region)
+- EV Demand: `Light_Duty_Commercial_Vehicle_(EV)_Annual_Sales` (by region)
+- ICE Demand: `Light_Duty_Commercial_Vehicle_(ICE)_Annual_Sales` (by region)
+- NGV Demand: `Light-duty_commercial_vehicles_(NGV)_Annual_Sales` (by region)
+- EV Fleet: `Light_Duty_Commercial_Vehicle_(EV)_Total_Fleet` (by region)
+- ICE Fleet: `Light_Duty_Commercial_Vehicle_(ICE)_Total_Fleet` (by region)
+- NGV Fleet: `Light_Duty_Commercial_Vehicle_(NGV)_Total_Fleet` (by region)
+
+**MCV (Medium Duty Commercial Vehicles)**
+- Full Name: `Medium_Duty_Commercial_Vehicles`
+- EV Cost: `MCV_commercial_vehicle_(Range-200_KM)_Lowest_Cost` (by region)
+- ICE Cost: `Medium_Duty_Commercial_Vehicle_(ICE)_Price` (by region)
+- Total Market: `Medium_Duty_Commercial_Vehicle_Annual_Sales` (by region)
+- EV Demand: `Medium_Duty_Commercial_Vehicle_(EV)_Annual_Sales` (by region)
+- ICE Demand: `Medium_Duty_Commercial_Vehicle_(ICE)_Annual_Sales` (by region)
+- NGV Demand: `Medium-duty_commercial_vehicles_(NGV)_Annual_Sales` (by region)
+- EV Fleet: `Medium_Duty_Commercial_Vehicle_(EV)_Total_Fleet` (by region)
+- ICE Fleet: `Medium_Duty_Commercial_Vehicle_(ICE)_Total_Fleet` (by region)
+- NGV Fleet: `Medium_Duty_Commercial_Vehicle_(NGV)_Total_Fleet` (by region)
+
+**HCV (Heavy Duty Commercial Vehicles)**
+- Full Name: `Heavy_Duty_Commercial_Vehicles`
+- EV Cost: `HCV_commercial_vehicle_(Range-400_KM)_Lowest_Cost` (by region)
+- ICE Cost: `Heavy_Duty_Commercial_Vehicle_(ICE)_Price` (by region)
+- Total Market: `Heavy_Duty_Commercial_Vehicle_Annual_Sales` (by region)
+- EV Demand: `Heavy_Duty_Commercial_Vehicle_(EV)_Annual_Sales` (by region)
+- ICE Demand: `Heavy_Duty_Commercial_Vehicle_(ICE)_Annual_Sales` (by region)
+- NGV Demand: `Heavy-duty_commercial_vehicles_(NGV)_Annual_Sales` (by region)
+- EV Fleet: `Heavy_Duty_Commercial_Vehicle_(EV)_Total_Fleet` (by region)
+- ICE Fleet: `Heavy_Duty_Commercial_Vehicle_(ICE)_Total_Fleet` (by region)
+- NGV Fleet: `Heavy_Duty_Commercial_Vehicle_(NGV)_Total_Fleet` (by region)
+
+### Available Regions
+All datasets support: `China`, `USA`, `Europe`, `Rest_of_World`, `Global`
+
+### Available Dataset Files
+- `Commercial_Vehicle.json` - Historical sales, costs, and fleet data for all segments and technologies
+- `commercial_vehicle_taxonomy_and_datasets.json` - Taxonomy mapping (this section)
+
+### Adoption Ceilings by Segment
+- **LCV:** 95% EV adoption ceiling (high suitability for urban delivery)
+- **MCV:** 85% EV adoption ceiling (moderate range requirements)
+- **HCV:** 75% EV adoption ceiling (long-haul constraints)
 
 ## Reference Documentation
 

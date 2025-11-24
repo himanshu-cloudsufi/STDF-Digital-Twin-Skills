@@ -163,6 +163,73 @@ Files saved to: `output/{Region}_{EndYear}_{Scenario}.{format}`
 - **Non-SWB baseline** uses multiple fallback methods to minimize error
 - **Validation** uses actual Coal emissions data (1975-2024) from Coal.json to verify calculations
 
+## Taxonomy and Dataset Mapping
+
+### Disruptor Technologies (SWB Stack)
+
+**Solar PV**
+- Entity Type: `disruptor`
+- LCOE: `Solar_Photovoltaic_LCOE`
+- Capacity: `Solar_Installed_Capacity`
+- Generation: `Solar_Annual_Power_Generation`
+- Capacity Factor: `Solar_Photovoltaic_Capacity_Factor`
+
+**Onshore Wind**
+- Entity Type: `disruptor`
+- LCOE: `Onshore_Wind_LCOE`
+- Capacity: `Onshore_Wind_Installed_Capacity`
+- Generation: `Wind_Annual_Power_Generation`
+- Capacity Factor: `Onshore_Wind_Capacity_Factor`
+
+**Offshore Wind**
+- Entity Type: `disruptor`
+- LCOE: `Offshore_Wind_LCOE`
+- Capacity: `Offshore_Wind_Installed_Capacity`
+- Generation: `Wind_Annual_Power_Generation`
+- Capacity Factor: `Offshore_Wind_Capacity_Factor`
+
+**Concentrated Solar Power (CSP)**
+- Entity Type: `disruptor`
+- LCOE: `Concentrated_Solar_Power_LCOE`
+- Capacity: `Concentrated_Solar_Power_Installed_Capacity`
+- Generation: `null` (derived from capacity)
+- Capacity Factor: `CSP_Capacity_Factor_Derived`
+
+**Battery Storage**
+- Entity Type: `disruptor`
+- Cost (2-hour): `Battery_Energy_Storage_System_(2-hour_Turnkey)_Cost`
+- Cost (4-hour): `Battery_Energy_Storage_System_(4-hour_Turnkey)_Cost`
+- Capacity: `Battery_Energy_Storage_System_Installed_Capacity`
+
+### Incumbent Technologies (Fossil Fuels)
+
+**Coal Power**
+- Entity Type: `incumbent`
+- LCOE: `Coal_Power_LCOE_Derived` (fallback - see Dataset Limitations)
+- Capacity: `Coal_Installed_Capacity`
+- Generation: `Coal_Annual_Power_Generation`
+- Capacity Factor: `Coal_Capacity_Factor_Derived`
+
+**Gas Power / Natural Gas Power**
+- Entity Type: `incumbent`
+- LCOE: `Gas_Power_LCOE_Derived` (fallback - see Dataset Limitations)
+- Capacity: `Natural_Gas_Installed_Capacity`
+- Generation: `Natural_Gas_Annual_Power_Generation`
+- Capacity Factor: `Natural_Gas_Capacity_Factor`
+
+### Electricity System Metrics
+
+- Total Demand: `Annual_Domestic_Consumption`
+- Total Generation: `Annual_Production`
+
+### Available Dataset Files
+
+- `Coal.json` - Coal generation, capacity, and CO2 emissions (1975-2024)
+- `Electricity.json` - Total electricity production and consumption by region
+- `Energy_Generation.json` - Capacity and generation by technology (Solar, Wind, Coal, Gas, Nuclear, Hydro)
+- `Energy_Storage.json` - Battery storage costs and capacity
+- `swb_taxonomy_and_datasets.json` - Taxonomy mapping (this section)
+
 ## Reference Documentation
 
 - [reference/methodology-reference.md](reference/methodology-reference.md) - YoY averaging, SCOE, displacement logic

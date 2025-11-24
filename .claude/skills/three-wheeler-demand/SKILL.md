@@ -298,6 +298,46 @@ python3 scripts/forecast.py --region Rest_of_World --end-year 2030 --output csv
 - **Europe**: Small emerging market, primarily urban delivery use cases
 - **USA**: Not included (negligible three-wheeler market)
 
+## Taxonomy and Dataset Mapping
+
+### Market Definition
+- **Market:** `Three_Wheelers`
+- **Total Market Demand:** `Annual_Sales` (by region)
+
+### Disruptor Technology
+
+**EV Three-Wheelers**
+- Entity Type: `disruptor`
+- Primary Cost Dataset: `EV_3_Wheeler_(Range-100_KM)_Lowest_Cost` (by region)
+- Secondary Cost Dataset: `(EV)_Median_Cost` (by region)
+- Demand Dataset: `(EV)_Annual_Sales` (by region)
+- Installed Base: `(EV)_Total_Fleet` (by region)
+
+### Incumbent Technology
+
+**ICE Three-Wheelers**
+- Entity Type: `incumbent`
+- Cost Dataset: `(ICE)_Median_Cost` (by region)
+- Demand Dataset: `(ICE)_Annual_Sales` (by region)
+- Installed Base: `(ICE)_Total_Fleet` (by region)
+
+### Commodity Impact Tracking
+
+**Lead (Battery Material)**
+- Entity Type: `commodity`
+- Implied Demand (Global):
+  - Sales: `Lead_Annual_Implied_Demand-Sales_3_wheelers`
+  - Replacement: `Lead_Annual_Implied_Demand-Vehicle_replacement_3_wheelers`
+
+### Available Regions
+All datasets support: `China`, `Europe`, `Rest_of_World`, `Global`
+
+**Note:** USA is excluded as the three-wheeler market is minimal in North America.
+
+### Available Dataset Files
+- `Three_Wheeler.json` - Historical sales, cost, and fleet data for EV and ICE three-wheelers
+- `three_wheeler_taxonomy_and_datasets.json` - Taxonomy mapping (this section)
+
 ## Reference Documentation
 
 - [reference/methodology-reference.md](reference/methodology-reference.md) - Detailed algorithms and equations

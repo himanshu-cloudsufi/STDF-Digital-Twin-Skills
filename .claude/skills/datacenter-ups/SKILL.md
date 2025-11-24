@@ -519,6 +519,49 @@ Based on:
 - TCO methodology for technology transitions
 - S-curve adoption modeling literature
 
+## Taxonomy and Dataset Mapping
+
+### Market Definition
+- **Market:** `Datacenter_UPS`
+- **Total Market Demand:** `Data_Center_Battery_Demand_Annual_Capacity_Demand_{Region}` (MWh/year)
+- **Market Drivers:** `Datacenter_capacity_growth_projections_{Region}`
+
+### Battery Technologies
+
+**VRLA (Valve-Regulated Lead-Acid) - Incumbent**
+- Entity Type: `incumbent`
+- Aliases: `Lead_Acid`, `LAB`
+- Demand Dataset: `Data_Center_Battery_Demand_(LAB)_Annual_Capacity_Demand_{Region}` (MWh/year)
+- Installed Base: `Lead_acid_batteries_UPS_Datacenter_Installed_Base_{Region}` (MWh)
+- Lifetime: `Lead_acid_batteries_UPS_Datacenter_Replacement_cycle_Battery_Replacement_cycle_Global` (5 years)
+- Cost: `VRLA_Battery_Cost_Global` (~$220/kWh, flat)
+
+**Li-ion (Lithium-ion) - Disruptor**
+- Entity Type: `disruptor`
+- Aliases: `Lithium_Ion`, `LIB`
+- Demand Dataset: `Data_Center_Battery_Demand_(Li-Ion)_Annual_Capacity_Demand_{Region}` (MWh/year)
+- Cost (4-hour): `Battery_Energy_Storage_System_(4-hour_Turnkey)_Cost_{Region}` ($/kWh)
+- Cost (2-hour): `Battery_Energy_Storage_System_(2-hour_Turnkey)_Cost_{Region}` ($/kWh)
+- Cost (Power basis): `Battery_Energy_Storage_System_Installed_Cost_Global` ($/kW)
+- Lifetime: `Li_ion_UPS_Replacement_cycle_Global` (12 years)
+- Material Intensity: `Data_Center_UPS_Battery_(Li-Ion)_Average_Lithium_content_Global` (kg Li/kWh)
+
+### Available Regions
+All datasets support: `China`, `USA`, `Europe`, `Rest_of_World`, `Global`
+
+### Available Dataset Files
+- `Datacenter_UPS.json` - Historical demand, installed base, and growth projections
+- `Energy_Storage.json` - Battery costs and technical parameters
+- `datacenter_ups_taxonomy_and_datasets.json` - Taxonomy mapping (this section)
+
+### Units
+- Demand: MWh/year
+- Installed Base: MWh
+- Replacement Cycle: years
+- Cost (Energy): $/kWh
+- Cost (Power): $/kW
+- Lithium Content: kg Li/kWh
+
 ## Reference Documentation
 
 - [reference/methodology-reference.md](reference/methodology-reference.md) - Detailed TCO calculation, S-curve fitting algorithms
