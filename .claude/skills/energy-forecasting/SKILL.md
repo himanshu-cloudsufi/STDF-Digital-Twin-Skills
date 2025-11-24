@@ -8,6 +8,95 @@ description: >
 
 Cost-driven forecasting for SWB (Solar-Wind-Battery) energy systems and fossil fuel displacement.
 
+## Table of Contents
+- [Available Datasets](#available-datasets)
+- [When to Use This Skill](#when-to-use-this-skill)
+- [Quick Start](#quick-start)
+- [Parameters](#parameters)
+- [Scenarios](#scenarios)
+- [Forecasting Process](#forecasting-process)
+- [Key Methodology Differences](#key-methodology-differences)
+- [Output Formats](#output-formats)
+- [Examples](#examples)
+- [Dataset Limitations & Fallback Strategies](#dataset-limitations--fallback-strategies)
+- [Taxonomy and Dataset Mapping](#taxonomy-and-dataset-mapping)
+- [Reference Documentation](#reference-documentation)
+
+## Available Datasets
+
+**CRITICAL FOR PLANNING:** The following datasets are available (✅) or require fallbacks (❌):
+
+### ✅ Disruptor Technologies (SWB Stack)
+
+#### Solar PV
+- **LCOE:** `Solar_Photovoltaic_LCOE` (China, USA, Global)
+- **Capacity:** `Solar_Installed_Capacity` (Global, cumulative)
+- **Generation:** `Solar_Annual_Power_Generation` (Global)
+- **Capacity Factor:** `Solar_Photovoltaic_Capacity_Factor` (China, USA, Global)
+
+#### Onshore Wind
+- **LCOE:** `Onshore_Wind_LCOE` (China, USA, Global)
+- **Capacity:** `Onshore_Wind_Installed_Capacity` (Global, cumulative)
+- **Generation:** `Wind_Annual_Power_Generation` (Global)
+- **Capacity Factor:** `Onshore_Wind_Capacity_Factor` (China, USA, Global)
+
+#### Offshore Wind
+- **LCOE:** `Offshore_Wind_LCOE` (China, USA, Global)
+- **Capacity:** `Offshore_Wind_Installed_Capacity` (Global, cumulative)
+- **Generation:** `Wind_Annual_Power_Generation` (Global)
+- **Capacity Factor:** `Offshore_Wind_Capacity_Factor` (China, USA, Global)
+
+#### Concentrated Solar Power (CSP)
+- **LCOE:** `Concentrated_Solar_Power_LCOE` (Global)
+- **Capacity:** `Concentrated_Solar_Power_Installed_Capacity` (Global)
+- **Capacity Factor:** Derived from historical data
+
+#### Battery Storage
+- **Cost (2-hour):** `Battery_Energy_Storage_System_(2-hour_Turnkey)_Cost` (Global)
+- **Cost (4-hour):** `Battery_Energy_Storage_System_(4-hour_Turnkey)_Cost` (Global)
+- **Capacity:** `Battery_Energy_Storage_System_Installed_Capacity` (Global)
+
+### ❌ Incumbent Technologies (Fossil Fuels) - **FALLBACK VALUES USED**
+
+#### Coal Power
+- **LCOE:** `Coal_Power_LCOE_Derived` - **NO DATASET** (uses fallback: ~$65/MWh for China, growing 1.5%/yr)
+- **Capacity:** `Coal_Installed_Capacity` (Global, cumulative) ✅
+- **Generation:** `Coal_Annual_Power_Generation` (Global) ✅
+- **Capacity Factor:** Derived from capacity/generation ✅
+
+#### Gas Power
+- **LCOE:** `Gas_Power_LCOE_Derived` - **NO DATASET** (uses fallback: ~$60/MWh for USA, growing 1.2%/yr)
+- **Capacity:** `Natural_Gas_Installed_Capacity` (Global, cumulative) ✅
+- **Generation:** `Natural_Gas_Annual_Power_Generation` (Global) ✅
+- **Capacity Factor:** `Natural_Gas_Capacity_Factor` (Global) ✅
+
+### ✅ Electricity System Metrics
+- **Total Demand:** `Annual_Domestic_Consumption_{Region}`
+- **Total Generation:** `Annual_Production_{Region}`
+
+### ✅ Validation Data
+- **Coal CO2 Emissions:** `Coal_CO2_Emissions` (1975-2024, for validation)
+
+### Dataset Files Location
+- `Coal.json` - Coal generation, capacity, CO2 emissions (1975-2024)
+- `Electricity.json` - Total production and consumption by region
+- `Energy_Generation.json` - Capacity and generation (Solar, Wind, Coal, Gas, Nuclear, Hydro)
+- `Energy_Storage.json` - Battery storage costs and capacity
+- `swb_taxonomy_and_datasets.json` - Complete taxonomy mapping
+
+### Regional Coverage
+All datasets available for: **China, USA, Europe, Rest_of_World, Global**
+
+### Critical Fallback Strategy Notes
+1. **Coal & Gas LCOE:** Use regional baseline values (2020) with annual cost escalation
+   - See `config.json` → `fallback_lcoe_values` for complete regional values
+2. **Nuclear & Hydro Generation:** Try actual data → derive from residual → use regional percentage estimates
+   - See `config.json` → `non_swb_baseline_percentages`
+3. **Capacity Factors:** Historical → regional defaults → global average → technology default
+   - See `config.json` → `capacity_factors` → `fallback_hierarchy`
+
+**Important:** Despite fallbacks, tipping points remain valid due to conservative fossil cost assumptions
+
 ## When to Use This Skill
 
 Use for energy generation and capacity forecasting when:

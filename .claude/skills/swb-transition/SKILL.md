@@ -14,6 +14,76 @@ description: >
 
 This skill models the economic-driven transition from fossil fuels (coal/gas) to renewable energy (Solar+Wind+Battery stack) in the electricity system, using LCOE/SCOE cost parity analysis and displacement sequencing.
 
+## Table of Contents
+- [Available Datasets](#available-datasets)
+- [Overview](#overview)
+- [Key Features](#key-features)
+- [Usage](#usage)
+- [Parameters](#parameters)
+- [Outputs](#outputs)
+- [Data Requirements](#data-requirements)
+- [Validation](#validation)
+- [Scenarios](#scenarios)
+- [Regional Considerations](#regional-considerations)
+- [Technical Details](#technical-details)
+
+## Available Datasets
+
+**CRITICAL FOR PLANNING:** The following datasets drive the SWB transition model:
+
+### ✅ Disruptor Technologies (SWB Stack)
+- **Solar LCOE:** `Solar_Photovoltaic_LCOE_{Region}` (China, USA, Global)
+- **Onshore Wind LCOE:** `Onshore_Wind_LCOE_{Region}` (China, USA, Global)
+- **Offshore Wind LCOE:** `Offshore_Wind_LCOE_{Region}` (China, USA, Global)
+- **Battery Cost:** `Battery_Energy_Storage_System_Cost_{Region}` (various durations)
+- **Solar Capacity:** `Solar_Installed_Capacity_{Region}` (Global, cumulative)
+- **Onshore Wind Capacity:** `Onshore_Wind_Installed_Capacity_{Region}` (Global, cumulative)
+- **Offshore Wind Capacity:** `Offshore_Wind_Installed_Capacity_{Region}` (Global, cumulative)
+- **Battery Capacity:** `Battery_Energy_Storage_System_Installed_Capacity_{Region}` (Global)
+- **Solar Generation:** `Solar_Annual_Power_Generation_{Region}` (Global)
+- **Wind Generation:** `Wind_Annual_Power_Generation_{Region}` (Global)
+- **Solar CF:** `Solar_Photovoltaic_Capacity_Factor_{Region}` (15-25%, improving)
+- **Onshore Wind CF:** `Onshore_Wind_Capacity_Factor_{Region}` (25-35%, improving)
+- **Offshore Wind CF:** `Offshore_Wind_Capacity_Factor_{Region}` (35-50%, improving)
+
+### ❌ Incumbent Technologies (Fossil Fuels) - **PARTIAL DATA**
+- **Coal LCOE:** NO DATASET - uses fallback (~$65/MWh China, rising 1.5%/yr)
+- **Gas LCOE:** NO DATASET - uses fallback (~$60/MWh USA, rising 1.2%/yr)
+- **Coal Capacity:** `Coal_Installed_Capacity` (Global, cumulative) ✅
+- **Gas Capacity:** `Natural_Gas_Installed_Capacity` (Global, cumulative) ✅
+- **Coal Generation:** `Coal_Annual_Power_Generation` (Global) ✅
+- **Gas Generation:** `Natural_Gas_Annual_Power_Generation` (Global) ✅
+- **Coal CF:** Derived from capacity/generation ✅
+- **Gas CF:** `Natural_Gas_Capacity_Factor` (Global) ✅
+
+### System Metrics
+- **Electricity Demand:** `Electricity_Annual_Production_{Region}`
+- **Total Demand:** `Electricity_Annual_Domestic_Consumption_{Region}`
+
+### Dataset Files Location
+- `Coal.json` - Coal generation, capacity, CO2 (1975-2024)
+- `Electricity.json` - Total production and consumption by region
+- `Energy_Generation.json` - Capacity and generation by technology
+- `Energy_Storage.json` - Battery storage costs and capacity
+- `swb_taxonomy_and_datasets.json` - Complete taxonomy mapping
+
+### Regional Coverage
+All datasets available for: **China, USA, Europe, Rest_of_World, Global**
+
+### Displacement Sequencing by Region
+- **China:** Coal-first (air quality, climate commitments)
+- **Europe:** Coal-first (carbon pricing, green policies)
+- **USA:** Gas-first (cheap gas, flexible generation)
+- **Rest_of_World:** Mixed, country-specific
+
+### Critical Notes for Planning
+1. **SWB Stack Cost = MAX(Solar_LCOE, Wind_LCOE) + SCOE** (conservative approach)
+2. **Tipping Points:** Separate vs-coal and vs-gas detection
+3. **Reserve Floors:** Min 10% coal, 15% gas of peak load retained
+4. **New Capacity = Difference in cumulative capacity** for all generation types
+5. **Capacity Factors improve annually:** Solar +0.2-0.3pp/yr, Wind +0.2-0.5pp/yr
+6. **Fallback LCOE values are conservative** - tipping points remain valid
+
 ## Overview
 
 The skill forecasts the energy transition across:

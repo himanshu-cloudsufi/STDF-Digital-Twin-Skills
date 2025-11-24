@@ -12,6 +12,51 @@ description: >
 
 This skill implements cost-driven demand forecasting for three-wheeler markets, focusing on EV disruption dynamics and tipping point analysis.
 
+## Table of Contents
+- [Available Datasets](#available-datasets)
+- [Overview](#overview)
+- [Key Features](#key-features)
+- [Usage](#usage)
+- [Methodology](#methodology)
+- [Output Formats](#output-formats)
+- [Scenarios](#scenarios)
+- [Examples](#examples)
+- [Market Context](#market-context)
+- [Taxonomy and Dataset Mapping](#taxonomy-and-dataset-mapping)
+- [Reference Documentation](#reference-documentation)
+
+## Available Datasets
+
+**CRITICAL FOR PLANNING:** The following datasets are available and must be used for forecasting:
+
+### Market Data
+- **Total Market:** `Annual_Sales` (by region: China, Europe, Rest_of_World, Global)
+
+### EV Three-Wheelers (Disruptor)
+- **Cost Data:**
+  - Primary: `EV_3_Wheeler_(Range-100_KM)_Lowest_Cost_{Region}` (key for tipping point detection)
+  - Secondary: `(EV)_Median_Cost_{Region}`
+- **Demand:** `(EV)_Annual_Sales_{Region}`
+- **Fleet:** `(EV)_Total_Fleet_{Region}`
+
+### ICE Three-Wheelers (Incumbent)
+- **Cost Data:** `(ICE)_Median_Cost_{Region}` (key for tipping point detection)
+- **Demand:** `(ICE)_Annual_Sales_{Region}`
+- **Fleet:** `(ICE)_Total_Fleet_{Region}`
+
+### Lead Demand Tracking (Commodity Impact)
+- **Sales-related:** `Lead_Annual_Implied_Demand-Sales_3_wheelers` (Global)
+- **Replacement-related:** `Lead_Annual_Implied_Demand-Vehicle_replacement_3_wheelers` (Global)
+
+### Dataset Files Location
+- `Three_Wheeler.json` - All historical sales, cost, and fleet data
+- `three_wheeler_taxonomy_and_datasets.json` - Complete taxonomy mapping
+
+### Regional Coverage
+All datasets available for: **China, Europe, Rest_of_World, Global**
+
+**IMPORTANT:** USA is excluded - three-wheeler market is minimal in North America
+
 ## Overview
 
 The skill forecasts three-wheeler demand across:

@@ -12,6 +12,46 @@ description: >
 
 This skill implements cost-driven demand forecasting for two-wheeler markets, focusing on EV disruption dynamics and tipping point analysis.
 
+## Table of Contents
+- [Available Datasets](#available-datasets)
+- [Overview](#overview)
+- [Key Features](#key-features)
+- [Usage](#usage)
+- [Methodology](#methodology)
+- [Output Formats](#output-formats)
+- [Scenarios](#scenarios)
+- [Examples](#examples)
+- [Taxonomy and Dataset Mapping](#taxonomy-and-dataset-mapping)
+- [Reference Documentation](#reference-documentation)
+
+## Available Datasets
+
+**CRITICAL FOR PLANNING:** The following datasets are available and must be used for forecasting:
+
+### Market Data
+- **Total Market:** `Two_Wheeler_Annual_Sales` (by region: China, USA, Europe, Rest_of_World, Global)
+
+### EV Two-Wheelers (Disruptor)
+- **Cost Data:**
+  - Primary: `EV_2_Wheeler_(Range-100_KM)_Lowest_Cost_{Region}` (key for tipping point detection)
+  - Secondary: `Two_Wheeler_(EV)_Median_Cost_{Region}`
+- **Demand:** `Two_Wheeler_(EV)_Annual_Sales_{Region}`
+- **Fleet:** `Two_Wheeler_(EV)_Total_Fleet_{Region}` (NOT available for China)
+
+### ICE Two-Wheelers (Incumbent)
+- **Cost Data:** `Two_Wheeler_(ICE)_Median_Cost_{Region}` (key for tipping point detection)
+- **Demand:** `Two_Wheeler_(ICE)_Annual_Sales_{Region}`
+- **Fleet:** `Two_Wheeler_(ICE)_Total_Fleet_{Region}`
+
+### Dataset Files Location
+- `Two_Wheeler.json` - All historical sales, cost, and fleet data
+- `two_wheeler_taxonomy_and_datasets.json` - Complete taxonomy mapping
+
+### Regional Coverage
+All datasets available for: **China, USA, Europe, Rest_of_World, Global**
+
+**Note:** EV fleet data NOT available for China
+
 ## Overview
 
 The skill forecasts two-wheeler demand across:

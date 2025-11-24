@@ -8,6 +8,66 @@ description: >
 
 **Status:** Active skill for segment-level commercial vehicle (CV) demand forecasting with EV disruption and NGV modeling.
 
+## Table of Contents
+- [Available Datasets](#available-datasets)
+- [When to Use This Skill](#when-to-use-this-skill)
+- [Quick Start](#quick-start)
+- [Parameters](#parameters)
+- [Forecasting Process](#forecasting-process)
+- [Output Formats](#output-formats)
+- [Examples](#examples)
+- [Taxonomy and Dataset Mapping](#taxonomy-and-dataset-mapping)
+- [Reference Documentation](#reference-documentation)
+
+## Available Datasets
+
+**CRITICAL FOR PLANNING:** The following datasets are available for all three segments (LCV, MCV, HCV):
+
+### LCV (Light Duty Commercial Vehicles)
+- **Market:** `Light_Duty_Commercial_Vehicle_Annual_Sales_{Region}`
+- **EV Cost:** `LCV_commercial_vehicle_(Range-100_KM)_Lowest_Cost_{Region}` (key for tipping point)
+- **ICE Cost:** `Light_Duty_Commercial_Vehicle_(ICE)_Price_{Region}` (key for tipping point)
+- **EV Demand:** `Light_Duty_Commercial_Vehicle_(EV)_Annual_Sales_{Region}`
+- **ICE Demand:** `Light_Duty_Commercial_Vehicle_(ICE)_Annual_Sales_{Region}`
+- **NGV Demand:** `Light-duty_commercial_vehicles_(NGV)_Annual_Sales_{Region}`
+- **EV Fleet:** `Light_Duty_Commercial_Vehicle_(EV)_Total_Fleet_{Region}`
+- **ICE Fleet:** `Light_Duty_Commercial_Vehicle_(ICE)_Total_Fleet_{Region}`
+- **NGV Fleet:** `Light_Duty_Commercial_Vehicle_(NGV)_Total_Fleet_{Region}`
+
+### MCV (Medium Duty Commercial Vehicles)
+- **Market:** `Medium_Duty_Commercial_Vehicle_Annual_Sales_{Region}`
+- **EV Cost:** `MCV_commercial_vehicle_(Range-200_KM)_Lowest_Cost_{Region}` (key for tipping point)
+- **ICE Cost:** `Medium_Duty_Commercial_Vehicle_(ICE)_Price_{Region}` (key for tipping point)
+- **EV Demand:** `Medium_Duty_Commercial_Vehicle_(EV)_Annual_Sales_{Region}`
+- **ICE Demand:** `Medium_Duty_Commercial_Vehicle_(ICE)_Annual_Sales_{Region}`
+- **NGV Demand:** `Medium-duty_commercial_vehicles_(NGV)_Annual_Sales_{Region}`
+- **EV Fleet:** `Medium_Duty_Commercial_Vehicle_(EV)_Total_Fleet_{Region}`
+- **ICE Fleet:** `Medium_Duty_Commercial_Vehicle_(ICE)_Total_Fleet_{Region}`
+- **NGV Fleet:** `Medium_Duty_Commercial_Vehicle_(NGV)_Total_Fleet_{Region}`
+
+### HCV (Heavy Duty Commercial Vehicles)
+- **Market:** `Heavy_Duty_Commercial_Vehicle_Annual_Sales_{Region}`
+- **EV Cost:** `HCV_commercial_vehicle_(Range-400_KM)_Lowest_Cost_{Region}` (key for tipping point)
+- **ICE Cost:** `Heavy_Duty_Commercial_Vehicle_(ICE)_Price_{Region}` (key for tipping point)
+- **EV Demand:** `Heavy_Duty_Commercial_Vehicle_(EV)_Annual_Sales_{Region}`
+- **ICE Demand:** `Heavy_Duty_Commercial_Vehicle_(ICE)_Annual_Sales_{Region}`
+- **NGV Demand:** `Heavy-duty_commercial_vehicles_(NGV)_Annual_Sales_{Region}`
+- **EV Fleet:** `Heavy_Duty_Commercial_Vehicle_(EV)_Total_Fleet_{Region}`
+- **ICE Fleet:** `Heavy_Duty_Commercial_Vehicle_(ICE)_Total_Fleet_{Region}`
+- **NGV Fleet:** `Heavy_Duty_Commercial_Vehicle_(NGV)_Total_Fleet_{Region}`
+
+### Dataset Files Location
+- `Commercial_Vehicle.json` - All segment data (LCV, MCV, HCV) for all powertrains
+- `commercial_vehicle_taxonomy_and_datasets.json` - Complete taxonomy mapping
+
+### Regional Coverage
+All datasets available for: **China, USA, Europe, Rest_of_World, Global**
+
+### Adoption Ceilings by Segment
+- **LCV:** 95% EV adoption ceiling (high suitability for urban delivery)
+- **MCV:** 85% EV adoption ceiling (moderate range requirements)
+- **HCV:** 75% EV adoption ceiling (long-haul constraints)
+
 ## When to Use This Skill
 
 Use for commercial vehicle demand forecasting when:

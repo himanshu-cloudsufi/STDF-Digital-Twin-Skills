@@ -12,6 +12,62 @@ description: >
 
 Unified skill for forecasting two-wheeler and three-wheeler demand with cost-driven EV disruption analysis.
 
+## Table of Contents
+- [Available Datasets](#available-datasets)
+- [Overview](#overview)
+- [Quick Start](#quick-start)
+- [Command-Line Parameters](#command-line-parameters)
+- [Architecture](#architecture)
+- [Methodology](#methodology)
+- [Output Formats](#output-formats)
+- [Examples](#examples)
+- [Common Use Cases](#common-use-cases)
+- [Taxonomy and Dataset Mapping](#taxonomy-and-dataset-mapping)
+- [Related Skills](#related-skills)
+
+## Available Datasets
+
+**CRITICAL FOR PLANNING:** Datasets vary by vehicle type. Always check vehicle-specific availability:
+
+### Two-Wheeler Datasets (includes USA)
+- **Market:** `Two_Wheeler_Annual_Sales_{Region}`
+- **EV Cost:** `EV_2_Wheeler_(Range-100_KM)_Lowest_Cost_{Region}` (key for tipping point)
+- **ICE Cost:** `Two_Wheeler_(ICE)_Median_Cost_{Region}` (key for tipping point)
+- **EV Demand:** `Two_Wheeler_(EV)_Annual_Sales_{Region}`
+- **ICE Demand:** `Two_Wheeler_(ICE)_Annual_Sales_{Region}`
+- **EV Fleet:** `Two_Wheeler_(EV)_Total_Fleet_{Region}` (NOT available for China)
+- **ICE Fleet:** `Two_Wheeler_(ICE)_Total_Fleet_{Region}`
+- **Fleet Lifetime:** 11 years
+- **Regions:** China, USA, Europe, Rest_of_World, Global
+
+### Three-Wheeler Datasets (NO USA)
+- **Market:** `Annual_Sales_{Region}`
+- **EV Cost:** `EV_3_Wheeler_(Range-100_KM)_Lowest_Cost_{Region}` (key for tipping point)
+- **ICE Cost:** `(ICE)_Median_Cost_{Region}` (key for tipping point)
+- **EV Demand:** `(EV)_Annual_Sales_{Region}`
+- **ICE Demand:** `(ICE)_Annual_Sales_{Region}`
+- **EV Fleet:** `(EV)_Total_Fleet_{Region}`
+- **ICE Fleet:** `(ICE)_Total_Fleet_{Region}`
+- **Lead Impact:** `Lead_Annual_Implied_Demand-Sales_3_wheelers`, `Lead_Annual_Implied_Demand-Vehicle_replacement_3_wheelers` (Global)
+- **Fleet Lifetime:** 10 years (commercial use)
+- **Regions:** China, Europe, Rest_of_World, Global (NO USA)
+
+### Dataset Files Location
+- `data/two_wheeler/Two_Wheeler.json` - Two-wheeler sales, cost, fleet data
+- `data/three_wheeler/Three_Wheeler.json` - Three-wheeler sales, cost, fleet data
+- `data/two_wheeler/two_wheeler_taxonomy_and_datasets.json` - Two-wheeler taxonomy
+- `data/three_wheeler/three_wheeler_taxonomy_and_datasets.json` - Three-wheeler taxonomy
+
+### Configuration Files
+- `configs/two_wheeler_config.json` - Two-wheeler specific parameters
+- `configs/three_wheeler_config.json` - Three-wheeler specific parameters
+
+### Critical Notes for Planning
+1. **USA region:** Only available for two-wheelers
+2. **EV fleet (China):** NOT available for two-wheelers, available for three-wheelers
+3. **Fleet lifetimes:** Different by vehicle type (11y vs 10y)
+4. **Use Case:** Two-wheelers = personal/commuter, Three-wheelers = commercial/delivery
+
 ## Overview
 
 This skill provides a single, unified framework for forecasting light vehicle markets:

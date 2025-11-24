@@ -6,6 +6,53 @@ description: >
 
 # Cost-Driven Demand Forecasting
 
+## Table of Contents
+- [Available Datasets](#available-datasets)
+- [Quick Start](#quick-start)
+- [Parameters](#parameters)
+- [Forecasting Process](#forecasting-process)
+- [Output Formats](#output-formats)
+- [Examples](#examples)
+- [Taxonomy and Dataset Mapping](#taxonomy-and-dataset-mapping)
+- [Reference Documentation](#reference-documentation)
+
+## Available Datasets
+
+**CRITICAL FOR PLANNING:** The following datasets are available for passenger vehicle forecasting:
+
+### Market Data
+- **Total Market:** `Passenger_Vehicle_Annual_Sales_{Region}`
+
+### EV Cars (Aggregate Disruptor)
+- **Cost:** `Passenger_EV_Cars_(Range_-200_miles)_Lowest_Cost_{Region}` (key for tipping point detection)
+- **Demand:** `Passenger_Vehicle_(EV)_Annual_Sales_{Region}`
+
+### BEV Cars (Battery Electric - Primary Disruptor)
+- **Demand:** `Passenger_Vehicle_(BEV)_Annual_Sales_{Region}`
+- **Fleet:** `Passenger_Vehicle_(BEV)_Total_Fleet_{Region}`
+
+### PHEV Cars (Plug-in Hybrid - Transitional/Chimera)
+- **Demand:** `Passenger_Vehicle_(PHEV)_Annual_Sales_{Region}`
+
+### ICE Cars (Incumbent)
+- **Cost:** `Passenger_Vehicle_(ICE)_Median_Price_(Mid_Size_Sedan)_{Region}` (key for tipping point detection)
+- **Demand:** `Passenger_Vehicle_(ICE)_Annual_Sales_{Region}`
+- **Fleet:** `Passenger_Vehicle_(ICE)_Total_Fleet_{Region}`
+- **Fleet (TaaS-adjusted):** `Passenger_Vehicle_(ICE)_Total_Fleet_TaaSAdj_{Region}` (China only)
+
+### Dataset Files Location
+- `Passenger_Cars.json` - All historical sales, cost, and fleet data
+- `passenger_vehicles_taxonomy_and_datasets.json` - Complete taxonomy mapping
+
+### Regional Coverage
+All datasets available for: **China, USA, Europe, Rest_of_World, Global**
+
+### Critical Notes for Planning
+1. **Tipping Point Detection:** Uses EV cost vs ICE cost comparison
+2. **BEV Adoption:** Logistic S-curve post-tipping (default 100% ceiling)
+3. **PHEV Trajectory:** Hump-shaped (rises pre-tipping, decays after with 3-year half-life)
+4. **ICE Forecast:** Residual = Market - BEV - PHEV
+
 ## Quick Start
 
 **Prerequisites:**

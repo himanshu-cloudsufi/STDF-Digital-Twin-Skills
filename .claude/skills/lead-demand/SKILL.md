@@ -14,6 +14,94 @@ description: >
 
 This skill implements bottom-up installed-base accounting for lead demand forecasting, focusing on battery applications (85% of total demand) across automotive and industrial segments.
 
+## Table of Contents
+- [Available Datasets](#available-datasets)
+- [Overview](#overview)
+- [Key Features](#key-features)
+- [Usage](#usage)
+- [Outputs](#outputs)
+- [Validation](#validation)
+- [Scenarios](#scenarios)
+- [Common Analysis Patterns](#common-analysis-patterns)
+- [Taxonomy and Dataset Mapping](#taxonomy-and-dataset-mapping)
+- [Reference Documentation](#reference-documentation)
+
+## Available Datasets
+
+**CRITICAL FOR PLANNING:** The following datasets drive the bottom-up installed-base accounting model:
+
+### Lead Demand Categories (Validation Anchors)
+- **Total Demand:** `Annual_Implied_Demand` (Global)
+- **Industrial Motive:** `Annual_Implied_Demand-Industrial_batteries_motive_power` (Global)
+- **Industrial Stationary:** `Annual_Implied_Demand-Industrial_batteries_stationary` (Global)
+- **Non-Battery Uses:** `Annual_Implied_Demand-Non-battery_uses` (Global)
+- **Cost:** `Cost` (Global)
+
+### Passenger Cars (SLI Batteries)
+- **ICE Sales:** `Passenger_Vehicle_(ICE)_Annual_Sales_{Region}`
+- **BEV Sales:** `Passenger_Vehicle_(BEV)_Annual_Sales` (Global)
+- **PHEV Sales:** `Passenger_Vehicle_(PHEV)_Annual_Sales` (Global)
+- **ICE Fleet:** `Passenger_Vehicle_(ICE)_Total_Fleet` (Global)
+- **BEV Fleet:** `Passenger_Vehicle_(BEV)_Total_Fleet` (Global)
+- **Lead Demand (Cars):** `Lead_Annual_Implied_Demand-Sales_Cars` (Global)
+- **Lead Content:** ICE 11.5 kg, BEV 9.0 kg, PHEV 10.0 kg
+
+### Two-Wheelers (SLI Batteries)
+- **Total Sales:** `Annual_Sales_{Region}`
+- **ICE Sales:** `(ICE)_Annual_Sales_{Region}`
+- **EV Sales:** `(EV)_Annual_Sales_{Region}`
+- **ICE Fleet:** `(ICE)_Total_Fleet_{Region}`
+- **EV Fleet:** `(EV)_Total_Fleet_{Region}` (except China)
+- **Lead Demand (Sales):** `Lead_Annual_Implied_Demand-Sales_2_wheelers` (Global)
+- **Lead Demand (Replacement):** `Lead_Annual_Implied_Demand-Vehicle_replacement_2_wheelers` (Global)
+- **Lead Content:** ICE 2.5 kg, EV 1.8 kg
+
+### Three-Wheelers (SLI Batteries)
+- **Total Sales:** `Annual_Sales_{Region}` (no USA)
+- **ICE Sales:** `(ICE)_Annual_Sales_{Region}`
+- **EV Sales:** `(EV)_Annual_Sales_{Region}`
+- **ICE Fleet:** `(ICE)_Total_Fleet_{Region}`
+- **EV Fleet:** `(EV)_Total_Fleet_{Region}`
+- **Lead Demand (Sales):** `Lead_Annual_Implied_Demand-Sales_3_wheelers` (Global)
+- **Lead Demand (Replacement):** `Lead_Annual_Implied_Demand-Vehicle_replacement_3_wheelers` (Global)
+- **Lead Content:** ICE 3.5 kg, EV 2.5 kg
+
+### Commercial Vehicles (SLI Batteries)
+- **Total Sales:** `Annual_Sales_{Region}`
+- **ICE Sales:** `(ICE)_Annual_Sales_{Region}`
+- **EV Sales:** `(EV)_Annual_Sales_{Region}`
+- **NGV Sales:** `(NGV)_Annual_Sales_{Region}`
+- **ICE Fleet:** `(ICE)_Total_Fleet_{Region}`
+- **EV Fleet:** `(EV)_Total_Fleet_{Region}`
+- **NGV Fleet:** `(NGV)_Total_Fleet_{Region}`
+- **Lead Demand (Sales):** `Lead_Annual_Implied_Demand-Sales_Commercial_vehicles` (Global)
+- **Lead Demand (Buses):** `Lead_Annual_Implied_Demand-Sales_Buses` (Global)
+- **Lead Demand (Replacement):** `Lead_Annual_Implied_Demand-Vehicle_replacement_Commercial` (Global)
+- **Lead Content:** ICE 15.0 kg, EV 12.0 kg, NGV 15.5 kg
+
+### Dataset Files Location
+- `Lead.json` - Lead cost and demand by category
+- `Passenger_Cars.json` - Passenger vehicle sales and fleet data
+- `Two_Wheeler.json` - Two-wheeler sales, fleet, and cost data
+- `Three_Wheeler.json` - Three-wheeler sales, fleet, and cost data
+- `Commercial_Vehicle.json` - Commercial vehicle sales, fleet, and cost data
+- `lead_taxonomy_and_datasets.json` - Complete taxonomy mapping
+
+### Regional Coverage
+- **Passenger Cars:** China, USA, Europe, Rest_of_World, Global
+- **Two-Wheelers:** China, USA, Europe, Rest_of_World, Global
+- **Three-Wheelers:** China, Europe, Rest_of_World, Global (NO USA)
+- **Commercial Vehicles:** China, USA, Europe, Rest_of_World, Global
+- **Lead Demand:** Global only
+
+### Critical Notes for Planning
+1. **Bottom-up calculation:** Demand = OEM + Replacement for each vehicle type
+2. **OEM Demand:** Sales(t) × Lead_Content per powertrain
+3. **Replacement Demand:** Installed_Base(t) / Battery_Lifetime × Lead_Content
+4. **Battery Lifetimes:** SLI: 4.5 years, Motive: 7.0 years, Stationary: 6.0 years
+5. **Asset Lifetimes:** Cars: 18 years, 2W: 11 years, 3W: 9 years, CV: 20 years
+6. **Stock-flow:** IB(t+1) = IB(t) + Sales(t) - Scrappage(t)
+
 ## Overview
 
 The skill forecasts lead demand across major segments:

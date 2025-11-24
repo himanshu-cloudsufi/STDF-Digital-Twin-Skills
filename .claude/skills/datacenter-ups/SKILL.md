@@ -13,6 +13,58 @@ description: >
 
 This skill models the economic-driven transition from VRLA (Valve-Regulated Lead-Acid) to Lithium-ion batteries in datacenter UPS (Uninterruptible Power Supply) systems, using TCO-based tipping point analysis and S-curve adoption modeling.
 
+## Table of Contents
+- [Available Datasets](#available-datasets)
+- [Overview](#overview)
+- [Key Features](#key-features)
+- [Usage](#usage)
+- [Parameters](#parameters)
+- [Outputs](#outputs)
+- [Examples](#examples)
+- [Troubleshooting](#troubleshooting)
+- [Common Analysis Patterns](#common-analysis-patterns)
+- [Taxonomy and Dataset Mapping](#taxonomy-and-dataset-mapping)
+- [Reference Documentation](#reference-documentation)
+
+## Available Datasets
+
+**CRITICAL FOR PLANNING:** The following datasets are available for datacenter UPS battery forecasting:
+
+### VRLA (Incumbent Lead-Acid Batteries)
+- **Demand:** `Data_Center_Battery_Demand_(LAB)_Annual_Capacity_Demand_{Region}` (MWh/year)
+- **Installed Base:** `Lead_acid_batteries_UPS_Datacenter_Installed_Base_{Region}` (MWh)
+- **Lifetime:** `Lead_acid_batteries_UPS_Datacenter_Replacement_cycle_Battery_Replacement_cycle_Global` (5 years)
+- **Cost:** `VRLA_Battery_Cost_Global` (~$220/kWh, flat trajectory)
+- **OpEx:** $18/kWh-yr (config parameter)
+
+### Li-ion (Disruptor Lithium-Ion Batteries)
+- **Demand:** `Data_Center_Battery_Demand_(Li-Ion)_Annual_Capacity_Demand_{Region}` (MWh/year)
+- **Cost (4-hour):** `Battery_Energy_Storage_System_(4-hour_Turnkey)_Cost_{Region}` ($/kWh - proxy from grid storage)
+- **Cost (2-hour):** `Battery_Energy_Storage_System_(2-hour_Turnkey)_Cost_{Region}` ($/kWh - proxy from grid storage)
+- **Cost (Power):** `Battery_Energy_Storage_System_Installed_Cost_Global` ($/kW)
+- **Lifetime:** `Li_ion_UPS_Replacement_cycle_Global` (12 years)
+- **Material:** `Data_Center_UPS_Battery_(Li-Ion)_Average_Lithium_content_Global` (kg Li/kWh)
+- **OpEx:** $6/kWh-yr (config parameter)
+
+### Market Growth Drivers
+- **Growth Projections:** `Datacenter_UPS_annual_growth_{Region}` (7-10% typical)
+
+### Dataset Files Location
+- `Datacenter_UPS.json` - Demand, installed base, growth projections
+- `Energy_Storage.json` - Battery costs and technical parameters
+- `datacenter_ups_taxonomy_and_datasets.json` - Complete taxonomy mapping
+
+### Regional Coverage
+All datasets available for: **China, USA, Europe, Rest_of_World, Global**
+
+### Critical Notes for Planning
+1. **TCO Calculation:** Uses 15-year horizon with 8% discount rate
+2. **VRLA:** Lower CapEx (~$220/kWh), higher OpEx ($18/kWh-yr), 5-year life (3 replacements in 15y)
+3. **Li-ion:** Declining CapEx (BESS proxy), lower OpEx ($6/kWh-yr), 12-year life (1.25 replacements in 15y)
+4. **Tipping Point:** Year when Li-ion TCO ≤ VRLA TCO sustained for 3+ years
+5. **Adoption:** S-curve with 90-99% ceiling (L parameter), k steepness linked to cost advantage
+6. **Demand Split:** New-build + replacement (contestable market at 5-year VRLA cycles)
+
 ## Overview
 
 The skill forecasts battery demand for datacenter backup power systems across two competing technologies:

@@ -8,6 +8,90 @@ description: >
 
 Analyze AI, robotics, and GPU trends using cost-capability disruption framework.
 
+## Table of Contents
+- [Available Datasets](#available-datasets)
+- [Quick Start](#quick-start)
+- [Core Concepts](#core-concepts)
+- [Data Categories](#data-categories)
+- [Analysis Types](#analysis-types)
+- [Common Use Cases](#common-use-cases)
+- [Scenarios](#scenarios)
+- [Output Formats](#output-formats)
+- [Taxonomy and Dataset Mapping](#taxonomy-and-dataset-mapping)
+- [Tips](#tips)
+
+## Available Datasets
+
+**CRITICAL FOR PLANNING:** 68 AI benchmarks + 25 robot/GPU datasets available in `AL_JSON.json`:
+
+### Artificial Intelligence (68 datasets - All Global)
+- **Language Understanding:** `Artificial_Intelligence_MMLU_Accuracy` (33% → 92.3%, key benchmark)
+- **Math Reasoning:** `Artificial_Intelligence_GSM8K_Accuracy` (89% → 97.72%)
+- **Code Generation:** `Artificial_Intelligence_HumanEval_Accuracy`
+- **Expert Q&A:** `Artificial_Intelligence_GPQA_Diamond_Accuracy`
+- **Vision:** `Artificial_Intelligence_ImageNet_Top5_Accuracy`
+- **Multimodal:** `Artificial_Intelligence_MMMU_Accuracy`
+- **Training Data:** `Artificial_Intelligence_Traning_Dataset_Size` (tokens, growing 3.7×/year)
+- **Model Parameters:** `Artificial_Intelligence_Model_Parameters`
+- **Training Compute:** `Artificial_Intelligence_Training_Compute`
+- **Inference Cost:** `Artificial_Intelligence_Inference_Cost` (declining exponentially)
+- **Training Cost:** `Artificial_Intelligence_Training_Cost`
+- **Enterprise Adoption:** `Artificial_Intelligence_Enterprise_Adoption`
+- **API Usage:** `Artificial_Intelligence_API_Usage`
+
+### Industrial Robots (12 datasets - Regional + Global)
+- **Annual Installations:** `Industrial_Robot_Annual_Installation_{Region}`
+- **Operational Stock:** `Industrial_Robot_Operational_stock_{Region}`
+- **By Industry:**
+  - Automotive: `Industrial_Robot_Annual_Installation_(Automotive)`
+  - Electronics: `Industrial_Robot_Annual_Installation_(Electrical_Electronics)`
+  - Metal: `Industrial_Robot_Annual_Installation_(Metal_and_Machinery)`
+  - Plastics: `Industrial_Robot_Annual_Installation_(Plastics_and_Chemical_Products)`
+  - Food: `Industrial_Robot_Annual_Installation_(Food)`
+  - Other: `Industrial_Robot_Annual_Installation_(Others)`
+
+### Service Robots (6 datasets - Global)
+- **Total Demand:** `Service_Robot_(Professional)_Annual_Installation` (Global)
+- **By Sector:**
+  - Agriculture: `Service_Robot_(Professional)_Annual_Installation_(Agriculture)`
+  - Hospitality: `Service_Robot_(Professional)_Annual_Installation_(Hospitality)`
+  - Logistics: `Service_Robot_(Professional)_Annual_Installation_(Logistics)`
+  - Medical: `Service_Robot_(Professional)_Annual_Installation_(Medical)`
+  - Other: `Service_Robot_(Professional)_Annual_Installation_(Others)`
+
+### Humanoid Robots (1 dataset - Global)
+- **Market Size:** `Humanoid_Robot_Market_Size` (Global)
+
+### GPU (6 datasets - Global)
+- **NVIDIA:**
+  - V100: `GPU_NVIDIA_Tesla_V100_Price`
+  - A100: `GPU_NVIDIA_A100_Tensor_Core_Price`
+  - H100: `GPU_NVIDIA_H100_Tensor_Core_Price`
+- **AMD:**
+  - MI210: `GPU_AMD_MI210_Price`
+  - MI250X: `GPU_AMD_MI250X_Price`
+  - MI300X: `GPU_AMD_MI300X_Price`
+
+### Dataset File Location
+- `AL_JSON.json` - Single comprehensive file with all 93 datasets
+- `artificial_labour_taxonomy_and_datasets.json` - Complete taxonomy mapping
+
+### Regional Coverage
+- **Global:** Most comprehensive (all AI benchmarks, GPUs, humanoids)
+- **China:** Industrial robots (leading adoption)
+- **USA:** Industrial robots (AI development leader)
+- **Europe:** Industrial robots (strong service robotics)
+- **Asia_Pacific:** Industrial robots (excl. China)
+- **Rest_of_World:** Emerging markets
+
+### Critical Notes for Planning
+1. **AI Capability Thresholds:** Human-level = 85-95%, Superhuman = >95%
+2. **Cost Parity Thresholds:** Approaching = 70-100%, Parity = 50-70%, Tipping = <50% AND capability ≥ human
+3. **Adoption Milestones:** Early = 10%, Mainstream = 50%, Late = 80-90%
+4. **Service-Level View:** ALWAYS analyze as $/task, $/inference, $/hour (not just hardware costs)
+5. **Growth Rates:** 20-40% annual CAGR typical for AI capability metrics
+6. **Data Quality:** Sparse data (2-3 points) for some metrics, annual for benchmarks, 1-2 year lag for robots
+
 ## Quick Start
 
 **Prerequisites:**

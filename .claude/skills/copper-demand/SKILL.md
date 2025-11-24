@@ -14,6 +14,99 @@ description: >
 
 Forecasts refined copper consumption using a two-tier hybrid methodology that combines bottom-up driver calculations with top-down segment allocation.
 
+## Table of Contents
+- [Available Datasets](#available-datasets)
+- [Quick Start](#quick-start)
+- [Key Capabilities](#key-capabilities)
+- [Two-Tier Methodology](#two-tier-methodology)
+- [Available Scenarios](#available-scenarios)
+- [Output Format](#output-format)
+- [Workflows](#workflows)
+- [Taxonomy and Dataset Mapping](#taxonomy-and-dataset-mapping)
+- [References](#references)
+
+## Available Datasets
+
+**CRITICAL FOR PLANNING:** The following datasets drive the two-tier copper demand model:
+
+### TIER 1: Bottom-Up Segments (High Confidence - Use These for Direct Calculations)
+
+#### Passenger Cars
+- **ICE Sales:** `Passenger_Vehicle_(ICE)_Annual_Sales_{Region}`
+- **BEV Sales:** `Passenger_Vehicle_(BEV)_Annual_Sales` (Global)
+- **PHEV Sales:** `Passenger_Vehicle_(PHEV)_Annual_Sales` (Global)
+- **ICE Fleet:** `Passenger_Vehicle_(ICE)_Total_Fleet` (Global)
+- **BEV Fleet:** `Passenger_Vehicle_(BEV)_Total_Fleet` (Global)
+- **PHEV Fleet:** `Passenger_Vehicle_(PHEV)_Total_Fleet` (Global)
+- **Copper Intensity:** ICE 20-25kg, HEV 30-40kg, PHEV 55-65kg, BEV 80-90kg
+
+#### Commercial Vehicles
+- **ICE Sales:** `Commercial_Vehicle_(ICE)_Annual_Sales` (Global)
+- **EV Sales:** `Commercial_Vehicle_(EV)_Annual_Sales` (Global)
+- **NGV Sales:** `Commercial_Vehicle_(NGV)_Annual_Sales` (Global)
+- **ICE Fleet:** `Commercial_Vehicle_(ICE)_Total_Fleet` (Global)
+- **EV Fleet:** `Commercial_Vehicle_(EV)_Total_Fleet` (Global)
+- **NGV Fleet:** `Commercial_Vehicle_(NGV)_Total_Fleet` (Global)
+- **Copper Intensity:** ICE 30-40kg, EV 110-130kg, NGV 35-42kg
+
+#### Two-Wheelers
+- **ICE Sales:** `Two_Wheeler_(ICE)_Annual_Sales` (Global)
+- **EV Sales:** `Two_Wheeler_(EV)_Annual_Sales` (Global)
+- **ICE Fleet:** `Two_Wheeler_(ICE)_Total_Fleet` (Global)
+- **EV Fleet:** `Two_Wheeler_(EV)_Total_Fleet` (Global)
+- **Copper Intensity:** ICE 2-4kg, EV 3-5kg
+
+#### Three-Wheelers
+- **ICE Sales:** `Three_Wheeler_(ICE)_Annual_Sales` (Global)
+- **EV Sales:** `Three_Wheeler_(EV)_Annual_Sales` (Global)
+- **ICE Fleet:** `Three_Wheeler_(ICE)_Total_Fleet` (Global)
+- **EV Fleet:** `Three_Wheeler_(EV)_Total_Fleet` (Global)
+- **Copper Intensity:** ICE 3-5kg, EV 4-6kg
+
+#### Grid Generation
+- **Onshore Wind:** `Onshore_Wind_Installed_Capacity` (Global, cumulative - derive new capacity)
+- **Offshore Wind:** `Offshore_Wind_Installed_Capacity` (Global, cumulative - derive new capacity)
+- **Solar PV:** `Solar_Installed_Capacity` (Global, cumulative - derive new capacity)
+- **Coal:** `Coal_Installed_Capacity` (Global, cumulative - derive new capacity)
+- **Natural Gas:** `Natural_Gas_Installed_Capacity` (Global, cumulative - derive new capacity)
+- **Copper Intensity:** Onshore Wind 4-10 t/MW, Offshore Wind 8-12 t/MW, Solar 4-6 t/MW, Coal/Gas 0.8-1.2 t/MW
+
+### TIER 2: Top-Down Segments (Low Confidence - Share-Based Allocation)
+- **Construction & Buildings:** 48% of Electrical share (NO bottom-up data)
+- **Grid T&D:** Residual from Electrical share (NO line-km data)
+- **Industrial Machinery:** 17% of Electrical share (NO motor/HVAC data)
+- **Electronics:** 11% of total (NO device sales data)
+- **Other Uses:** Bounded residual 8-18% (NO granular data)
+
+### Validation and Anchor Datasets
+- **Total Consumption:** `Annual_Consumption_{Region}` (Primary anchor)
+- **Transportation Share:** `Demand_Transportation_Percentage` (Global)
+- **Electrical Share:** `Electrical_Demand_Percentage` (Global)
+- **EV Share:** `EV_Demand_Percentage` (Global)
+- **Solar Share:** `Solar_Demand_Percentage` (Global)
+- **Wind Share:** `Wind_Turbines_Percentage` (Global)
+- **Copper Price:** `Price` (Global)
+- **Recycling Rate:** `Annual_Recycling_Rate` (Global)
+
+### Dataset Files Location
+- `Copper.json` - Consumption, prices, segment shares
+- `Passenger_Cars.json` - Passenger vehicle sales and fleet
+- `Commercial_Vehicle.json` - Commercial vehicle sales and fleet
+- `Two_Wheeler.json` - Two-wheeler sales and fleet
+- `Three_Wheeler.json` - Three-wheeler sales and fleet
+- `Energy_Generation.json` - Power generation installed capacity
+- `copper_taxonomy_and_datasets.json` - Complete taxonomy mapping
+
+### Regional Coverage
+- **Primary:** Global (most comprehensive)
+- **Regional Validation:** China, USA, Europe, Rest_of_World
+
+### Critical Notes for Planning
+1. **ALWAYS use Tier 1 datasets directly** - these have high-quality bottom-up data
+2. **Tier 2 segments are allocated** - adjust only Tier 2 when reconciling to total
+3. **New capacity = difference in cumulative capacity** for generation data
+4. **All segments must sum to total consumption** (±0.1% tolerance)
+
 ## Quick Start
 
 **Basic forecast:**
