@@ -4,6 +4,19 @@ description: >
   Performs segment-level demand forecasting for commercial vehicles (LCV, MCV, HCV) with EV disruption analysis, tipping point detection, and NGV chimera modeling across global regions. Calculates cost parity per segment and models differentiated EV adoption with segment-specific ceilings. Use when user asks about commercial vehicle demand, truck forecasts, CV electrification, LCV/MCV/HCV adoption, fleet tracking, or questions like "forecast commercial vehicle demand", "when will trucks electrify", "LCV vs HCV adoption rates", "NGV decline trajectory", "commercial vehicle fleet evolution", "segment-level tipping points". Handles segments: LCV (light duty), MCV (medium duty), HCV (heavy duty). Regions: China, USA, Europe, Rest_of_World, Global. Trigger keywords: forecast, commercial vehicle, CV, truck, LCV, MCV, HCV, light duty, medium duty, heavy duty, NGV, natural gas, segment, tipping point, fleet tracking, electrification, China, USA, Europe. (project)
 ---
 
+> ⚠️ **MANDATORY SCRIPT EXECUTION REQUIREMENT**
+>
+> This skill REQUIRES executing `scripts/forecast.py` using Bash tool.
+>
+> **REQUIRED:** `cd .claude/skills/commercial-vehicle-demand && python3 scripts/forecast.py --region X --end-year Y`
+>
+> **PROHIBITED:** Mental calculation, self-generated forecasts, methodology replication
+>
+> The methodology below describes what THE SCRIPT does. Your job: RUN THE SCRIPT, not replicate its logic.
+> Understanding the methodology ≠ Running the code. Reading this file ≠ Executing the analysis.
+>
+> **🔴 HISTORICAL DATA:** Do NOT generate historical values (LCV/MCV/HCV sales, costs, fleet) from memory. The script loads actual data from `Commercial_Vehicles.json`. Only script output contains verified historical data.
+
 # Commercial Vehicle Demand Forecasting
 
 **Status:** Active skill for segment-level commercial vehicle (CV) demand forecasting with EV disruption and NGV modeling.

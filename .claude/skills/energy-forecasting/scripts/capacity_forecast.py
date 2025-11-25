@@ -31,7 +31,9 @@ class CapacityForecaster:
         end_year: int
     ) -> Tuple[np.ndarray, np.ndarray]:
         """
-        Forecast capacity for a single technology using YoY growth averaging
+        Forecast capacity for a single technology using YoY growth averaging with decay.
+
+        Growth rate decay prevents unrealistic compounding where SWB exceeds demand.
 
         Args:
             technology: Technology name (e.g., "Solar_PV", "Onshore_Wind")
@@ -43,11 +45,23 @@ class CapacityForecaster:
         """
         try:
             hist_years, hist_capacity = self.data_loader.get_capacity_data(technology, region)
+
+            # Get growth decay settings from config
+            decay_config = self.config.get("growth_decay_parameters", {})
+            if decay_config.get("enabled", False):
+                decay_rate = decay_config.get("time_decay_rate", 0.05)
+                floor_growth_rate = decay_config.get("floor_growth_rate", 0.02)
+            else:
+                decay_rate = 0.0
+                floor_growth_rate = 0.02
+
             years, capacity = yoy_growth_average(
                 hist_years,
                 hist_capacity,
                 end_year,
-                self.max_yoy_growth
+                self.max_yoy_growth,
+                decay_rate=decay_rate,
+                floor_growth_rate=floor_growth_rate
             )
             return years, capacity
         except Exception as e:

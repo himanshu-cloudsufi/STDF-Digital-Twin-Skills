@@ -10,6 +10,19 @@ description: >
   Trigger keywords: copper demand, copper forecast, copper consumption, green transition copper, EV copper, renewable copper, copper modeling. (project)
 ---
 
+> ⚠️ **MANDATORY SCRIPT EXECUTION REQUIREMENT**
+>
+> This skill REQUIRES executing `scripts/forecast.py` using Bash tool.
+>
+> **REQUIRED:** `cd .claude/skills/copper-demand && python3 scripts/forecast.py --region X --end-year Y`
+>
+> **PROHIBITED:** Mental calculation, self-generated forecasts, methodology replication
+>
+> The methodology below describes what THE SCRIPT does. Your job: RUN THE SCRIPT, not replicate its logic.
+> Understanding the methodology ≠ Running the code. Reading this file ≠ Executing the analysis.
+>
+> **🔴 HISTORICAL DATA:** Do NOT generate historical copper demand values from memory. The script loads actual data from vehicle/energy datasets and applies copper intensity factors. Only script output contains verified historical data.
+
 # Copper Demand Forecasting Skill
 
 Forecasts refined copper consumption using a two-tier hybrid methodology that combines bottom-up driver calculations with top-down segment allocation.

@@ -9,6 +9,19 @@ description: >
   Trigger keywords: datacenter ups, ups batteries, VRLA lithium, datacenter battery transition, backup power, TCO analysis. (project)
 ---
 
+> ⚠️ **MANDATORY SCRIPT EXECUTION REQUIREMENT**
+>
+> This skill REQUIRES executing `scripts/forecast.py` using Bash tool.
+>
+> **REQUIRED:** `cd .claude/skills/datacenter-ups && python3 scripts/forecast.py --region X --end-year Y`
+>
+> **PROHIBITED:** Mental calculation, self-generated forecasts, methodology replication
+>
+> The methodology below describes what THE SCRIPT does. Your job: RUN THE SCRIPT, not replicate its logic.
+> Understanding the methodology ≠ Running the code. Reading this file ≠ Executing the analysis.
+>
+> **🔴 HISTORICAL DATA:** Do NOT generate historical UPS battery demand/cost values from memory. The script loads actual data from `Datacenter_UPS.json`. Only script output contains verified historical data.
+
 # Datacenter UPS Battery Technology Transition Skill
 
 This skill models the economic-driven transition from VRLA (Valve-Regulated Lead-Acid) to Lithium-ion batteries in datacenter UPS (Uninterruptible Power Supply) systems, using TCO-based tipping point analysis and S-curve adoption modeling.

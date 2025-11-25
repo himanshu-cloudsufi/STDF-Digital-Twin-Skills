@@ -287,6 +287,19 @@
     "Global": 0.22
   },
   "non_swb_decline_rate": 0.01,
+  "growth_decay_parameters": {
+    "enabled": true,
+    "time_decay_rate": 0.05,
+    "floor_growth_rate": 0.02,
+    "max_swb_penetration": 0.75,
+    "description": "Growth rate decay to prevent unrealistic SWB growth exceeding demand"
+  },
+  "demand_forecast_parameters": {
+    "enabled": true,
+    "min_growth_rate": 0.005,
+    "max_growth_rate": 0.05,
+    "description": "Demand growth forecasting using YoY averaging per swb_instructions_v4"
+  },
   "validation_rules": {
     "energy_balance_tolerance": 0.02,
     "non_negativity": true,

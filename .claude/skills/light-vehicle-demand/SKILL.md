@@ -8,6 +8,19 @@ description: >
   "EV adoption trends". Handles regions based on vehicle type. (project)
 ---
 
+> ⚠️ **MANDATORY SCRIPT EXECUTION REQUIREMENT**
+>
+> This skill REQUIRES executing `scripts/forecast.py` using Bash tool.
+>
+> **REQUIRED:** `cd .claude/skills/light-vehicle-demand && python3 scripts/forecast.py --vehicle-type X --region Y --end-year Z`
+>
+> **PROHIBITED:** Mental calculation, self-generated forecasts, methodology replication
+>
+> The methodology below describes what THE SCRIPT does. Your job: RUN THE SCRIPT, not replicate its logic.
+> Understanding the methodology ≠ Running the code. Reading this file ≠ Executing the analysis.
+>
+> **🔴 HISTORICAL DATA:** Do NOT generate historical values (2W/3W sales, costs, fleet) from memory. The script loads actual data from `Two_Wheeler.json` / `Three_Wheeler.json`. Only script output contains verified historical data.
+
 # Light Vehicle Demand Forecasting Skill
 
 Unified skill for forecasting two-wheeler and three-wheeler demand with cost-driven EV disruption analysis.

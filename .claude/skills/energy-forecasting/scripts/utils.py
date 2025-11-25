@@ -282,20 +282,92 @@ def convert_generation_to_capacity(
     return generation_gwh / (capacity_factor * hours_per_year)
 
 
+def forecast_demand_growth(
+    historical_years: List[int],
+    historical_demand: List[float],
+    end_year: int,
+    min_growth_rate: float = 0.005,
+    max_growth_rate: float = 0.05
+) -> Tuple[np.ndarray, np.ndarray]:
+    """
+    Forecast electricity demand using YoY growth averaging.
+    Per swb_instructions_v4 Section 2: "Take average of historical rates to forecast forward"
+
+    Args:
+        historical_years: Historical years
+        historical_demand: Historical demand values (TWh or GWh)
+        end_year: Final year to forecast to
+        min_growth_rate: Minimum annual growth rate (default: 0.5%)
+        max_growth_rate: Maximum annual growth rate (default: 5%)
+
+    Returns:
+        Tuple of (all_years, all_demand) including historical and forecast
+    """
+    years = np.array(historical_years)
+    demand = np.array(historical_demand)
+
+    if len(years) < 2:
+        # Not enough data, return constant
+        forecast_years = np.arange(years[-1] + 1, end_year + 1)
+        all_years = np.concatenate([years, forecast_years])
+        all_demand = np.full(len(all_years), demand[-1])
+        return all_years, all_demand
+
+    # Calculate YoY growth rates
+    yoy_rates = []
+    for i in range(1, len(demand)):
+        if demand[i-1] > 0:
+            rate = (demand[i] - demand[i-1]) / demand[i-1]
+            rate = clamp(rate, -0.1, 0.1)  # Cap outliers at ±10%
+            yoy_rates.append(rate)
+
+    if not yoy_rates:
+        avg_growth = 0.02  # Default 2% growth
+    else:
+        # Average of last 5 years (or all if less) per instructions
+        recent_rates = yoy_rates[-5:] if len(yoy_rates) >= 5 else yoy_rates
+        avg_growth = np.mean(recent_rates)
+
+    # Bound growth rate to reasonable range
+    avg_growth = clamp(avg_growth, min_growth_rate, max_growth_rate)
+
+    # Forecast forward
+    forecast_years = np.arange(years[-1] + 1, end_year + 1)
+    forecast_demand = []
+    current = demand[-1]
+
+    for _ in forecast_years:
+        current = current * (1 + avg_growth)
+        forecast_demand.append(current)
+
+    all_years = np.concatenate([years, forecast_years])
+    all_demand = np.concatenate([demand, np.array(forecast_demand)])
+
+    return all_years, all_demand
+
+
 def yoy_growth_average(
     historical_years: List[int],
     historical_values: List[float],
     end_year: int,
-    max_yoy_growth: float = 0.50
+    max_yoy_growth: float = 0.50,
+    decay_rate: float = 0.0,
+    floor_growth_rate: float = 0.02
 ) -> Tuple[np.ndarray, np.ndarray]:
     """
-    Forecast using year-over-year growth averaging method
+    Forecast using year-over-year growth averaging method with optional decay.
+
+    Growth rate maturation: as technologies mature, growth rates naturally decrease.
+    This prevents unrealistic compounding where SWB exceeds total demand.
 
     Args:
         historical_years: Historical years
         historical_values: Historical values
         end_year: Final year to forecast to
         max_yoy_growth: Maximum YoY growth rate cap (default: 50%)
+        decay_rate: Annual decay applied to growth rate (default: 0, no decay)
+                    E.g., 0.05 means growth rate decreases by 5% each year
+        floor_growth_rate: Minimum growth rate floor (default: 2%)
 
     Returns:
         Tuple of (all_years, all_values) including historical and forecast
@@ -326,16 +398,29 @@ def yoy_growth_average(
         all_values = np.full(len(all_years), values[-1])
         return all_years, all_values
 
-    # Average growth rate (median for robustness)
-    avg_growth_rate = np.median(yoy_growth_rates)
+    # Base growth rate (median for robustness)
+    base_growth_rate = np.median(yoy_growth_rates)
 
-    # Generate forecast
+    # Generate forecast with optional decay
     forecast_years = np.arange(years[-1] + 1, end_year + 1)
     forecast_values = []
 
     current_value = values[-1]
-    for _ in forecast_years:
-        current_value = current_value * (1 + avg_growth_rate)
+    current_growth_rate = base_growth_rate
+
+    for i, _ in enumerate(forecast_years):
+        # Apply time-based decay to growth rate
+        if decay_rate > 0 and i > 0:
+            current_growth_rate = current_growth_rate * (1 - decay_rate)
+
+        # Ensure growth rate doesn't fall below floor
+        effective_growth_rate = max(current_growth_rate, floor_growth_rate)
+
+        # Cap at maximum
+        effective_growth_rate = min(effective_growth_rate, max_yoy_growth)
+
+        # Apply growth
+        current_value = current_value * (1 + effective_growth_rate)
         forecast_values.append(max(0, current_value))  # Ensure non-negative
 
     all_years = np.concatenate([years, forecast_years])

@@ -4,6 +4,19 @@ description: >
   Performs cost-driven demand forecasting for passenger vehicles (EV, PHEV, ICE) across global regions. Calculates cost parity tipping points and models market adoption using logistic growth curves. Use when user asks about passenger vehicle demand, EV adoption, electric vehicle forecasts, market penetration, sales projections, or questions like "when will EVs dominate", "what is EV adoption in China", "forecast passenger vehicle demand", "when does cost parity occur", "EV market share by 2035", "predict ICE decline", "PHEV adoption trajectory". Handles regions: China, USA, Europe, Rest_of_World, Global. Trigger keywords: forecast, predict, demand, adoption, penetration, market share, EV, electric vehicle, passenger vehicle, BEV, PHEV, ICE, tipping point, cost parity, China, USA, Europe, 2030. (project)
 ---
 
+> ⚠️ **MANDATORY SCRIPT EXECUTION REQUIREMENT**
+>
+> This skill REQUIRES executing `scripts/forecast.py` using Bash tool.
+>
+> **REQUIRED:** `cd .claude/skills/demand-forecasting && python3 scripts/forecast.py --region X --end-year Y`
+>
+> **PROHIBITED:** Mental calculation, self-generated forecasts, methodology replication
+>
+> The methodology below describes what THE SCRIPT does. Your job: RUN THE SCRIPT, not replicate its logic.
+> Understanding the methodology ≠ Running the code. Reading this file ≠ Executing the analysis.
+>
+> **🔴 HISTORICAL DATA:** Do NOT generate historical values (2010-2024) from memory. The script loads actual data from `Passenger_Cars.json`. Only script output contains verified historical data.
+
 # Cost-Driven Demand Forecasting
 
 ## Table of Contents

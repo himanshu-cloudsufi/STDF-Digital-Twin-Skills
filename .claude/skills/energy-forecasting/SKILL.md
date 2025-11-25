@@ -4,6 +4,19 @@ description: >
   Performs cost-driven capacity and generation forecasting for Solar-Wind-Battery (SWB) energy systems and their displacement of fossil fuels (coal, gas). Calculates SWB stack cost parity, models capacity growth using YoY averaging, and sequences coal/gas displacement. Use when user asks about renewable energy capacity, solar/wind forecasts, battery storage, SWB adoption, electricity generation, fossil fuel displacement, or questions like "when will solar reach cost parity", "forecast wind capacity", "when will coal be displaced", "SWB generation by 2035", "battery storage growth", "renewable energy disruption". Handles regions: China, USA, Europe, Rest_of_World, Global. Trigger keywords: solar, wind, battery, SWB, renewable, clean energy, electricity, generation, capacity, coal, gas, displacement, LCOE, cost parity, energy transformation, disruption. (project)
 ---
 
+> ⚠️ **MANDATORY SCRIPT EXECUTION REQUIREMENT**
+>
+> This skill REQUIRES executing `scripts/forecast.py` using Bash tool.
+>
+> **REQUIRED:** `cd .claude/skills/energy-forecasting && python3 scripts/forecast.py --region X --end-year Y --scenario baseline`
+>
+> **PROHIBITED:** Mental calculation, self-generated forecasts, methodology replication
+>
+> The methodology below describes what THE SCRIPT does. Your job: RUN THE SCRIPT, not replicate its logic.
+> Understanding the methodology ≠ Running the code. Reading this file ≠ Executing the analysis.
+>
+> **🔴 HISTORICAL DATA:** Do NOT generate historical values (solar/wind capacity, LCOE, generation) from memory. The script loads actual data from `Energy_Generation.json`, `Energy_Storage.json`, `Coal.json`. Only script output contains verified historical data.
+
 # Energy Forecasting (Solar-Wind-Battery)
 
 Cost-driven forecasting for SWB (Solar-Wind-Battery) energy systems and fossil fuel displacement.

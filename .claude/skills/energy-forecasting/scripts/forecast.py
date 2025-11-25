@@ -17,7 +17,7 @@ from cost_analysis import CostAnalyzer
 from capacity_forecast import CapacityForecaster
 from displacement import DisplacementAnalyzer
 from emissions import EmissionsCalculator
-from utils import validate_energy_balance
+from utils import validate_energy_balance, forecast_demand_growth
 
 
 class EnergyForecastOrchestrator:
@@ -123,8 +123,34 @@ class EnergyForecastOrchestrator:
         # Step 4: Get Total Electricity Demand and Peak Load
         print("\n[4/5] Loading total electricity demand and calculating peak load...")
         try:
-            demand_years, total_demand = self.data_loader.get_electricity_demand(region)
-            total_demand_forecast = np.interp(years, demand_years, total_demand)
+            hist_demand_years, hist_demand = self.data_loader.get_electricity_demand(region)
+
+            # Check if demand forecasting is enabled
+            demand_config = self.config.get("demand_forecast_parameters", {})
+            if demand_config.get("enabled", True):
+                # Forecast demand growth using YoY averaging (per swb_instructions_v4 Section 2)
+                demand_years, demand_values = forecast_demand_growth(
+                    hist_demand_years,
+                    hist_demand,
+                    self.end_year,
+                    min_growth_rate=demand_config.get("min_growth_rate", 0.005),
+                    max_growth_rate=demand_config.get("max_growth_rate", 0.05)
+                )
+                # Calculate growth rate for logging
+                if len(hist_demand) > 0 and len(demand_values) > len(hist_demand):
+                    last_hist = hist_demand[-1]
+                    last_forecast = demand_values[-1]
+                    years_diff = self.end_year - hist_demand_years[-1]
+                    if years_diff > 0 and last_hist > 0:
+                        cagr = ((last_forecast / last_hist) ** (1 / years_diff)) - 1
+                        print(f"  - Demand forecasted with {cagr*100:.1f}%/yr growth (YoY averaging)")
+            else:
+                # Fall back to flat extrapolation (original behavior)
+                demand_years = np.array(hist_demand_years)
+                demand_values = np.array(hist_demand)
+                print(f"  - Using flat demand extrapolation (demand forecasting disabled)")
+
+            total_demand_forecast = np.interp(years, demand_years, demand_values)
         except Exception as e:
             print(f"  Warning: Could not load demand, using SWB+fossil estimate: {e}")
             # Fallback: estimate total as SWB + historical fossil
@@ -136,6 +162,27 @@ class EnergyForecastOrchestrator:
         peak_load_gw = (total_demand_forecast * 1000 / 8760) * load_factor
         print(f"  - Peak load factor: {load_factor}x")
         print(f"  - Peak load range: {peak_load_gw.min():.1f} - {peak_load_gw.max():.1f} GW")
+
+        # Cap SWB generation to not exceed available demand
+        # Available = Total Demand - Non-SWB - Minimum Fossil Floor
+        # This ensures energy balance is maintained
+        min_fossil_floor = total_demand_forecast * (
+            self.config["default_parameters"]["coal_reserve_floor"] +
+            self.config["default_parameters"]["gas_reserve_floor"]
+        )
+        max_swb_generation = total_demand_forecast - non_swb_generation - min_fossil_floor
+        max_swb_generation = np.maximum(max_swb_generation, 0)  # Ensure non-negative
+
+        # Apply cap to SWB generation
+        swb_uncapped = total_swb_generation.copy()
+        total_swb_generation = np.minimum(total_swb_generation, max_swb_generation)
+
+        # Log if capping was applied
+        capped_years = np.where(swb_uncapped > max_swb_generation)[0]
+        if len(capped_years) > 0:
+            first_capped_year = int(years[capped_years[0]])
+            max_cap_pct = (swb_uncapped[capped_years[-1]] / max_swb_generation[capped_years[-1]] - 1) * 100
+            print(f"  INFO: SWB generation capped starting {first_capped_year} (would exceed demand by up to {max_cap_pct:.0f}%)")
 
         # Step 5: Displacement Sequencing
         print("\n[5/5] Sequencing fossil fuel displacement...")

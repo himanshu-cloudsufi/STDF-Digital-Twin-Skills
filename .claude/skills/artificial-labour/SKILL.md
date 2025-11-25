@@ -4,6 +4,19 @@ description: >
   Analyzes artificial labour (AI, robotics, GPUs) using disruption framework. Tracks AI capabilities (MMLU, GSM8K, 68 metrics), robot installations, GPU economics. Performs cost-capability analysis, tipping point detection, S-curve adoption forecasting using Seba methodology. Use for AI performance trends, robot adoption, automation economics, AI benchmarks, GPU costs, or questions like "when will AI reach human-level?", "robot trends", "MMLU accuracy", "automation tipping points". Trigger keywords: artificial labour, AI, ML, MMLU, GSM8K, robot, robotics, humanoid, GPU, automation, benchmark, tipping point, disruption, forecast, adoption, cost parity.
 ---
 
+> ⚠️ **MANDATORY SCRIPT EXECUTION REQUIREMENT**
+>
+> This skill REQUIRES executing `scripts/analyzer.py` using Bash tool.
+>
+> **REQUIRED:** `cd .claude/skills/artificial-labour && python3 scripts/analyzer.py --analysis-type X`
+>
+> **PROHIBITED:** Mental calculation, self-generated forecasts, methodology replication
+>
+> The methodology below describes what THE SCRIPT does. Your job: RUN THE SCRIPT, not replicate its logic.
+> Understanding the methodology ≠ Running the code. Reading this file ≠ Executing the analysis.
+>
+> **🔴 HISTORICAL DATA:** Do NOT generate historical AI benchmark scores, robot installations, or GPU costs from memory. The script loads actual data from `AL_JSON.json` (68 AI benchmarks + robot/GPU data). Only script output contains verified historical data.
+
 # Artificial Labour Analysis
 
 Analyze AI, robotics, and GPU trends using cost-capability disruption framework.

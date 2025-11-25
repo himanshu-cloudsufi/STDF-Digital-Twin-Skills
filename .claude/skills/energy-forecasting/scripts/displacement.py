@@ -145,6 +145,49 @@ class DisplacementAnalyzer:
         """
         return self.displacement_sequences.get(region, "coal_first")
 
+    def _load_historical_fossil_generation(
+        self,
+        region: str
+    ) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, int]:
+        """
+        Load historical coal and gas generation data
+
+        Args:
+            region: Region name
+
+        Returns:
+            Tuple of (coal_years, coal_gen, gas_years, gas_gen, last_historical_year)
+        """
+        coal_years, coal_gen = None, None
+        gas_years, gas_gen = None, None
+        last_historical_year = 2024  # Default
+
+        try:
+            coal_years, coal_gen = self.data_loader.get_generation_data("Coal_Power", region)
+            coal_years = np.array(coal_years)
+            coal_gen = np.array(coal_gen)
+            print(f"  INFO: Loaded historical coal generation for {region} ({int(coal_years[0])}-{int(coal_years[-1])})")
+        except Exception as e:
+            print(f"  WARNING: Could not load historical coal data: {e}")
+
+        try:
+            gas_years, gas_gen = self.data_loader.get_generation_data("Natural_Gas_Power", region)
+            gas_years = np.array(gas_years)
+            gas_gen = np.array(gas_gen)
+            print(f"  INFO: Loaded historical gas generation for {region} ({int(gas_years[0])}-{int(gas_years[-1])})")
+        except Exception as e:
+            print(f"  WARNING: Could not load historical gas data: {e}")
+
+        # Determine last historical year from available data
+        if coal_years is not None and gas_years is not None:
+            last_historical_year = min(int(coal_years[-1]), int(gas_years[-1]))
+        elif coal_years is not None:
+            last_historical_year = int(coal_years[-1])
+        elif gas_years is not None:
+            last_historical_year = int(gas_years[-1])
+
+        return coal_years, coal_gen, gas_years, gas_gen, last_historical_year
+
     def allocate_fossil_generation(
         self,
         years: np.ndarray,
@@ -154,7 +197,10 @@ class DisplacementAnalyzer:
         region: str
     ) -> Tuple[np.ndarray, np.ndarray]:
         """
-        Allocate remaining generation to coal and gas using displacement sequence
+        Allocate remaining generation to coal and gas using displacement sequence.
+
+        For historical years: Uses actual historical data from datasets.
+        For forecast years: Applies displacement model starting from last historical value.
 
         Args:
             years: Array of years
@@ -166,46 +212,104 @@ class DisplacementAnalyzer:
         Returns:
             Tuple of (coal_generation, gas_generation) in GWh
         """
-        # Calculate residual available for fossil fuels
-        residual = total_demand - swb_generation - non_swb_generation
-        residual = np.maximum(residual, 0)  # Ensure non-negative
+        # Load historical fossil generation data
+        hist_coal_years, hist_coal_gen, hist_gas_years, hist_gas_gen, last_hist_year = \
+            self._load_historical_fossil_generation(region)
 
         # Get displacement sequence
         sequence = self.get_displacement_sequence(region)
 
         # Initialize arrays
-        coal_generation = np.zeros_like(residual)
-        gas_generation = np.zeros_like(residual)
+        coal_generation = np.zeros_like(years, dtype=float)
+        gas_generation = np.zeros_like(years, dtype=float)
 
         # Calculate reserve floors (minimum absolute generation)
         coal_floor = total_demand * self.coal_reserve_floor
         gas_floor = total_demand * self.gas_reserve_floor
 
-        if sequence == "coal_first":
-            # Displace coal first, then gas
-            for i, year in enumerate(years):
-                remaining = residual[i]
+        # Track last historical values for smooth transition to forecast
+        last_hist_coal = None
+        last_hist_gas = None
 
-                # Allocate to gas first (up to floor)
-                gas_allocation = min(remaining, gas_floor[i])
-                gas_generation[i] = gas_allocation
-                remaining -= gas_allocation
+        for i, year in enumerate(years):
+            year_int = int(year)
 
-                # Rest goes to coal
-                coal_generation[i] = remaining
+            # Check if this is a historical year with available data
+            use_historical_coal = (
+                hist_coal_years is not None and
+                year_int >= int(hist_coal_years[0]) and
+                year_int <= int(hist_coal_years[-1])
+            )
+            use_historical_gas = (
+                hist_gas_years is not None and
+                year_int >= int(hist_gas_years[0]) and
+                year_int <= int(hist_gas_years[-1])
+            )
 
-        else:  # gas_first
-            # Displace gas first, then coal
-            for i, year in enumerate(years):
-                remaining = residual[i]
+            if use_historical_coal and use_historical_gas:
+                # Use actual historical data
+                coal_generation[i] = np.interp(year, hist_coal_years, hist_coal_gen)
+                gas_generation[i] = np.interp(year, hist_gas_years, hist_gas_gen)
+                last_hist_coal = coal_generation[i]
+                last_hist_gas = gas_generation[i]
 
-                # Allocate to coal first (up to floor)
-                coal_allocation = min(remaining, coal_floor[i])
-                coal_generation[i] = coal_allocation
-                remaining -= coal_allocation
+            elif use_historical_coal:
+                # Only coal historical data available
+                coal_generation[i] = np.interp(year, hist_coal_years, hist_coal_gen)
+                last_hist_coal = coal_generation[i]
+                # Calculate gas from residual
+                residual = total_demand[i] - swb_generation[i] - non_swb_generation[i] - coal_generation[i]
+                gas_generation[i] = max(0, residual)
+                last_hist_gas = gas_generation[i]
 
-                # Rest goes to gas
-                gas_generation[i] = remaining
+            elif use_historical_gas:
+                # Only gas historical data available
+                gas_generation[i] = np.interp(year, hist_gas_years, hist_gas_gen)
+                last_hist_gas = gas_generation[i]
+                # Calculate coal from residual
+                residual = total_demand[i] - swb_generation[i] - non_swb_generation[i] - gas_generation[i]
+                coal_generation[i] = max(0, residual)
+                last_hist_coal = coal_generation[i]
+
+            else:
+                # Forecast year: apply displacement model
+                residual = total_demand[i] - swb_generation[i] - non_swb_generation[i]
+                residual = max(0, residual)
+
+                if sequence == "coal_first":
+                    # Displace coal first, protect gas longer
+                    # Gas gets minimum of (residual, gas_floor, last_historical_gas declining)
+                    if last_hist_gas is not None:
+                        # Decline from last historical value, but not below floor
+                        years_since_hist = year_int - last_hist_year
+                        decline_rate = 0.05  # 5% per year decline
+                        declining_gas = last_hist_gas * ((1 - decline_rate) ** years_since_hist)
+                        gas_target = max(declining_gas, gas_floor[i])
+                        gas_allocation = min(residual, gas_target)
+                    else:
+                        gas_allocation = min(residual, gas_floor[i])
+
+                    gas_generation[i] = gas_allocation
+                    coal_generation[i] = max(0, residual - gas_allocation)
+
+                else:  # gas_first
+                    # Displace gas first, protect coal longer
+                    if last_hist_coal is not None:
+                        years_since_hist = year_int - last_hist_year
+                        decline_rate = 0.05
+                        declining_coal = last_hist_coal * ((1 - decline_rate) ** years_since_hist)
+                        coal_target = max(declining_coal, coal_floor[i])
+                        coal_allocation = min(residual, coal_target)
+                    else:
+                        coal_allocation = min(residual, coal_floor[i])
+
+                    coal_generation[i] = coal_allocation
+                    gas_generation[i] = max(0, residual - coal_allocation)
+
+        # Log summary
+        hist_years_count = sum(1 for y in years if int(y) <= last_hist_year)
+        forecast_years_count = len(years) - hist_years_count
+        print(f"  INFO: Used historical data for {hist_years_count} years, forecast model for {forecast_years_count} years")
 
         return coal_generation, gas_generation
 

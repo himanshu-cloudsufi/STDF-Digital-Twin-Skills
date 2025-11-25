@@ -10,6 +10,19 @@ description: >
   Accounts for all vehicle types (cars, 2W, 3W, CVs) and powertrains (ICE, BEV, PHEV, EV, NGV). (project)
 ---
 
+> ⚠️ **MANDATORY SCRIPT EXECUTION REQUIREMENT**
+>
+> This skill REQUIRES executing `scripts/forecast.py` using Bash tool.
+>
+> **REQUIRED:** `cd .claude/skills/lead-demand && python3 scripts/forecast.py --region X --end-year Y`
+>
+> **PROHIBITED:** Mental calculation, self-generated forecasts, methodology replication
+>
+> The methodology below describes what THE SCRIPT does. Your job: RUN THE SCRIPT, not replicate its logic.
+> Understanding the methodology ≠ Running the code. Reading this file ≠ Executing the analysis.
+>
+> **🔴 HISTORICAL DATA:** Do NOT generate historical lead demand values from memory. The script loads actual data from vehicle fleet/sales datasets and applies lead content factors. Only script output contains verified historical data.
+
 # Lead Demand Forecasting Skill
 
 This skill implements bottom-up installed-base accounting for lead demand forecasting, focusing on battery applications (85% of total demand) across automotive and industrial segments.
