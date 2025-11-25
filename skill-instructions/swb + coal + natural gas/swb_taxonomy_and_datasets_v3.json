@@ -34,6 +34,20 @@
         "description": "Coal Annual Power Generation China"
       }
     },
+    "Coal_Annual_Power_Generation_Germany": {
+      "entity": "Coal_Power",
+      "region": "Germany",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "demand",
+          "entity_type": "incumbent",
+          "subcategory": "generation"
+        },
+        "description": "Coal Annual Power Generation Germany"
+      }
+    },
     "Coal_Annual_Power_Generation_Europe": {
       "entity": "Coal_Power",
       "region": "Europe",
@@ -101,6 +115,19 @@
           "entity_type": "incumbent"
         },
         "description": "Coal Installed Capacity China"
+      }
+    },
+    "Coal_Installed_Capacity_Germany": {
+      "entity": "Coal_Power",
+      "region": "Germany",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "installed_base",
+          "entity_type": "incumbent"
+        },
+        "description": "Coal Installed Capacity Germany"
       }
     },
     "Coal_Installed_Capacity_Europe": {
@@ -262,6 +289,20 @@
         "description": "Natural Gas Annual Power Generation China"
       }
     },
+    "Natural_Gas_Annual_Power_Generation_Germany": {
+      "entity": "Gas_Power",
+      "region": "Germany",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "demand",
+          "entity_type": "incumbent",
+          "subcategory": "generation"
+        },
+        "description": "Natural Gas Annual Power Generation Germany"
+      }
+    },
     "Natural_Gas_Annual_Power_Generation_Europe": {
       "entity": "Gas_Power",
       "region": "Europe",
@@ -396,6 +437,19 @@
         "description": "Natural Gas Installed Capacity China"
       }
     },
+    "Natural_Gas_Installed_Capacity_Germany": {
+      "entity": "Gas_Power",
+      "region": "Germany",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "installed_base",
+          "entity_type": "incumbent"
+        },
+        "description": "Natural Gas Installed Capacity Germany"
+      }
+    },
     "Natural_Gas_Installed_Capacity_Europe": {
       "entity": "Gas_Power",
       "region": "Europe",
@@ -472,6 +526,19 @@
           "entity_type": "disruptor"
         },
         "description": "Offshore Wind Installed Capacity China"
+      }
+    },
+    "Offshore_Wind_Installed_Capacity_Germany": {
+      "entity": "Offshore_Wind",
+      "region": "Germany",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "installed_base",
+          "entity_type": "disruptor"
+        },
+        "description": "Offshore Wind Installed Capacity Germany"
       }
     },
     "Offshore_Wind_Installed_Capacity_Europe": {
@@ -604,6 +671,19 @@
           "entity_type": "disruptor"
         },
         "description": "Onshore Wind Installed Capacity China"
+      }
+    },
+    "Onshore_Wind_Installed_Capacity_Germany": {
+      "entity": "Onshore_Wind",
+      "region": "Germany",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "installed_base",
+          "entity_type": "disruptor"
+        },
+        "description": "Onshore Wind Installed Capacity Germany"
       }
     },
     "Onshore_Wind_Installed_Capacity_Europe": {
@@ -756,6 +836,20 @@
         "description": "Solar Annual Power Generation China"
       }
     },
+    "Solar_Annual_Power_Generation_Germany": {
+      "entity": "Solar_PV",
+      "region": "Germany",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "demand",
+          "entity_type": "disruptor",
+          "subcategory": "generation"
+        },
+        "description": "Solar Annual Power Generation Germany"
+      }
+    },
     "Solar_Annual_Power_Generation_Europe": {
       "entity": "Solar_PV",
       "region": "Europe",
@@ -823,6 +917,19 @@
           "entity_type": "disruptor"
         },
         "description": "Solar Installed Capacity China"
+      }
+    },
+    "Solar_Installed_Capacity_Germany": {
+      "entity": "Solar_PV",
+      "region": "Germany",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "installed_base",
+          "entity_type": "disruptor"
+        },
+        "description": "Solar Installed Capacity Germany"
       }
     },
     "Solar_Installed_Capacity_Europe": {
@@ -1056,6 +1163,20 @@
           "subcategory": "generation"
         },
         "description": "Wind Annual Power Generation China"
+      }
+    },
+    "Wind_Annual_Power_Generation_Germany": {
+      "entity": "Wind_Mix",
+      "region": "Germany",
+      "level_name": "product",
+      "metadata": {
+        "type": "historical",
+        "tags": {
+          "category": "demand",
+          "entity_type": "disruptor",
+          "subcategory": "generation"
+        },
+        "description": "Wind Annual Power Generation Germany"
       }
     },
     "Wind_Annual_Power_Generation_Europe": {

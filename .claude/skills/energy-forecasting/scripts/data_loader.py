@@ -343,7 +343,7 @@ class DataLoader:
     def get_all_regions(self) -> List[str]:
         """Get list of all available regions (excluding Global)"""
         # Standard regions for SWB forecasting
-        return ["China", "USA", "Europe", "Rest_of_World"]
+        return ["China", "USA", "Europe", "Germany", "Rest_of_World"]
 
     def get_entity_type(self, technology: str) -> str:
         """

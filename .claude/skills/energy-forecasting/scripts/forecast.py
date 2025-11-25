@@ -413,7 +413,7 @@ def main():
     parser.add_argument(
         "--region",
         required=True,
-        choices=["China", "USA", "Europe", "Rest_of_World", "Global"],
+        choices=["China", "USA", "Europe", "Germany", "Rest_of_World", "Global"],
         help="Region to forecast"
     )
     parser.add_argument(

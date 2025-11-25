@@ -5,53 +5,82 @@
       "lcoe": "Solar_Photovoltaic_LCOE",
       "capacity": "Solar_Installed_Capacity",
       "generation": "Solar_Annual_Power_Generation",
-      "capacity_factor": "Solar_Photovoltaic_Capacity_Factor"
+      "capacity_factor": "Solar_Photovoltaic_Capacity_Factor",
+      "installed_cost": "Solar_Photovoltaic_Installed_Cost",
+      "module_costs": {
+        "all_black": "Solar_PV_Module_(All_Black)_Cost",
+        "bifacial": "Solar_PV_Module_(Bifacial)_Cost",
+        "high_efficiency": "Solar_PV_Module_(High_efficiency)_Cost",
+        "low_cost": "Solar_PV_Module_(Low_Cost_Technology)_Cost",
+        "mainstream": "Solar_PV_Module_(Mainstream)_Cost"
+      },
+      "regions": ["China", "USA", "Europe", "Germany", "Rest_of_World", "Global"]
     },
     "Onshore_Wind": {
       "entity_type": "disruptor",
       "lcoe": "Onshore_Wind_LCOE",
       "capacity": "Onshore_Wind_Installed_Capacity",
       "generation": "Wind_Annual_Power_Generation",
-      "capacity_factor": "Onshore_Wind_Capacity_Factor"
+      "capacity_factor": "Onshore_Wind_Capacity_Factor",
+      "installed_cost": "Onshore_Wind_Installed_Cost",
+      "regions": ["China", "USA", "Europe", "Germany", "Rest_of_World", "Global"]
     },
     "Offshore_Wind": {
       "entity_type": "disruptor",
       "lcoe": "Offshore_Wind_LCOE",
       "capacity": "Offshore_Wind_Installed_Capacity",
       "generation": "Wind_Annual_Power_Generation",
-      "capacity_factor": "Offshore_Wind_Capacity_Factor"
+      "capacity_factor": "Offshore_Wind_Capacity_Factor",
+      "installed_cost": "Offshore_Wind_Installed_Cost",
+      "regions": ["China", "USA", "Europe", "Germany", "Rest_of_World", "Global"]
+    },
+    "Wind_Mix": {
+      "entity_type": "disruptor",
+      "generation": "Wind_Annual_Power_Generation",
+      "regions": ["China", "USA", "Europe", "Germany", "Rest_of_World", "Global"]
     },
     "CSP": {
       "entity_type": "disruptor",
       "lcoe": "Concentrated_Solar_Power_LCOE",
       "capacity": "Concentrated_Solar_Power_Installed_Capacity",
       "generation": null,
-      "capacity_factor": "CSP_Capacity_Factor_Derived"
+      "capacity_factor": "CSP_Capacity_Factor_Derived",
+      "installed_cost": "Concentrated_Solar_Power_Installed_Cost",
+      "regions": ["China", "USA", "Europe", "Rest_of_World", "Global"]
     },
     "Battery_Storage": {
       "entity_type": "disruptor",
       "cost_2hr": "Battery_Energy_Storage_System_(2-hour_Turnkey)_Cost",
       "cost_4hr": "Battery_Energy_Storage_System_(4-hour_Turnkey)_Cost",
-      "capacity": "Battery_Energy_Storage_System_Installed_Capacity"
+      "capacity": "Battery_Energy_Storage_System_Installed_Capacity",
+      "installed_cost": "Battery_Energy_Storage_System_Installed_Cost",
+      "regions": ["China", "USA", "Europe", "Rest_of_World", "Global"]
     },
     "Coal_Power": {
       "entity_type": "incumbent",
       "lcoe": "Coal_Power_LCOE_Derived",
       "capacity": "Coal_Installed_Capacity",
       "generation": "Coal_Annual_Power_Generation",
-      "capacity_factor": "Coal_Capacity_Factor_Derived"
+      "capacity_factor": "Coal_Capacity_Factor_Derived",
+      "regions": ["China", "USA", "Europe", "Germany", "Rest_of_World", "Global"]
     },
-    "Gas_Power": {
+    "Natural_Gas_Power": {
       "entity_type": "incumbent",
-      "lcoe": "Gas_Power_LCOE_Derived",
+      "lcoe": "Natural_Gas_Power_LCOE_Derived",
       "capacity": "Natural_Gas_Installed_Capacity",
       "generation": "Natural_Gas_Annual_Power_Generation",
-      "capacity_factor": "Natural_Gas_Capacity_Factor"
+      "capacity_factor": "Natural_Gas_Capacity_Factor",
+      "regions": ["China", "USA", "Europe", "Germany", "Rest_of_World", "Global"]
     }
   },
   "electricity_system": {
     "demand": "Electricity_Annual_Domestic_Consumption",
     "generation": "Electricity_Annual_Production",
-    "price": "Electricity_Residential_Price"
+    "price": "Electricity_Residential_Price",
+    "regions": {
+      "demand": ["China", "USA", "Europe", "Rest_of_World", "Global"],
+      "generation": ["China", "USA", "Europe", "Rest_of_World", "Global"],
+      "price": ["China", "USA", "Europe"]
+    }
   }
 }

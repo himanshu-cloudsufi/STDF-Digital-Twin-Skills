@@ -1,7 +1,7 @@
 ---
 name: energy-forecasting
 description: >
-  Performs cost-driven capacity and generation forecasting for Solar-Wind-Battery (SWB) energy systems and their displacement of fossil fuels (coal, gas). Calculates SWB stack cost parity, models capacity growth using YoY averaging, and sequences coal/gas displacement. Use when user asks about renewable energy capacity, solar/wind forecasts, battery storage, SWB adoption, electricity generation, fossil fuel displacement, or questions like "when will solar reach cost parity", "forecast wind capacity", "when will coal be displaced", "SWB generation by 2035", "battery storage growth", "renewable energy disruption". Handles regions: China, USA, Europe, Rest_of_World, Global. Trigger keywords: solar, wind, battery, SWB, renewable, clean energy, electricity, generation, capacity, coal, gas, displacement, LCOE, cost parity, energy transformation, disruption. (project)
+  Performs cost-driven capacity and generation forecasting for Solar-Wind-Battery (SWB) energy systems and their displacement of fossil fuels (coal, gas). Calculates SWB stack cost parity, models capacity growth using YoY averaging, and sequences coal/gas displacement. Use when user asks about renewable energy capacity, solar/wind forecasts, battery storage, SWB adoption, electricity generation, fossil fuel displacement, or questions like "when will solar reach cost parity", "forecast wind capacity", "when will coal be displaced", "SWB generation by 2035", "battery storage growth", "renewable energy disruption". Handles regions: China, USA, Europe, Germany, Rest_of_World, Global. Trigger keywords: solar, wind, battery, SWB, renewable, clean energy, electricity, generation, capacity, coal, gas, displacement, LCOE, cost parity, energy transformation, disruption, Germany, German. (project)
 ---
 
 > ⚠️ **MANDATORY SCRIPT EXECUTION REQUIREMENT**
@@ -43,49 +43,53 @@ Cost-driven forecasting for SWB (Solar-Wind-Battery) energy systems and fossil f
 
 #### Solar PV
 - **LCOE:** `Solar_Photovoltaic_LCOE` (China, USA, Global)
-- **Capacity:** `Solar_Installed_Capacity` (Global, cumulative)
-- **Generation:** `Solar_Annual_Power_Generation` (Global)
+- **Capacity:** `Solar_Installed_Capacity` (China, USA, Europe, Germany, Rest_of_World, Global)
+- **Generation:** `Solar_Annual_Power_Generation` (China, USA, Europe, Germany, Rest_of_World, Global)
 - **Capacity Factor:** `Solar_Photovoltaic_Capacity_Factor` (China, USA, Global)
+- **Module Costs (Europe):** All Black, Bifacial, High efficiency, Low Cost Technology, Mainstream
 
 #### Onshore Wind
 - **LCOE:** `Onshore_Wind_LCOE` (China, USA, Global)
-- **Capacity:** `Onshore_Wind_Installed_Capacity` (Global, cumulative)
-- **Generation:** `Wind_Annual_Power_Generation` (Global)
+- **Capacity:** `Onshore_Wind_Installed_Capacity` (China, USA, Europe, Germany, Rest_of_World, Global)
+- **Generation:** `Wind_Annual_Power_Generation` (China, USA, Europe, Germany, Rest_of_World, Global)
 - **Capacity Factor:** `Onshore_Wind_Capacity_Factor` (China, USA, Global)
 
 #### Offshore Wind
 - **LCOE:** `Offshore_Wind_LCOE` (China, USA, Global)
-- **Capacity:** `Offshore_Wind_Installed_Capacity` (Global, cumulative)
-- **Generation:** `Wind_Annual_Power_Generation` (Global)
-- **Capacity Factor:** `Offshore_Wind_Capacity_Factor` (China, USA, Global)
+- **Capacity:** `Offshore_Wind_Installed_Capacity` (China, USA, Europe, Germany, Rest_of_World, Global)
+- **Generation:** `Wind_Annual_Power_Generation` (China, USA, Europe, Germany, Rest_of_World, Global)
+- **Capacity Factor:** `Offshore_Wind_Capacity_Factor` (Global)
 
 #### Concentrated Solar Power (CSP)
 - **LCOE:** `Concentrated_Solar_Power_LCOE` (Global)
-- **Capacity:** `Concentrated_Solar_Power_Installed_Capacity` (Global)
+- **Capacity:** `Concentrated_Solar_Power_Installed_Capacity` (China, USA, Europe, Rest_of_World, Global)
+- **Installed Cost:** `Concentrated_Solar_Power_Installed_Cost` (Global)
 - **Capacity Factor:** Derived from historical data
 
 #### Battery Storage
-- **Cost (2-hour):** `Battery_Energy_Storage_System_(2-hour_Turnkey)_Cost` (Global)
-- **Cost (4-hour):** `Battery_Energy_Storage_System_(4-hour_Turnkey)_Cost` (Global)
-- **Capacity:** `Battery_Energy_Storage_System_Installed_Capacity` (Global)
+- **Cost (2-hour):** `Battery_Energy_Storage_System_(2-hour_Turnkey)_Cost` (China, USA, Europe, Global)
+- **Cost (4-hour):** `Battery_Energy_Storage_System_(4-hour_Turnkey)_Cost` (China, USA, Europe, Global)
+- **Capacity:** `Battery_Energy_Storage_System_Installed_Capacity` (China, USA, Europe, Rest_of_World, Global)
+- **Installed Cost:** `Battery_Energy_Storage_System_Installed_Cost` (Global)
 
 ### ❌ Incumbent Technologies (Fossil Fuels) - **FALLBACK VALUES USED**
 
 #### Coal Power
 - **LCOE:** `Coal_Power_LCOE_Derived` - **NO DATASET** (uses fallback: ~$65/MWh for China, growing 1.5%/yr)
-- **Capacity:** `Coal_Installed_Capacity` (Global, cumulative) ✅
-- **Generation:** `Coal_Annual_Power_Generation` (Global) ✅
+- **Capacity:** `Coal_Installed_Capacity` (China, USA, Europe, Germany, Rest_of_World, Global) ✅
+- **Generation:** `Coal_Annual_Power_Generation` (China, USA, Europe, Germany, Rest_of_World, Global) ✅
 - **Capacity Factor:** Derived from capacity/generation ✅
 
 #### Gas Power
 - **LCOE:** `Gas_Power_LCOE_Derived` - **NO DATASET** (uses fallback: ~$60/MWh for USA, growing 1.2%/yr)
-- **Capacity:** `Natural_Gas_Installed_Capacity` (Global, cumulative) ✅
-- **Generation:** `Natural_Gas_Annual_Power_Generation` (Global) ✅
-- **Capacity Factor:** `Natural_Gas_Capacity_Factor` (Global) ✅
+- **Capacity:** `Natural_Gas_Installed_Capacity` (China, USA, Europe, Germany, Rest_of_World, Global) ✅
+- **Generation:** `Natural_Gas_Annual_Power_Generation` (China, USA, Europe, Germany, Rest_of_World, Global) ✅
+- **Capacity Factor:** `Natural_Gas_Capacity_Factor` (China, USA, Europe, Rest_of_World, Global) ✅
 
 ### ✅ Electricity System Metrics
-- **Total Demand:** `Annual_Domestic_Consumption_{Region}`
-- **Total Generation:** `Annual_Production_{Region}`
+- **Total Demand:** `Electricity_Annual_Domestic_Consumption` (China, USA, Europe, Rest_of_World, Global)
+- **Total Generation:** `Electricity_Annual_Production` (China, USA, Europe, Rest_of_World, Global)
+- **Residential Price:** `Electricity_Residential_Price` (China, USA, Europe)
 
 ### ✅ Validation Data
 - **Coal CO2 Emissions:** `Coal_CO2_Emissions` (1975-2024, for validation)
@@ -98,7 +102,28 @@ Cost-driven forecasting for SWB (Solar-Wind-Battery) energy systems and fossil f
 - `swb_taxonomy_and_datasets.json` - Complete taxonomy mapping
 
 ### Regional Coverage
-All datasets available for: **China, USA, Europe, Rest_of_World, Global**
+All datasets available for: **China, USA, Europe, Germany, Rest_of_World, Global**
+
+### ⚠️ Germany-Specific Data Limitations
+
+Germany is supported but has limited data coverage compared to other regions:
+
+**Available for Germany:**
+- ✅ Solar_Installed_Capacity (2005-2023)
+- ✅ Onshore_Wind_Installed_Capacity (2005-2024)
+- ✅ Offshore_Wind_Installed_Capacity (2005-2024)
+- ✅ Coal_Annual_Power_Generation (2000-2024)
+- ✅ Coal_Installed_Capacity (2005-2023)
+- ✅ Natural_Gas_Annual_Power_Generation (2000-2024)
+- ✅ Natural_Gas_Installed_Capacity (2005-2023)
+
+**Missing for Germany (uses fallbacks):**
+- ❌ Electricity_Annual_Domestic_Consumption → Uses Europe proxy or estimation
+- ❌ Solar/Wind LCOE → Uses Global fallback
+- ❌ Battery_Storage_Capacity → Uses Global fallback (scaled)
+- ❌ Nuclear/Hydro generation → Uses 15% baseline estimate (note: Germany closed nuclear in 2023)
+
+**Impact:** Germany forecasts may show higher uncertainty in energy balance validation. Use Europe region for more robust forecasts when precision is critical.
 
 ### Critical Fallback Strategy Notes
 1. **Coal & Gas LCOE:** Use regional baseline values (2020) with annual cost escalation
@@ -129,6 +154,9 @@ Use for energy generation and capacity forecasting when:
 # Accelerated transition scenario
 ./run_forecast.sh --region USA --end-year 2030 --scenario accelerated --output both
 
+# Germany coal phase-out analysis
+./run_forecast.sh --region Germany --end-year 2035 --scenario baseline --output both
+
 # Global (all regions + aggregation)
 ./run_forecast.sh --region Global --end-year 2030 --scenario baseline --output both
 
@@ -140,7 +168,7 @@ Use for energy generation and capacity forecasting when:
 
 | Parameter | Default | Description |
 |-----------|---------|-------------|
-| `--region` | Required | China, USA, Europe, Rest_of_World, Global |
+| `--region` | Required | China, USA, Europe, Germany, Rest_of_World, Global |
 | `--end-year` | 2040 | Forecast horizon |
 | `--battery-duration` | 4 | Battery duration in hours (2, 4, or 8) |
 | `--scenario` | baseline | Scenario: baseline, accelerated, delayed |
@@ -208,7 +236,12 @@ Files saved to: `output/{Region}_{EndYear}_{Scenario}.{format}`
 ./run_forecast.sh --region Europe --battery-duration 8 --scenario delayed --output json
 ```
 
-**Example 4: Global aggregation across all scenarios**
+**Example 4: Germany coal phase-out with accelerated scenario**
+```bash
+./run_forecast.sh --region Germany --end-year 2038 --scenario accelerated --output both
+```
+
+**Example 5: Global aggregation across all scenarios**
 ```bash
 ./run_forecast.sh --region Global --scenario baseline --output json
 ./run_forecast.sh --region Global --scenario accelerated --output json
@@ -222,6 +255,7 @@ Files saved to: `output/{Region}_{EndYear}_{Scenario}.{format}`
 | China | Coal-first | High coal dependency, government policy |
 | USA | Gas-first | Gas-heavy grid, coal already declining |
 | Europe | Coal-first | Coal phase-out commitments |
+| Germany | Coal-first | Aggressive coal phase-out by 2038 |
 | Rest_of_World | Coal-first | Default assumption |
 
 ## Dataset Limitations & Fallback Strategies

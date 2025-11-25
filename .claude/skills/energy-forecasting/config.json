@@ -46,6 +46,7 @@
     "China": "coal_first",
     "USA": "gas_first",
     "Europe": "coal_first",
+    "Germany": "coal_first",
     "Rest_of_World": "coal_first"
   },
   "swb_components": [
@@ -68,6 +69,7 @@
     "China",
     "USA",
     "Europe",
+    "Germany",
     "Rest_of_World",
     "Global"
   ],
@@ -106,6 +108,7 @@
       "China": 10,
       "USA": 0,
       "Europe": 30,
+      "Germany": 35,
       "Rest_of_World": 5,
       "Global": 15
     },
@@ -136,6 +139,7 @@
       "China": 1.2,
       "USA": 0.9,
       "Europe": 0.8,
+      "Germany": 0.75,
       "Rest_of_World": 1.3,
       "Global": 1.0
     }
@@ -144,6 +148,7 @@
     "China": 1.4,
     "USA": 1.5,
     "Europe": 1.3,
+    "Germany": 1.25,
     "Rest_of_World": 1.4,
     "Global": 1.4
   },
@@ -178,6 +183,16 @@
         "CSP": 0.22,
         "Nuclear": 0.85,
         "Hydro": 0.45
+      },
+      "Germany": {
+        "Solar_PV": 0.11,
+        "Onshore_Wind": 0.21,
+        "Offshore_Wind": 0.42,
+        "Coal_Power": 0.40,
+        "Natural_Gas_Power": 0.30,
+        "CSP": 0.20,
+        "Nuclear": 0.85,
+        "Hydro": 0.40
       },
       "Rest_of_World": {
         "Solar_PV": 0.16,
@@ -236,12 +251,14 @@
       "China": 1.0,
       "USA": 1.2,
       "Europe": 1.3,
+      "Germany": 1.35,
       "Rest_of_World": 1.1
     },
     "Natural_Gas_Power": {
       "China": 1.1,
       "USA": 1.0,
       "Europe": 1.4,
+      "Germany": 1.45,
       "Rest_of_World": 1.2
     }
   },
@@ -251,6 +268,7 @@
         "China": 65,
         "USA": 75,
         "Europe": 85,
+        "Germany": 90,
         "Rest_of_World": 70,
         "Global": 70
       },
@@ -258,6 +276,7 @@
         "China": 0.015,
         "USA": 0.02,
         "Europe": 0.025,
+        "Germany": 0.03,
         "Rest_of_World": 0.015,
         "Global": 0.018
       }
@@ -267,6 +286,7 @@
         "China": 90,
         "USA": 60,
         "Europe": 110,
+        "Germany": 115,
         "Rest_of_World": 80,
         "Global": 80
       },
@@ -274,6 +294,7 @@
         "China": 0.01,
         "USA": 0.012,
         "Europe": 0.015,
+        "Germany": 0.018,
         "Rest_of_World": 0.012,
         "Global": 0.012
       }
@@ -283,6 +304,7 @@
     "China": 0.2,
     "USA": 0.22,
     "Europe": 0.28,
+    "Germany": 0.15,
     "Rest_of_World": 0.18,
     "Global": 0.22
   },

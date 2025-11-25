@@ -24,7 +24,7 @@ with open(config_path) as f:
 data_loader = DataLoader()  # Uses default data directory
 cost_analyzer = CostAnalyzer(config, data_loader)
 
-regions = ["China", "USA", "Europe", "Rest_of_World"]
+regions = ["China", "USA", "Europe", "Germany", "Rest_of_World"]
 
 print("=" * 70)
 print("SWB vs Coal Tipping Points by Region")
