@@ -47,17 +47,11 @@
       "capacity": "Natural_Gas_Installed_Capacity",
       "generation": "Natural_Gas_Annual_Power_Generation",
       "capacity_factor": "Natural_Gas_Capacity_Factor"
-    },
-    "Natural_Gas_Power": {
-      "entity_type": "incumbent",
-      "lcoe": "Gas_Power_LCOE_Derived",
-      "capacity": "Natural_Gas_Installed_Capacity",
-      "generation": "Natural_Gas_Annual_Power_Generation",
-      "capacity_factor": "Natural_Gas_Capacity_Factor"
     }
   },
   "electricity_system": {
-    "demand": "Annual_Domestic_Consumption",
-    "generation": "Annual_Production"
+    "demand": "Electricity_Annual_Domestic_Consumption",
+    "generation": "Electricity_Annual_Production",
+    "price": "Electricity_Residential_Price"
   }
 }
